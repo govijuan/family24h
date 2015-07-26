@@ -1,224 +1,27 @@
-.container.theme-showcase(role="main")
-  #flash.alert.alert-danger.alert-dismissible.fade.in(role="alert")
-    %button(type="button" class="close" data-dismiss="alert" aria-label="Close")
-      %span(aria-hidden="true") &times;
+//=require header.haml
 
-  #mapdiv
+.dashboard(role="main")
+  .top
+    %p.name Name
+    %p.profile_picture_url
+    .gender
+    %span.user_config.glyphicon.glyphicon-cog
+    .config_box
+      %p logout
+  
+  .sidebar
+    %p.email Email
+    %p.telephone Telephone
 
+    %a.lock(href="#")
+    %a.ring(href="#")
+    %a.pattern(href="#")
+    %a.wipe(href="#")
 
-  %form
+  %section.content
+    #flash.alert.alert-danger.alert-dismissible.fade.in(role="alert")
+      %button(type="button" class="close" data-dismiss="alert" aria-label="Close")
+        %span(aria-hidden="true") &times;
+    #mapdiv
 
-    .form-group
-      #cep.field
-        %label(for="cep") CEP
-        %input(type="text" class="form-control" id="cep" placeholder="CEP")
-
-      .field
-        %label(for="input_endereco") Endereço
-        %input(type="text" class="form-control" id="input_endereco" placeholder="Endereço")
-
-      .field
-        %label(for="exampleInputPassword1") Numero
-        %input(type="text" class="form-control" id="input_numero" placeholder="Nº")
-
-      .field
-        %label(for="input_numero") Bairro
-        %input(type="text" class="form-control" id="input_bairro" placeholder="Bairro")
-
-      .field
-        %label(for="input_cidade") Cidade
-        %input(type="text" class="form-control" id="input_cidade" placeholder="Cidade")
-
-      .field
-        %label(for="input_estado") Estado
-        %input(type="text" class="form-control" id="input_estado" placeholder="Estado")
-
-      %small Relaxa, não vamos contar para ninguem é só para te mostrar no Mapa... ;)
-
-
-
-     .page-header
-       %h3 Atendimento
-
-     .row.form-group
-
-       %label(class="col-xs-6 col-sm-6 col-md-4")
-         %input(type="checkbox" name="inlineRadioOptions" id="inlineRadio2" value="option2") 
-         Domicilio
-
-       %label(class="col-xs-6 col-sm-6 col-md-4")
-         %input(type="checkbox" name="inlineRadioOptions" id="inlineRadio2" value="option2") 
-         Tenho lugar
-
-       %label(class="col-xs-6 col-sm-6 col-md-4")
-         %input(type="checkbox" name="inlineRadioOptions" id="inlineRadio2" value="option2") 
-         Hoteis
-
-       %label(class="col-xs-6 col-sm-6 col-md-4")
-         %input(type="checkbox" name="inlineRadioOptions" id="inlineRadio2" value="option2") 
-         Casas de Swing
-
-       %label(class="col-xs-6 col-sm-6 col-md-4")
-         %input(type="checkbox" name="inlineRadioOptions" id="inlineRadio2" value="option2") 
-         Festas/Evento
-
-       %label(class="col-xs-6 col-sm-6 col-md-4")
-         %input(type="checkbox" name="inlineRadioOptions" id="inlineRadio2" value="option2") 
-         Promoção de Eventos
-
-       %label(class="col-xs-6 col-sm-6 col-md-4")
-         %input(type="checkbox" name="inlineRadioOptions" id="inlineRadio2" value="option2") 
-         Despedidas de Solteiro
-       
-     
-
-     .page-header
-       %h3 Pele
-     
-
-     .row.form-group
-       %label(class="col-xs-6 col-sm-6")
-         %input(type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1") 
-         Negra
-       
-       %label(class="col-xs-6 col-sm-6")
-         %input(type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2") 
-         Branca
-       
-       %label(class="col-xs-6 col-sm-6")
-         %input(type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2") 
-         Caucasiana
-       
-       %label(class="col-xs-6 col-sm-6")
-         %input(type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1") 
-         Pardo
-       
-     
-
-     .page-header
-       %h3 Cabelos
-     
-
-     .row.form-group
-       %label(class="col-xs-6 col-sm-6")
-         %input(type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1") 
-         Pretos
-       
-       %label(class="col-xs-6 col-sm-6")
-         %input(type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2") 
-         Loiros
-       
-       %label(class="col-xs-6 col-sm-6")
-         %input(type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1") 
-         Ruivos
-       
-       %label(class="col-xs-6 col-sm-6")
-         %input(type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2") 
-         Castanhos Claro
-       
-       %label(class="col-xs-6 col-sm-6")
-         %input(type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1") 
-         Castanhos Médio
-       
-       %label(class="col-xs-6 col-sm-6")
-         %input(type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2") 
-         Castanhos Escuro
-       
-       %br
-       %label(class="col-xs-6 col-sm-6")
-         %input(type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2") 
-         Outros
-       
-     
-
-
-     .page-header
-       %h3 Olhos
-
-     .row.form-group
-       %label(class="col-xs-6 col-sm-6")
-         %input(type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2") 
-         Azuis
-       
-       %label(class="col-xs-6 col-sm-6")
-         %input(type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1") 
-         Verdes
-       
-       %label(class="col-xs-6 col-sm-6")
-         %input(type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2") 
-         Castanho Claro
-       
-       %label(class="col-xs-6 col-sm-6")
-         %input(type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2") 
-         Castanho Escuro
-
-
-     .page-header
-       %h3 Beija na Boca
-
-     .row.form-group
-       %label(class="col-xs-6 col-sm-6")
-         %input(type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1") 
-         Sim
-       
-       %label(class="col-xs-6 col-sm-6")
-         %input(type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2") 
-         Não
-       
-
-     .page-header
-       %h3 Oral
-     
-
-     .row.form-group
-        %label(class="col-xs-6 col-sm-6")
-          %input(type="radio" name="inlineRadioOptions" id="oral_sim" value="oral_sim") 
-          Sim
-
-        %label(class="col-xs-6 col-sm-6")
-          %input(type="radio" name="inlineRadioOptions" id="oral_nao" value="oral_nao") 
-          Não
-         
-
-     .row.form-group.oral_options
-         %label(class="col-xs-6 col-sm-6")
-           %input(type="radio" name="inlineRadioOptions" id="oral_sem" value="oral_sem") 
-           Sem Camisinha
-         
-         %label(class="col-xs-6 col-sm-6")
-           %input(type="radio" name="inlineRadioOptions" id="oral_com" value="oral_com") 
-           Com Camisinha
-         
-       
-         %label(class="col-xs-6 col-sm-6")
-           %input(type="checkbox" name="inlineRadioOptions" id="oral_final" value="oral_final") 
-           Deixo finalizar na Boca
-         
-       
-     .page-header
-       %h3 Anal
-
-     .row.form-group
-       %label(class="col-xs-6 col-sm-6")
-         %input(type="radio" name="inlineRadioOptions" id="anal_sim" value="anal_sim") 
-         Sim
-       
-
-       %label(class="col-xs-6 col-sm-6")
-         %input(type="radio" name="inlineRadioOptions" id="anal_nao" value="anal_nao") 
-         Não
-       
-     
-
-     .row.form-group.anal_options
-       %label(class="col-xs-6 col-sm-6")
-         %input(type="radio" name="inlineRadioOptions" id="anal_incluso" value="anal_incluso") 
-         Incluso
-       
-       %label(class="col-xs-6 col-sm-6")
-         %input(type="radio" name="inlineRadioOptions" id="anal_taxa" value="anal_taxa") 
-         Com taxa
-       
-
-     %button(class="btn btn-lg btn-primary" type="submit") Enviar
-     %button(class="btn btn-lg btn-success" type="submit") Salvar
+//=require footer.haml

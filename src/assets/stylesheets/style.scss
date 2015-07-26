@@ -1,6 +1,127 @@
+/*----------------------------------------------------------------------------*\
+    CONTENTS
+\*----------------------------------------------------------------------------*/
+/*
+
+    NOTES           General notes
+    PROJECT INFO    Information about the Project
+    RESET           CSS reset/normalize
+    IMPORTS         External/Vendors CSS Frameworks/Libraries
+    FONTS           Customs Fonts that aren't from Google Fonts
+    SHARED          Shared elements across the site.
+    MAIN            HTML, BODY, etc.
+*/
+
+/*----------------------------------------------------------------------------*\
+    $NOTES
+\*----------------------------------------------------------------------------*/
+/*
+    How to seach this file:
+    append '$' to the desired above section to go straight to it.
+*/
+
+/*----------------------------------------------------------------------------*\
+    $PROJECT INFO
+\*----------------------------------------------------------------------------*/
+/*
+    Project: Family 24h
+    Developer: Gutem <gutem@eokoe.com>
+    Project Manager: Gian <gian.vizzotto@eokoe.com>
+*/
+
+/*----------------------------------------------------------------------------*\
+    $IMPORTS
+\*----------------------------------------------------------------------------*/
 @import "main";
 @import "_bootstrap";
 
-/*******************************************************************************
-* General Styling
-*******************************************************************************/
+/*----------------------------------------------------------------------------*\
+    $VARIABLES
+\*----------------------------------------------------------------------------*/
+$black: #2e2e2e;
+
+$dark_blue: #006599;
+$dark_blue_shade: #03405f;
+
+$light_blue: #32ccfe;
+$light_blue_shade: #0098ca;
+
+/*----------------------------------------------------------------------------*\
+    $SHARED
+\*----------------------------------------------------------------------------*/
+.top {
+  background-color: $dark_blue;
+  width: 100%;
+  height: 70px;
+
+  span {
+    cursor: context-menu;
+    font-size: 40px;
+    margin: 15px;
+  }
+
+  p, span {
+    float: right;
+  }
+}
+
+.config_box {
+  display: none;
+}
+
+.sidebar {
+  background-color: $light_blue;
+  width: 10%;
+  float: left;
+}
+
+.content {
+  background-color: #ccc;
+  float: left;
+  position: relative;
+}
+
+#flash {
+  display: none;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 100;
+  width: 90%;
+}
+
+#mapdiv {
+  float: left;
+  z-index: 10;
+}
+
+.lock,
+.ring,
+.pattern,
+.wipe {
+  float: left;
+  height: 146px;
+  width: 100%;
+  border-bottom: 1px solid $light_blue_shade;
+
+  &:hover {
+    background-color: $light_blue_shade;
+  }
+}
+
+.lock {
+  background: transparent url("../images/ic_phonelink_lock_black_48px.svg") center center scroll no-repeat;
+  border-top: 1px solid $light_blue_shade;
+}
+
+.ring {
+  background: transparent url("../images/ic_speaker_phone_black_48px.svg") center center scroll no-repeat;
+}
+
+.pattern {
+  background: transparent url("../images/ic_dialpad_black_48px.svg") center center scroll no-repeat;
+}
+
+.wipe {
+  background: transparent url("../images/ic_phonelink_erase_black_48px.svg") center center scroll no-repeat;
+}

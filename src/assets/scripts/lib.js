@@ -24,52 +24,57 @@ function fadeIn(el) {
   tick();
 }
 
-
 var err = document.getElementById('flash');
 
 /*******************************************************************************
-* Ajax function to parse from CEP to Address
+* Ajax function to parse JSONP
 *******************************************************************************/
-$("#cep").focusout(function() {
-  var numeroCEP = $("#cep").val().split("-").join("");
+$(document).ready(function() {
+
+  // API's config 
+  var url = 'http://api.nueta/';
+  var webFunctions_endpoint = "notification-messages"
+  var user_endpoint = "users/";
+  var user_id = "38";
+  var api_key = "?api_key=LAK2La6084ac4f20de47b82ba1K3hj3hH32KS301SA2";
+
+
   $.ajax({
-    url: 'http://correiosapi.apphb.com/cep/'+numeroCEP,
-    dataType: 'jsonp',
+    url: url+user_endpoint+user_id+api_key,
+    type: 'GET',
     crossDomain: true,
-    contentType: "application/json",
     statusCode: {
       200: function(data) { console.log(data);
 
-        // var endereco = document.querySelector('#endereco');
-        // var bairro = document.querySelector('#bairro');
-        // var cidade = document.querySelector('#cidade');
-        // var estado = document.querySelector("#estado");
+        var telephoneField = document.querySelector('.telephone');
+        var nameField = document.querySelector('.name');
+        var emailField = document.querySelector('.email');
+        var profilePicture = document.querySelector('.profile_picture_url');
+        // var userID = document.querySelector('.user_id');
+        // var type = document.querySelector('.type');
+        // var gender = document.querySelector('.gender');
 
-        var inputEndereco = document.querySelector('#input_endereco');
-        var inputBairro = document.querySelector('#input_bairro');
-        var inputCidade = document.querySelector('#input_cidade');
-        var inputEstado = document.querySelector("#input_estado");
+        // var fadeInFields = document.getElementsByClassName('field');
+        
+        telephoneField.innerHTML = data.telephone;
+        nameField.innerHTML = data.name;
+        emailField.innerHTML = data.email;
+        profilePicture.innerHTML = data.profile_picture_url;
+        // userID.innerHTML = data.id;
+        // type.innerHTML = data.type;
+        // gender.innerHTML = data.gender;
 
-        var fadeInFields = document.getElementsByClassName('field');
+        // if (endereco.style.display != 'block') {
+        //   fadeIn(fadeInFields);
+        // };
 
-        inputEndereco.value = data.tipoDeLogradouro+" "+data.logradouro;
-        inputBairro.value = data.bairro;
-        inputCidade.value = data.cidade;
-        inputEstado.value = data.estado;
-
-        if (endereco.style.display != 'block') {
-          fadeIn(fadeInFields);
-        };
-
-        // err.innerHTML += "<p>"+ input_endereco.value +"</p>";
+        // err.innerHTML += "<p>"+ data.name +"</p>";
       } // Ok
       ,400: function(msg) { 
-        console.log(msg);  
-        err.innerHTML += "<p>CEP não encontrado!</p>"
+        console.log(msg);
       } // Bad Request
       ,404: function(msg) { 
-        console.log("CEP não encontrado!"); 
-        err.innerHTML += "<p>CEP não encontrado!</p>"
+        console.log(msg); 
       } // Not Found
     }
   });
@@ -139,8 +144,8 @@ function showPosition(position) {
 
   fadeIn(mapObj);
 
-  err.innerHTML += "<p>Latitude: "+latitude+", Longitude: "+longitude+"</p>";
-  fadeIn(err);
+  // err.innerHTML += "<p>Latitude: "+latitude+", Longitude: "+longitude+"</p>";
+  // fadeIn(err);
 }
 
 function stopWatch() {
@@ -168,3 +173,21 @@ function showError(error) {
 
   fadeIn(err);
 }
+
+/*******************************************************************************
+* Geoloc
+*******************************************************************************/
+function resizeSidebar() {
+  var windowHeight = window.innerHeight;
+  var windowWidth = window.innerWidth;
+  var sideBar = $('.sidebar');
+  var topBar = $('.top');
+  var section = $('.content');
+  var map = $('#mapdiv');
+  sideBar.css("height", windowHeight - topBar.innerHeight());
+  section.css("width", windowWidth - sideBar.innerWidth());
+  section.css("height", windowHeight - topBar.innerHeight());
+  map.css("width", windowWidth - sideBar.innerWidth());
+  map.css("height", windowHeight - topBar.innerHeight());
+}
+

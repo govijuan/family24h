@@ -19,8 +19,8 @@ var del = require('del');
 
 var src = {
     base: './src',
-    scss: './src/assets/stylesheets/**/*.scss',
     haml: './src/**/*.haml',
+    scss: './src/assets/stylesheets/**/*.scss',
     scripts: './src/assets/scripts/**/*.js',
     images: './src/assets/images/**/*',
     fonts: './src/assets/fonts/**/*',
@@ -28,6 +28,7 @@ var src = {
 
 var dist = {
     base: './dist',
+    haml: './dist/**/*.haml',
     scss: './dist/assets/stylesheets/',
     scripts: './dist/assets/scripts/',
     images: './dist/assets/images/',
@@ -49,9 +50,11 @@ gulp.task('browser-sync', function() {
 * Cleaner task
 *******************************************************************************/
 gulp.task('clean', function(cb) {
-  del([dist.scss, 
+  del([dist.haml, 
+       dist.scss, 
        dist.scripts, 
-       dist.images], cb)
+       dist.images, 
+       dist.fonts], cb)
 });
 
 /*******************************************************************************
@@ -87,6 +90,8 @@ gulp.task('fonts', function() {
 gulp.task('haml', function() {
   gulp.src(src.haml)
   .pipe(plugins.changed(dist.base))
+  .pipe(plugins.include())
+    .on('error', console.log)
   .pipe(plugins.haml())
   .pipe(gulp.dest(dist.base))
   .pipe(plugins.notify({message: 'HAML task complete'}))
@@ -98,9 +103,14 @@ gulp.task('haml', function() {
 *******************************************************************************/
 gulp.task('images', function() {
   gulp.src(src.images)
-  .pipe(plugins.cache(plugins.imagemin({ optimizationLevel: 3, progressive: true, interlaced: true })))
+  .pipe(plugins.cache(
+    plugins.imagemin(
+      {optimizationLevel: 3, 
+      progressive: true, 
+      interlaced: true })))
   .pipe(gulp.dest(dist.images))
   .pipe(plugins.notify({message: 'Images task complete'}))
+  .pipe(browserSync.stream())
 });
 
 /*******************************************************************************
@@ -128,8 +138,8 @@ gulp.task('build', function (done) {
     'sass',
     'scripts',
     'fonts',
-    'haml',
     'images',
+    'haml',
   done);
 });
 
@@ -144,11 +154,11 @@ gulp.task('watch', ['build', 'browser-sync'], function() {
   // Watch for Scripts
   gulp.watch(src.scripts, ['scripts']);
 
-  // Watch for HAML files
-  gulp.watch(src.haml, ['haml']);
-
   // Watch for Images files
   gulp.watch(src.images, ['images']);
+
+  // Watch for HAML files
+  gulp.watch(src.haml, ['haml']);
 });
 
 gulp.task('default', ['build']);

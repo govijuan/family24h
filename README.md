@@ -1,7 +1,7 @@
 ### Family 24h
 
-Dependencies: 
- * Nodejs
+Dependencies:  
+ * Nodejs  
  * NPM
 
 #### Building
