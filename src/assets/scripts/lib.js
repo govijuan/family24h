@@ -1,30 +1,34 @@
 /*******************************************************************************
+* Global Variables
+*******************************************************************************/
+var err = document.getElementById('flash');
+
+/*******************************************************************************
 * Fade In effect
 *******************************************************************************/
-function fadeIn(el) {
-  var opacity = 0;
+// function fadeIn(el) {
+//   var opacity = 0;
 
-  el.style.opacity = 0;
-  el.style.filter = '';
-  el.style.display = 'block';
+//   el[0].style.opacity = 0;
+//   el[0].style.filter = '';
+//   el[0].style.display = 'block';
 
-  var last = +new Date();
-  var tick = function() {
-    opacity += (new Date() - last) / 400;
-    el.style.opacity = opacity;
-    el.style.filter = 'alpha(opacity=' + (100 * opacity)|0 + ')';
+//   var last = +new Date();
 
-    last = +new Date();
+//   var tick = function() {
+//     opacity += (new Date() - last) / 400;
+//     el[0].style.opacity = opacity;
+//     el[0].style.filter = 'alpha(opacity=' + (100 * opacity)|0 + ')';
 
-    if (opacity < 1) {
-      (window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16);
-    }
-  };
+//     last = +new Date();
 
-  tick();
-}
+//     if (opacity < 1) {
+//       (window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16);
+//     }
+//   };
 
-var err = document.getElementById('flash');
+//   tick();
+// }
 
 /*******************************************************************************
 * Ajax function to parse JSONP
@@ -78,7 +82,6 @@ $(document).ready(function() {
       } // Not Found
     }
   });
-  fadeIn(err);
 });
 
 /*******************************************************************************
@@ -96,7 +99,6 @@ function geo_location() {
 
     watchId = navigator.geolocation.getCurrentPosition(showPosition, showError, optn);
   } else {
-
     err.innerHTML += "<p>Geolocation is <strong>not</strong> supported in your browser.</p>";
     fadeIn(err);
   }
@@ -143,9 +145,6 @@ function showPosition(position) {
   });
 
   fadeIn(mapObj);
-
-  // err.innerHTML += "<p>Latitude: "+latitude+", Longitude: "+longitude+"</p>";
-  // fadeIn(err);
 }
 
 function stopWatch() {
@@ -159,23 +158,25 @@ function showError(error) {
   switch(error.code) {
     case error.code == 1 || error.PERMISSION_DENIED:
       err.innerHTML += "<p>User denied the request for Geolocation.</p>";
+      fadeIn(err);
     break;
     case error.code == 2 || error.POSITION_UNAVAILABLE:
       err.innerHTML += "<p>Location information is unavailable.</p>";
+      fadeIn(err);
     break;
     case error.code == 3 || error.TIMEOUT:
       err.innerHTML += "<p>The request to get user location timed out.</p>";
+      fadeIn(err);
     break;
     case error.code == 0 || error.UNKNOWN_ERROR:
       err.innerHTML += "<p>An unknown error occurred.</p>";
+      fadeIn(err);
     break;
   }
-
-  fadeIn(err);
 }
 
 /*******************************************************************************
-* Geoloc
+* Resize
 *******************************************************************************/
 function resizeSidebar() {
   var windowHeight = window.innerHeight;
@@ -190,4 +191,59 @@ function resizeSidebar() {
   map.css("width", windowWidth - sideBar.innerWidth());
   map.css("height", windowHeight - topBar.innerHeight());
 }
+
+/*******************************************************************************
+* Modal
+*******************************************************************************/
+function displayModal(mode) {
+
+  // var modal = document.getElementsByClassName("confirm-modal");
+  var modal = $(".confirm-modal");
+
+  var title = $(".confirm-modal h3");
+  var avatar = $(".confirm-modal img");
+  var description = $(".confirm-modal p");
+  var button = $(".confirm-modal .btn");
+
+  if (button.hasClass("btn-danger")) {
+    button.removeClass("btn-danger");
+    button.addClass("btn-success");
+  };
+
+  if(mode == "lock"){
+    title[0].innerHTML = "Lock your phone";
+    avatar[0].src = "assets/images/ic_phonelink_lock_black_48px.svg";
+    description[0].innerHTML = "You can lock your phone and combine with others actions";
+    button[0].innerHTML = "Lock";
+  }
+
+  if(mode == "ring"){
+    title[0].innerHTML = "Ring your phone";
+    avatar[0].src = "assets/images/ic_speaker_phone_black_48px.svg";
+    description[0].innerHTML = "You can lock your phone and combine with others actions";
+    button[0].innerHTML = "Ring";
+  }
+  
+  if(mode == "pattern"){
+    title[0].innerHTML = "Change the lock pattern of your phone";
+    avatar[0].src = "assets/images/ic_dialpad_black_48px.svg";
+    description[0].innerHTML = "You can lock your phone and combine with others actions";
+    button[0].innerHTML = "Change";
+  }
+  
+  if(mode == "wipe"){
+    title[0].innerHTML = "Wipe your phone";
+    avatar[0].src = "assets/images/ic_phonelink_erase_black_48px.svg";
+    description[0].innerHTML = "You can lock your phone and combine with others actions";
+    button[0].innerHTML = "Wipe";
+
+    button.removeClass("btn-success");
+    button.addClass("btn-danger");
+  }
+  modal.fadeIn("slow");
+}
+
+$(".confirm-modal .close").click(function() {
+    $(this).parent().fadeOut("slow");
+  });
 

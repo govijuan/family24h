@@ -50,23 +50,55 @@ $light_blue_shade: #0098ca;
     $SHARED
 \*----------------------------------------------------------------------------*/
 .top {
-  background-color: $dark_blue;
+  background-color: $black;
   width: 100%;
   height: 70px;
+}
 
-  span {
-    cursor: context-menu;
-    font-size: 40px;
-    margin: 15px;
-  }
+.user-config {
+  cursor: context-menu;
+  font-size: 40px;
+  margin: 15px;
+  float: right;
+}
 
-  p, span {
-    float: right;
+.config-box {
+  display: none;
+  background-color: #fff;
+  padding: 15px;
+  position: absolute;
+  right: 10px;
+  top: 70px;
+  z-index: 1000;
+  border-radius: 5px;
+  border: 1px solid #efefef;
+
+  .top-tip {
+    background-color: #fff;
+    height: 10px;
+    position: absolute;
+    right: 10px;
+    top: -15px;
+    transform: rotate(45deg);
+    width: 10px;
   }
 }
 
-.config_box {
-  display: none;
+.confirm-modal,
+.config-box {
+
+  div {
+    float: left;
+    margin: 10px;
+  }
+}
+
+.avatar {
+
+  img {
+    height: 64px;
+    width: 64px;
+  }
 }
 
 .sidebar {
@@ -103,6 +135,17 @@ $light_blue_shade: #0098ca;
   height: 146px;
   width: 100%;
   border-bottom: 1px solid $light_blue_shade;
+  position: relative;
+
+  p {
+    text-transform: uppercase;
+    font-weight: bold;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    color: $black;
+  }
 
   &:hover {
     background-color: $light_blue_shade;
@@ -110,18 +153,42 @@ $light_blue_shade: #0098ca;
 }
 
 .lock {
-  background: transparent url("../images/ic_phonelink_lock_black_48px.svg") center center scroll no-repeat;
+  background: transparent url("../images/ic_phonelink_lock_black_48px.svg") center 40px scroll no-repeat;
   border-top: 1px solid $light_blue_shade;
 }
 
 .ring {
-  background: transparent url("../images/ic_speaker_phone_black_48px.svg") center center scroll no-repeat;
+  background: transparent url("../images/ic_speaker_phone_black_48px.svg") center 40px scroll no-repeat;
 }
 
 .pattern {
-  background: transparent url("../images/ic_dialpad_black_48px.svg") center center scroll no-repeat;
+  background: transparent url("../images/ic_dialpad_black_48px.svg") center 40px scroll no-repeat;
 }
 
 .wipe {
-  background: transparent url("../images/ic_phonelink_erase_black_48px.svg") center center scroll no-repeat;
+  background: transparent url("../images/ic_phonelink_erase_black_48px.svg") center 40px scroll no-repeat;
+}
+
+.confirm-modal {
+  background-color: #fff;
+  border-radius: 5px;
+  display: none;
+  margin-left: -250px;
+  outline: 0 none;
+  overflow: hidden;
+  padding: 15px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 200;
+  border: 1px solid #efefef;
+
+  h3 {
+    margin-top: 0;
+  }
+}
+
+.btn-ring {
+  float: right;
+  clear: both;
 }

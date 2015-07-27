@@ -2,26 +2,59 @@
 
 .dashboard(role="main")
   .top
-    %p.name Name
+    .user-config.glyphicon.glyphicon-cog
     %p.profile_picture_url
     .gender
-    %span.user_config.glyphicon.glyphicon-cog
-    .config_box
-      %p logout
+
+    .config-box
+      .top-tip
+
+      .row
+
+        %div
+          .avatar
+
+        %div
+          %p.name Name
+          %p.email Email
+          %p.telephone Telephone
+
+      .row
+        %p logout
   
   .sidebar
-    %p.email Email
-    %p.telephone Telephone
 
-    %a.lock(href="#")
-    %a.ring(href="#")
-    %a.pattern(href="#")
-    %a.wipe(href="#")
+    .buttons
+      %a.lock(href="#" onclick="displayModal('lock');")
+        %p Lock
+      %a.ring(href="#" onclick="displayModal('ring');")
+        %p Ring
+      %a.pattern(href="#" onclick="displayModal('pattern');")
+        %p Pattern
+      %a.wipe(href="#" onclick="displayModal('wipe');")
+        %p Wipe
+    %p V 1.0.0
 
   %section.content
     #flash.alert.alert-danger.alert-dismissible.fade.in(role="alert")
       %button(type="button" class="close" data-dismiss="alert" aria-label="Close")
         %span(aria-hidden="true") &times;
     #mapdiv
+
+    .confirm-modal(role="modal")
+      %button(type="button" class="close" data-dismiss="alert" aria-label="Close")
+        %span(aria-hidden="true") &times;
+      %h3 Ring my phone
+      
+      .row
+        %div
+          .avatar
+            %img(src="")
+
+        %div
+          %p This will ring your phone for 15 seconds
+
+      %a(class="btn btn-lg btn-success btn-ring" href="#" role="button") Ring ma' bell
+
 
 //=require footer.haml
