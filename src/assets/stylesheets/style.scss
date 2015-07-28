@@ -55,6 +55,15 @@ $light_blue_shade: #0098ca;
   height: 70px;
 }
 
+.logo {
+  margin-left: 50px;
+  float: left;
+
+  img {
+    height: 70px;
+  }
+}
+
 .user-config {
   cursor: context-menu;
   font-size: 40px;
@@ -105,6 +114,16 @@ $light_blue_shade: #0098ca;
   background-color: $light_blue;
   width: 10%;
   float: left;
+  position: relative;
+
+  .version {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    text-align: center;
+    font-weight: bold;
+    font-size: 11px;
+  }
 }
 
 .content {
@@ -185,6 +204,12 @@ $light_blue_shade: #0098ca;
 
   h3 {
     margin-top: 0;
+  }
+
+  .close {
+    &:hover {
+      transform: scale(1.5);
+    }
   }
 }
 

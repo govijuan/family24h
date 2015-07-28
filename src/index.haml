@@ -2,6 +2,8 @@
 
 .dashboard(role="main")
   .top
+    .logo
+      %img(src="assets/images/logo-negativo.svg")
     .user-config.glyphicon.glyphicon-cog
     %p.profile_picture_url
     .gender
@@ -33,7 +35,7 @@
         %p Pattern
       %a.wipe(href="#" onclick="displayModal('wipe');")
         %p Wipe
-    %p V 1.0.0
+    %p.version V 1.0.0
 
   %section.content
     #flash.alert.alert-danger.alert-dismissible.fade.in(role="alert")

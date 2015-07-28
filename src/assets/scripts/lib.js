@@ -1,43 +1,72 @@
-/*******************************************************************************
-* Global Variables
-*******************************************************************************/
+/*----------------------------------------------------------------------------*\
+    CONTENTS
+\*----------------------------------------------------------------------------*/
+/*
+
+    NOTES             General notes
+    PROJECT INFO      Information about the Project
+    GLOBAL VARIABLES  Variables that'll be used Globally
+    CALLS             General calls
+*/
+
+/*----------------------------------------------------------------------------*\
+    $NOTES
+\*----------------------------------------------------------------------------*/
+/*
+    How to seach this file:
+    append '$' to the desired above section to go straight to it.
+    In the case of Functions, put '$' in the front of Function's name.
+*/
+
+/*----------------------------------------------------------------------------*\
+    $PROJECT INFO
+\*----------------------------------------------------------------------------*/
+/*
+    Project: Family 24h
+    Developer: Gutem <gutem@eokoe.com>
+    Project Manager: Gian <gian.vizzotto@eokoe.com>
+*/
+
+/*----------------------------------------------------------------------------*\
+    $Global Variables
+\*----------------------------------------------------------------------------*/
 var err = document.getElementById('flash');
 
-/*******************************************************************************
-* Fade In effect
-*******************************************************************************/
-// function fadeIn(el) {
-//   var opacity = 0;
 
-//   el[0].style.opacity = 0;
-//   el[0].style.filter = '';
-//   el[0].style.display = 'block';
+/*----------------------------------------------------------------------------*\
+    $FadeIn Effect
+\*----------------------------------------------------------------------------*/
+function fadeIn(el) {
+  var opacity = 0;
 
-//   var last = +new Date();
+  el.style.opacity = 0;
+  el.style.filter = '';
+  el.style.display = 'block';
 
-//   var tick = function() {
-//     opacity += (new Date() - last) / 400;
-//     el[0].style.opacity = opacity;
-//     el[0].style.filter = 'alpha(opacity=' + (100 * opacity)|0 + ')';
+  var last = +new Date();
 
-//     last = +new Date();
+  var tick = function() {
+    opacity += (new Date() - last) / 400;
+    el.style.opacity = opacity;
+    el.style.filter = 'alpha(opacity=' + (100 * opacity)|0 + ')';
 
-//     if (opacity < 1) {
-//       (window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16);
-//     }
-//   };
+    last = +new Date();
 
-//   tick();
-// }
+    if (opacity < 1) {
+      (window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16);
+    }
+  };
 
-/*******************************************************************************
-* Ajax function to parse JSONP
-*******************************************************************************/
+  tick();
+}
+
+/*----------------------------------------------------------------------------*\
+    $Ajax to parse user's info 
+\*----------------------------------------------------------------------------*/
 $(document).ready(function() {
 
   // API's config 
   var url = 'http://api.nueta/';
-  var webFunctions_endpoint = "notification-messages"
   var user_endpoint = "users/";
   var user_id = "38";
   var api_key = "?api_key=LAK2La6084ac4f20de47b82ba1K3hj3hH32KS301SA2";
@@ -48,31 +77,18 @@ $(document).ready(function() {
     type: 'GET',
     crossDomain: true,
     statusCode: {
-      200: function(data) { console.log(data);
+      200: function(data) { 
+        console.log(data);
 
         var telephoneField = document.querySelector('.telephone');
         var nameField = document.querySelector('.name');
         var emailField = document.querySelector('.email');
         var profilePicture = document.querySelector('.profile_picture_url');
-        // var userID = document.querySelector('.user_id');
-        // var type = document.querySelector('.type');
-        // var gender = document.querySelector('.gender');
-
-        // var fadeInFields = document.getElementsByClassName('field');
         
         telephoneField.innerHTML = data.telephone;
         nameField.innerHTML = data.name;
         emailField.innerHTML = data.email;
         profilePicture.innerHTML = data.profile_picture_url;
-        // userID.innerHTML = data.id;
-        // type.innerHTML = data.type;
-        // gender.innerHTML = data.gender;
-
-        // if (endereco.style.display != 'block') {
-        //   fadeIn(fadeInFields);
-        // };
-
-        // err.innerHTML += "<p>"+ data.name +"</p>";
       } // Ok
       ,400: function(msg) { 
         console.log(msg);
@@ -84,9 +100,81 @@ $(document).ready(function() {
   });
 });
 
-/*******************************************************************************
-* Geoloc
-*******************************************************************************/
+/*----------------------------------------------------------------------------*\
+    $Ajax to parse notifications  
+\*----------------------------------------------------------------------------*/
+function notification(type) {
+  // API's config 
+  var url = "http://api.nueta/";
+  var endpoint = "notification-messages";
+  var api_key = "?api_key=LAK2La6084ac4f20de47b82ba1K3hj3hH32KS301SA2";
+
+  var code = "";
+  var event_id = "";
+
+  if (type == "lock") {
+    // var uuid = guid();
+    // code = "?code=device:locked";
+    // event_id = "?event_id="+uuid;
+    err.innerHTML += "<p>Device locked.</p>";
+  };
+
+  if (type == "unlock") {
+    // var uuid = guid();
+    code = "?code=device:unlocked";
+    event_id = "?event_id="+uuid;
+  };
+
+  if (type == "ring") {
+    var uuid = guid();
+    code = "?code=buzzer/turn-on";
+    event_id = "?event_id="+uuid;
+  };
+
+  if (type == "wipe") {
+    var uuid = guid();
+    code = "?code=device:wipe";
+    event_id = "?event_id="+uuid;
+  };
+
+  fadeIn(err);
+
+  // $.ajax({
+  //   url: url+endpoint+api_key,
+  //   type: 'GET',
+  //   crossDomain: true,
+  //   statusCode: {
+  //     200: function(data) { 
+  //       console.log(data);
+  //     } // Ok
+  //     ,400: function(msg) { 
+  //       console.log(msg);
+  //     } // Bad Request
+  //     ,404: function(msg) { 
+  //       console.log(msg); 
+  //     } // Not Found
+  //   }
+  // });
+}
+
+
+
+/*----------------------------------------------------------------------------*\
+    $Event ID generator 
+\*----------------------------------------------------------------------------*/
+function guid() {
+  function s4() {
+    return Math.floor((1 + Math.random()) * 0x10000)
+      .toString(16)
+      .substring(1);
+  }
+  return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+    s4() + '-' + s4() + s4() + s4();
+}
+
+/*----------------------------------------------------------------------------*\
+    $Geolocation
+\*----------------------------------------------------------------------------*/
 var watchId = null;
 
 function geo_location() {
@@ -175,9 +263,9 @@ function showError(error) {
   }
 }
 
-/*******************************************************************************
-* Resize
-*******************************************************************************/
+/*----------------------------------------------------------------------------*\
+    $Resize
+\*----------------------------------------------------------------------------*/
 function resizeSidebar() {
   var windowHeight = window.innerHeight;
   var windowWidth = window.innerWidth;
@@ -192,12 +280,11 @@ function resizeSidebar() {
   map.css("height", windowHeight - topBar.innerHeight());
 }
 
-/*******************************************************************************
-* Modal
-*******************************************************************************/
+/*----------------------------------------------------------------------------*\
+    $Modal 
+\*----------------------------------------------------------------------------*/
 function displayModal(mode) {
 
-  // var modal = document.getElementsByClassName("confirm-modal");
   var modal = $(".confirm-modal");
 
   var title = $(".confirm-modal h3");
@@ -215,6 +302,7 @@ function displayModal(mode) {
     avatar[0].src = "assets/images/ic_phonelink_lock_black_48px.svg";
     description[0].innerHTML = "You can lock your phone and combine with others actions";
     button[0].innerHTML = "Lock";
+    button[0].setAttribute("onclick","notification('lock');")
   }
 
   if(mode == "ring"){
@@ -222,6 +310,7 @@ function displayModal(mode) {
     avatar[0].src = "assets/images/ic_speaker_phone_black_48px.svg";
     description[0].innerHTML = "You can lock your phone and combine with others actions";
     button[0].innerHTML = "Ring";
+    button[0].setAttribute("onclick","notification('ring');")
   }
   
   if(mode == "pattern"){
@@ -236,6 +325,7 @@ function displayModal(mode) {
     avatar[0].src = "assets/images/ic_phonelink_erase_black_48px.svg";
     description[0].innerHTML = "You can lock your phone and combine with others actions";
     button[0].innerHTML = "Wipe";
+    button[0].setAttribute("onclick","notification('wipe');")
 
     button.removeClass("btn-success");
     button.addClass("btn-danger");
@@ -243,7 +333,14 @@ function displayModal(mode) {
   modal.fadeIn("slow");
 }
 
+/*----------------------------------------------------------------------------*\
+    $Calls 
+\*----------------------------------------------------------------------------*/
+$(".user-config").click(function() {
+  $(".config-box").toggle();
+});
+
 $(".confirm-modal .close").click(function() {
-    $(this).parent().fadeOut("slow");
-  });
+  $(this).parent().fadeOut("slow");
+});
 
