@@ -16,11 +16,11 @@
 %script(src="assets/scripts/lib.js")
 %script(src="assets/scripts/main.js")
 
-:javascript 
-  geo_location();
-  resizeSidebar();
-
-
+:javascript
+  if (page == "index") {
+    geo_location();
+    resizeSidebar();
+  };
 
 <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
 :javascript

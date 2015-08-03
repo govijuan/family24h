@@ -1,4 +1,3 @@
-// Meu
 var fs = require('fs');
 var path = require('path');
 
@@ -50,11 +49,7 @@ gulp.task('browser-sync', function() {
 * Cleaner task
 *******************************************************************************/
 gulp.task('clean', function(cb) {
-  del([dist.haml, 
-       dist.scss, 
-       dist.scripts, 
-       dist.images, 
-       dist.fonts], cb)
+  del(dist.base, cb)
 });
 
 /*******************************************************************************
@@ -88,7 +83,7 @@ gulp.task('fonts', function() {
 * HAML related tasks
 *******************************************************************************/
 gulp.task('haml', function() {
-  gulp.src(src.haml)
+  gulp.src([src.haml, '!src/header.haml', '!src/footer.haml'])
   .pipe(plugins.changed(dist.base))
   .pipe(plugins.include())
     .on('error', console.log)
