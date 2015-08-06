@@ -1,0 +1,333 @@
+/*----------------------------------------------------------------------------*\
+    CONTENTS
+\*----------------------------------------------------------------------------*/
+/*
+
+    NOTES           General notes
+    PROJECT INFO    Information about the Project
+    RESET           CSS reset/normalize
+    IMPORTS         External/Vendors CSS Frameworks/Libraries
+    FONTS           Customs Fonts that aren't from Google Fonts
+    SHARED          Shared elements across the site.
+    MAIN            HTML, BODY, etc.
+*/
+
+/*----------------------------------------------------------------------------*\
+    $NOTES
+\*----------------------------------------------------------------------------*/
+/*
+    How to seach this file:
+    append '$' to the desired above section to go straight to it.
+*/
+
+/*----------------------------------------------------------------------------*\
+    $PROJECT INFO
+\*----------------------------------------------------------------------------*/
+/*
+    Project: Family 24h
+    Developer: Gutem <gutem@eokoe.com>
+    Project Manager: Gian <gian.vizzotto@eokoe.com>
+*/
+
+/*----------------------------------------------------------------------------*\
+    $IMPORTS
+\*----------------------------------------------------------------------------*/
+@import "main";
+@import "_bootstrap";
+@import url(http://fonts.googleapis.com/css?family=Ubuntu);
+@import url(http://fonts.googleapis.com/css?family=Maven+Pro);
+
+/*----------------------------------------------------------------------------*\
+    $VARIABLES
+\*----------------------------------------------------------------------------*/
+$black: #2e2e2e;
+
+$dark_blue: #006599;
+$dark_blue_shade: #03405f;
+
+$light_blue: #32ccfe;
+$light_blue_shade: #0098ca;
+
+$lighter_gray: #f7f7f7;
+$light_gray: #e2e2e2;
+$medium_gray: #ccc;
+$dark_gray: #666;
+
+/*----------------------------------------------------------------------------*\
+    $SHARED
+\*----------------------------------------------------------------------------*/
+.top {
+  background-color: $black;
+  width: 100%;
+  height: 70px;
+}
+
+.logo {
+  margin-left: 50px;
+  float: left;
+
+  img {
+    height: 70px;
+  }
+}
+
+.user-config {
+  cursor: context-menu;
+  font-size: 40px;
+  margin: 15px;
+  float: right;
+}
+
+.config-box {
+  display: none;
+  background-color: #fff;
+  padding: 15px;
+  position: absolute;
+  right: 10px;
+  top: 70px;
+  z-index: 1000;
+  border-radius: 5px;
+  border: 1px solid #efefef;
+
+  .top-tip {
+    background-color: #fff;
+    height: 10px;
+    position: absolute;
+    right: 10px;
+    top: -15px;
+    transform: rotate(45deg);
+    width: 10px;
+  }
+}
+
+.confirm-modal,
+.config-box {
+
+  div {
+    float: left;
+    margin: 10px;
+  }
+}
+
+.avatar {
+
+  img {
+    height: 64px;
+    width: 64px;
+  }
+}
+
+.sidebar {
+  background-color: $light_blue;
+  width: 10%;
+  float: left;
+  position: relative;
+
+  .version {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    text-align: center;
+    font-weight: bold;
+    font-size: 11px;
+  }
+}
+
+.content {
+  background-color: #ccc;
+  float: left;
+  position: relative;
+}
+
+#flash {
+  display: none;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 100;
+  width: 90%;
+}
+
+#mapdiv {
+  float: left;
+  z-index: 10;
+}
+
+.lock,
+.ring,
+.pattern,
+.wipe {
+  float: left;
+  height: 146px;
+  width: 100%;
+  border-bottom: 1px solid $light_blue_shade;
+  position: relative;
+
+  p {
+    text-transform: uppercase;
+    font-weight: bold;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    color: $black;
+  }
+
+  &:hover {
+    background-color: $light_blue_shade;
+  }
+}
+
+.lock {
+  background: transparent url("../images/ic_phonelink_lock_black_48px.svg") center 40px scroll no-repeat;
+  border-top: 1px solid $light_blue_shade;
+}
+
+.ring {
+  background: transparent url("../images/ic_speaker_phone_black_48px.svg") center 40px scroll no-repeat;
+}
+
+.pattern {
+  background: transparent url("../images/ic_dialpad_black_48px.svg") center 40px scroll no-repeat;
+}
+
+.wipe {
+  background: transparent url("../images/ic_phonelink_erase_black_48px.svg") center 40px scroll no-repeat;
+}
+
+.confirm-modal {
+  background-color: #fff;
+  border-radius: 5px;
+  display: none;
+  margin-left: -250px;
+  outline: 0 none;
+  overflow: hidden;
+  padding: 15px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 200;
+  border: 1px solid #efefef;
+
+  h3 {
+    margin-top: 0;
+  }
+
+  .close {
+    &:hover {
+      transform: scale(1.5);
+    }
+  }
+}
+
+.btn-ring {
+  float: right;
+  clear: both;
+}
+
+
+/*----------------------------------------------------------------------------*\
+    $LOGIN
+\*----------------------------------------------------------------------------*/
+.header {
+  border-bottom: 1px solid $light_gray;
+  width: 100%;
+  float: left;
+  margin-bottom: 20px;
+  font-family: 'Ubuntu', sans-serif;
+
+  .logo img, p {
+    float: left;
+  }
+
+  .logo img {
+    height: 110px;
+  }
+
+  p {
+    color: $medium_gray;
+    font-weight: bold;
+    margin-top: 60px;
+    margin-left: 20px;
+  }
+}
+
+.main {
+  font-family: 'Ubuntu', sans-serif;
+
+  h3 {
+    font-size: 48px;
+    color: $light_blue;
+    font-weight: bold;
+    line-height: 54px;
+
+    small {
+      font-size: 24px;
+      line-height: 54px;
+      float: right;
+      color: $dark_gray;
+      border-left: 1px solid $dark_gray;
+      padding-left: 35px;
+    }
+  }
+
+
+  
+  .field {
+    float: none;
+    margin: 20px auto;
+  }
+
+  form {
+    border: 1px solid $medium_gray;
+    border-radius: 5px;
+    background-color: $lighter_gray;
+
+    label {
+      color: $dark_gray;
+    }
+
+    label,
+    input {
+      clear: both;
+      float: left;
+    }
+
+    input {
+      padding: 10px 5px;
+      border-radius: 5px;
+      border: 1px solid $light_gray;
+      margin-bottom: 15px;
+      width: 100%;
+
+      &[type="checkbox"] {
+        width: auto;
+        float: left;
+      }
+
+      &[type="checkbox"] + label {
+        clear: none;
+        margin-left: 5px;
+      }
+    }
+
+    a {
+      float: right;
+      color: $dark_gray;
+    }
+
+    button {
+      font-family: 'Maven Pro', sans-serif;
+      font-weight: bold;
+      background-color: $light_blue;
+      float: left;
+      margin: 20px 0 !important;
+      color: #fff;
+
+      &:hover {
+        background-color: $light_blue_shade;
+        color: #fff;
+      }
+    }
+  }
+}

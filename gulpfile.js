@@ -98,11 +98,10 @@ gulp.task('haml', function() {
 *******************************************************************************/
 gulp.task('images', function() {
   gulp.src(src.images)
-  .pipe(plugins.cache(
-    plugins.imagemin(
-      {optimizationLevel: 3, 
-      progressive: true, 
-      interlaced: true })))
+  .pipe(plugins.imagemin(
+    {optimizationLevel: 3, 
+    progressive: true, 
+    interlaced: true }))
   .pipe(gulp.dest(dist.images))
   .pipe(plugins.notify({message: 'Images task complete'}))
   .pipe(browserSync.stream())

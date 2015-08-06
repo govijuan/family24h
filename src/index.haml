@@ -1,64 +1,341 @@
-//=include header.haml
+!!! 5
+%html(class="no-js" lang="pt-BR")
+  %head
+    %meta(charset="utf-8")
+    %meta(http-equiv="x-ua-compatible" content="ie=edge")
+    %title Family 24h
+    %meta(name="description" content="")
+    %meta(name="viewport" content="width=device-width, initial-scale=1")
 
-.dashboard(role="main")
-  .top
-    .logo
-      %img(src="assets/images/logo-negativo.svg")
-    .user-config.glyphicon.glyphicon-cog
-    %p.profile_picture_url
-    .gender
+    %link(rel="apple-touch-icon" href="apple-touch-icon.png")
 
-    .config-box
-      .top-tip
+    <!-- Place favicon.ico in the root directory -->
+    %link(rel="shortcut icon" href="favicon.ico" type="image/x-icon")
 
-      .row
+    %link(rel="stylesheet" href="assets/stylesheets/style.css")
 
-        %div
-          .avatar
+    %script(src="assets/scripts/vendor/modernizr-2.8.3.min.js")
 
-        %div
-          %p.name Name
-          %p.email Email
-          %p.telephone Telephone
+  %body
 
-      .row
-        %p logout
-  
-  .sidebar
+    %header
+      .container
+        .logo
+          %a(href="/")
+            %img(src="assets/images/logo-negativo.svg")
+            %p SUA FAMILIA EM BOAS MÃOS
 
-    .buttons
-      %a.lock(href="#" onclick="displayModal('lock');")
-        %p Lock
-      %a.ring(href="#" onclick="displayModal('ring');")
-        %p Ring
-      %a.pattern(href="#" onclick="displayModal('pattern');")
-        %p Pattern
-      %a.wipe(href="#" onclick="displayModal('wipe');")
-        %p Wipe
-    %p.version V 1.0.0
+        %nav
+          %ul
+            %li
+              %a(href="#") Conheça
+            %li
+              %a(href="#") Vantagens
+            %li
+              %a(href="#") Versões
+            %li
+              %a(href="#") Ajuda
+            %li
+              %a(href="#") Downloads
 
-  %section.content
-    #flash.alert.alert-danger.alert-dismissible.fade.in(role="alert")
-      %button(type="button" class="close" data-dismiss="alert" aria-label="Close")
-        %span(aria-hidden="true") &times;
-    #mapdiv
+    %section.intro
+      .container
 
-    .confirm-modal(role="modal")
-      %button(type="button" class="close" data-dismiss="alert" aria-label="Close")
-        %span(aria-hidden="true") &times;
-      %h3 Ring my phone
-      
-      .row
-        %div
-          .avatar
-            %img(src="")
+        .text.col-xs-5.col-sm-5.col-md-5.col-lg-5
+          %h4 Sua família mais protegida!
 
-        %div
-          %p This will ring your phone for 15 seconds
+          %p 
+            %strong Family24h 
+             é um aplicativo mobile que permite o monitoramento familiar, no qual você tem acesso, on line, a localização dos aparelhos cadastrados, através de um mapa interativo.
 
-      %a(class="btn btn-lg btn-success btn-ring" href="#" role="button") Ring ma' bell
+          %a(class="btn btn-default baixar" href="#" role="button") Baixe agora, é gratuito!
 
-:javascript
-  var page = "index";
+          %a(class="btn btn-default video" href="#" role="button") Assista ao vídeo
 
-//=include footer.haml
+
+        .col-xs-6.col-sm-6.col-md-6.col-lg-6
+
+    %section.features
+      .container
+        .row
+          %h3 Vantagens
+            %small Só o Family24h oferece:
+
+        .list.col-md-8
+
+          .item
+            .text_on
+              %p 
+                Alerta de 
+                %br 
+                Panico
+            .text_hover
+              %p Utilizar nossa plataforma web (Family24h.com) para ter acesso a todos os aparelhos sem precisar do seu celular
+
+          .item
+            .text_on
+              %p 
+                Detalhamento
+                %br
+                do dispositivo
+            .text_hover
+              %p Utilizar nossa plataforma web (Family24h.com) para ter acesso a todos os aparelhos sem precisar do seu celular
+
+          .item
+            .text_on
+              %p 
+                Avisos por
+                %br
+                SMS
+            .text_hover
+              %p Utilizar nossa plataforma web (Family24h.com) para ter acesso a todos os aparelhos sem precisar do seu celular
+
+          .item
+            .text_on
+              %p 
+                Cercas
+                %br
+                virtuais
+            .text_hover
+              %p Utilizar nossa plataforma web (Family24h.com) para ter acesso a todos os aparelhos sem precisar do seu celular
+
+          .item
+            .text_on
+              %p 
+                Aviso de
+                %br
+                substituição
+                %br
+                do SIMCARD
+            .text_hover
+              %p Utilizar nossa plataforma web (Family24h.com) para ter acesso a todos os aparelhos sem precisar do seu celular
+
+          .item
+            .text_on
+              %p 
+                Informações
+                %br
+                de velocidade
+            .text_hover
+              %p Utilizar nossa plataforma web (Family24h.com) para ter acesso a todos os aparelhos sem precisar do seu celular
+
+          .item
+            .text_on
+              %p 
+                Proteção contra
+                %br
+                roubo do aparelho
+                %br
+                e dos dados
+            .text_hover
+              %p Utilizar nossa plataforma web (Family24h.com) para ter acesso a todos os aparelhos sem precisar do seu celular
+
+          .item
+            .text_on
+              %p Item description normal
+            .text_hover
+              %p Utilizar nossa plataforma web (Family24h.com) para ter acesso a todos os aparelhos sem precisar do seu celular
+
+          .item
+            .text_on
+              %p  
+                Histórico de
+                %br
+                posições
+            .text_hover
+              %p Utilizar nossa plataforma web (Family24h.com) para ter acesso a todos os aparelhos sem precisar do seu celular
+
+    %section.versions
+      .container
+        .row
+          %h3 Versões
+            %small Ainda mais proteção para sua familia
+
+
+
+    %section.help
+      .container
+        .row
+          %h3 Ajuda
+            %small Precisa de ajuda? Tem perguntas? Encontre as respostas que você precisa aqui
+
+        .col-xs-3.col-sm-3.col-md-3.col-lg-3
+          %h4 Gerais
+            %ul
+              %li
+                %a(href="#") Item 
+              %li
+                %a(href="#") Item 
+              %li
+                %a(href="#") Item 
+              %li
+                %a(href="#") Item 
+              %li
+                %a(href="#") Item 
+
+          %h4 Gerais
+            %ul
+              %li
+                %a(href="#") Item 
+              %li
+                %a(href="#") Item 
+              %li
+                %a(href="#") Item 
+              %li
+                %a(href="#") Item 
+              %li
+                %a(href="#") Item 
+
+        .col-xs-3.col-sm-3.col-md-3.col-lg-3
+          %h4 Gerais
+            %ul
+              %li
+                %a(href="#") Item 
+              %li
+                %a(href="#") Item 
+              %li
+                %a(href="#") Item 
+              %li
+                %a(href="#") Item 
+              %li
+                %a(href="#") Item 
+
+          %h4 Gerais
+            %ul
+              %li
+                %a(href="#") Item 
+              %li
+                %a(href="#") Item 
+              %li
+                %a(href="#") Item 
+              %li
+                %a(href="#") Item 
+              %li
+                %a(href="#") Item 
+
+        .col-xs-3.col-sm-3.col-md-3.col-lg-3
+          %h4 Gerais
+            %ul
+              %li
+                %a(href="#") Item 
+              %li
+                %a(href="#") Item 
+              %li
+                %a(href="#") Item 
+              %li
+                %a(href="#") Item 
+              %li
+                %a(href="#") Item 
+
+          %h4 Gerais
+            %ul
+              %li
+                %a(href="#") Item 
+              %li
+                %a(href="#") Item 
+              %li
+                %a(href="#") Item 
+              %li
+                %a(href="#") Item 
+              %li
+                %a(href="#") Item 
+
+        .col-xs-3.col-sm-3.col-md-3.col-lg-3
+          %h4 Gerais
+            %ul
+              %li
+                %a(href="#") Item 
+              %li
+                %a(href="#") Item 
+              %li
+                %a(href="#") Item 
+              %li
+                %a(href="#") Item 
+              %li
+                %a(href="#") Item 
+
+          %h4 Gerais
+            %ul
+              %li
+                %a(href="#") Item 
+              %li
+                %a(href="#") Item 
+              %li
+                %a(href="#") Item 
+              %li
+                %a(href="#") Item 
+              %li
+                %a(href="#") Item 
+
+    %section.contact
+      .container
+        %h3 Contato
+
+        .col-xs-6.col-sm-6.col-md-6.col-lg-6
+          %p Entre em contato por telefone
+          %p +55 11 3386-8181
+
+        .col-xs-6.col-sm-6.col-md-6.col-lg-6
+          %p Ou, por email
+          %form
+            %label(for="name") Nome 
+              %span *
+            %input(type="text" name="name" id="name")
+
+            %label(for="email") Email 
+              %span *
+            %input(type="text" name="email" id="email")
+
+            %label(for="") Mensagem (máximo 300 caracteres)
+              %span *
+            %textarea
+
+            %button(type="button" class="btn btn-lg") Enviar Mensagem
+
+    %footer
+      .container
+        .logo
+          %a(href="/")
+            %img(src="assets/images/logo-negativo.svg")
+
+        .links
+
+          %ul
+            %li 
+              %p Sobre
+            %li 
+              %a(href="#") Conheça
+            %li 
+              %a(href="#") Vantagens
+            %li 
+              %a(href="#") Termos de Uso
+            %li 
+              %a(href="#") Políticas e Privacidade
+
+          %ul
+            %li 
+              %p Versões
+            %li 
+              %a(href="#") Conheça
+            %li 
+              %a(href="#") Vantagens
+            %li 
+              %a(href="#") Termos de Uso
+            %li 
+              %a(href="#") Políticas e Privacidade
+
+          %ul
+            %li 
+              %p Ajuda
+            %li 
+              %a(href="#") Conheça
+            %li 
+              %a(href="#") Vantagens
+            %li 
+              %a(href="#") Termos de Uso
+            %li 
+              %a(href="#") Políticas e Privacidade
+
+        .appstore
+          %img(src="assets/images/google_play.png")
+          %img(src="assets/images/app_store.png")

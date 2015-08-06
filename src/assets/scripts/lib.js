@@ -120,7 +120,7 @@ function notification(type) {
   };
 
   if (type == "unlock") {
-    // var uuid = guid();
+    var uuid = guid();
     code = "?code=device:unlocked";
     event_id = "?event_id="+uuid;
   };

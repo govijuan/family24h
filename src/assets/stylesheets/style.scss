@@ -34,8 +34,8 @@
 \*----------------------------------------------------------------------------*/
 @import "main";
 @import "_bootstrap";
-@import url(http://fonts.googleapis.com/css?family=Ubuntu);
-@import url(http://fonts.googleapis.com/css?family=Maven+Pro);
+@import url(http://fonts.googleapis.com/css?family=Ubuntu:400,700);
+@import url(http://fonts.googleapis.com/css?family=Maven+Pro:400,700);
 
 /*----------------------------------------------------------------------------*\
     $VARIABLES
@@ -53,187 +53,37 @@ $light_gray: #e2e2e2;
 $medium_gray: #ccc;
 $dark_gray: #666;
 
+$light_green: #69dbd2;
+
 /*----------------------------------------------------------------------------*\
     $SHARED
 \*----------------------------------------------------------------------------*/
-.top {
-  background-color: $black;
-  width: 100%;
-  height: 70px;
+* {
+  box-sizing: border-box;
 }
 
-.logo {
-  margin-left: 50px;
-  float: left;
+h3 {
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 48px;
+  font-weight: bold;
+  line-height: 54px;
+  margin: 70px 0 70px 40px;
 
-  img {
-    height: 70px;
+  small {
+    font-size: 30px;
+    line-height: 54px;
+    color: $dark_gray;
+    border-left: 1px solid $dark_gray;
+    padding-left: 35px;
+    margin-left: 35px;
   }
 }
-
-.user-config {
-  cursor: context-menu;
-  font-size: 40px;
-  margin: 15px;
-  float: right;
-}
-
-.config-box {
-  display: none;
-  background-color: #fff;
-  padding: 15px;
-  position: absolute;
-  right: 10px;
-  top: 70px;
-  z-index: 1000;
-  border-radius: 5px;
-  border: 1px solid #efefef;
-
-  .top-tip {
-    background-color: #fff;
-    height: 10px;
-    position: absolute;
-    right: 10px;
-    top: -15px;
-    transform: rotate(45deg);
-    width: 10px;
-  }
-}
-
-.confirm-modal,
-.config-box {
-
-  div {
-    float: left;
-    margin: 10px;
-  }
-}
-
-.avatar {
-
-  img {
-    height: 64px;
-    width: 64px;
-  }
-}
-
-.sidebar {
-  background-color: $light_blue;
-  width: 10%;
-  float: left;
-  position: relative;
-
-  .version {
-    position: absolute;
-    width: 100%;
-    bottom: 0;
-    text-align: center;
-    font-weight: bold;
-    font-size: 11px;
-  }
-}
-
-.content {
-  background-color: #ccc;
-  float: left;
-  position: relative;
-}
-
-#flash {
-  display: none;
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  z-index: 100;
-  width: 90%;
-}
-
-#mapdiv {
-  float: left;
-  z-index: 10;
-}
-
-.lock,
-.ring,
-.pattern,
-.wipe {
-  float: left;
-  height: 146px;
-  width: 100%;
-  border-bottom: 1px solid $light_blue_shade;
-  position: relative;
-
-  p {
-    text-transform: uppercase;
-    font-weight: bold;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    text-align: center;
-    color: $black;
-  }
-
-  &:hover {
-    background-color: $light_blue_shade;
-  }
-}
-
-.lock {
-  background: transparent url("../images/ic_phonelink_lock_black_48px.svg") center 40px scroll no-repeat;
-  border-top: 1px solid $light_blue_shade;
-}
-
-.ring {
-  background: transparent url("../images/ic_speaker_phone_black_48px.svg") center 40px scroll no-repeat;
-}
-
-.pattern {
-  background: transparent url("../images/ic_dialpad_black_48px.svg") center 40px scroll no-repeat;
-}
-
-.wipe {
-  background: transparent url("../images/ic_phonelink_erase_black_48px.svg") center 40px scroll no-repeat;
-}
-
-.confirm-modal {
-  background-color: #fff;
-  border-radius: 5px;
-  display: none;
-  margin-left: -250px;
-  outline: 0 none;
-  overflow: hidden;
-  padding: 15px;
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  z-index: 200;
-  border: 1px solid #efefef;
-
-  h3 {
-    margin-top: 0;
-  }
-
-  .close {
-    &:hover {
-      transform: scale(1.5);
-    }
-  }
-}
-
-.btn-ring {
-  float: right;
-  clear: both;
-}
-
 
 /*----------------------------------------------------------------------------*\
-    $LOGIN
+    $HEADER
 \*----------------------------------------------------------------------------*/
-.header {
-  border-bottom: 1px solid $light_gray;
-  width: 100%;
-  float: left;
-  margin-bottom: 20px;
+header {
+  background-color: $black;
   font-family: 'Ubuntu', sans-serif;
 
   .logo img, p {
@@ -250,84 +100,229 @@ $dark_gray: #666;
     margin-top: 60px;
     margin-left: 20px;
   }
+
+  .container {
+    position: relative;
+  }
 }
 
-.main {
+nav {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+
+  li {
+    list-style: none;
+    display: inline;
+    margin: 0 5px;
+    float: left;
+  }
+
+  a {
+    color: #fff;
+    float: left;
+    padding-bottom: 19px;
+
+    &.active,
+    &:hover {
+      color: #fff;
+      border-bottom: 4px solid $light_blue;
+      text-decoration: none;
+      padding-bottom: 15px;
+    }
+  }
+}
+
+/*----------------------------------------------------------------------------*\
+    $INTRO
+\*----------------------------------------------------------------------------*/
+.intro {
+  background: #fff url('../images/site_intro.png') top center scroll no-repeat;
+  height: 905px;
   font-family: 'Ubuntu', sans-serif;
 
-  h3 {
-    font-size: 48px;
-    color: $light_blue;
+  .text {
+    margin-top: 185px;
+    font-size: 20px;
+    color: $dark_gray;
+
+    strong {
+      font-weight: bold;
+    }
+
+  }
+
+  h4 {
+    font-size: 52px;
     font-weight: bold;
-    line-height: 54px;
+    color: $light_blue;
+  }
+
+  a {
+    margin-right: 10px;
+    margin-top: 10px;
+    color: #fff;
+    text-transform: uppercase;
+    border: none;
+
+    &:hover {
+      color: #fff;
+    }
+  }
+
+  .baixar {
+    background-color: $dark_blue;
+    box-shadow: 0 3px $dark_blue_shade;
+  }
+
+  .video {
+    background-color: $light_blue;
+    box-shadow: 0 3px $light_blue_shade;
+  }
+}
+
+/*----------------------------------------------------------------------------*\
+    $FEATURES
+\*----------------------------------------------------------------------------*/
+.features {
+  background: #fff url('../images/site_features.jpg') top center scroll no-repeat;
+  height: 1016px;
+
+  h3 {
+    color: $dark_blue;
+  }
+
+  .item {
+    background-color: #fff;
+    height: 150px;
+    width: 28%;
+    float: left;
+    margin: 10px;
+    border-radius: 5px;
+    opacity: .8;
+    padding: 5px;
+
+    .text_on,
+    .text_hover {
+        text-align: center;
+        font-family: 'Ubuntu', sans-serif;
+        font-size: 20px;
+        font-weight: bold;
+      }
+
+    .text_on {     
+      color: $dark_blue;
+    }
+
+    .text_hover {
+      display: none;
+      font-size: 18px;
+      line-height: 22px;
+      color: #fff;
+      font-weight: normal;
+    }
+
+    &:hover {
+      background-color: $light_green;
+
+      .text_on{
+        display: none;
+      }
+
+      .text_hover {
+        display: block;
+      }
+    }
+  }
+}
+
+/*----------------------------------------------------------------------------*\
+    $VERSIONS
+\*----------------------------------------------------------------------------*/
+.versions {
+  background: #fff url('../images/site_versions.jpg') bottom center scroll no-repeat;
+  height: 700px;
+
+  h3 {
+    color: $light_blue;
+  }
+}
+
+/*----------------------------------------------------------------------------*\
+    $HELP
+\*----------------------------------------------------------------------------*/
+.help {
+  background: #fff url('../images/site_help.png') top center scroll repeat-x;
+  height: 700px;
+
+  h3 {
+    color: $dark_blue;
 
     small {
       font-size: 24px;
-      line-height: 54px;
-      float: right;
-      color: $dark_gray;
-      border-left: 1px solid $dark_gray;
-      padding-left: 35px;
     }
   }
+}
 
+/*----------------------------------------------------------------------------*\
+    $CONTACT
+\*----------------------------------------------------------------------------*/
+.contact {
+  background: #fff url('../images/site_contact.jpg') top center scroll repeat-x;
+  height: 1034px;
+  color: #fff;
+}
 
-  
-  .field {
-    float: none;
-    margin: 20px auto;
+/*----------------------------------------------------------------------------*\
+    $FOOTER
+\*----------------------------------------------------------------------------*/
+footer {
+  height: 470px;
+  background-color: $black;
+  padding-top: 65px;
+
+  .logo img {
+    height: 110px;
   }
 
-  form {
-    border: 1px solid $medium_gray;
-    border-radius: 5px;
-    background-color: $lighter_gray;
+  .links {
 
-    label {
-      color: $dark_gray;
-    }
-
-    label,
-    input {
-      clear: both;
+     ul {
       float: left;
-    }
+      padding-left: 0;
+     }
 
-    input {
-      padding: 10px 5px;
-      border-radius: 5px;
-      border: 1px solid $light_gray;
-      margin-bottom: 15px;
-      width: 100%;
+    li {
+        font-family: 'MavenPro', sans-serif;
 
-      &[type="checkbox"] {
-        width: auto;
-        float: left;
+      p {
+        font-size: 18px;
+        color: $light_blue;
+        margin-bottom: 15px;
       }
 
-      &[type="checkbox"] + label {
-        clear: none;
-        margin-left: 5px;
-      }
-    }
-
-    a {
-      float: right;
-      color: $dark_gray;
-    }
-
-    button {
-      font-family: 'Maven Pro', sans-serif;
-      font-weight: bold;
-      background-color: $light_blue;
-      float: left;
-      margin: 20px 0 !important;
-      color: #fff;
-
-      &:hover {
-        background-color: $light_blue_shade;
+      a {
+        font-size: 12px;
         color: #fff;
+        margin-bottom: 15px;
+
+        &:hover {
+          color: #fff;
+        }
       }
+    }
+  }
+
+  .links,
+  .appstore {
+    margin-top: 60px;
+  }
+
+  .appstore {
+    float: right;
+
+    img:first-child {
+      margin-right: 15px;
     }
   }
 }
