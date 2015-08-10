@@ -343,4 +343,3 @@ $(".user-config").click(function() {
 $(".confirm-modal .close").click(function() {
   $(this).parent().fadeOut("slow");
 });
-

@@ -6252,7 +6252,10 @@ h3 {
   font-weight: bold;
   line-height: 54px;
   margin: 70px 0 70px 40px; }
+  h3 span {
+    float: left; }
   h3 small {
+    float: left;
     font-size: 30px;
     line-height: 54px;
     color: #666;
@@ -6300,7 +6303,7 @@ nav {
 /*----------------------------------------------------------------------------*    $INTRO
 \*----------------------------------------------------------------------------*/
 .intro {
-  background: #fff url("../images/site_intro.png") top center scroll no-repeat;
+  background: url("../images/site_intro.jpg") top center scroll no-repeat, url("../images/site_intro_bg.png") top left scroll repeat-x;
   height: 905px;
   font-family: 'Ubuntu', sans-serif; }
   .intro .text {
@@ -6331,39 +6334,45 @@ nav {
 /*----------------------------------------------------------------------------*    $FEATURES
 \*----------------------------------------------------------------------------*/
 .features {
-  background: #fff url("../images/site_features.jpg") top center scroll no-repeat;
+  background: #fff url("../images/site_features.jpg") top right scroll no-repeat;
   height: 1016px; }
   .features h3 {
     color: #006599; }
   .features .item {
-    background-color: #fff;
-    height: 150px;
-    width: 28%;
+    height: 204px;
+    width: 30%;
     float: left;
     margin: 10px;
-    border-radius: 5px;
+    border-radius: 10px;
     opacity: .8;
-    padding: 5px; }
+    padding: 15px;
+    background-color: #fff; }
+    .features .item.open {
+      background-color: #69dbd2; }
     .features .item .text_on,
     .features .item .text_hover {
       text-align: center;
       font-family: 'Ubuntu', sans-serif;
       font-size: 20px;
-      font-weight: bold; }
+      font-weight: bold;
+      position: relative;
+      height: 100%; }
     .features .item .text_on {
       color: #006599; }
+    .features .item .icon {
+      margin-bottom: 10px; }
     .features .item .text_hover {
       display: none;
       font-size: 18px;
       line-height: 22px;
       color: #fff;
       font-weight: normal; }
-    .features .item:hover {
-      background-color: #69dbd2; }
-      .features .item:hover .text_on {
-        display: none; }
-      .features .item:hover .text_hover {
-        display: block; }
+    .features .item .more, .features .item .minus {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      margin: 0;
+      cursor: pointer; }
 
 /*----------------------------------------------------------------------------*    $VERSIONS
 \*----------------------------------------------------------------------------*/
@@ -6398,25 +6407,57 @@ footer {
   padding-top: 65px; }
   footer .logo img {
     height: 110px; }
-  footer .links ul {
-    float: left;
-    padding-left: 0; }
-  footer .links li {
-    font-family: 'MavenPro', sans-serif; }
-    footer .links li p {
-      font-size: 18px;
-      color: #32ccfe;
-      margin-bottom: 15px; }
-    footer .links li a {
-      font-size: 12px;
-      color: #fff;
-      margin-bottom: 15px; }
-      footer .links li a:hover {
-        color: #fff; }
+  footer .logo,
+  footer .links {
+    float: left; }
+  footer .links {
+    margin-left: 50px; }
+    footer .links ul {
+      float: left;
+      padding-left: 0;
+      margin-left: 90px; }
+    footer .links li {
+      font-family: 'MavenPro', sans-serif;
+      font-weight: bold;
+      margin: 10px 0; }
+      footer .links li p {
+        font-size: 18px;
+        color: #32ccfe;
+        margin-bottom: 20px; }
+      footer .links li a {
+        font-size: 12px;
+        color: #fff;
+        margin-bottom: 15px; }
+        footer .links li a:hover {
+          color: #fff; }
   footer .links,
   footer .appstore {
-    margin-top: 60px; }
+    margin-top: 40px; }
   footer .appstore {
     float: right; }
     footer .appstore img:first-child {
       margin-right: 15px; }
+  footer .socials-links,
+  footer .legal {
+    width: 100%;
+    float: left; }
+
+@media screen and (max-width: 767px) {
+  h3 small {
+    border: medium none;
+    clear: both;
+    margin: 10px 0;
+    padding: 0;
+    font-size: 24px;
+    line-height: 30px; }
+  .features .item {
+    background-color: red;
+    width: 42%; } }
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+  .features .item {
+    background-color: green; } }
+
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+  .features .item {
+    background-color: yellow; } }

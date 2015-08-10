@@ -69,7 +69,12 @@ h3 {
   line-height: 54px;
   margin: 70px 0 70px 40px;
 
+  span {
+    float: left;
+  }
+
   small {
+    float: left;
     font-size: 30px;
     line-height: 54px;
     color: $dark_gray;
@@ -137,7 +142,7 @@ nav {
     $INTRO
 \*----------------------------------------------------------------------------*/
 .intro {
-  background: #fff url('../images/site_intro.png') top center scroll no-repeat;
+  background: url('../images/site_intro.jpg') top center scroll no-repeat, url('../images/site_intro_bg.png') top left scroll repeat-x;
   height: 905px;
   font-family: 'Ubuntu', sans-serif;
 
@@ -185,7 +190,7 @@ nav {
     $FEATURES
 \*----------------------------------------------------------------------------*/
 .features {
-  background: #fff url('../images/site_features.jpg') top center scroll no-repeat;
+  background: #fff url('../images/site_features.jpg') top right scroll no-repeat;
   height: 1016px;
 
   h3 {
@@ -193,25 +198,35 @@ nav {
   }
 
   .item {
-    background-color: #fff;
-    height: 150px;
-    width: 28%;
+    height: 204px;
+    width: 30%;
     float: left;
     margin: 10px;
-    border-radius: 5px;
+    border-radius: 10px;
     opacity: .8;
-    padding: 5px;
+    padding: 15px;
+    background-color: #fff;
+
+    &.open {
+      background-color: $light_green;
+    }
 
     .text_on,
     .text_hover {
-        text-align: center;
-        font-family: 'Ubuntu', sans-serif;
-        font-size: 20px;
-        font-weight: bold;
+      text-align: center;
+      font-family: 'Ubuntu', sans-serif;
+      font-size: 20px;
+      font-weight: bold;
+      position: relative;
+      height: 100%;
       }
 
     .text_on {     
       color: $dark_blue;
+    }
+
+    .icon {
+      margin-bottom: 10px;
     }
 
     .text_hover {
@@ -222,16 +237,12 @@ nav {
       font-weight: normal;
     }
 
-    &:hover {
-      background-color: $light_green;
-
-      .text_on{
-        display: none;
-      }
-
-      .text_hover {
-        display: block;
-      }
+    .more, .minus {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      margin: 0;
+      cursor: pointer;
     }
   }
 }
@@ -285,20 +296,29 @@ footer {
     height: 110px;
   }
 
+  .logo,
   .links {
+    float: left;
+  }
+
+  .links {
+    margin-left: 50px;
 
      ul {
       float: left;
       padding-left: 0;
+      margin-left: 90px;
      }
 
     li {
         font-family: 'MavenPro', sans-serif;
+        font-weight: bold;
+        margin: 10px 0;
 
       p {
         font-size: 18px;
         color: $light_blue;
-        margin-bottom: 15px;
+        margin-bottom: 20px;
       }
 
       a {
@@ -315,7 +335,7 @@ footer {
 
   .links,
   .appstore {
-    margin-top: 60px;
+    margin-top: 40px;
   }
 
   .appstore {
@@ -325,4 +345,88 @@ footer {
       margin-right: 15px;
     }
   }
+
+  .socials-links,
+  .legal {
+    width: 100%;
+    float: left;
+  }
+}
+
+
+// Extra Small
+@media screen and (max-width: 767px) {
+  h3 {
+
+      small {
+        border: medium none;
+        clear: both;
+        margin: 10px 0;
+        padding: 0;
+        font-size: 24px;
+        line-height: 30px;
+      }
+    }
+
+  .features {
+
+    .item {
+      background-color: red;
+      width: 42%;
+    }
+
+    // .item {
+    //   height: 170px;
+    //   width: 100%;
+    //   margin: 10px;
+    //   padding: 15px;
+
+    //   .text_on,
+    //   .text_hover {
+    //     font-size: 18px;
+    //     }
+
+    //   .icon {
+    //     margin-bottom: 10px;
+    //   }
+
+    //   .text_hover {
+    //     font-size: 18px;
+    //     line-height: 22px;
+    //   }
+
+    //   .more, .minus {
+    //     position: absolute;
+    //     bottom: 0;
+    //     right: 0;
+    //     margin: 0;
+    //     cursor: pointer;
+    //   }
+    // }
+  }
+}
+
+// Small
+@media screen and (min-width: 768px) and (max-width: 991px) {
+  .features {
+
+    .item {
+      background-color: green;
+    }
+  }
+}
+
+// Medium
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+    .features {
+
+    .item {
+      background-color: yellow;
+    }
+  }
+}
+
+// Large
+@media screen and (min-width: 1200px) {
+  
 }
