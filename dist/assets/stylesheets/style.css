@@ -6263,6 +6263,25 @@ h3 {
     padding-left: 35px;
     margin-left: 35px; }
 
+.intro a,
+.versions a {
+  margin-right: 10px;
+  margin-top: 10px;
+  color: #fff;
+  text-transform: uppercase;
+  border: none; }
+  .intro a:hover,
+  .versions a:hover {
+    color: #fff; }
+  .intro a.baixar,
+  .versions a.baixar {
+    background-color: #006599;
+    box-shadow: 0 3px #03405f; }
+  .intro a.video,
+  .versions a.video {
+    background-color: #32ccfe;
+    box-shadow: 0 3px #0098ca; }
+
 /*----------------------------------------------------------------------------*    $HEADER
 \*----------------------------------------------------------------------------*/
 header {
@@ -6316,20 +6335,6 @@ nav {
     font-size: 52px;
     font-weight: bold;
     color: #32ccfe; }
-  .intro a {
-    margin-right: 10px;
-    margin-top: 10px;
-    color: #fff;
-    text-transform: uppercase;
-    border: none; }
-    .intro a:hover {
-      color: #fff; }
-  .intro .baixar {
-    background-color: #006599;
-    box-shadow: 0 3px #03405f; }
-  .intro .video {
-    background-color: #32ccfe;
-    box-shadow: 0 3px #0098ca; }
 
 /*----------------------------------------------------------------------------*    $FEATURES
 \*----------------------------------------------------------------------------*/
@@ -6377,10 +6382,29 @@ nav {
 /*----------------------------------------------------------------------------*    $VERSIONS
 \*----------------------------------------------------------------------------*/
 .versions {
-  background: #fff url("../images/site_versions.jpg") bottom center scroll no-repeat;
-  height: 700px; }
+  background: #fff url("../images/site_versions.jpg") bottom center scroll no-repeat; }
   .versions h3 {
     color: #32ccfe; }
+  .versions .slide {
+    height: 541px;
+    margin: 70px 0 170px; }
+    .versions .slide img {
+      overflow: hidden; }
+    .versions .slide .text {
+      font-size: 20px;
+      font-family: 'Ubuntu', sans-serif;
+      top: 105px;
+      right: 70px;
+      position: absolute; }
+    .versions .slide ul {
+      padding-left: 20px;
+      font-size: 22px;
+      font-family: 'Ubuntu', sans-serif;
+      font-weight: bold;
+      color: #32ccfe; }
+  .versions .baixar {
+    margin-top: 35px;
+    padding: 12px 15px; }
 
 /*----------------------------------------------------------------------------*    $HELP
 \*----------------------------------------------------------------------------*/
@@ -6391,20 +6415,67 @@ nav {
     color: #006599; }
     .help h3 small {
       font-size: 24px; }
+  .help span.glyphicon {
+    font-size: 24px;
+    margin: 18px 15px;
+    position: absolute;
+    top: 70px;
+    color: #32ccfe; }
+  .help input {
+    font-family: 'Ubuntu', sans-serif;
+    width: 100%;
+    padding: 10px 10px 10px 50px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 24px;
+    margin: 70px 0 40px; }
 
 /*----------------------------------------------------------------------------*    $CONTACT
 \*----------------------------------------------------------------------------*/
 .contact {
   background: #fff url("../images/site_contact.jpg") top center scroll repeat-x;
   height: 1034px;
-  color: #fff; }
+  color: #fff;
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: bold;
+  font-size: 16px; }
+  .contact .container {
+    padding-top: 410px; }
+  .contact .tel .pre {
+    font-size: 24px; }
+  .contact .tel .pre,
+  .contact .tel .fone {
+    color: #b9f1ff; }
+  .contact .tel .fone {
+    font-size: 36px; }
+  .contact .field {
+    padding: 0 10px 0 0;
+    margin-bottom: 15px; }
+  .contact label {
+    float: left;
+    clear: both; }
+  .contact input,
+  .contact textarea {
+    float: left;
+    border-radius: 3px;
+    border: none;
+    clear: both;
+    width: 100%;
+    padding: 7px; }
+  .contact textarea {
+    height: 100px; }
+  .contact button {
+    background-color: #006599;
+    width: 250px; }
+    .contact button:hover {
+      color: #fff;
+      background-color: #03405f; }
 
 /*----------------------------------------------------------------------------*    $FOOTER
 \*----------------------------------------------------------------------------*/
 footer {
-  height: 470px;
   background-color: #2e2e2e;
-  padding-top: 65px; }
+  padding-bottom: 40px; }
   footer .logo img {
     height: 110px; }
   footer .logo,
@@ -6415,7 +6486,9 @@ footer {
     footer .links ul {
       float: left;
       padding-left: 0;
-      margin-left: 90px; }
+      margin-left: 80px; }
+      footer .links ul:first-child {
+        margin-left: 0; }
     footer .links li {
       font-family: 'MavenPro', sans-serif;
       font-weight: bold;
@@ -6437,27 +6510,81 @@ footer {
     float: right; }
     footer .appstore img:first-child {
       margin-right: 15px; }
+  footer .socials-links {
+    margin-bottom: 10px; }
+    footer .socials-links p, footer .socials-links .networks {
+      text-align: center; }
+    footer .socials-links img {
+      margin: 0 5px; }
   footer .socials-links,
   footer .legal {
     width: 100%;
     float: left; }
+  footer .legal p {
+    color: #fff;
+    text-align: center; }
 
+/*----------------------------------------------------------------------------*    $EXTRA_SMALL
+\*----------------------------------------------------------------------------*/
 @media screen and (max-width: 767px) {
   h3 small {
-    border: medium none;
+    border: none;
     clear: both;
     margin: 10px 0;
     padding: 0;
     font-size: 24px;
-    line-height: 30px; }
+    line-height: 30px;
+    margin-bottom: 30px; }
+  .intro .text {
+    font-size: 18px; }
+  .intro h4 {
+    font-size: 36px; }
   .features .item {
     background-color: red;
-    width: 42%; } }
+    width: 100%; }
+  footer .logo,
+  footer .appstore {
+    width: 100%;
+    text-align: center; }
+    footer .logo img,
+    footer .appstore img {
+      clear: both;
+      margin-bottom: 10px; } }
 
+/*----------------------------------------------------------------------------*    $SMALL
+\*----------------------------------------------------------------------------*/
 @media screen and (min-width: 768px) and (max-width: 991px) {
+  h3 small {
+    border: none;
+    clear: both;
+    margin: 10px 0;
+    padding: 0;
+    font-size: 24px;
+    line-height: 30px;
+    margin-bottom: 30px; }
+  .intro .text {
+    font-size: 18px; }
+  .intro h4 {
+    font-size: 36px; }
   .features .item {
-    background-color: green; } }
+    background-color: green; }
+  footer .appstore {
+    text-align: center;
+    clear: both;
+    float: left;
+    width: 100%; } }
 
+/*----------------------------------------------------------------------------*    $MEDIUM
+\*----------------------------------------------------------------------------*/
 @media screen and (min-width: 992px) and (max-width: 1199px) {
+  .intro h4 {
+    font-size: 48px; }
   .features .item {
-    background-color: yellow; } }
+    background-color: yellow; }
+  footer .appstore img {
+    clear: both;
+    float: left;
+    margin-bottom: 10px; } }
+
+/*----------------------------------------------------------------------------*    $LARGE
+\*----------------------------------------------------------------------------*/

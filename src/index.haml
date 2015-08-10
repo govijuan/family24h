@@ -28,17 +28,18 @@
         %nav
           %ul
             %li
-              %a(href="#") Conheça
+              %a(href="#intro") Conheça
             %li
-              %a(href="#") Vantagens
+              %a(href="#features") Vantagens
             %li
-              %a(href="#") Versões
+              %a(href="#versions") Versões
             %li
-              %a(href="#") Ajuda
+              %a(href="#help") Ajuda
             %li
               %a(href="#") Downloads
 
     %section.intro
+      %a(name="intro")
       .container
 
         .text.col-xs-5.col-sm-5.col-md-5.col-lg-5
@@ -55,37 +56,64 @@
     //=include home_features.haml
 
     %section.versions
+      %a(name="versions")
       .container
         .row
           %h3 
             %span Versões
             %small Ainda mais proteção para sua familia
-   
+
+        .slide.col-xs-12.col-sm-12.col-md-12.col-lg-12
+          -# %img(src="assets/images/versions_premium.png")
+
+          .text.col-xs-6.col-sm-6.col-md-6.col-lg-6
+            %p 
+              %strong Family24h 
+               é um aplicativo mobile que permite o monitoramento familiar, no qual você tem acesso, on line, a localização dos aparelhos cadastrados, através de um mapa interativo.
+
+            %ul
+              %li
+                %p Direct emergency responders to your location
+              %li
+                %p Give you personalized crisis care
+              %li
+                %p Direct you to the nearest gas station
+              %li
+                %p Access your emergency profile
+
+            %a(class="btn btn-default baixar" href="#" role="button") Não perca, baixe agora!
+
     //=include home_help.haml
 
 
     %section.contact
+      %a(name="contact")
       .container
         %h3 Contato
 
-        .col-xs-6.col-sm-6.col-md-6.col-lg-6
+        .tel.col-xs-6.col-sm-6.col-md-6.col-lg-6
           %p Entre em contato por telefone
-          %p +55 11 3386-8181
+          %p 
+            %span.pre +55 11  
+            %span.fone &nbsp;3386-8181
 
-        .col-xs-6.col-sm-6.col-md-6.col-lg-6
+        .message.col-xs-6.col-sm-6.col-md-6.col-lg-6
           %p Ou, por email
           %form
-            %label(for="name") Nome 
-              %span *
-            %input(type="text" name="name" id="name")
+            .field.col-xs-12.col-sm-12.col-md-6.col-lg-6
+              %label(for="name") Nome 
+                %span *
+              %input(type="text" name="name" id="name")
 
-            %label(for="email") Email 
-              %span *
-            %input(type="text" name="email" id="email")
+            .field.col-xs-12.col-sm-12.col-md-6.col-lg-6
+              %label(for="email") Email 
+                %span *
+              %input(type="text" name="email" id="email")
 
-            %label(for="") Mensagem (máximo 300 caracteres)
-              %span *
-            %textarea
+            .field.col-xs-12.col-sm-12.col-md-12.col-lg-12
+              %label(for="") Mensagem (máximo 300 caracteres)
+                %span *
+              %textarea
 
             %button(type="button" class="btn btn-lg") Enviar Mensagem
 
@@ -101,9 +129,9 @@
             %li 
               %p Sobre
             %li 
-              %a(href="#") Conheça
+              %a(href="#intro") Conheça
             %li 
-              %a(href="#") Vantagens
+              %a(href="#features") Vantagens
             %li 
               %a(href="#") Termos de Uso
             %li 
@@ -113,17 +141,17 @@
             %li 
               %p Versões
             %li 
-              %a(href="#") Gratuito
+              %a(href="#versions") Gratuito
             %li 
-              %a(href="#") Premium
+              %a(href="#versions") Premium
 
           %ul
             %li 
               %p Ajuda
             %li 
-              %a(href="#") Suporte
+              %a(href="#help") Suporte
             %li 
-              %a(href="#") Contato
+              %a(href="#contact") Contato
 
         .appstore
           %img(src="assets/images/google_play.png")
@@ -131,27 +159,27 @@
 
         .socials-links
           %p Siga-nos
-          %div
+          .networks
             %a(href="#")
-              %img(src="icon_footer_facebook.png")
+              %img(src="assets/images/icon_footer_facebook.png")
             %a(href="#")
-              %img(src="icon_footer_tumblr.png")
+              %img(src="assets/images/icon_footer_tumblr.png")
             %a(href="#")
-              %img(src="icon_footer_pinterest.png")
+              %img(src="assets/images/icon_footer_pinterest.png")
             %a(href="#")
-              %img(src="icon_footer_twitter.png")
+              %img(src="assets/images/icon_footer_twitter.png")
             %a(href="#")
-              %img(src="icon_footer_youtube.png")
+              %img(src="assets/images/icon_footer_youtube.png")
             %a(href="#")
-              %img(src="icon_footer_linkedin.png")
+              %img(src="assets/images/icon_footer_linkedin.png")
             %a(href="#")
-              %img(src="icon_footer_gplus.png")
+              %img(src="assets/images/icon_footer_gplus.png")
 
         .legal
           %p 
             Copyright &copy; 2015 - Family 24h - An 
             %a(href="http://www.eokoe.com") Eokoe 
-            Project
+             Project
 
 <!-- jQuery -->
 %script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js")
