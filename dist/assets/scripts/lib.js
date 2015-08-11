@@ -80,15 +80,17 @@ $(document).ready(function() {
       200: function(data) { 
         console.log(data);
 
-        var telephoneField = document.querySelector('.telephone');
-        var nameField = document.querySelector('.name');
-        var emailField = document.querySelector('.email');
-        var profilePicture = document.querySelector('.profile_picture_url');
-        
-        telephoneField.innerHTML = data.telephone;
-        nameField.innerHTML = data.name;
-        emailField.innerHTML = data.email;
-        profilePicture.innerHTML = data.profile_picture_url;
+        var telephoneField = document.querySelectorAll('.telephone');
+        var nameField = document.querySelectorAll('.name');
+        var emailField = document.querySelectorAll('.email');
+        var profilePicture = document.querySelectorAll('.profile_picture_url');
+
+        for (var i = 0; i <= telephoneField.length - 1; i++) {
+          telephoneField[i].innerHTML = data.telephone;
+          nameField[i].innerHTML = data.name;
+          emailField[i].innerHTML = data.email;
+          profilePicture[i].innerHTML = data.profile_picture_url;
+        };
       } // Ok
       ,400: function(msg) { 
         console.log(msg);

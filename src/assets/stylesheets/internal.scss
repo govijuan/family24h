@@ -73,9 +73,11 @@ $dark_gray: #666;
 
 .user-config {
   cursor: context-menu;
-  font-size: 40px;
-  margin: 15px;
+  font-size: 32px;
+  line-height: 70px;
+  margin-right: 15px;
   float: right;
+  color: #fff;
 }
 
 .config-box {
@@ -329,5 +331,41 @@ $dark_gray: #666;
         color: #fff;
       }
     }
+  }
+}
+
+/*----------------------------------------------------------------------------*\
+    $BILLING
+\*----------------------------------------------------------------------------*/
+.perfil {
+  overflow: hidden;
+}
+
+.history {
+
+}
+
+.payment {
+  border: 1px solid $medium_gray;
+  border-radius: 5px;
+  padding: 20px;
+  margin: 10px auto;
+
+  table {
+    width: 100%;
+    font-size: 16px;
+  }
+
+  tr {
+    width: 100%;
+    border-bottom: 1px solid $medium_gray;
+
+    &:last-child {
+      border: none;
+    }
+  }
+
+  td {
+    padding: 10px 0;
   }
 }

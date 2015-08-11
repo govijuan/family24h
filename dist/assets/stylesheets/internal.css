@@ -6256,9 +6256,11 @@ button.close {
 
 .user-config {
   cursor: context-menu;
-  font-size: 40px;
-  margin: 15px;
-  float: right; }
+  font-size: 32px;
+  line-height: 70px;
+  margin-right: 15px;
+  float: right;
+  color: #fff; }
 
 .config-box {
   display: none;
@@ -6453,3 +6455,24 @@ button.close {
       .main form button:hover {
         background-color: #0098ca;
         color: #fff; }
+
+/*----------------------------------------------------------------------------*    $BILLING
+\*----------------------------------------------------------------------------*/
+.perfil {
+  overflow: hidden; }
+
+.payment {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  margin: 10px auto; }
+  .payment table {
+    width: 100%;
+    font-size: 16px; }
+  .payment tr {
+    width: 100%;
+    border-bottom: 1px solid #ccc; }
+    .payment tr:last-child {
+      border: none; }
+  .payment td {
+    padding: 10px 0; }
