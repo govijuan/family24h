@@ -113,34 +113,46 @@ h3 {
 /*----------------------------------------------------------------------------*\
     $HEADER
 \*----------------------------------------------------------------------------*/
-header {
-  background-color: $black;
+.header {
+  border-bottom: 1px solid $light_gray;
+  width: 100%;
+  float: left;
+  margin-bottom: 20px;
   font-family: 'Ubuntu', sans-serif;
+}
 
-  .logo img, p {
-    float: left;
-  }
+.header__logo {
+  height: 70px;
+  float: left;
+  margin-top: 25px;
+  margin-bottom: 10px;
+}
 
-  .logo img {
-    height: 110px;
-  }
+.header__tagline {
+  color: $medium_gray;
+  font-weight: bold;
+  margin-top: 75px;
+  margin-left: 20px;
+  float: left;
+  font-size: 12px;
+  letter-spacing: 5px;
+}
 
-  p {
-    color: $medium_gray;
-    font-weight: bold;
-    margin-top: 60px;
-    margin-left: 20px;
-  }
+.header_dark {
+  margin-bottom: 0;
+  border: none;
+  background-color: $black;
 
   .container {
     position: relative;
   }
 }
 
-nav {
+.menu {
   position: absolute;
   right: 0;
   bottom: 0;
+  font-weight: bold;
 
   li {
     list-style: none;
@@ -164,11 +176,16 @@ nav {
   }
 }
 
+section {
+  width: 100%;
+  float: left;
+}
+
 /*----------------------------------------------------------------------------*\
     $INTRO
 \*----------------------------------------------------------------------------*/
 .intro {
-  background: url('../images/site_intro.jpg') top center scroll no-repeat, url('../images/site_intro_bg.png') top left scroll repeat-x;
+  background: url('../images/site_intro.jpg') top center scroll no-repeat, #fff url('../images/site_intro_bg.png') top left scroll repeat-x;
   height: 905px;
   font-family: 'Ubuntu', sans-serif;
 

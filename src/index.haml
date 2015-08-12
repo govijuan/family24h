@@ -18,14 +18,13 @@
 
   %body
 
-    %header
+    %header.header.header_dark
       .container
-        .logo
-          %a(href="/")
-            %img(src="assets/images/logo-negativo.svg")
-            %p SUA FAMÍLIA EM BOAS MÃOS
+        %a(href="/")
+          %img.header__logo(src="assets/images/logo-negativo.svg")
+          %p.header__tagline SUA FAMÍLIA EM BOAS MÃOS
 
-        %nav
+        %nav.menu
           %ul
             %li
               %a(href="#intro") Conheça
@@ -36,7 +35,7 @@
             %li
               %a(href="#help") Ajuda
             %li
-              %a(href="#") Downloads
+              %a(href="download.html") Downloads
 
     %section.intro
       %a(name="intro")
@@ -56,9 +55,9 @@
     //=include home_features.haml
 
     %section.versions
-      %a(name="versions")
       .container
         .row
+          %a(name="versions")
           %h3 
             %span Versões
             %small Ainda mais proteção para sua familia
@@ -87,8 +86,8 @@
 
 
     %section.contact
-      %a(name="contact")
       .container
+        %a(name="contact")
         %h3 Contato
 
         .tel.col-xs-6.col-sm-6.col-md-6.col-lg-6

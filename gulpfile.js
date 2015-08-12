@@ -66,8 +66,8 @@ gulp.task('sass', function() {
   .pipe(plugins.rename({suffix: '.min'}))
   .pipe(plugins.minifyCss())
   .pipe(gulp.dest(dist.scss))
-  .pipe(plugins.notify({message: 'SASS task complete'}))
   .pipe(browserSync.stream())
+  .pipe(plugins.notify({message: 'SASS task complete'}))
 });
 
 /*******************************************************************************
@@ -90,8 +90,8 @@ gulp.task('haml', function() {
     .on('error', console.log)
   .pipe(plugins.haml())
   .pipe(gulp.dest(dist.base))
-  .pipe(plugins.notify({message: 'HAML task complete'}))
   .pipe(browserSync.stream())
+  .pipe(plugins.notify({message: 'HAML task complete'}))
 });
 
 /*******************************************************************************
@@ -104,8 +104,8 @@ gulp.task('images', function() {
     progressive: true, 
     interlaced: true }))
   .pipe(gulp.dest(dist.images))
-  .pipe(plugins.notify({message: 'Images task complete'}))
   .pipe(browserSync.stream())
+  .pipe(plugins.notify({message: 'Images task complete'}))
 });
 
 /*******************************************************************************

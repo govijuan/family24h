@@ -1,31 +1,9 @@
 /*----------------------------------------------------------------------------*\
     $LOGIN
 \*----------------------------------------------------------------------------*/
-.header {
-  border-bottom: 1px solid $light_gray;
-  width: 100%;
-  float: left;
-  margin-bottom: 20px;
-  font-family: 'Ubuntu', sans-serif;
-}
-
-.header__logo {
-  height: 110px;
-  float: left;
-  // margin-left: 50px;
-}
-
-.header__tagline {
-  color: $medium_gray;
-  font-weight: bold;
-  margin-top: 60px;
-  margin-left: 20px;
-  float: left;
-}
 
 .title,
 .form__field {
-  padding: 20px 15px;
   position: relative;
   float: none;
   box-sizing: border-box;
@@ -63,59 +41,90 @@
   overflow: hidden;
   width: 92%;
   margin: 0 auto;
+  padding: 20px 15px;
+
+  a {
+    float: right;
+    color: $dark_gray;
+  }
+
+  label {
+    color: $dark_gray;
+  }
+
+  label,
+  input {
+    clear: both;
+    float: left;
+
+    &[type="checkbox"] + label {
+      clear: none;
+      margin-left: 5px;
+    }
+  }
 }
 
-.main {
+.form__input {
+  padding: 10px 15px;
+  border-radius: 5px;
+  border: 1px solid $light_gray;
+  margin-bottom: 20px;
+  width: 100%;
+
+  &[type="checkbox"] {
+    width: auto;
+    float: left;
+  }
+}
+
+.form__button {
+  font-family: 'Maven Pro', sans-serif;
+  font-weight: bold;
+  background-color: $light_blue;
+  float: left;
+  color: #fff;
+
+  &:hover {
+    background-color: $light_blue_shade;
+    color: #fff;
+  }
+}
+
+.title__header_left {
+  margin-left: 0px;
+}
+
+.download {
+  border: 1px solid $medium_gray;
+  border-radius: 5px;
+  background-color: $lighter_gray;
+  overflow: hidden;
+  width: calc(50% - 10px);
+  box-sizing: border-box;
+  float: left;
+  padding: 30px;
+  color: $dark_gray;
   font-family: 'Ubuntu', sans-serif;
 
-  form {
+  img {
+    margin: 45px 0;
 
-    label {
-      color: $dark_gray;
-    }
-
-    label,
-    input {
-      clear: both;
-      float: left;
-    }
-
-    input {
-      padding: 10px 5px;
-      border-radius: 5px;
-      border: 1px solid $light_gray;
-      margin-bottom: 15px;
-      width: 100%;
-
-      &[type="checkbox"] {
-        width: auto;
-        float: left;
-      }
-
-      &[type="checkbox"] + label {
-        clear: none;
-        margin-left: 5px;
-      }
-    }
-
-    a {
+    &:last-child {
       float: right;
-      color: $dark_gray;
     }
+  }
 
-    button {
-      font-family: 'Maven Pro', sans-serif;
-      font-weight: bold;
-      background-color: $light_blue;
-      float: left;
-      margin: 20px 0 !important;
-      color: #fff;
+  &:last-child {
+    margin-left: 20px;
+  }
 
-      &:hover {
-        background-color: $light_blue_shade;
-        color: #fff;
-      }
-    }
+  h4 {
+    font-weight: bold;
+    font-size: 24px;
+  }
+
+  p {
+    font-size: 18px;
   }
 }
 
@@ -123,10 +132,14 @@
     $EXTRA_SMALL
 \*----------------------------------------------------------------------------*/
 @media screen and (max-width: 767px) {
+
+  .header {
+    text-align: center;
+  }
+
   .header__logo,
   .header__tagline {
     float: none;
-    text-align: center;
   }
 
   .header__tagline {

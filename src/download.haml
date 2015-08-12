@@ -1,0 +1,28 @@
+//=include header_interna.haml
+
+%section.main
+  .container
+    .col-xs-12.col-sm-12.col-md-12.col-lg-12
+      .title
+        %h3.title__header.title__header_left Download
+        %small.title__tagline Baixe agora, é gratuito!
+
+      .download
+        %h4 Acesse as lojas dos dispositivos
+        %p Acesse, faça o download e já comece a usar!
+
+        %img(src="assets/images/app_store.png")
+
+        %img(src="assets/images/google_play.png")
+
+      .download
+        %h4 Ou digite o número de seu telefone móvel
+        %p Você receberá um SMS com um link para o download
+
+        %form
+          %label(for="phone") Digite o número de seu telefone móvel com o DDD
+          %input.form__input(type="text" name="phone" id="phone")
+
+          %button.form__button(type="button" class="btn btn-lg btn-block") Quero receber o link
+
+//=include footer.haml

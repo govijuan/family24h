@@ -10,16 +10,16 @@
       %form
         .form__field
           %label(for="email") Email
-          %input(type="email" name="email" id="email")
+          %input.form__input(type="email" name="email" id="email")
 
           %label(for="password") Senha
-          %input(type="password" name="password" id="password")
+          %input.form__input(type="password" name="password" id="password")
 
           %input(type="checkbox" name="remember" id="remember")
           %label(for="remember") Mantenha-me conectado
 
           %a(href="#") Esqueci minha senha
 
-          %button(type="button" class="btn btn-lg btn-block") Entrar
+          %button.form__button(type="button" class="btn btn-lg btn-block") Entrar
 
 //=include footer.haml
