@@ -1,19 +1,14 @@
-//=include header.haml
-
-.header
-  .logo
-    %img(src="assets/images/logo-positivo.svg")
-    %p SUA FAMILIA EM BOAS MÃOS
+//=include header_interna.haml
 
 %section.main
   .container
     .col-xs-12.col-sm-10.col-md-8.col-lg-6.col-sm-offset-1.col-md-offset-2.col-lg-offset-3
-      .field.col-xs-11.col-sm-11.col-md-11.col-lg-11
-        %h3 Login
-          %small Bem vindo ao Family24h
+      .title
+        %h3.title__header Login
+        %small.title__tagline Bem vindo ao Family24h
 
-      %form.clearfix
-        .field.col-xs-11.col-sm-11.col-md-11.col-lg-11
+      %form
+        .form__field
           %label(for="email") Email
           %input(type="email" name="email" id="email")
 

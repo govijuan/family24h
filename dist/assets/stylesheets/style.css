@@ -6524,6 +6524,127 @@ footer {
     color: #fff;
     text-align: center; }
 
+/*----------------------------------------------------------------------------*    $LOGIN
+\*----------------------------------------------------------------------------*/
+.header {
+  border-bottom: 1px solid #e2e2e2;
+  width: 100%;
+  float: left;
+  margin-bottom: 20px;
+  font-family: 'Ubuntu', sans-serif; }
+
+.header__logo {
+  height: 110px;
+  float: left; }
+
+.header__tagline {
+  color: #ccc;
+  font-weight: bold;
+  margin-top: 60px;
+  margin-left: 20px;
+  float: left; }
+
+.title,
+.form__field {
+  padding: 20px 15px;
+  position: relative;
+  float: none;
+  box-sizing: border-box; }
+
+.title {
+  width: 100%;
+  overflow: hidden; }
+
+.title__header {
+  font-size: 48px;
+  color: #32ccfe;
+  font-weight: bold;
+  line-height: 54px;
+  margin-top: 20px;
+  float: left; }
+
+.title__tagline {
+  font-size: 24px;
+  line-height: 54px;
+  color: #666;
+  border-left: 1px solid #666;
+  padding-left: 35px;
+  float: left;
+  margin-left: 35px;
+  margin-top: 20px; }
+
+.form__field {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f7f7f7;
+  overflow: hidden;
+  width: 92%;
+  margin: 0 auto; }
+
+.main {
+  font-family: 'Ubuntu', sans-serif; }
+  .main form label {
+    color: #666; }
+  .main form label,
+  .main form input {
+    clear: both;
+    float: left; }
+  .main form input {
+    padding: 10px 5px;
+    border-radius: 5px;
+    border: 1px solid #e2e2e2;
+    margin-bottom: 15px;
+    width: 100%; }
+    .main form input[type="checkbox"] {
+      width: auto;
+      float: left; }
+    .main form input[type="checkbox"] + label {
+      clear: none;
+      margin-left: 5px; }
+  .main form a {
+    float: right;
+    color: #666; }
+  .main form button {
+    font-family: 'Maven Pro', sans-serif;
+    font-weight: bold;
+    background-color: #32ccfe;
+    float: left;
+    margin: 20px 0 !important;
+    color: #fff; }
+    .main form button:hover {
+      background-color: #0098ca;
+      color: #fff; }
+
+/*----------------------------------------------------------------------------*    $EXTRA_SMALL
+\*----------------------------------------------------------------------------*/
+@media screen and (max-width: 767px) {
+  .header__logo,
+  .header__tagline {
+    float: none;
+    text-align: center; }
+  .header__tagline {
+    margin-top: 0; }
+  .title {
+    margin-bottom: 20px; }
+  .title__header,
+  .title__tagline {
+    float: left;
+    clear: both; }
+  .title__header {
+    margin: 0; }
+  .title__tagline {
+    padding-left: 0;
+    border: none;
+    margin: 0; }
+  .form__field {
+    clear: both; } }
+
+/*----------------------------------------------------------------------------*    $SMALL
+\*----------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*    $MEDIUM
+\*----------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*    $LARGE
+\*----------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------*    $EXTRA_SMALL
 \*----------------------------------------------------------------------------*/
 @media screen and (max-width: 767px) {

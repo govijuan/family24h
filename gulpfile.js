@@ -56,7 +56,8 @@ gulp.task('clean', function(cb) {
 * SASS related tasks
 *******************************************************************************/
 gulp.task('sass', function() {
-  gulp.src(src.scss)
+  gulp.src([src.scss, '!./src/assets/stylesheets/login/login.scss'])
+  .pipe(plugins.include())
   // .pipe(plugins.sourcemaps.init())
   .pipe(plugins.sass({style: 'compressed'}))
   .pipe(plugins.autoprefixer('last 2 version', 'ie 8', 'ie 9', 'ie 10', 'ie 11', 'opera 12.1', 'ios 6', 'android 4'))
