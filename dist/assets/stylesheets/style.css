@@ -6251,7 +6251,8 @@ h3 {
   font-size: 48px;
   font-weight: bold;
   line-height: 54px;
-  margin: 70px 0 70px 40px; }
+  margin: 70px 0 40px 40px;
+  float: left; }
   h3 span {
     float: left; }
   h3 small {
@@ -6362,41 +6363,63 @@ section {
   height: 1016px; }
   .features h3 {
     color: #006599; }
-  .features .item {
-    height: 204px;
-    width: 30%;
-    float: left;
-    margin: 10px;
-    border-radius: 10px;
-    opacity: .8;
-    padding: 15px;
-    background-color: #fff; }
-    .features .item.open {
-      background-color: #69dbd2; }
-    .features .item .text_on,
-    .features .item .text_hover {
-      text-align: center;
-      font-family: 'Ubuntu', sans-serif;
-      font-size: 20px;
-      font-weight: bold;
-      position: relative;
-      height: 100%; }
-    .features .item .text_on {
-      color: #006599; }
-    .features .item .icon {
-      margin-bottom: 10px; }
-    .features .item .text_hover {
-      display: none;
-      font-size: 18px;
-      line-height: 22px;
-      color: #fff;
-      font-weight: normal; }
-    .features .item .more, .features .item .minus {
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      margin: 0;
-      cursor: pointer; }
+
+/* entire container, keeps perspective */
+.list {
+  -webkit-perspective: 1000;
+          perspective: 1000; }
+
+.list__item {
+  height: 204px;
+  width: 30%;
+  float: left;
+  margin: 10px;
+  border-radius: 10px;
+  opacity: .8;
+  padding: 15px;
+  background-color: #fff;
+  -webkit-transition: 0.6s;
+          transition: 0.6s;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+  cursor: pointer; }
+  .list__item.flip {
+    background-color: #69dbd2;
+    -webkit-transform: rotateY(180deg);
+            transform: rotateY(180deg); }
+  .list__item .more, .list__item .minus {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 0; }
+
+.item__front,
+.item__back {
+  text-align: center;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  position: relative;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden; }
+
+.item__front {
+  color: #006599;
+  z-index: 2;
+  -webkit-transform: rotateY(0deg);
+          transform: rotateY(0deg); }
+  .item__front .icon {
+    margin-bottom: 10px; }
+
+.item__back {
+  font-size: 18px;
+  line-height: 22px;
+  color: #fff;
+  font-weight: normal;
+  background-color: #69dbd2;
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg); }
 
 /*----------------------------------------------------------------------------*    $VERSIONS
 \*----------------------------------------------------------------------------*/

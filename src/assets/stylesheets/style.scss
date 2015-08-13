@@ -67,7 +67,8 @@ h3 {
   font-size: 48px;
   font-weight: bold;
   line-height: 54px;
-  margin: 70px 0 70px 40px;
+  margin: 70px 0 40px 40px;
+  float: left;
 
   span {
     float: left;
@@ -217,55 +218,69 @@ section {
   h3 {
     color: $dark_blue;
   }
+}
 
-  .item {
-    height: 204px;
-    width: 30%;
-    float: left;
-    margin: 10px;
-    border-radius: 10px;
-    opacity: .8;
-    padding: 15px;
-    background-color: #fff;
+/* entire container, keeps perspective */
+.list {
+  perspective: 1000;
+}
 
-    &.open {
-      background-color: $light_green;
-    }
 
-    .text_on,
-    .text_hover {
-      text-align: center;
-      font-family: 'Ubuntu', sans-serif;
-      font-size: 20px;
-      font-weight: bold;
-      position: relative;
-      height: 100%;
-      }
 
-    .text_on {     
-      color: $dark_blue;
-    }
+.list__item {
+  height: 204px;
+  width: 30%;
+  float: left;
+  margin: 10px;
+  border-radius: 10px;
+  opacity: .8;
+  padding: 15px;
+  background-color: #fff;
+  transition: 0.6s;
+  transform-style: preserve-3d;
+  cursor: pointer;
 
-    .icon {
-      margin-bottom: 10px;
-    }
-
-    .text_hover {
-      display: none;
-      font-size: 18px;
-      line-height: 22px;
-      color: #fff;
-      font-weight: normal;
-    }
-
-    .more, .minus {
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      margin: 0;
-      cursor: pointer;
-    }
+  &.flip {
+    background-color: $light_green;
+    transform: rotateY(180deg);
   }
+
+  .more, .minus {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 0;
+  }
+}
+
+.item__front,
+.item__back {
+  text-align: center;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  position: relative;
+  height: 100%;
+  backface-visibility: hidden;
+  }
+
+.item__front {     
+  color: $dark_blue;
+  z-index: 2;
+  transform: rotateY(0deg);
+
+  .icon {
+    margin-bottom: 10px;
+  }
+}
+
+.item__back {
+  font-size: 18px;
+  line-height: 22px;
+  color: #fff;
+  font-weight: normal;
+  background-color: $light_green;
+  transform: rotateY(180deg);
 }
 
 /*----------------------------------------------------------------------------*\

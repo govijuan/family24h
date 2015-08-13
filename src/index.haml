@@ -48,7 +48,7 @@
             %strong Family24h 
              é um aplicativo mobile que permite o monitoramento familiar, no qual você tem acesso, on line, a localização dos aparelhos cadastrados, através de um mapa interativo.
 
-          %a(class="btn btn-default baixar" href="#" role="button") Baixe agora, é gratuito!
+          %a(class="btn btn-default baixar" href="download.html" role="button") Baixe agora, é gratuito!
 
           %a(class="btn btn-default video" href="#" role="button") Assista ao vídeo
     
@@ -80,15 +80,16 @@
               %li
                 %p Access your emergency profile
 
-            %a(class="btn btn-default baixar" href="#" role="button") Não perca, baixe agora!
+            %a(class="btn btn-default baixar" href="download.html" role="button") Não perca, baixe agora!
 
     //=include home_help.haml
 
 
     %section.contact
       .container
-        %a(name="contact")
-        %h3 Contato
+        .row
+          %a(name="contact")
+          %h3 Contato
 
         .tel.col-xs-6.col-sm-6.col-md-6.col-lg-6
           %p Entre em contato por telefone
@@ -132,9 +133,9 @@
             %li 
               %a(href="#features") Vantagens
             %li 
-              %a(href="#") Termos de Uso
+              %a(href="termo.html") Termos de Uso
             %li 
-              %a(href="#") Políticas e Privacidade
+              %a(href="privacidade.html") Políticas e Privacidade
 
           %ul
             %li 
@@ -186,14 +187,14 @@
   window.jQuery || document.write('<script src="assets/scripts/vendor/jquery-1.11.3.min.js")<\/script>')
 
 :javascript
-  $(".item .more").click(function() {
-    $(this).parent().hide();
-    $(this).parent().parent().addClass("open");
-    $(this).parent().next().show();
+  $(".list__item .item__front").click(function() {
+    $(this).hide();
+    $(this).parent().addClass("flip");
+    $(this).next().show();
   });
 
-  $(".item .minus").click(function() {
-    $(this).parent().hide();
-    $(this).parent().parent().removeClass("open");
-    $(this).parent().prev().show();
+  $(".list__item .item__back").click(function() {
+    $(this).hide();
+    $(this).parent().removeClass("flip");
+    $(this).prev().show();
   });
