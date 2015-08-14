@@ -30,7 +30,8 @@
 /*----------------------------------------------------------------------------*\
     $Global Variables
 \*----------------------------------------------------------------------------*/
-var err = document.getElementById('flash');
+var api_url = "http://api.nueta/";
+var flash = document.getElementById('flash');
 
 
 /*----------------------------------------------------------------------------*\
@@ -53,7 +54,8 @@ function fadeIn(el) {
     last = +new Date();
 
     if (opacity < 1) {
-      (window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16);
+      (window.requestAnimationFrame && requestAnimationFrame(tick)) 
+      || setTimeout(tick, 16);
     }
   };
 
@@ -63,34 +65,137 @@ function fadeIn(el) {
 /*----------------------------------------------------------------------------*\
     $Ajax to parse user's info 
 \*----------------------------------------------------------------------------*/
-$(document).ready(function() {
+// $(document).ready(function() {
 
+//   // API's config 
+//   var user_endpoint = "users/";
+//   var user_id = "38";
+//   var api_key = "?api_key=LAK2La6084ac4f20de47b82ba1K3hj3hH32KS301SA2";
+
+
+//   $.ajax({
+//     url: api_url + user_endpoint + user_id + api_key,
+//     type: 'GET',
+//     crossDomain: true,
+//     statusCode: {
+//       200: function(data) { 
+//         console.log(data);
+
+//         var telephoneField = document.querySelectorAll('.telephone');
+//         var nameField = document.querySelectorAll('.name');
+//         var emailField = document.querySelectorAll('.email');
+//         var profilePicture = document.querySelectorAll('.profile_picture_url');
+
+//         for (var i = 0; i <= telephoneField.length - 1; i++) {
+//           telephoneField[i].innerHTML = data.telephone;
+//           nameField[i].innerHTML = data.name;
+//           emailField[i].innerHTML = data.email;
+//           profilePicture[i].innerHTML = data.profile_picture_url;
+//         };
+        
+//       } // Ok
+//       ,400: function(msg) { 
+//         console.log(msg);
+//       } // Bad Request
+//       ,404: function(msg) { 
+//         console.log(msg); 
+//       } // Not Found
+//     }
+//   });
+// });
+
+
+/*----------------------------------------------------------------------------*\
+    $Ajax Login  
+\*----------------------------------------------------------------------------*/
+
+function getCredentials() {
+  var username = document.login_form.email.value;
+  var password = document.login_form.password.value;
+
+  login(username,password);
+
+  function login(user,pass) {
+
+    // API's config 
+    var endpoint = "login"
+
+    $.ajax({
+      url: api_url + endpoint,
+      type: 'POST',
+      crossDomain: true,
+      data: "&email=" + user + "&password=" + pass,
+      statusCode: {
+        200: function(data_server) { 
+          console.log(data_server);
+          window.location = "dashboard.html"; 
+        } // Ok
+        ,400: function(data_server) { 
+          console.log(data_server);
+        } // Bad Request
+        ,404: function(data_server) { 
+          console.log(data_server); 
+        } // Not Found
+      }
+    });
+
+    $(".confirm-modal").fadeOut("slow");
+  }
+}
+
+/*----------------------------------------------------------------------------*\
+    $Ajax to parse notifications  
+\*----------------------------------------------------------------------------*/
+function notification(type) {
   // API's config 
-  var url = 'http://api.nueta/';
-  var user_endpoint = "users/";
-  var user_id = "38";
+  var url = "http://api.nueta/";
+  // var endpoint = "notification-messages";
+  var endpoint = "device-status";
   var api_key = "?api_key=LAK2La6084ac4f20de47b82ba1K3hj3hH32KS301SA2";
 
+  var code = "";
+  var event_id = "";
+  var request = "";
+
+  if (type == "lock") {
+    var uuid = guid();
+    code = "?code=device:locked";
+    event_id = "?event_id="+uuid;
+    request = url + endpoint + code + event_id;
+    console.log(request);
+    flash.innerHTML += "<p>Device locked.</p>";
+  };
+
+  if (type == "unlock") {
+    var uuid = guid();
+    code = "?code=device:unlocked";
+    event_id = "?event_id="+uuid;
+    flash.innerHTML += "<p>Device unlocked.</p>";
+  };
+
+  if (type == "ring") {
+    var uuid = guid();
+    code = "?code=buzzer/turn-on";
+    event_id = "?event_id="+uuid;
+    flash.innerHTML += "<p>Device ringing.</p>";
+  };
+
+  if (type == "wipe") {
+    var uuid = guid();
+    code = "?code=device:wipe";
+    event_id = "?event_id="+uuid;
+    flash.innerHTML += "<p>Device's data wiped.</p>";
+  };
 
   $.ajax({
-    url: url+user_endpoint+user_id+api_key,
+    url: url + endpoint + api_key,
     type: 'GET',
     crossDomain: true,
     statusCode: {
       200: function(data) { 
         console.log(data);
-
-        var telephoneField = document.querySelectorAll('.telephone');
-        var nameField = document.querySelectorAll('.name');
-        var emailField = document.querySelectorAll('.email');
-        var profilePicture = document.querySelectorAll('.profile_picture_url');
-
-        for (var i = 0; i <= telephoneField.length - 1; i++) {
-          telephoneField[i].innerHTML = data.telephone;
-          nameField[i].innerHTML = data.name;
-          emailField[i].innerHTML = data.email;
-          profilePicture[i].innerHTML = data.profile_picture_url;
-        };
+        flash.className += " alert-success";
+        fadeIn(flash);
       } // Ok
       ,400: function(msg) { 
         console.log(msg);
@@ -100,63 +205,8 @@ $(document).ready(function() {
       } // Not Found
     }
   });
-});
 
-/*----------------------------------------------------------------------------*\
-    $Ajax to parse notifications  
-\*----------------------------------------------------------------------------*/
-function notification(type) {
-  // API's config 
-  var url = "http://api.nueta/";
-  var endpoint = "notification-messages";
-  var api_key = "?api_key=LAK2La6084ac4f20de47b82ba1K3hj3hH32KS301SA2";
-
-  var code = "";
-  var event_id = "";
-
-  if (type == "lock") {
-    // var uuid = guid();
-    // code = "?code=device:locked";
-    // event_id = "?event_id="+uuid;
-    err.innerHTML += "<p>Device locked.</p>";
-  };
-
-  if (type == "unlock") {
-    var uuid = guid();
-    code = "?code=device:unlocked";
-    event_id = "?event_id="+uuid;
-  };
-
-  if (type == "ring") {
-    var uuid = guid();
-    code = "?code=buzzer/turn-on";
-    event_id = "?event_id="+uuid;
-  };
-
-  if (type == "wipe") {
-    var uuid = guid();
-    code = "?code=device:wipe";
-    event_id = "?event_id="+uuid;
-  };
-
-  fadeIn(err);
-
-  // $.ajax({
-  //   url: url+endpoint+api_key,
-  //   type: 'GET',
-  //   crossDomain: true,
-  //   statusCode: {
-  //     200: function(data) { 
-  //       console.log(data);
-  //     } // Ok
-  //     ,400: function(msg) { 
-  //       console.log(msg);
-  //     } // Bad Request
-  //     ,404: function(msg) { 
-  //       console.log(msg); 
-  //     } // Not Found
-  //   }
-  // });
+  $(".confirm-modal").fadeOut("slow");
 }
 
 
@@ -189,8 +239,8 @@ function geo_location() {
 
     watchId = navigator.geolocation.getCurrentPosition(showPosition, showError, optn);
   } else {
-    err.innerHTML += "<p>Geolocation is <strong>not</strong> supported in your browser.</p>";
-    fadeIn(err);
+    flash.innerHTML += "<p>Geolocation is <strong>not</strong> supported in your browser.</p>";
+    fadeIn(flash);
   }
 }
 
@@ -227,10 +277,10 @@ function showPosition(position) {
           popup.open(googleMap);
         });
       } else {
-          err.innerHTML += "<p>No results found.</p>";
+          flash.innerHTML += "<p>No results found.</p>";
       }
     } else {
-        err.inerHTLM += "<p>Geocoder failed due to: " + status + "</p>";
+        flash.inerHTLM += "<p>Geocoder failed due to: " + status + "</p>";
     }
   });
 
@@ -247,20 +297,20 @@ function stopWatch() {
 function showError(error) {
   switch(error.code) {
     case error.code == 1 || error.PERMISSION_DENIED:
-      err.innerHTML += "<p>User denied the request for Geolocation.</p>";
-      fadeIn(err);
+      flash.innerHTML += "<p>User denied the request for Geolocation.</p>";
+      fadeIn(flash);
     break;
     case error.code == 2 || error.POSITION_UNAVAILABLE:
-      err.innerHTML += "<p>Location information is unavailable.</p>";
-      fadeIn(err);
+      flash.innerHTML += "<p>Location information is unavailable.</p>";
+      fadeIn(flash);
     break;
     case error.code == 3 || error.TIMEOUT:
-      err.innerHTML += "<p>The request to get user location timed out.</p>";
-      fadeIn(err);
+      flash.innerHTML += "<p>The request to get user location timed out.</p>";
+      fadeIn(flash);
     break;
     case error.code == 0 || error.UNKNOWN_ERROR:
-      err.innerHTML += "<p>An unknown error occurred.</p>";
-      fadeIn(err);
+      flash.innerHTML += "<p>An unknown error occurred.</p>";
+      fadeIn(flash);
     break;
   }
 }

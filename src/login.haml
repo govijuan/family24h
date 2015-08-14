@@ -7,7 +7,7 @@
         %h3.title__header Login
         %small.title__tagline Bem vindo ao Family24h
 
-      %form
+      %form(name="login_form")
         .form__field
           %label(for="email") Email
           %input.form__input(type="email" name="email" id="email")
@@ -20,6 +20,8 @@
 
           %a(href="#") Esqueci minha senha
 
-          %button.form__button(type="button" class="btn btn-lg btn-block") Entrar
+          %button.form__button(type="button" class="btn btn-lg btn-block" onclick="getCredentials()") Entrar
 
+:javascript
+  var page = "login";
 //=include footer.haml

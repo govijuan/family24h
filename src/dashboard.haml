@@ -16,7 +16,7 @@
     %p.version V 1.0.0
 
   %section.content
-    #flash.alert.alert-danger.alert-dismissible.fade.in(role="alert")
+    #flash.alert.alert-dismissible(role="alert")
       %button(type="button" class="close" data-dismiss="alert" aria-label="Close")
         %span(aria-hidden="true") &times;
     #mapdiv
@@ -37,6 +37,6 @@
       %a(class="btn btn-lg btn-success btn-ring" href="#" role="button") Ring ma' bell
 
 :javascript
-  var page = "index";
+  var page = "map";
 
 //=include footer.haml
