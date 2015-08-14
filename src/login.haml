@@ -10,18 +10,23 @@
       %form(name="login_form")
         .form__field
           %label(for="email") Email
-          %input.form__input(type="email" name="email" id="email")
+          %small(class="email_return")
+          %input.form__input(type="email" name="email" id="email" onblur="validate('email');")
 
+        .form__field
           %label(for="password") Senha
-          %input.form__input(type="password" name="password" id="password")
+          %small(class="password_return")
+          %input.form__input(type="password" name="password" id="password" onblur="validate('pass');")
 
+        .form__field
           %input(type="checkbox" name="remember" id="remember")
           %label(for="remember") Mantenha-me conectado
 
           %a(href="#") Esqueci minha senha
 
+        .form__field
           %button.form__button(type="button" class="btn btn-lg btn-block" onclick="getCredentials()") Entrar
 
-:javascript
-  var page = "login";
-//=include footer.haml
+//=include scripts.haml
+
+%script(src="assets/scripts/login/login.js")

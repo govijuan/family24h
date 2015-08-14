@@ -36,7 +36,8 @@
 
       %a(class="btn btn-lg btn-success btn-ring" href="#" role="button") Ring ma' bell
 
-:javascript
-  var page = "map";
+//=include scripts.haml
 
-//=include footer.haml
+:javascript
+  geo_location();
+  resizeSidebar();

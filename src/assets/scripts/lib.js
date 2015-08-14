@@ -1,33 +1,4 @@
 /*----------------------------------------------------------------------------*\
-    CONTENTS
-\*----------------------------------------------------------------------------*/
-/*
-
-    NOTES             General notes
-    PROJECT INFO      Information about the Project
-    GLOBAL VARIABLES  Variables that'll be used Globally
-    CALLS             General calls
-*/
-
-/*----------------------------------------------------------------------------*\
-    $NOTES
-\*----------------------------------------------------------------------------*/
-/*
-    How to seach this file:
-    append '$' to the desired above section to go straight to it.
-    In the case of Functions, put '$' in the front of Function's name.
-*/
-
-/*----------------------------------------------------------------------------*\
-    $PROJECT INFO
-\*----------------------------------------------------------------------------*/
-/*
-    Project: Family 24h
-    Developer: Gutem <gutem@eokoe.com>
-    Project Manager: Gian <gian.vizzotto@eokoe.com>
-*/
-
-/*----------------------------------------------------------------------------*\
     $Global Variables
 \*----------------------------------------------------------------------------*/
 var api_url = "http://api.nueta/";
@@ -103,45 +74,6 @@ function fadeIn(el) {
 //     }
 //   });
 // });
-
-
-/*----------------------------------------------------------------------------*\
-    $Ajax Login  
-\*----------------------------------------------------------------------------*/
-
-function getCredentials() {
-  var username = document.login_form.email.value;
-  var password = document.login_form.password.value;
-
-  login(username,password);
-
-  function login(user,pass) {
-
-    // API's config 
-    var endpoint = "login"
-
-    $.ajax({
-      url: api_url + endpoint,
-      type: 'POST',
-      crossDomain: true,
-      data: "&email=" + user + "&password=" + pass,
-      statusCode: {
-        200: function(data_server) { 
-          console.log(data_server);
-          window.location = "dashboard.html"; 
-        } // Ok
-        ,400: function(data_server) { 
-          console.log(data_server);
-        } // Bad Request
-        ,404: function(data_server) { 
-          console.log(data_server); 
-        } // Not Found
-      }
-    });
-
-    $(".confirm-modal").fadeOut("slow");
-  }
-}
 
 /*----------------------------------------------------------------------------*\
     $Ajax to parse notifications  

@@ -6598,7 +6598,7 @@ footer {
   margin-left: 35px;
   margin-top: 20px; }
 
-.form__field {
+form {
   border: 1px solid #ccc;
   border-radius: 5px;
   background-color: #f7f7f7;
@@ -6606,19 +6606,29 @@ footer {
   width: 92%;
   margin: 0 auto;
   padding: 20px 15px; }
-  .form__field a {
+  form a {
     float: right;
     color: #666; }
-  .form__field label {
+  form label {
     color: #666; }
-  .form__field label,
-  .form__field input {
+  form small {
+    float: right; }
+  form label,
+  form input {
     clear: both;
     float: left; }
-    .form__field label[type="checkbox"] + label,
-    .form__field input[type="checkbox"] + label {
+    form label[type="checkbox"] + label,
+    form input[type="checkbox"] + label {
       clear: none;
       margin-left: 5px; }
+
+.form__field.error > small,
+.form__field.error > label {
+  color: #a94442; }
+
+.form__field.error > input {
+  border-color: #a94442;
+  background-color: #f2dede; }
 
 .form__input {
   padding: 10px 15px;

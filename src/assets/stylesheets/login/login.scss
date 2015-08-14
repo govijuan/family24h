@@ -1,7 +1,6 @@
 /*----------------------------------------------------------------------------*\
     $LOGIN
 \*----------------------------------------------------------------------------*/
-
 .title,
 .form__field {
   position: relative;
@@ -34,7 +33,7 @@
   margin-top: 20px;
 }
 
-.form__field {
+form {
   border: 1px solid $medium_gray;
   border-radius: 5px;
   background-color: $lighter_gray;
@@ -52,6 +51,10 @@
     color: $dark_gray;
   }
 
+  small {
+    float: right;
+  }
+
   label,
   input {
     clear: both;
@@ -61,6 +64,19 @@
       clear: none;
       margin-left: 5px;
     }
+  }
+}
+
+.form__field {
+
+  &.error > small,
+  &.error > label, {
+    color: #a94442;
+  }
+
+  &.error > input {
+    border-color: #a94442;
+    background-color: #f2dede; 
   }
 }
 
