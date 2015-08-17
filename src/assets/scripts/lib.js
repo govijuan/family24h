@@ -76,58 +76,142 @@ function fadeIn(el) {
 // });
 
 /*----------------------------------------------------------------------------*\
+    $Modal 
+\*----------------------------------------------------------------------------*/
+var modal = $(".confirm-modal");
+var title = $(".confirm-modal h3");
+var avatar = $(".confirm-modal img");
+var description = $(".confirm-modal p");
+var button = $(".confirm-modal .btn");
+
+function displayModal(mode) {
+
+  if (button.hasClass("btn-danger")) {
+    button.removeClass("btn-danger");
+    button.addClass("btn-success");
+  };
+
+  if(mode === "lock"){
+    title[0].innerHTML = "Lock your phone";
+    avatar[0].src = "assets/images/ic_phonelink_lock_black_48px.svg";
+    description[0].innerHTML = "You can lock your phone and combine with others actions";
+    button[0].innerHTML = "Lock";
+    button[0].setAttribute("onclick","confirmModal('lock');")
+  }
+
+  if(mode === "ring"){
+    title[0].innerHTML = "Ring your phone";
+    avatar[0].src = "assets/images/ic_speaker_phone_black_48px.svg";
+    description[0].innerHTML = "You can lock your phone and combine with others actions";
+    button[0].innerHTML = "Ring";
+    button[0].setAttribute("onclick","notification('ring');")
+  }
+  
+  if(mode === "pattern"){
+    title[0].innerHTML = "Change the lock pattern of your phone";
+    avatar[0].src = "assets/images/ic_dialpad_black_48px.svg";
+    description[0].innerHTML = "You can lock your phone and combine with others actions";
+    button[0].innerHTML = "Change";
+  }
+  
+  if(mode === "wipe"){
+    title[0].innerHTML = "Wipe your phone";
+    avatar[0].src = "assets/images/ic_phonelink_erase_black_48px.svg";
+    description[0].innerHTML = "You can lock your phone and combine with others actions";
+    button[0].innerHTML = "Wipe";
+    button[0].setAttribute("onclick","confirmModal('wipe');")
+
+    button.removeClass("btn-success");
+    button.addClass("btn-danger");
+  }
+  modal.fadeIn("slow");
+}
+
+/*----------------------------------------------------------------------------*\
+    $Confirm Modal 
+\*----------------------------------------------------------------------------*/
+function confirmModal(mode) {
+
+  title[0].innerHTML = "Confirm your password";
+  avatar[0].remove(this);
+  description[0].innerHTML = "<input type='password'/>";
+
+  if(mode === "lock"){
+    button[0].innerHTML = "Lock";
+    button[0].setAttribute("onclick","notification('lock');")
+  }
+  
+  if(mode === "pattern"){
+    button[0].innerHTML = "Change";
+  }
+  
+  if(mode === "wipe"){
+    button[0].innerHTML = "Wipe";
+    button[0].setAttribute("onclick","notification('wipe');")
+
+    button.removeClass("btn-success");
+    button.addClass("btn-danger");
+  }
+  modal.fadeIn("slow");
+}
+
+/*----------------------------------------------------------------------------*\
     $Ajax to parse notifications  
 \*----------------------------------------------------------------------------*/
 function notification(type) {
   // API's config 
-  var url = "http://api.nueta/";
-  // var endpoint = "notification-messages";
-  var endpoint = "device-status";
-  var api_key = "?api_key=LAK2La6084ac4f20de47b82ba1K3hj3hH32KS301SA2";
 
-  var code = "";
-  var event_id = "";
-  var request = "";
+  var endpoint = "notification-messages";
+  var api_key = "&api_key=LAK2La6084ac4f20de47b82ba1K3hj3hH32KS301SA2";
+  var password = "&password=12345678";
+
+  var code = "&code=";
+  var event_id = "&event_id=";
+  var data = "&data={}";
 
   if (type == "lock") {
     var uuid = guid();
-    code = "?code=device:locked";
-    event_id = "?event_id="+uuid;
-    request = url + endpoint + code + event_id;
-    console.log(request);
+    code += "device:locked";
+    event_id += uuid;
     flash.innerHTML += "<p>Device locked.</p>";
   };
 
   if (type == "unlock") {
     var uuid = guid();
-    code = "?code=device:unlocked";
-    event_id = "?event_id="+uuid;
+    code += "device:unlocked";
+    event_id += uuid;
     flash.innerHTML += "<p>Device unlocked.</p>";
   };
 
   if (type == "ring") {
     var uuid = guid();
-    code = "?code=buzzer/turn-on";
-    event_id = "?event_id="+uuid;
+    code += "buzzer/turn-on";
+    event_id += uuid;
     flash.innerHTML += "<p>Device ringing.</p>";
   };
 
   if (type == "wipe") {
     var uuid = guid();
-    code = "?code=device:wipe";
-    event_id = "?event_id="+uuid;
+    code += "device:wipe";
+    event_id += uuid;
     flash.innerHTML += "<p>Device's data wiped.</p>";
   };
 
+
+  request = code + data + event_id;
+
+  if (type !== "ring") {
+    request += password;
+  };
+
   $.ajax({
-    url: url + endpoint + api_key,
-    type: 'GET',
+    url: api_url + endpoint,
+    type: 'POST',
+    data: request + api_key,
     crossDomain: true,
     statusCode: {
-      200: function(data) { 
-        console.log(data);
-        flash.className += " alert-success";
-        fadeIn(flash);
+      202: function(msg) { 
+        console.log(msg);
       } // Ok
       ,400: function(msg) { 
         console.log(msg);
@@ -139,9 +223,10 @@ function notification(type) {
   });
 
   $(".confirm-modal").fadeOut("slow");
+
+  flash.className += " alert-success";
+  fadeIn(flash);
 }
-
-
 
 /*----------------------------------------------------------------------------*\
     $Event ID generator 
@@ -262,59 +347,6 @@ function resizeSidebar() {
   section.css("height", windowHeight - topBar.innerHeight());
   map.css("width", windowWidth - sideBar.innerWidth());
   map.css("height", windowHeight - topBar.innerHeight());
-}
-
-/*----------------------------------------------------------------------------*\
-    $Modal 
-\*----------------------------------------------------------------------------*/
-function displayModal(mode) {
-
-  var modal = $(".confirm-modal");
-
-  var title = $(".confirm-modal h3");
-  var avatar = $(".confirm-modal img");
-  var description = $(".confirm-modal p");
-  var button = $(".confirm-modal .btn");
-
-  if (button.hasClass("btn-danger")) {
-    button.removeClass("btn-danger");
-    button.addClass("btn-success");
-  };
-
-  if(mode == "lock"){
-    title[0].innerHTML = "Lock your phone";
-    avatar[0].src = "assets/images/ic_phonelink_lock_black_48px.svg";
-    description[0].innerHTML = "You can lock your phone and combine with others actions";
-    button[0].innerHTML = "Lock";
-    button[0].setAttribute("onclick","notification('lock');")
-  }
-
-  if(mode == "ring"){
-    title[0].innerHTML = "Ring your phone";
-    avatar[0].src = "assets/images/ic_speaker_phone_black_48px.svg";
-    description[0].innerHTML = "You can lock your phone and combine with others actions";
-    button[0].innerHTML = "Ring";
-    button[0].setAttribute("onclick","notification('ring');")
-  }
-  
-  if(mode == "pattern"){
-    title[0].innerHTML = "Change the lock pattern of your phone";
-    avatar[0].src = "assets/images/ic_dialpad_black_48px.svg";
-    description[0].innerHTML = "You can lock your phone and combine with others actions";
-    button[0].innerHTML = "Change";
-  }
-  
-  if(mode == "wipe"){
-    title[0].innerHTML = "Wipe your phone";
-    avatar[0].src = "assets/images/ic_phonelink_erase_black_48px.svg";
-    description[0].innerHTML = "You can lock your phone and combine with others actions";
-    button[0].innerHTML = "Wipe";
-    button[0].setAttribute("onclick","notification('wipe');")
-
-    button.removeClass("btn-success");
-    button.addClass("btn-danger");
-  }
-  modal.fadeIn("slow");
 }
 
 /*----------------------------------------------------------------------------*\

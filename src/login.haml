@@ -11,12 +11,12 @@
         .form__field
           %label(for="email") Email
           %small(class="email_return")
-          %input.form__input(type="email" name="email" id="email" onblur="validate('email');")
+          %input.form__input(type="email" name="email" id="email" onblur="validate(this);")
 
         .form__field
           %label(for="password") Senha
           %small(class="password_return")
-          %input.form__input(type="password" name="password" id="password" onblur="validate('pass');")
+          %input.form__input(type="password" name="password" id="password" onblur="validate(this);")
 
         .form__field
           %input(type="checkbox" name="remember" id="remember")

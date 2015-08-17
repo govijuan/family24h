@@ -2,24 +2,42 @@
     $Validation 
 \*----------------------------------------------------------------------------*/
 function validate(element) {
+  
+  var email_error = document.querySelector(".email_return");
+  var pass_error = document.querySelector(".password_return");
 
-  if (this.value == null || this.value == "") {
+  if (element.value == null || element.value == "") {
 
-    if (element == "email") {
-      console.log('email'); 
-      if (document.querySelector(".email_return").innerHTML == "") {
-        document.querySelector(".email_return").innerHTML += "Campo requerido";
+    console.log(element.value);
+
+    if (element.name == "email") {
+
+      if (email_error.innerHTML == "") {
+        email_error.innerHTML += "Campo requerido";
       };
-      document.login_form.email.parentNode.className += " error";
+
+      if (element.parentNode.classList != "error") {
+        document.login_form.email.parentNode.className += " error";
+      }
     };
 
+    if (element.name == "password") {
 
-    if (element == "pass") {
-      console.log('pass');
-      if (document.querySelector(".password_return").innerHTML == "") {
-        document.querySelector(".password_return").innerHTML += "Campo requerido";
+      if (pass_error.innerHTML == "") {
+        pass_error.innerHTML += "Campo requerido";
       };
       document.login_form.password.parentNode.className += " error";
+    };
+  } else {
+
+    if (document.login_form.email.parentNode.classList.contains("error")) {
+        email_error.innerHTML = "";
+        document.login_form.email.parentNode.className = "form__field";
+    };
+
+    if (document.login_form.password.parentNode.classList.contains("error")) {
+      pass_error.innerHTML = "";
+      document.login_form.password.parentNode.className = "form__field";
     };
   }
 }
