@@ -133,8 +133,8 @@ function displayModal(mode) {
 function confirmModal(mode) {
 
   title[0].innerHTML = "Confirm your password";
-  avatar[0].remove(this);
-  description[0].innerHTML = "<input type='password'/>";
+  avatar[0].parentNode.parentNode.remove(this);
+  description[0].innerHTML = "<input type='password' name='confirm[password]' id='confirm[password]'/>";
 
   if(mode === "lock"){
     button[0].innerHTML = "Lock";
@@ -163,40 +163,35 @@ function notification(type) {
 
   var endpoint = "notification-messages";
   var api_key = "&api_key=LAK2La6084ac4f20de47b82ba1K3hj3hH32KS301SA2";
-  var password = "&password=12345678";
+  var password_input = document.getElementsByName("confirm[password]");
+  var password = "&password=" + password_input[0].value;
 
   var code = "&code=";
   var event_id = "&event_id=";
   var data = "&data={}";
+  var uuid = guid();
 
   if (type == "lock") {
-    var uuid = guid();
     code += "device:locked";
-    event_id += uuid;
     flash.innerHTML += "<p>Device locked.</p>";
   };
 
   if (type == "unlock") {
-    var uuid = guid();
     code += "device:unlocked";
-    event_id += uuid;
     flash.innerHTML += "<p>Device unlocked.</p>";
   };
 
   if (type == "ring") {
-    var uuid = guid();
     code += "buzzer/turn-on";
-    event_id += uuid;
     flash.innerHTML += "<p>Device ringing.</p>";
   };
 
   if (type == "wipe") {
-    var uuid = guid();
     code += "device:wipe";
-    event_id += uuid;
     flash.innerHTML += "<p>Device's data wiped.</p>";
   };
 
+  event_id += uuid;
 
   request = code + data + event_id;
 
