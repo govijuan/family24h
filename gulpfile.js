@@ -12,26 +12,27 @@ var plugins = require('gulp-load-plugins')();
 // Temporary solution until gulp 4
 // https://github.com/gulpjs/gulp/issues/355
 var runSequence = require('run-sequence');
+
 var browserSync = require('browser-sync').create();
 var del = require('del');
 
 
 var src = {
-    base: './src',
-    haml: './src/**/*.haml',
-    scss: './src/assets/stylesheets/**/*.scss',
-    scripts: './src/assets/scripts/**/*.js',
-    images: './src/assets/images/**/*',
-    fonts: './src/assets/fonts/**/*',
+  base: './src',
+  jade: './src/**/*.jade',
+  scss: './src/stylesheets/**/*.scss',
+  scripts: './src/scripts/**/*.js',
+  images: './src/images/**/*',
+  fonts: './src/fonts/**/*',
 };
 
 var dist = {
-    base: './dist',
-    haml: './dist/**/*.haml',
-    scss: './dist/assets/stylesheets/',
-    scripts: './dist/assets/scripts/',
-    images: './dist/assets/images/',
-    fonts: './dist/assets/fonts/',
+  base: './dist',
+  jade: './dist/**/*.jade',
+  scss: './dist/stylesheets/',
+  scripts: './dist/scripts/',
+  images: './dist/images/',
+  fonts: './dist/fonts/',
 };
 
 /*******************************************************************************
@@ -53,21 +54,46 @@ gulp.task('clean', function(cb) {
 });
 
 /*******************************************************************************
+* Jade related tasks
+*******************************************************************************/
+gulp.task('jade', function() {
+  gulp.src([src.jade, 
+            '!src/header.jade', 
+            '!src/footer.jade',
+            '!src/home_help.jade',
+            '!src/home_features.jade',
+            '!src/header_interna.jade'])
+  .pipe(plugins.plumber())
+  .pipe(plugins.changed(dist.base))
+  .pipe(plugins.include())
+  .on('error', console.log)
+  .pipe(plugins.jade())
+  .pipe(gulp.dest(dist.base))
+  .pipe(browserSync.stream())
+});
+
+/*******************************************************************************
 * SASS related tasks
 *******************************************************************************/
 gulp.task('sass', function() {
-  gulp.src([src.scss, '!./src/assets/stylesheets/login/login.scss'])
+  gulp.src([src.scss, '!src/stylesheets/login/*'])
+  .pipe(plugins.plumber())
   .pipe(plugins.include())
   // .pipe(plugins.sourcemaps.init())
   .pipe(plugins.sass({style: 'compressed'}))
-  .pipe(plugins.autoprefixer('last 2 version', 'ie 8', 'ie 9', 'ie 10', 'ie 11', 'opera 12.1', 'ios 6', 'android 4'))
+  .pipe(plugins.autoprefixer([
+    'last 2 version',  
+    'android >= 4',
+    'ie >= 9',
+    'opera >= 12', 
+    'ios >= 6']))
+  .pipe(plugins.csscomb())
   // .pipe(plugins.sourcemaps.write('./'))
   .pipe(gulp.dest(dist.scss))
-  .pipe(plugins.rename({suffix: '.min'}))
-  .pipe(plugins.minifyCss())
-  .pipe(gulp.dest(dist.scss))
+  // .pipe(plugins.rename({suffix: '.min'}))
+  // .pipe(plugins.minifyCss())
+  // .pipe(gulp.dest(dist.scss))
   .pipe(browserSync.stream())
-  .pipe(plugins.notify({message: 'SASS task complete'}))
 });
 
 /*******************************************************************************
@@ -75,23 +101,9 @@ gulp.task('sass', function() {
 *******************************************************************************/
 gulp.task('fonts', function() {
   gulp.src(src.fonts)
+  .pipe(plugins.plumber())
   .pipe(gulp.dest(dist.fonts))
-  .pipe(plugins.notify({message: 'Fonts task complete'}))
   .pipe(browserSync.stream())
-});
-
-/*******************************************************************************
-* HAML related tasks
-*******************************************************************************/
-gulp.task('haml', function() {
-  gulp.src([src.haml, '!src/header.haml', '!src/footer.haml'])
-  .pipe(plugins.changed(dist.base))
-  .pipe(plugins.include())
-    .on('error', console.log)
-  .pipe(plugins.haml())
-  .pipe(gulp.dest(dist.base))
-  .pipe(browserSync.stream())
-  .pipe(plugins.notify({message: 'HAML task complete'}))
 });
 
 /*******************************************************************************
@@ -99,13 +111,14 @@ gulp.task('haml', function() {
 *******************************************************************************/
 gulp.task('images', function() {
   gulp.src(src.images)
+  .pipe(plugins.plumber())
+  .pipe(plugins.changed(dist.images))
   .pipe(plugins.imagemin(
     {optimizationLevel: 3, 
-    progressive: true, 
-    interlaced: true }))
+      progressive: true, 
+      interlaced: true }))
   .pipe(gulp.dest(dist.images))
   .pipe(browserSync.stream())
-  .pipe(plugins.notify({message: 'Images task complete'}))
 });
 
 /*******************************************************************************
@@ -113,6 +126,7 @@ gulp.task('images', function() {
 *******************************************************************************/
 gulp.task('scripts', function() {
   gulp.src(src.scripts)
+  .pipe(plugins.plumber())
   // .pipe(plugins.jshint())
   // .pipe(plugins.jshint.reporter('jshint-stylish'))
   // .pipe(plugins.concat('main.js'))
@@ -120,22 +134,21 @@ gulp.task('scripts', function() {
   // .pipe(plugins.rename({suffix: '.min'}))
   // .pipe(plugins.uglify())
   // .pipe(gulp.dest(dist.scripts))
-  .pipe(plugins.notify({message: 'Scripts task complete'}))
   .pipe(browserSync.stream())
 });
 
 /*******************************************************************************
 * Main tasks
 *******************************************************************************/
-gulp.task('build', function (done) {
+gulp.task('build', function(done) {
   runSequence(
-    'clean',
+    // 'clean',
+    'images',
+    'jade',
     'sass',
     'scripts',
     'fonts',
-    'images',
-    'haml',
-  done);
+    done);
 });
 
 gulp.task('watch', ['build', 'browser-sync'], function() {
@@ -152,8 +165,8 @@ gulp.task('watch', ['build', 'browser-sync'], function() {
   // Watch for Images files
   gulp.watch(src.images, ['images']);
 
-  // Watch for HAML files
-  gulp.watch(src.haml, ['haml']);
+  // Watch for Jade files
+  gulp.watch(src.jade, ['jade']);
 });
 
-gulp.task('default', ['build']);
+gulp.task('default', ['clean', 'images', 'jade', 'sass', 'scripts', 'fonts']);

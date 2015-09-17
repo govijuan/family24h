@@ -1,0 +1,197 @@
+doctype html
+html(class="no-js" lang="pt-BR")
+  head
+    meta(charset="utf-8")
+    meta(http-equiv="x-ua-compatible" content="ie=edge")
+    title Family 24h
+    meta(name="description" content="")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+
+    link(rel="apple-touch-icon" href="apple-touch-icon.png")
+
+    <!-- Place favicon.ico in the root directory -->
+    link(rel="shortcut icon" href="favicon.ico" type="image/x-icon")
+
+    link(rel="stylesheet" href="stylesheets/style.css")
+
+    script(src="scripts/vendor/modernizr-2.8.3.min.js")
+
+  body
+
+    header.header.header_dark
+      .container
+        a(href="/")
+          img.header__logo(src="images/logo-negativo.svg")
+          p.header__tagline SUA FAMÍLIA EM BOAS MÃOS
+
+        nav.menu
+          ul
+            li
+              a(href="#intro") Conheça
+            li
+              a(href="#features") Vantagens
+            li
+              a(href="#versions") Versões
+            li
+              a(href="#help") Ajuda
+            li
+              a(href="download.html") Downloads
+
+    section.intro
+      a(name="intro")
+      .container
+
+        .text.col-xs-5.col-sm-5.col-md-5.col-lg-5
+          h4 Sua família mais protegida!
+
+          p 
+            strong Family24h 
+           | é um aplicativo mobile que permite o monitoramento familiar, no qual você tem acesso, on line, a localização dos aparelhos cadastrados, através de um mapa interativo.
+
+          a(class="btn btn-default baixar" href="download.html" role="button") Baixe agora, é gratuito!
+
+          a(class="btn btn-default video" href="#" role="button") Assista ao vídeo
+    
+    include home_features.jade
+
+    section.versions
+      .container
+        .row
+          a(name="versions")
+          h3 
+            span Versões
+            small Ainda mais proteção para sua familia
+
+        .slide.col-xs-12.col-sm-12.col-md-12.col-lg-12
+          img(src="images/versions_premium.png")
+
+          .text.col-xs-6.col-sm-6.col-md-6.col-lg-6
+            p 
+              strong Family24h 
+             | é um aplicativo mobile que permite o monitoramento familiar, no qual você tem acesso, on line, a localização dos aparelhos cadastrados, através de um mapa interativo.
+
+            ul
+              li
+                p Direct emergency responders to your location
+              li
+                p Give you personalized crisis care
+              li
+                p Direct you to the nearest gas station
+              li
+                p Access your emergency profile
+
+            a(class="btn btn-default baixar" href="download.html" role="button") Não perca, baixe agora!
+
+    include home_help.jade
+
+
+    section.contact
+      .container
+        .row
+          a(name="contact")
+          h3 Contato
+
+        .tel.col-xs-6.col-sm-6.col-md-6.col-lg-6
+          p Entre em contato por telefone
+          p 
+            span.pre +55 11  
+            span.fone &nbsp;3386-8181
+
+        .message.col-xs-6.col-sm-6.col-md-6.col-lg-6
+          p Ou, por email
+          form
+            .field.col-xs-12.col-sm-12.col-md-6.col-lg-6
+              label(for="name") Nome 
+                span *
+              input(type="text" name="name" id="name")
+
+            .field.col-xs-12.col-sm-12.col-md-6.col-lg-6
+              label(for="email") Email 
+                span *
+              input(type="text" name="email" id="email")
+
+            .field.col-xs-12.col-sm-12.col-md-12.col-lg-12
+              label(for="") Mensagem (máximo 300 caracteres)
+                span *
+              textarea
+
+            button(type="button" class="btn btn-lg") Enviar Mensagem
+
+    footer
+      .container
+        .logo
+          a(href="/")
+            img(src="images/logo-negativo.svg")
+
+        .links
+
+          ul
+            li 
+              p Sobre
+            li 
+              a(href="#intro") Conheça
+            li 
+              a(href="#features") Vantagens
+            li 
+              a(href="termo.html") Termos de Uso
+            li 
+              a(href="privacidade.html") Políticas e Privacidade
+
+          ul
+            li 
+              p Versões
+            li 
+              a(href="#versions") Gratuito
+            li 
+              a(href="#versions") Premium
+
+          ul
+            li 
+              p Ajuda
+            li 
+              a(href="#help") Suporte
+            li 
+              a(href="#contact") Contato
+
+        .appstore
+          img(src="images/google_play.png")
+          img(src="images/app_store.png")
+
+        .socials-links
+          p Siga-nos
+          .networks
+            a(href="#")
+              img(src="images/icon_footer_facebook.png")
+            a(href="#")
+              img(src="images/icon_footer_tumblr.png")
+            a(href="#")
+              img(src="images/icon_footer_pinterest.png")
+            a(href="#")
+              img(src="images/icon_footer_twitter.png")
+            a(href="#")
+              img(src="images/icon_footer_youtube.png")
+            a(href="#")
+              img(src="images/icon_footer_linkedin.png")
+            a(href="#")
+              img(src="images/icon_footer_gplus.png")
+
+        .legal
+          p 
+            Copyright &copy; 2015 - Family 24h - An 
+            a(href="http://www.eokoe.com") Eokoe 
+             Project
+
+include scripts.jade
+
+script.
+  $(".list__item .item__front").click(function() {
+    $(this).hide();
+    $(this).parent().addClass("flip");
+    $(this).next().show();
+  });
+
+  $(".list__item .item__back").click(function() {
+    $(this).hide();
+    $(this).parent().removeClass("flip");
+    $(this).prev().show();
+  });

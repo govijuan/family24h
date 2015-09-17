@@ -1,0 +1,43 @@
+include header.jade
+
+.dashboard(role="main")
+  
+  .sidebar
+
+    .buttons
+      a.lock(href="#" onclick="displayModal('lock');")
+        p Lock
+      a.ring(href="#" onclick="displayModal('ring');")
+        p Ring
+      a.pattern(href="#" onclick="displayModal('pattern');")
+        p Pattern
+      a.wipe(href="#" onclick="displayModal('wipe');")
+        p Wipe
+    p.version V 1.0.0
+
+  section.content
+    #flash.alert.alert-dismissible(role="alert")
+      button(type="button" class="close" data-dismiss="alert" aria-label="Close")
+        span(aria-hidden="true") &times;
+    #mapdiv
+
+    .confirm-modal(role="modal")
+      button(type="button" class="close" data-dismiss="alert" aria-label="Close")
+        span(aria-hidden="true") &times;
+      h3
+      
+      .row
+        div
+          .avatar
+            img(src="")
+
+        div
+          p This will ring your phone for 15 seconds
+
+      a(class="btn btn-lg btn-success btn-ring" href="#" role="button") Ring ma' bell
+
+block scripts
+
+script.
+  geo_location();
+  resizeSidebar();
