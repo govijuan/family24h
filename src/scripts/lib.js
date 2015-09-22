@@ -94,7 +94,7 @@ function displayModal(mode) {
 
   if(mode === "lock"){
     title[0].innerHTML = "Lock your phone";
-    avatar[0].src = "assets/images/ic_phonelink_lock_black_48px.svg";
+    avatar[0].src = "images/ic_phonelink_lock_black_48px.svg";
     description[0].innerHTML = "You can lock your phone and combine with others actions";
     button[0].innerHTML = "Lock";
     button[0].setAttribute("onclick","confirmModal('lock');");
@@ -102,7 +102,7 @@ function displayModal(mode) {
 
   if(mode === "ring"){
     title[0].innerHTML = "Ring your phone";
-    avatar[0].src = "assets/images/ic_speaker_phone_black_48px.svg";
+    avatar[0].src = "images/ic_speaker_phone_black_48px.svg";
     description[0].innerHTML = "You can lock your phone and combine with others actions";
     button[0].innerHTML = "Ring";
     button[0].setAttribute("onclick","notification('ring');");
@@ -110,14 +110,14 @@ function displayModal(mode) {
   
   if(mode === "pattern"){
     title[0].innerHTML = "Change the lock pattern of your phone";
-    avatar[0].src = "assets/images/ic_dialpad_black_48px.svg";
+    avatar[0].src = "images/ic_dialpad_black_48px.svg";
     description[0].innerHTML = "You can lock your phone and combine with others actions";
     button[0].innerHTML = "Change";
   }
   
   if(mode === "wipe"){
     title[0].innerHTML = "Wipe your phone";
-    avatar[0].src = "assets/images/ic_phonelink_erase_black_48px.svg";
+    avatar[0].src = "images/ic_phonelink_erase_black_48px.svg";
     description[0].innerHTML = "You can lock your phone and combine with others actions";
     button[0].innerHTML = "Wipe";
     button[0].setAttribute("onclick","confirmModal('wipe');");

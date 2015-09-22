@@ -90,9 +90,9 @@ gulp.task('sass', function() {
   .pipe(plugins.csscomb())
   // .pipe(plugins.sourcemaps.write('./'))
   .pipe(gulp.dest(dist.scss))
-  // .pipe(plugins.rename({suffix: '.min'}))
-  // .pipe(plugins.minifyCss())
-  // .pipe(gulp.dest(dist.scss))
+  .pipe(plugins.rename({suffix: '.min'}))
+  .pipe(plugins.minifyCss())
+  .pipe(gulp.dest(dist.scss))
   .pipe(browserSync.stream())
 });
 
