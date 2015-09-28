@@ -20,7 +20,7 @@ var del = require('del');
 var src = {
   base: './src',
   jade: './src/**/*.jade',
-  scss: './src/stylesheets/**/*.scss',
+  scss: './src/styles/**/*.scss',
   scripts: './src/scripts/**/*.js',
   images: './src/images/**/*',
   fonts: './src/fonts/**/*',
@@ -28,8 +28,8 @@ var src = {
 
 var dist = {
   base: './dist',
-  jade: './dist/**/*.jade',
-  scss: './dist/stylesheets/',
+  jade: './dist/**/',
+  scss: './dist/styles/',
   scripts: './dist/scripts/',
   images: './dist/images/',
   fonts: './dist/fonts/',
@@ -58,11 +58,12 @@ gulp.task('clean', function(cb) {
 *******************************************************************************/
 gulp.task('jade', function() {
   gulp.src([src.jade, 
-            '!src/header.jade', 
-            '!src/footer.jade',
-            '!src/home_help.jade',
-            '!src/home_features.jade',
-            '!src/header_interna.jade'])
+            '!src/**/header.jade', 
+            '!src/**/footer.jade',
+            '!src/**/home_help.jade',
+            '!src/**/home_features.jade',
+            '!src/**/header_interna.jade',
+            '!src/**/scripts.jade'])
   .pipe(plugins.plumber())
   .pipe(plugins.changed(dist.base))
   .pipe(plugins.include())
@@ -76,7 +77,7 @@ gulp.task('jade', function() {
 * SASS related tasks
 *******************************************************************************/
 gulp.task('sass', function() {
-  gulp.src([src.scss, '!src/stylesheets/login/*'])
+  gulp.src([src.scss, '!src/styles/login/*'])
   .pipe(plugins.plumber())
   .pipe(plugins.include())
   // .pipe(plugins.sourcemaps.init())
@@ -131,9 +132,9 @@ gulp.task('scripts', function() {
   // .pipe(plugins.jshint.reporter('jshint-stylish'))
   // .pipe(plugins.concat('main.js'))
   .pipe(gulp.dest(dist.scripts))
-  // .pipe(plugins.rename({suffix: '.min'}))
-  // .pipe(plugins.uglify())
-  // .pipe(gulp.dest(dist.scripts))
+  .pipe(plugins.rename({suffix: '.min'}))
+  .pipe(plugins.uglify())
+  .pipe(gulp.dest(dist.scripts))
   .pipe(browserSync.stream())
 });
 

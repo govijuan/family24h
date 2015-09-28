@@ -1,5 +1,5 @@
 doctype html
-html(class="no-js" lang="pt-BR")
+html(class="no-js" lang="pt-BR" ng-app="family")
   head
     meta(charset="utf-8")
     meta(http-equiv="x-ua-compatible" content="ie=edge")
@@ -12,14 +12,14 @@ html(class="no-js" lang="pt-BR")
     <!-- Place favicon.ico in the root directory -->
     link(rel="shortcut icon" href="favicon.ico" type="image/x-icon")
 
-    link(rel="stylesheet" href="stylesheets/style.min.css")
+    link(rel="stylesheet" href="/styles/style.min.css")
 
-    script(src="scripts/vendor/modernizr-2.8.3.min.js")
+    script(src="/scripts/vendor/modernizr-2.8.3.min.js")
 
   body
 
     header.header
       .container
         a(href="/")
-            img.header__logo(src="images/logo-positivo.svg")
+            img.header__logo(src="/images/logo-positivo.svg")
         p.header__tagline SUA FAMILIA EM BOAS MÃOS

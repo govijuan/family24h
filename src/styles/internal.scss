@@ -141,6 +141,7 @@ $dark_gray: #666;
   background-color: #ccc;
   float: left;
   position: relative;
+  width: 90%;
 }
 
 #flash {
@@ -155,6 +156,8 @@ $dark_gray: #666;
 #mapdiv {
   float: left;
   z-index: 10;
+  width: 100%;
+  height: 100%;
 }
 
 .lock,

@@ -1,5 +1,5 @@
 doctype html
-html(class="no-js" lang="pt-BR")
+html(class="no-js" lang="pt-BR" ng-app)
   head
     meta(charset="utf-8")
     meta(http-equiv="x-ua-compatible" content="ie=edge")
@@ -12,7 +12,7 @@ html(class="no-js" lang="pt-BR")
     <!-- Place favicon.ico in the root directory -->
     link(rel="shortcut icon" href="favicon.ico" type="image/x-icon")
 
-    link(rel="stylesheet" href="stylesheets/style.css")
+    link(rel="stylesheet" href="styles/style.css")
 
     script(src="scripts/vendor/modernizr-2.8.3.min.js")
 
@@ -43,10 +43,7 @@ html(class="no-js" lang="pt-BR")
 
         .text.col-xs-5.col-sm-5.col-md-5.col-lg-5
           h4 Sua família mais protegida!
-
-          p 
-            strong Family24h 
-           | é um aplicativo mobile que permite o monitoramento familiar, no qual você tem acesso, on line, a localização dos aparelhos cadastrados, através de um mapa interativo.
+          p <strong>Family24h</strong> é um aplicativo mobile que permite o monitoramento familiar, no qual você tem acesso, on line, a localização dos aparelhos cadastrados, através de um mapa interativo.
 
           a(class="btn btn-default baixar" href="download.html" role="button") Baixe agora, é gratuito!
 
@@ -66,9 +63,7 @@ html(class="no-js" lang="pt-BR")
           img(src="images/versions_premium.png")
 
           .text.col-xs-6.col-sm-6.col-md-6.col-lg-6
-            p 
-              strong Family24h 
-             | é um aplicativo mobile que permite o monitoramento familiar, no qual você tem acesso, on line, a localização dos aparelhos cadastrados, através de um mapa interativo.
+            p <strong>Family24h</strong> é um aplicativo mobile que permite o monitoramento familiar, no qual você tem acesso, on line, a localização dos aparelhos cadastrados, através de um mapa interativo.
 
             ul
               li
@@ -181,17 +176,17 @@ html(class="no-js" lang="pt-BR")
             a(href="http://www.eokoe.com") Eokoe 
              Project
 
-include scripts.jade
+    include scripts.jade
 
-script.
-  $(".list__item .item__front").click(function() {
-    $(this).hide();
-    $(this).parent().addClass("flip");
-    $(this).next().show();
-  });
+    script.
+      $(".list__item .item__front").click(function() {
+        $(this).hide();
+        $(this).parent().addClass("flip");
+        $(this).next().show();
+      });
 
-  $(".list__item .item__back").click(function() {
-    $(this).hide();
-    $(this).parent().removeClass("flip");
-    $(this).prev().show();
-  });
+      $(".list__item .item__back").click(function() {
+        $(this).hide();
+        $(this).parent().removeClass("flip");
+        $(this).prev().show();
+      });

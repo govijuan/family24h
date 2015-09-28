@@ -1,21 +1,25 @@
-<!-- Scripts -->
+//- Scripts
 
-<!-- jQuery -->
+//- Angular
+script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js")
+script(src="/scripts/controller.js")
+
+//- jQuery
 script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js")
 script.
-  window.jQuery || document.write('<script src="scripts/vendor/jquery-1.11.3.min.js")<\/script>')
+  window.jQuery || document.write('<script src="/scripts/vendor/jquery-1.11.3.min.js")<\/script>')
 
-<!-- Google Maps -->
+//- Google Maps
 script(src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true")
 
-<!-- Bootstrap Scripts-->
-script(src="scripts/bootstrap/alert.js")
+//- Bootstrap Scripts
+//- script(src="/scripts/bootstrap/alert.js")
 
-<!-- Local Scripts-->
-script(src="scripts/lib.js")
-script(src="scripts/plugins.js")
+//- Local Scripts
+script(src="/scripts/lib.js")
+//- script(src="/scripts/plugins.js")
 
-<!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+//- Google Analytics: change UA-XXXXX-X to be your site's ID.
 script.
   (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
   function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;

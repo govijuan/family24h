@@ -333,17 +333,19 @@ function showError(error) {
 function resizeSidebar() {
   var windowHeight = window.innerHeight;
   var windowWidth = window.innerWidth;
-  var sideBar = $(".sidebar");
-  var topBar = $(".top");
-  var section = $(".content");
-  var map = $("#mapdiv");
-  sideBar.css("height", windowHeight - topBar.innerHeight());
-  section.css("width", windowWidth - sideBar.innerWidth());
-  section.css("height", windowHeight - topBar.innerHeight());
-  map.css("width", windowWidth - sideBar.innerWidth());
-  map.css("height", windowHeight - topBar.innerHeight());
+  var sideBar = document.getElementsByClassName("sidebar");
+  var topBar = document.getElementsByClassName("top");
+  var section = document.getElementsByClassName("content");
+  var map = document.getElementById("mapdiv");
+  sideBar[0].style.height = windowHeight - topBar[0].offsetHeight + "px";
+  // section[0].style.width = windowWidth - sideBar[0].offsetWidth - 1 + "px";
+  section[0].style.height = windowHeight - topBar[0].offsetHeight + "px";
+  // map.style.width = windowWidth - sideBar[0].offsetWidth + "px";
+  // map.style.height = windowHeight - topBar[0].offsetHeight + "px";
 }
 
+window.addEventListener('orientationchange', resizeSidebar, false);
+window.addEventListener('resize', resizeSidebar, false);
 /*----------------------------------------------------------------------------*\
     $Calls 
 \*----------------------------------------------------------------------------*/
