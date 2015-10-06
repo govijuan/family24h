@@ -1,24 +1,30 @@
 include ../layout/header.jade
 
 .dashboard(role="main")
-  
-  .sidebar
-
-    .buttons
-      a.lock(href="#" onclick="displayModal('lock');")
-        p Lock
-      a.ring(href="#" onclick="displayModal('ring');")
-        p Ring
-      a.pattern(href="#" onclick="displayModal('pattern');")
-        p Pattern
-      a.wipe(href="#" onclick="displayModal('wipe');")
-        p Wipe
-    p.version V 1.0.0
 
   section.content
     #flash.alert.alert-dismissible(role="alert")
       button(type="button" class="close" data-dismiss="alert" aria-label="Close")
         span(aria-hidden="true") &times;
+    
+    .button__bar
+      .buttons
+        a.lock(href="#" onclick="displayModal('lock');")
+          img(src="/images/ic_phonelink_lock_black_48px.svg")
+          p Lock
+
+        a.ring(href="#" onclick="displayModal('ring');")
+          img(src="/images/ic_speaker_phone_black_48px.svg")
+          p Ring
+
+        a.pattern(href="#" onclick="displayModal('pattern');")
+          img(src="/images/ic_dialpad_black_48px.svg")
+          p Pattern
+
+        a.wipe(href="#" onclick="displayModal('wipe');")
+          img(src="/images/ic_phonelink_erase_black_48px.svg")
+          p Wipe
+
     #mapdiv
 
     .confirm-modal(role="modal")

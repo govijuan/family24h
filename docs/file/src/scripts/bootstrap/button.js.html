@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../../">
+  <title data-ice="title">src/scripts/bootstrap/button.js | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+</head>
+<body class="layout-container">
+
+<header>
+  <a href="./">Home</a>
+  <a href="identifiers.html">Identifier</a>
+  <a href="source.html">Source</a>
+  
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  </ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/scripts/bootstrap/button.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/* ========================================================================
+ * Bootstrap: button.js v3.3.5
+ * http://getbootstrap.com/javascript/#buttons
+ * ========================================================================
+ * Copyright 2011-2015 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+
++function ($) {
+  &apos;use strict&apos;;
+
+  // BUTTON PUBLIC CLASS DEFINITION
+  // ==============================
+
+  var Button = function (element, options) {
+    this.$element  = $(element)
+    this.options   = $.extend({}, Button.DEFAULTS, options)
+    this.isLoading = false
+  }
+
+  Button.VERSION  = &apos;3.3.5&apos;
+
+  Button.DEFAULTS = {
+    loadingText: &apos;loading...&apos;
+  }
+
+  Button.prototype.setState = function (state) {
+    var d    = &apos;disabled&apos;
+    var $el  = this.$element
+    var val  = $el.is(&apos;input&apos;) ? &apos;val&apos; : &apos;html&apos;
+    var data = $el.data()
+
+    state += &apos;Text&apos;
+
+    if (data.resetText == null) $el.data(&apos;resetText&apos;, $el[val]())
+
+    // push to event loop to allow forms to submit
+    setTimeout($.proxy(function () {
+      $el[val](data[state] == null ? this.options[state] : data[state])
+
+      if (state == &apos;loadingText&apos;) {
+        this.isLoading = true
+        $el.addClass(d).attr(d, d)
+      } else if (this.isLoading) {
+        this.isLoading = false
+        $el.removeClass(d).removeAttr(d)
+      }
+    }, this), 0)
+  }
+
+  Button.prototype.toggle = function () {
+    var changed = true
+    var $parent = this.$element.closest(&apos;[data-toggle=&quot;buttons&quot;]&apos;)
+
+    if ($parent.length) {
+      var $input = this.$element.find(&apos;input&apos;)
+      if ($input.prop(&apos;type&apos;) == &apos;radio&apos;) {
+        if ($input.prop(&apos;checked&apos;)) changed = false
+        $parent.find(&apos;.active&apos;).removeClass(&apos;active&apos;)
+        this.$element.addClass(&apos;active&apos;)
+      } else if ($input.prop(&apos;type&apos;) == &apos;checkbox&apos;) {
+        if (($input.prop(&apos;checked&apos;)) !== this.$element.hasClass(&apos;active&apos;)) changed = false
+        this.$element.toggleClass(&apos;active&apos;)
+      }
+      $input.prop(&apos;checked&apos;, this.$element.hasClass(&apos;active&apos;))
+      if (changed) $input.trigger(&apos;change&apos;)
+    } else {
+      this.$element.attr(&apos;aria-pressed&apos;, !this.$element.hasClass(&apos;active&apos;))
+      this.$element.toggleClass(&apos;active&apos;)
+    }
+  }
+
+
+  // BUTTON PLUGIN DEFINITION
+  // ========================
+
+  function Plugin(option) {
+    return this.each(function () {
+      var $this   = $(this)
+      var data    = $this.data(&apos;bs.button&apos;)
+      var options = typeof option == &apos;object&apos; &amp;&amp; option
+
+      if (!data) $this.data(&apos;bs.button&apos;, (data = new Button(this, options)))
+
+      if (option == &apos;toggle&apos;) data.toggle()
+      else if (option) data.setState(option)
+    })
+  }
+
+  var old = $.fn.button
+
+  $.fn.button             = Plugin
+  $.fn.button.Constructor = Button
+
+
+  // BUTTON NO CONFLICT
+  // ==================
+
+  $.fn.button.noConflict = function () {
+    $.fn.button = old
+    return this
+  }
+
+
+  // BUTTON DATA-API
+  // ===============
+
+  $(document)
+    .on(&apos;click.bs.button.data-api&apos;, &apos;[data-toggle^=&quot;button&quot;]&apos;, function (e) {
+      var $btn = $(e.target)
+      if (!$btn.hasClass(&apos;btn&apos;)) $btn = $btn.closest(&apos;.btn&apos;)
+      Plugin.call($btn, &apos;toggle&apos;)
+      if (!($(e.target).is(&apos;input[type=&quot;radio&quot;]&apos;) || $(e.target).is(&apos;input[type=&quot;checkbox&quot;]&apos;))) e.preventDefault()
+    })
+    .on(&apos;focus.bs.button.data-api blur.bs.button.data-api&apos;, &apos;[data-toggle^=&quot;button&quot;]&apos;, function (e) {
+      $(e.target).closest(&apos;.btn&apos;).toggleClass(&apos;focus&apos;, /^focus(in)?$/.test(e.type))
+    })
+
+}(jQuery);
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.3.1)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

@@ -121,27 +121,12 @@ $dark_gray: #666;
   }
 }
 
-.sidebar {
-  background-color: $light_blue;
-  width: 10%;
-  float: left;
-  position: relative;
-
-  .version {
-    position: absolute;
-    width: 100%;
-    bottom: 0;
-    text-align: center;
-    font-weight: bold;
-    font-size: 11px;
-  }
-}
 
 .content {
   background-color: #ccc;
   float: left;
   position: relative;
-  width: 90%;
+  width: 100%;
 }
 
 #flash {
@@ -153,11 +138,11 @@ $dark_gray: #666;
   width: 90%;
 }
 
-#mapdiv {
+.button__bar {
+  background-color: $light_blue;
+  width: 10%;
   float: left;
-  z-index: 10;
-  width: 100%;
-  height: 100%;
+  position: relative;
 }
 
 .lock,
@@ -165,18 +150,14 @@ $dark_gray: #666;
 .pattern,
 .wipe {
   float: left;
-  height: 146px;
   width: 100%;
   border-bottom: 1px solid $light_blue_shade;
   position: relative;
+  text-align: center;
 
   p {
     text-transform: uppercase;
     font-weight: bold;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    text-align: center;
     color: $black;
   }
 
@@ -185,21 +166,11 @@ $dark_gray: #666;
   }
 }
 
-.lock {
-  background: transparent url("../images/ic_phonelink_lock_black_48px.svg") center 40px scroll no-repeat;
-  border-top: 1px solid $light_blue_shade;
-}
-
-.ring {
-  background: transparent url("../images/ic_speaker_phone_black_48px.svg") center 40px scroll no-repeat;
-}
-
-.pattern {
-  background: transparent url("../images/ic_dialpad_black_48px.svg") center 40px scroll no-repeat;
-}
-
-.wipe {
-  background: transparent url("../images/ic_phonelink_erase_black_48px.svg") center 40px scroll no-repeat;
+#mapdiv {
+  float: left;
+  z-index: 10;
+  width: 90%;
+  height: 100%;
 }
 
 .confirm-modal {
@@ -269,5 +240,63 @@ $dark_gray: #666;
 
   td {
     padding: 10px 0;
+  }
+}
+
+
+/*----------------------------------------------------------------------------*\
+    $EXTRA_SMALL
+\*----------------------------------------------------------------------------*/
+@media screen and  (max-width: 991px) {
+
+  .button__bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+  }
+
+  #mapdiv {
+    float: left;
+    width: 100%;
+    height: 87%;
+    position: relative;
+    z-index: 1;
+  }
+
+  .lock,
+  .ring,
+  .pattern,
+  .wipe {
+    float: left;
+    height: 75px;
+    width: 25%;
+
+    img {
+      margin: 10px auto;
+      width: 32px;
+    }
+  }
+}
+
+
+/*----------------------------------------------------------------------------*\
+    $MEDIUM
+\*----------------------------------------------------------------------------*/
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+
+}
+
+/*----------------------------------------------------------------------------*\
+    $LARGE
+\*----------------------------------------------------------------------------*/
+@media screen and (min-width: 1200px) {
+
+  .lock,
+  .ring,
+  .pattern,
+  .wipe {
+    height: 146px;
   }
 }

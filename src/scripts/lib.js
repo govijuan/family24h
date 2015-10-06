@@ -1,16 +1,15 @@
-"use strict";
-
 /*----------------------------------------------------------------------------*\
     $Global Variables
 \*----------------------------------------------------------------------------*/
 var api_url = "http://api.nueta/";
 var flash = document.getElementById("flash");
 
-
 /*----------------------------------------------------------------------------*\
     $FadeIn Effect
 \*----------------------------------------------------------------------------*/
 function fadeIn(el) {
+  "use strict";
+
   var opacity = 0;
 
   el.style.opacity = 0;
@@ -86,6 +85,7 @@ var description = $(".confirm-modal p");
 var button = $(".confirm-modal .btn");
 
 function displayModal(mode) {
+  "use strict";
 
   if (button.hasClass("btn-danger")) {
     button.removeClass("btn-danger");
@@ -94,7 +94,7 @@ function displayModal(mode) {
 
   if(mode === "lock"){
     title[0].innerHTML = "Lock your phone";
-    avatar[0].src = "images/ic_phonelink_lock_black_48px.svg";
+    avatar[0].src = "/images/ic_phonelink_lock_black_48px.svg";
     description[0].innerHTML = "You can lock your phone and combine with others actions";
     button[0].innerHTML = "Lock";
     button[0].setAttribute("onclick","confirmModal('lock');");
@@ -102,7 +102,7 @@ function displayModal(mode) {
 
   if(mode === "ring"){
     title[0].innerHTML = "Ring your phone";
-    avatar[0].src = "images/ic_speaker_phone_black_48px.svg";
+    avatar[0].src = "/images/ic_speaker_phone_black_48px.svg";
     description[0].innerHTML = "You can lock your phone and combine with others actions";
     button[0].innerHTML = "Ring";
     button[0].setAttribute("onclick","notification('ring');");
@@ -110,14 +110,14 @@ function displayModal(mode) {
   
   if(mode === "pattern"){
     title[0].innerHTML = "Change the lock pattern of your phone";
-    avatar[0].src = "images/ic_dialpad_black_48px.svg";
+    avatar[0].src = "/images/ic_dialpad_black_48px.svg";
     description[0].innerHTML = "You can lock your phone and combine with others actions";
     button[0].innerHTML = "Change";
   }
   
   if(mode === "wipe"){
     title[0].innerHTML = "Wipe your phone";
-    avatar[0].src = "images/ic_phonelink_erase_black_48px.svg";
+    avatar[0].src = "/images/ic_phonelink_erase_black_48px.svg";
     description[0].innerHTML = "You can lock your phone and combine with others actions";
     button[0].innerHTML = "Wipe";
     button[0].setAttribute("onclick","confirmModal('wipe');");
@@ -132,6 +132,7 @@ function displayModal(mode) {
     $Confirm Modal 
 \*----------------------------------------------------------------------------*/
 function confirmModal(mode) {
+  "use strict";
 
   title[0].innerHTML = "Confirm your password";
   avatar[0].parentNode.parentNode.remove(this);
@@ -160,6 +161,8 @@ function confirmModal(mode) {
     $Ajax to parse notifications  
 \*----------------------------------------------------------------------------*/
 function notification(type) {
+  "use strict";
+
   // API's config 
 
   var endpoint = "notification-messages";
@@ -228,6 +231,8 @@ function notification(type) {
     $Event ID generator 
 \*----------------------------------------------------------------------------*/
 function guid() {
+  "use strict";
+
   function s4() {
     return Math.floor((1 + Math.random()) * 0x10000)
       .toString(16)
@@ -242,6 +247,8 @@ function guid() {
 var watchId = null;
 
 function geo_location() {
+  "use strict";
+
   if (navigator.geolocation) {
     var optn = {
       enableHighAccuracy : true,
@@ -257,6 +264,8 @@ function geo_location() {
 }
 
 function showPosition(position) {
+  "use strict";
+
   var latitude = position.coords.latitude;
   var longitude = position.coords.longitude;
   var googlePos = new google.maps.LatLng(latitude, longitude);
@@ -300,6 +309,8 @@ function showPosition(position) {
 }
 
 function stopWatch() {
+  "use strict";
+
   if (watchId) {
     navigator.geolocation.clearWatch(watchId);
     watchId = null;
@@ -307,6 +318,8 @@ function stopWatch() {
 }
 
 function showError(error) {
+  "use strict";
+
   switch(error.code) {
     case error.code == 1 || error.PERMISSION_DENIED:
       flash.innerHTML += "<p>User denied the request for Geolocation.</p>";
@@ -320,7 +333,7 @@ function showError(error) {
       flash.innerHTML += "<p>The request to get user location timed out.</p>";
       fadeIn(flash);
     break;
-    case error.code == 0 || error.UNKNOWN_ERROR:
+    case error.code === 0 || error.UNKNOWN_ERROR:
       flash.innerHTML += "<p>An unknown error occurred.</p>";
       fadeIn(flash);
     break;
@@ -331,21 +344,23 @@ function showError(error) {
     $Resize
 \*----------------------------------------------------------------------------*/
 function resizeSidebar() {
+  "use strict";
+
   var windowHeight = window.innerHeight;
   var windowWidth = window.innerWidth;
-  var sideBar = document.getElementsByClassName("sidebar");
+  var sideBar = document.getElementsByClassName("button__bar");
   var topBar = document.getElementsByClassName("top");
   var section = document.getElementsByClassName("content");
   var map = document.getElementById("mapdiv");
-  sideBar[0].style.height = windowHeight - topBar[0].offsetHeight + "px";
+  // sideBar[0].style.height = windowHeight - topBar[0].offsetHeight + "px";
   // section[0].style.width = windowWidth - sideBar[0].offsetWidth - 1 + "px";
   section[0].style.height = windowHeight - topBar[0].offsetHeight + "px";
   // map.style.width = windowWidth - sideBar[0].offsetWidth + "px";
-  // map.style.height = windowHeight - topBar[0].offsetHeight + "px";
+  map.style.height = windowHeight - topBar[0].offsetHeight + "px";
 }
 
-window.addEventListener('orientationchange', resizeSidebar, false);
-window.addEventListener('resize', resizeSidebar, false);
+// window.addEventListener('orientationchange', resizeSidebar, false);
+// window.addEventListener('resize', resizeSidebar, false);
 /*----------------------------------------------------------------------------*\
     $Calls 
 \*----------------------------------------------------------------------------*/

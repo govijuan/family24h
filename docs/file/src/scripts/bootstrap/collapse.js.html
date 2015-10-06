@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../../">
+  <title data-ice="title">src/scripts/bootstrap/collapse.js | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+</head>
+<body class="layout-container">
+
+<header>
+  <a href="./">Home</a>
+  <a href="identifiers.html">Identifier</a>
+  <a href="source.html">Source</a>
+  
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  </ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/scripts/bootstrap/collapse.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/* ========================================================================
+ * Bootstrap: collapse.js v3.3.5
+ * http://getbootstrap.com/javascript/#collapse
+ * ========================================================================
+ * Copyright 2011-2015 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+
++function ($) {
+  &apos;use strict&apos;;
+
+  // COLLAPSE PUBLIC CLASS DEFINITION
+  // ================================
+
+  var Collapse = function (element, options) {
+    this.$element      = $(element)
+    this.options       = $.extend({}, Collapse.DEFAULTS, options)
+    this.$trigger      = $(&apos;[data-toggle=&quot;collapse&quot;][href=&quot;#&apos; + element.id + &apos;&quot;],&apos; +
+                           &apos;[data-toggle=&quot;collapse&quot;][data-target=&quot;#&apos; + element.id + &apos;&quot;]&apos;)
+    this.transitioning = null
+
+    if (this.options.parent) {
+      this.$parent = this.getParent()
+    } else {
+      this.addAriaAndCollapsedClass(this.$element, this.$trigger)
+    }
+
+    if (this.options.toggle) this.toggle()
+  }
+
+  Collapse.VERSION  = &apos;3.3.5&apos;
+
+  Collapse.TRANSITION_DURATION = 350
+
+  Collapse.DEFAULTS = {
+    toggle: true
+  }
+
+  Collapse.prototype.dimension = function () {
+    var hasWidth = this.$element.hasClass(&apos;width&apos;)
+    return hasWidth ? &apos;width&apos; : &apos;height&apos;
+  }
+
+  Collapse.prototype.show = function () {
+    if (this.transitioning || this.$element.hasClass(&apos;in&apos;)) return
+
+    var activesData
+    var actives = this.$parent &amp;&amp; this.$parent.children(&apos;.panel&apos;).children(&apos;.in, .collapsing&apos;)
+
+    if (actives &amp;&amp; actives.length) {
+      activesData = actives.data(&apos;bs.collapse&apos;)
+      if (activesData &amp;&amp; activesData.transitioning) return
+    }
+
+    var startEvent = $.Event(&apos;show.bs.collapse&apos;)
+    this.$element.trigger(startEvent)
+    if (startEvent.isDefaultPrevented()) return
+
+    if (actives &amp;&amp; actives.length) {
+      Plugin.call(actives, &apos;hide&apos;)
+      activesData || actives.data(&apos;bs.collapse&apos;, null)
+    }
+
+    var dimension = this.dimension()
+
+    this.$element
+      .removeClass(&apos;collapse&apos;)
+      .addClass(&apos;collapsing&apos;)[dimension](0)
+      .attr(&apos;aria-expanded&apos;, true)
+
+    this.$trigger
+      .removeClass(&apos;collapsed&apos;)
+      .attr(&apos;aria-expanded&apos;, true)
+
+    this.transitioning = 1
+
+    var complete = function () {
+      this.$element
+        .removeClass(&apos;collapsing&apos;)
+        .addClass(&apos;collapse in&apos;)[dimension](&apos;&apos;)
+      this.transitioning = 0
+      this.$element
+        .trigger(&apos;shown.bs.collapse&apos;)
+    }
+
+    if (!$.support.transition) return complete.call(this)
+
+    var scrollSize = $.camelCase([&apos;scroll&apos;, dimension].join(&apos;-&apos;))
+
+    this.$element
+      .one(&apos;bsTransitionEnd&apos;, $.proxy(complete, this))
+      .emulateTransitionEnd(Collapse.TRANSITION_DURATION)[dimension](this.$element[0][scrollSize])
+  }
+
+  Collapse.prototype.hide = function () {
+    if (this.transitioning || !this.$element.hasClass(&apos;in&apos;)) return
+
+    var startEvent = $.Event(&apos;hide.bs.collapse&apos;)
+    this.$element.trigger(startEvent)
+    if (startEvent.isDefaultPrevented()) return
+
+    var dimension = this.dimension()
+
+    this.$element[dimension](this.$element[dimension]())[0].offsetHeight
+
+    this.$element
+      .addClass(&apos;collapsing&apos;)
+      .removeClass(&apos;collapse in&apos;)
+      .attr(&apos;aria-expanded&apos;, false)
+
+    this.$trigger
+      .addClass(&apos;collapsed&apos;)
+      .attr(&apos;aria-expanded&apos;, false)
+
+    this.transitioning = 1
+
+    var complete = function () {
+      this.transitioning = 0
+      this.$element
+        .removeClass(&apos;collapsing&apos;)
+        .addClass(&apos;collapse&apos;)
+        .trigger(&apos;hidden.bs.collapse&apos;)
+    }
+
+    if (!$.support.transition) return complete.call(this)
+
+    this.$element
+      [dimension](0)
+      .one(&apos;bsTransitionEnd&apos;, $.proxy(complete, this))
+      .emulateTransitionEnd(Collapse.TRANSITION_DURATION)
+  }
+
+  Collapse.prototype.toggle = function () {
+    this[this.$element.hasClass(&apos;in&apos;) ? &apos;hide&apos; : &apos;show&apos;]()
+  }
+
+  Collapse.prototype.getParent = function () {
+    return $(this.options.parent)
+      .find(&apos;[data-toggle=&quot;collapse&quot;][data-parent=&quot;&apos; + this.options.parent + &apos;&quot;]&apos;)
+      .each($.proxy(function (i, element) {
+        var $element = $(element)
+        this.addAriaAndCollapsedClass(getTargetFromTrigger($element), $element)
+      }, this))
+      .end()
+  }
+
+  Collapse.prototype.addAriaAndCollapsedClass = function ($element, $trigger) {
+    var isOpen = $element.hasClass(&apos;in&apos;)
+
+    $element.attr(&apos;aria-expanded&apos;, isOpen)
+    $trigger
+      .toggleClass(&apos;collapsed&apos;, !isOpen)
+      .attr(&apos;aria-expanded&apos;, isOpen)
+  }
+
+  function getTargetFromTrigger($trigger) {
+    var href
+    var target = $trigger.attr(&apos;data-target&apos;)
+      || (href = $trigger.attr(&apos;href&apos;)) &amp;&amp; href.replace(/.*(?=#[^\s]+$)/, &apos;&apos;) // strip for ie7
+
+    return $(target)
+  }
+
+
+  // COLLAPSE PLUGIN DEFINITION
+  // ==========================
+
+  function Plugin(option) {
+    return this.each(function () {
+      var $this   = $(this)
+      var data    = $this.data(&apos;bs.collapse&apos;)
+      var options = $.extend({}, Collapse.DEFAULTS, $this.data(), typeof option == &apos;object&apos; &amp;&amp; option)
+
+      if (!data &amp;&amp; options.toggle &amp;&amp; /show|hide/.test(option)) options.toggle = false
+      if (!data) $this.data(&apos;bs.collapse&apos;, (data = new Collapse(this, options)))
+      if (typeof option == &apos;string&apos;) data[option]()
+    })
+  }
+
+  var old = $.fn.collapse
+
+  $.fn.collapse             = Plugin
+  $.fn.collapse.Constructor = Collapse
+
+
+  // COLLAPSE NO CONFLICT
+  // ====================
+
+  $.fn.collapse.noConflict = function () {
+    $.fn.collapse = old
+    return this
+  }
+
+
+  // COLLAPSE DATA-API
+  // =================
+
+  $(document).on(&apos;click.bs.collapse.data-api&apos;, &apos;[data-toggle=&quot;collapse&quot;]&apos;, function (e) {
+    var $this   = $(this)
+
+    if (!$this.attr(&apos;data-target&apos;)) e.preventDefault()
+
+    var $target = getTargetFromTrigger($this)
+    var data    = $target.data(&apos;bs.collapse&apos;)
+    var option  = data ? &apos;toggle&apos; : $this.data()
+
+    Plugin.call($target, option)
+  })
+
+}(jQuery);
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.3.1)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

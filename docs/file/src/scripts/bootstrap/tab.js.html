@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../../">
+  <title data-ice="title">src/scripts/bootstrap/tab.js | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+</head>
+<body class="layout-container">
+
+<header>
+  <a href="./">Home</a>
+  <a href="identifiers.html">Identifier</a>
+  <a href="source.html">Source</a>
+  
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  </ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/scripts/bootstrap/tab.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/* ========================================================================
+ * Bootstrap: tab.js v3.3.5
+ * http://getbootstrap.com/javascript/#tabs
+ * ========================================================================
+ * Copyright 2011-2015 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+
++function ($) {
+  &apos;use strict&apos;;
+
+  // TAB CLASS DEFINITION
+  // ====================
+
+  var Tab = function (element) {
+    // jscs:disable requireDollarBeforejQueryAssignment
+    this.element = $(element)
+    // jscs:enable requireDollarBeforejQueryAssignment
+  }
+
+  Tab.VERSION = &apos;3.3.5&apos;
+
+  Tab.TRANSITION_DURATION = 150
+
+  Tab.prototype.show = function () {
+    var $this    = this.element
+    var $ul      = $this.closest(&apos;ul:not(.dropdown-menu)&apos;)
+    var selector = $this.data(&apos;target&apos;)
+
+    if (!selector) {
+      selector = $this.attr(&apos;href&apos;)
+      selector = selector &amp;&amp; selector.replace(/.*(?=#[^\s]*$)/, &apos;&apos;) // strip for ie7
+    }
+
+    if ($this.parent(&apos;li&apos;).hasClass(&apos;active&apos;)) return
+
+    var $previous = $ul.find(&apos;.active:last a&apos;)
+    var hideEvent = $.Event(&apos;hide.bs.tab&apos;, {
+      relatedTarget: $this[0]
+    })
+    var showEvent = $.Event(&apos;show.bs.tab&apos;, {
+      relatedTarget: $previous[0]
+    })
+
+    $previous.trigger(hideEvent)
+    $this.trigger(showEvent)
+
+    if (showEvent.isDefaultPrevented() || hideEvent.isDefaultPrevented()) return
+
+    var $target = $(selector)
+
+    this.activate($this.closest(&apos;li&apos;), $ul)
+    this.activate($target, $target.parent(), function () {
+      $previous.trigger({
+        type: &apos;hidden.bs.tab&apos;,
+        relatedTarget: $this[0]
+      })
+      $this.trigger({
+        type: &apos;shown.bs.tab&apos;,
+        relatedTarget: $previous[0]
+      })
+    })
+  }
+
+  Tab.prototype.activate = function (element, container, callback) {
+    var $active    = container.find(&apos;&gt; .active&apos;)
+    var transition = callback
+      &amp;&amp; $.support.transition
+      &amp;&amp; ($active.length &amp;&amp; $active.hasClass(&apos;fade&apos;) || !!container.find(&apos;&gt; .fade&apos;).length)
+
+    function next() {
+      $active
+        .removeClass(&apos;active&apos;)
+        .find(&apos;&gt; .dropdown-menu &gt; .active&apos;)
+          .removeClass(&apos;active&apos;)
+        .end()
+        .find(&apos;[data-toggle=&quot;tab&quot;]&apos;)
+          .attr(&apos;aria-expanded&apos;, false)
+
+      element
+        .addClass(&apos;active&apos;)
+        .find(&apos;[data-toggle=&quot;tab&quot;]&apos;)
+          .attr(&apos;aria-expanded&apos;, true)
+
+      if (transition) {
+        element[0].offsetWidth // reflow for transition
+        element.addClass(&apos;in&apos;)
+      } else {
+        element.removeClass(&apos;fade&apos;)
+      }
+
+      if (element.parent(&apos;.dropdown-menu&apos;).length) {
+        element
+          .closest(&apos;li.dropdown&apos;)
+            .addClass(&apos;active&apos;)
+          .end()
+          .find(&apos;[data-toggle=&quot;tab&quot;]&apos;)
+            .attr(&apos;aria-expanded&apos;, true)
+      }
+
+      callback &amp;&amp; callback()
+    }
+
+    $active.length &amp;&amp; transition ?
+      $active
+        .one(&apos;bsTransitionEnd&apos;, next)
+        .emulateTransitionEnd(Tab.TRANSITION_DURATION) :
+      next()
+
+    $active.removeClass(&apos;in&apos;)
+  }
+
+
+  // TAB PLUGIN DEFINITION
+  // =====================
+
+  function Plugin(option) {
+    return this.each(function () {
+      var $this = $(this)
+      var data  = $this.data(&apos;bs.tab&apos;)
+
+      if (!data) $this.data(&apos;bs.tab&apos;, (data = new Tab(this)))
+      if (typeof option == &apos;string&apos;) data[option]()
+    })
+  }
+
+  var old = $.fn.tab
+
+  $.fn.tab             = Plugin
+  $.fn.tab.Constructor = Tab
+
+
+  // TAB NO CONFLICT
+  // ===============
+
+  $.fn.tab.noConflict = function () {
+    $.fn.tab = old
+    return this
+  }
+
+
+  // TAB DATA-API
+  // ============
+
+  var clickHandler = function (e) {
+    e.preventDefault()
+    Plugin.call($(this), &apos;show&apos;)
+  }
+
+  $(document)
+    .on(&apos;click.bs.tab.data-api&apos;, &apos;[data-toggle=&quot;tab&quot;]&apos;, clickHandler)
+    .on(&apos;click.bs.tab.data-api&apos;, &apos;[data-toggle=&quot;pill&quot;]&apos;, clickHandler)
+
+}(jQuery);
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.3.1)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

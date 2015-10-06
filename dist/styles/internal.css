@@ -10107,36 +10107,13 @@ button.close
     height: 64px;
 }
 
-.sidebar
-{
-    position: relative; 
-
-    float: left;
-
-    width: 10%;
-
-    background-color: #32ccfe;
-}
-.sidebar .version
-{
-    font-size: 11px; 
-    font-weight: bold;
-
-    position: absolute;
-    bottom: 0;
-
-    width: 100%;
-
-    text-align: center;
-}
-
 .content
 {
     position: relative;
 
     float: left;
 
-    width: 90%; 
+    width: 100%; 
 
     background-color: #ccc;
 }
@@ -10153,14 +10130,15 @@ button.close
     width: 90%;
 }
 
-#mapdiv
+.button__bar
 {
-    z-index: 10;
+    position: relative; 
 
     float: left;
 
-    width: 100%;
-    height: 100%;
+    width: 10%;
+
+    background-color: #32ccfe;
 }
 
 .lock,
@@ -10168,12 +10146,13 @@ button.close
 .pattern,
 .wipe
 {
-    position: relative; 
+    position: relative;
 
     float: left;
 
     width: 100%;
-    height: 146px;
+
+    text-align: center; 
 
     border-bottom: 1px solid #0098ca;
 }
@@ -10184,12 +10163,6 @@ button.close
 {
     font-weight: bold;
 
-    position: absolute;
-    bottom: 0;
-
-    width: 100%;
-
-    text-align: center;
     text-transform: uppercase;
 
     color: #2e2e2e;
@@ -10202,25 +10175,14 @@ button.close
     background-color: #0098ca;
 }
 
-.lock
+#mapdiv
 {
-    border-top: 1px solid #0098ca; 
-    background: transparent url('../images/ic_phonelink_lock_black_48px.svg') center 40px scroll no-repeat;
-}
+    z-index: 10;
 
-.ring
-{
-    background: transparent url('../images/ic_speaker_phone_black_48px.svg') center 40px scroll no-repeat;
-}
+    float: left;
 
-.pattern
-{
-    background: transparent url('../images/ic_dialpad_black_48px.svg') center 40px scroll no-repeat;
-}
-
-.wipe
-{
-    background: transparent url('../images/ic_phonelink_erase_black_48px.svg') center 40px scroll no-repeat;
+    width: 90%;
+    height: 100%;
 }
 
 .confirm-modal
@@ -10297,4 +10259,62 @@ button.close
 .payment td
 {
     padding: 10px 0;
+}
+
+/*----------------------------------------------------------------------------*    $EXTRA_SMALL
+\*----------------------------------------------------------------------------*/
+@media screen and (max-width: 991px)
+{
+    .button__bar
+    {
+        position: absolute;
+        z-index: 10; 
+        bottom: 0;
+        left: 0;
+
+        width: 100%;
+    }
+    #mapdiv
+    {
+        position: relative;
+        z-index: 1; 
+
+        float: left;
+
+        width: 100%;
+        height: 87%;
+    }
+    .lock,
+    .ring,
+    .pattern,
+    .wipe
+    {
+        float: left;
+
+        width: 25%; 
+        height: 75px;
+    }
+    .lock img,
+    .ring img,
+    .pattern img,
+    .wipe img
+    {
+        width: 32px; 
+        margin: 10px auto;
+    }
+}
+
+/*----------------------------------------------------------------------------*    $MEDIUM
+\*----------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*    $LARGE
+\*----------------------------------------------------------------------------*/
+@media screen and (min-width: 1200px)
+{
+    .lock,
+    .ring,
+    .pattern,
+    .wipe
+    {
+        height: 146px;
+    }
 }

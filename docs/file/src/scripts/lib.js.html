@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">src/scripts/lib.js | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+</head>
+<body class="layout-container">
+
+<header>
+  <a href="./">Home</a>
+  <a href="identifiers.html">Identifier</a>
+  <a href="source.html">Source</a>
+  
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  </ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/scripts/lib.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/*----------------------------------------------------------------------------*\
+    $Global Variables
+\*----------------------------------------------------------------------------*/
+var api_url = &quot;http://api.nueta/&quot;;
+var flash = document.getElementById(&quot;flash&quot;);
+
+
+/*----------------------------------------------------------------------------*\
+    $FadeIn Effect
+\*----------------------------------------------------------------------------*/
+function fadeIn(el) {
+  &quot;use strict&quot;;
+
+  var opacity = 0;
+
+  el.style.opacity = 0;
+  el.style.filter = &quot;&quot;;
+  el.style.display = &quot;block&quot;;
+
+  var last = +new Date();
+
+  var tick = function() {
+    opacity += (new Date() - last) / 400;
+    el.style.opacity = opacity;
+    el.style.filter = &quot;alpha(opacity=&quot; + (100 * opacity)|0 + &quot;)&quot;;
+
+    last = +new Date();
+
+    if (opacity &lt; 1) {
+      (window.requestAnimationFrame &amp;&amp; requestAnimationFrame(tick)) || setTimeout(tick, 16);
+    }
+  };
+
+  tick();
+}
+
+/*----------------------------------------------------------------------------*\
+    $Ajax to parse user&apos;s info 
+\*----------------------------------------------------------------------------*/
+// $(document).ready(function() {
+
+//   // API&apos;s config 
+//   var user_endpoint = &quot;users/&quot;;
+//   var user_id = &quot;38&quot;;
+//   var api_key = &quot;?api_key=LAK2La6084ac4f20de47b82ba1K3hj3hH32KS301SA2&quot;;
+
+
+//   $.ajax({
+//     url: api_url + user_endpoint + user_id + api_key,
+//     type: &apos;GET&apos;,
+//     crossDomain: true,
+//     statusCode: {
+//       200: function(data) { 
+//         console.log(data);
+
+//         var telephoneField = document.querySelectorAll(&apos;.telephone&apos;);
+//         var nameField = document.querySelectorAll(&apos;.name&apos;);
+//         var emailField = document.querySelectorAll(&apos;.email&apos;);
+//         var profilePicture = document.querySelectorAll(&apos;.profile_picture_url&apos;);
+
+//         for (var i = 0; i &lt;= telephoneField.length - 1; i++) {
+//           telephoneField[i].innerHTML = data.telephone;
+//           nameField[i].innerHTML = data.name;
+//           emailField[i].innerHTML = data.email;
+//           profilePicture[i].innerHTML = data.profile_picture_url;
+//         };
+        
+//       } // Ok
+//       ,400: function(msg) { 
+//         console.log(msg);
+//       } // Bad Request
+//       ,404: function(msg) { 
+//         console.log(msg); 
+//       } // Not Found
+//     }
+//   });
+// });
+
+/*----------------------------------------------------------------------------*\
+    $Modal 
+\*----------------------------------------------------------------------------*/
+var modal = $(&quot;.confirm-modal&quot;);
+var title = $(&quot;.confirm-modal h3&quot;);
+var avatar = $(&quot;.confirm-modal img&quot;);
+var description = $(&quot;.confirm-modal p&quot;);
+var button = $(&quot;.confirm-modal .btn&quot;);
+
+function displayModal(mode) {
+  &quot;use strict&quot;;
+
+  if (button.hasClass(&quot;btn-danger&quot;)) {
+    button.removeClass(&quot;btn-danger&quot;);
+    button.addClass(&quot;btn-success&quot;);
+  }
+
+  if(mode === &quot;lock&quot;){
+    title[0].innerHTML = &quot;Lock your phone&quot;;
+    avatar[0].src = &quot;/images/ic_phonelink_lock_black_48px.svg&quot;;
+    description[0].innerHTML = &quot;You can lock your phone and combine with others actions&quot;;
+    button[0].innerHTML = &quot;Lock&quot;;
+    button[0].setAttribute(&quot;onclick&quot;,&quot;confirmModal(&apos;lock&apos;);&quot;);
+  }
+
+  if(mode === &quot;ring&quot;){
+    title[0].innerHTML = &quot;Ring your phone&quot;;
+    avatar[0].src = &quot;/images/ic_speaker_phone_black_48px.svg&quot;;
+    description[0].innerHTML = &quot;You can lock your phone and combine with others actions&quot;;
+    button[0].innerHTML = &quot;Ring&quot;;
+    button[0].setAttribute(&quot;onclick&quot;,&quot;notification(&apos;ring&apos;);&quot;);
+  }
+  
+  if(mode === &quot;pattern&quot;){
+    title[0].innerHTML = &quot;Change the lock pattern of your phone&quot;;
+    avatar[0].src = &quot;/images/ic_dialpad_black_48px.svg&quot;;
+    description[0].innerHTML = &quot;You can lock your phone and combine with others actions&quot;;
+    button[0].innerHTML = &quot;Change&quot;;
+  }
+  
+  if(mode === &quot;wipe&quot;){
+    title[0].innerHTML = &quot;Wipe your phone&quot;;
+    avatar[0].src = &quot;/images/ic_phonelink_erase_black_48px.svg&quot;;
+    description[0].innerHTML = &quot;You can lock your phone and combine with others actions&quot;;
+    button[0].innerHTML = &quot;Wipe&quot;;
+    button[0].setAttribute(&quot;onclick&quot;,&quot;confirmModal(&apos;wipe&apos;);&quot;);
+
+    button.removeClass(&quot;btn-success&quot;);
+    button.addClass(&quot;btn-danger&quot;);
+  }
+  modal.fadeIn(&quot;slow&quot;);
+}
+
+/*----------------------------------------------------------------------------*\
+    $Confirm Modal 
+\*----------------------------------------------------------------------------*/
+function confirmModal(mode) {
+  &quot;use strict&quot;;
+
+  title[0].innerHTML = &quot;Confirm your password&quot;;
+  avatar[0].parentNode.parentNode.remove(this);
+  description[0].innerHTML = &quot;&lt;input type=&apos;password&apos; name=&apos;confirm[password]&apos; id=&apos;confirm[password]&apos;/&gt;&quot;;
+
+  if(mode === &quot;lock&quot;){
+    button[0].innerHTML = &quot;Lock&quot;;
+    button[0].setAttribute(&quot;onclick&quot;,&quot;notification(&apos;lock&apos;);&quot;);
+  }
+  
+  if(mode === &quot;pattern&quot;){
+    button[0].innerHTML = &quot;Change&quot;;
+  }
+  
+  if(mode === &quot;wipe&quot;){
+    button[0].innerHTML = &quot;Wipe&quot;;
+    button[0].setAttribute(&quot;onclick&quot;,&quot;notification(&apos;wipe&apos;);&quot;);
+
+    button.removeClass(&quot;btn-success&quot;);
+    button.addClass(&quot;btn-danger&quot;);
+  }
+  modal.fadeIn(&quot;slow&quot;);
+}
+
+/*----------------------------------------------------------------------------*\
+    $Ajax to parse notifications  
+\*----------------------------------------------------------------------------*/
+function notification(type) {
+  &quot;use strict&quot;;
+
+  // API&apos;s config 
+
+  var endpoint = &quot;notification-messages&quot;;
+  var api_key = &quot;&amp;api_key=LAK2La6084ac4f20de47b82ba1K3hj3hH32KS301SA2&quot;;
+  var password_input = document.getElementsByName(&quot;confirm[password]&quot;);
+  var password = &quot;&amp;password=&quot; + password_input[0].value;
+
+  var code = &quot;&amp;code=&quot;;
+  var event_id = &quot;&amp;event_id=&quot;;
+  var data = &quot;&amp;data={}&quot;;
+  var uuid = guid();
+
+  if (type == &quot;lock&quot;) {
+    code += &quot;device:locked&quot;;
+    flash.innerHTML += &quot;&lt;p&gt;Device locked.&lt;/p&gt;&quot;;
+  }
+
+  if (type == &quot;unlock&quot;) {
+    code += &quot;device:unlocked&quot;;
+    flash.innerHTML += &quot;&lt;p&gt;Device unlocked.&lt;/p&gt;&quot;;
+  }
+
+  if (type == &quot;ring&quot;) {
+    code += &quot;buzzer/turn-on&quot;;
+    flash.innerHTML += &quot;&lt;p&gt;Device ringing.&lt;/p&gt;&quot;;
+  }
+
+  if (type == &quot;wipe&quot;) {
+    code += &quot;device:wipe&quot;;
+    flash.innerHTML += &quot;&lt;p&gt;Device&apos;s data wiped.&lt;/p&gt;&quot;;
+  }
+
+  event_id += uuid;
+
+  request = code + data + event_id;
+
+  if (type !== &quot;ring&quot;) {
+    request += password;
+  }
+
+  $.ajax({
+    url: api_url + endpoint,
+    type: &quot;POST&quot;,
+    data: request + api_key,
+    crossDomain: true,
+    statusCode: {
+      202: function(msg) { 
+        console.log(msg);
+      }, // Ok
+      400: function(msg) { 
+        console.log(msg);
+      }, // Bad Request
+      404: function(msg) { 
+        console.log(msg); 
+      } // Not Found
+    }
+  });
+
+  $(&quot;.confirm-modal&quot;).fadeOut(&quot;slow&quot;);
+
+  flash.className += &quot; alert-success&quot;;
+  fadeIn(flash);
+}
+
+/*----------------------------------------------------------------------------*\
+    $Event ID generator 
+\*----------------------------------------------------------------------------*/
+function guid() {
+  &quot;use strict&quot;;
+
+  function s4() {
+    return Math.floor((1 + Math.random()) * 0x10000)
+      .toString(16)
+      .substring(1);
+  }
+  return s4() + s4() + &quot;-&quot; + s4() + &quot;-&quot; + s4() + &quot;-&quot; + s4() + &quot;-&quot; + s4() + s4() + s4();
+}
+
+/*----------------------------------------------------------------------------*\
+    $Geolocation
+\*----------------------------------------------------------------------------*/
+var watchId = null;
+
+function geo_location() {
+  &quot;use strict&quot;;
+
+  if (navigator.geolocation) {
+    var optn = {
+      enableHighAccuracy : true,
+      timeout : Infinity,
+      maximumAge : 0
+    };
+
+    watchId = navigator.geolocation.getCurrentPosition(showPosition, showError, optn);
+  } else {
+    flash.innerHTML += &quot;&lt;p&gt;Geolocation is &lt;strong&gt;not&lt;/strong&gt; supported in your browser.&lt;/p&gt;&quot;;
+    fadeIn(flash);
+  }
+}
+
+function showPosition(position) {
+  &quot;use strict&quot;;
+
+  var latitude = position.coords.latitude;
+  var longitude = position.coords.longitude;
+  var googlePos = new google.maps.LatLng(latitude, longitude);
+  var mapOptions = {
+      zoom : 15,
+      center : googlePos,
+      mapTypeId : google.maps.MapTypeId.ROADMAP
+  };
+  var mapObj = document.getElementById(&apos;mapdiv&apos;);
+  var googleMap = new google.maps.Map(mapObj, mapOptions);
+  var markerOpt = {
+      map : googleMap,
+      position : googlePos,
+      title : &apos;Hi , I am here&apos;,
+      animation : google.maps.Animation.DROP
+  };
+  var googleMarker = new google.maps.Marker(markerOpt);
+  var geocoder = new google.maps.Geocoder();
+  geocoder.geocode({
+    &apos;latLng&apos; : googlePos
+    }, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+        if (results[1]) {
+          var popOpts = {
+            content : results[1].formatted_address,
+            position : googlePos
+          };
+        var popup = new google.maps.InfoWindow(popOpts);
+        google.maps.event.addListener(googleMarker, &apos;click&apos;, function() {
+          popup.open(googleMap);
+        });
+      } else {
+          flash.innerHTML += &quot;&lt;p&gt;No results found.&lt;/p&gt;&quot;;
+      }
+    } else {
+        flash.inerHTLM += &quot;&lt;p&gt;Geocoder failed due to: &quot; + status + &quot;&lt;/p&gt;&quot;;
+    }
+  });
+
+  fadeIn(mapObj);
+}
+
+function stopWatch() {
+  &quot;use strict&quot;;
+
+  if (watchId) {
+    navigator.geolocation.clearWatch(watchId);
+    watchId = null;
+  }
+}
+
+function showError(error) {
+  &quot;use strict&quot;;
+
+  switch(error.code) {
+    case error.code == 1 || error.PERMISSION_DENIED:
+      flash.innerHTML += &quot;&lt;p&gt;User denied the request for Geolocation.&lt;/p&gt;&quot;;
+      fadeIn(flash);
+    break;
+    case error.code == 2 || error.POSITION_UNAVAILABLE:
+      flash.innerHTML += &quot;&lt;p&gt;Location information is unavailable.&lt;/p&gt;&quot;;
+      fadeIn(flash);
+    break;
+    case error.code == 3 || error.TIMEOUT:
+      flash.innerHTML += &quot;&lt;p&gt;The request to get user location timed out.&lt;/p&gt;&quot;;
+      fadeIn(flash);
+    break;
+    case error.code === 0 || error.UNKNOWN_ERROR:
+      flash.innerHTML += &quot;&lt;p&gt;An unknown error occurred.&lt;/p&gt;&quot;;
+      fadeIn(flash);
+    break;
+  }
+}
+
+/*----------------------------------------------------------------------------*\
+    $Resize
+\*----------------------------------------------------------------------------*/
+function resizeSidebar() {
+  &quot;use strict&quot;;
+
+  var windowHeight = window.innerHeight;
+  var windowWidth = window.innerWidth;
+  var sideBar = document.getElementsByClassName(&quot;button__bar&quot;);
+  var topBar = document.getElementsByClassName(&quot;top&quot;);
+  var section = document.getElementsByClassName(&quot;content&quot;);
+  var map = document.getElementById(&quot;mapdiv&quot;);
+  // sideBar[0].style.height = windowHeight - topBar[0].offsetHeight + &quot;px&quot;;
+  // section[0].style.width = windowWidth - sideBar[0].offsetWidth - 1 + &quot;px&quot;;
+  section[0].style.height = windowHeight - topBar[0].offsetHeight + &quot;px&quot;;
+  // map.style.width = windowWidth - sideBar[0].offsetWidth + &quot;px&quot;;
+  map.style.height = windowHeight - topBar[0].offsetHeight + &quot;px&quot;;
+}
+
+// window.addEventListener(&apos;orientationchange&apos;, resizeSidebar, false);
+// window.addEventListener(&apos;resize&apos;, resizeSidebar, false);
+/*----------------------------------------------------------------------------*\
+    $Calls 
+\*----------------------------------------------------------------------------*/
+$(&quot;.user-config&quot;).click(function() {
+  $(&quot;.config-box&quot;).toggle();
+});
+
+$(&quot;.confirm-modal .close&quot;).click(function() {
+  $(this).parent().fadeOut(&quot;slow&quot;);
+});</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.3.1)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

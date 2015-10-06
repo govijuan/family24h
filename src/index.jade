@@ -35,10 +35,9 @@ html(class="no-js" lang="pt-BR" ng-app)
             li
               a(href="#help") Ajuda
             li
-              a(href="download.html") Downloads
+              a(href="download") Downloads
 
-    section.intro
-      a(name="intro")
+    section.intro#intro
       .container
 
         .text.col-xs-5.col-sm-5.col-md-5.col-lg-5
@@ -51,10 +50,9 @@ html(class="no-js" lang="pt-BR" ng-app)
     
     include home_features.jade
 
-    section.versions
+    section.versions#versions
       .container
         .row
-          a(name="versions")
           h3 
             span Versões
             small Ainda mais proteção para sua familia
@@ -80,7 +78,7 @@ html(class="no-js" lang="pt-BR" ng-app)
     include home_help.jade
 
 
-    section.contact
+    section.contact#contact
       .container
         .row
           a(name="contact")
@@ -179,6 +177,20 @@ html(class="no-js" lang="pt-BR" ng-app)
     include scripts.jade
 
     script.
+      // Smooth Scrolling
+      $('a[href^="#"]').on('click', function(event) {
+
+          var target = $( $(this).attr('href') );
+
+          if( target.length ) {
+              event.preventDefault();
+              $('html, body').animate({
+                  scrollTop: target.offset().top
+              }, 1000);
+          }
+      });
+
+      // Features's Flip on click
       $(".list__item .item__front").click(function() {
         $(this).hide();
         $(this).parent().addClass("flip");

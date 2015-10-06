@@ -1,10 +1,9 @@
-"use strict";
-
 /*----------------------------------------------------------------------------*\
     $Validation 
 \*----------------------------------------------------------------------------*/
 function validate(element) {
-  
+  "use strict";
+
   var email_error = document.querySelector(".email_return");
   var pass_error = document.querySelector(".password_return");
 
@@ -50,6 +49,8 @@ function validate(element) {
     $Ajax Login  
 \*----------------------------------------------------------------------------*/
 function getCredentials() {
+  "use strict";
+
   var username = document.login_form.email.value;
   var password = document.login_form.password.value;
 
@@ -57,6 +58,7 @@ function getCredentials() {
 }
 
 function login(user,pass) {
+  "use strict";
 
   // API's config 
   var endpoint = "login";
@@ -82,6 +84,8 @@ function login(user,pass) {
     $Ajax Password Recovery  
 \*----------------------------------------------------------------------------*/
 function passwordRecovery() {
+  "use strict";
+
   var email = document.login_form.email.value;
 
   // API's config 
@@ -106,6 +110,8 @@ function passwordRecovery() {
     $Ajax Password Change  
 \*----------------------------------------------------------------------------*/
 function passwordChange() {
+  "use strict";
+
   var email = queryVariable("email");
   var secret_key = queryVariable("key");
 
@@ -147,6 +153,8 @@ function passwordChange() {
 }
 
 function queryVariable(param) {
+  "use strict";
+  
   var query = window.location.search.substring(1);
   var vars = query.split("&");
   for (var i=0;i<vars.length;i++) {
