@@ -10786,6 +10786,31 @@ form input[type='checkbox'] + label
     }
 }
 
+.form__field.success,
+.form__field.fail
+{
+    display: none; 
+
+    text-align: center;
+}
+.form__field.success p,
+.form__field.fail p
+{
+    font-size: 18px;
+
+    margin: 0;
+}
+
+.form__field.success
+{
+    color: #3c763d;
+}
+
+.form__field.fail
+{
+    color: #a94442;
+}
+
 /*----------------------------------------------------------------------------*    $SMALL
 \*----------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------*    $MEDIUM

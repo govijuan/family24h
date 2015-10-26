@@ -1,7 +1,7 @@
 /*----------------------------------------------------------------------------*\
     $Global Variables
 \*----------------------------------------------------------------------------*/
-var api_url = "http://familyhomol.eokoe.com/";
+var api_url = "http://familyhomol.eokoe.com";
 var flash = document.getElementById("flash");
 
 /*----------------------------------------------------------------------------*\
@@ -39,7 +39,7 @@ function fadeIn(el) {
 // $(document).ready(function() {
 
 //   // API's config 
-//   var user_endpoint = "users/";
+//   var user_endpoint = "/users";
 //   var user_id = "38";
 //   var api_key = "?api_key=LAK2La6084ac4f20de47b82ba1K3hj3hH32KS301SA2";
 
@@ -165,7 +165,7 @@ function notification(type) {
 
   // API's config 
 
-  var endpoint = "notification-messages";
+  var endpoint = "/notification-messages";
   var api_key = "&api_key=LAK2La6084ac4f20de47b82ba1K3hj3hH32KS301SA2";
   var password_input = document.getElementsByName("confirm[password]");
   var password = "&password=" + password_input[0].value;

@@ -187,6 +187,27 @@ form {
   }
 }
 
+.form__field {
+
+  &.success,
+  &.fail {
+    text-align: center;
+    display: none;
+
+    p {
+      font-size: 18px;
+      margin: 0;
+    }
+  }
+  &.success {
+    color: #3c763d;
+  }
+
+  &.fail {
+    color: #a94442;
+  }
+}
+
 
 /*----------------------------------------------------------------------------*\
     $SMALL

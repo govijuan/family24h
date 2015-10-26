@@ -98,9 +98,12 @@ function passwordRecovery() {
     data: "&email=" + email,
     statusCode: {
       200: function(data_server) {
-        // window.location = "dashboard.html"; 
+        $(".form__field").hide();
+        $(".success").show();
       },
       400: function(data_server) { 
+        $(".form__field").hide();
+        $(".fail").show();
       }
     }
   });
