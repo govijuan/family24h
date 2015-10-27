@@ -61,13 +61,13 @@ function login(user,pass) {
   "use strict";
 
   // API's config 
-  var endpoint = "login";
+  var endpoint = "/login";
 
   $.ajax({
     url: api_url + endpoint,
     type: "POST",
     crossDomain: true,
-    data: "&email=" + user + "&password=" + pass,
+    data: "&email=" + user + "&password=" + pass + "&is_mobile=0",
     statusCode: {
       200: function(data_server) { 
         // console.log(data_server);
@@ -147,7 +147,6 @@ function passwordChange() {
     data: request,
     statusCode: {
       200: function(data_server) {
-        // window.location = "dashboard.html"; 
       },
       400: function(data_server) { 
       }
