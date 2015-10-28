@@ -140,6 +140,6 @@ function setCookie(id, api_key) {
     // $(".container").hide();
     validateCookie();
   } else{
-    window.location = "/login"; 
+    // window.location = "/login"; 
   }
 })();
