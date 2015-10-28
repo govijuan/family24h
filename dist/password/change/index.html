@@ -19,32 +19,36 @@
     </header>
   </body>
 </html>
-<section class="main">
+<section role="password_change" class="main">
   <div class="container">
     <div class="col-xs-12 col-sm-10 col-md-8 col-lg-6 col-sm-offset-1 col-md-offset-2 col-lg-offset-3">
       <div class="title">
         <h3 class="title__header">Login</h3><small class="title__tagline">Bem vindo ao Family24h</small>
       </div>
-      <form name="login_form">
-        <div class="form__field">
-          <label for="email">Email</label><small class="email_return"></small>
+      <form name="pass_change_form">
+        <div class="form__field email">
+          <label for="email">Email</label>
           <input type="email" name="email" id="email" class="form__input">
         </div>
-        <div class="form__field">
-          <button type="button" onclick="passwordRecovery()" class="form__button btn btn-lg btn-block">Enviar</button>
+        <div class="form__field codigo">
+          <label for="codigo">Código</label>
+          <input type="text" name="codigo" id="codigo" class="form__input">
         </div>
-        <div class="form__field success">
-          <p>Email enviado com sucesso. <br />Cheque a sua pasta de SPAM.</p>
+        <div class="form__field senha">
+          <label for="password">Nova senha</label>
+          <input type="password" name="password" id="password" class="form__input">
         </div>
-        <div class="form__field fail">
-          <p>Ocorreu um problema ao enviar sua requisição. <br/ > Tente novamente em alguns minutos.</p>
+        <div class="form__field confirma">
+          <label for="password_confirmP">Confirmar senha</label><small class="password_return"></small>
+          <input type="password" name="password_confirm" id="password_confirm" class="form__input">
+        </div>
+        <div class="form__field envia">
+          <input type="submit" onclick="passwordChange()" value="Prosseguir" class="form__button btn btn-lg btn-block">
         </div>
       </form>
     </div>
   </div>
 </section>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js"></script>
-<script src="/scripts/controller.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script>
   window.jQuery || document.write('<script src="/scripts/vendor/jquery-1.11.3.min.js")<\/script>')
@@ -60,4 +64,4 @@
   r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
   ga('create','UA-XXXXX-X','auto');ga('send','pageview');
 </script>
-<script src="scripts/login/login.js"></script>
+<script src="/scripts/password/change/pass_change.min.js"></script>

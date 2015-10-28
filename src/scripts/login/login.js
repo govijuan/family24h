@@ -70,8 +70,12 @@ function login(user,pass) {
     data: "&email=" + user + "&password=" + pass + "&is_mobile=0",
     statusCode: {
       200: function(data_server) { 
-        // console.log(data_server);
-        window.location = "dashboard.html"; 
+        var api_key = data_server.api_key;
+        var id = data_server.id;
+
+        setCookie(id, api_key);
+        window.location = "/dashboard"; 
+
       },
       400: function(data_server) { 
         // console.log('teste');
@@ -80,88 +84,9 @@ function login(user,pass) {
   });
 }
 
-/*----------------------------------------------------------------------------*\
-    $Ajax Password Recovery  
-\*----------------------------------------------------------------------------*/
-function passwordRecovery() {
-  "use strict";
-
-  var email = document.login_form.email.value;
-
-  // API's config 
-  var endpoint = "/user-forgot-password/email";
-
-  $.ajax({
-    url: api_url + endpoint,
-    type: "POST",
-    crossDomain: true,
-    data: "&email=" + email,
-    statusCode: {
-      200: function(data_server) {
-        $(".form__field").hide();
-        $(".success").show();
-      },
-      400: function(data_server) { 
-        $(".form__field").hide();
-        $(".fail").show();
-      }
-    }
-  });
-}
-
-/*----------------------------------------------------------------------------*\
-    $Ajax Password Change  
-\*----------------------------------------------------------------------------*/
-function passwordChange() {
-  "use strict";
-
-  var email = queryVariable("email");
-  var secret_key = queryVariable("key");
-
-  var password = document.login_form.password.value;
-  var password_confirm = document.login_form.password_confirm.value;
-
-  var enviar = document.getElementsByTagName("button");
-
-  // API's config 
-  var endpoint = "/user-forgot-password/reset-password";
-
-  var request = "&email=" + email + 
-                "&password=" + password + 
-                "&password_confirm=" + password_confirm +
-                "&secret_key=" + secret_key;
-
-  // while(password.value !== password_confirm.value || 
-  //       password.value === null || 
-  //       password.value === "" ||
-  //       password_confirm.value === null || 
-  //       password_confirm.value === "") {
-  //   enviar[0].removeAttribute("disabled");    
-  // }
-
-
-  $.ajax({
-    url: api_url + endpoint,
-    type: "POST",
-    crossDomain: true,
-    data: request,
-    statusCode: {
-      200: function(data_server) {
-      },
-      400: function(data_server) { 
-      }
-    }
-  });
-}
-
-function queryVariable(param) {
-  "use strict";
-  
-  var query = window.location.search.substring(1);
-  var vars = query.split("&");
-  for (var i=0;i<vars.length;i++) {
-         var pair = vars[i].split("=");
-         if(pair[0] == param){return pair[1];}
-  }
-  return(false);
+function setCookie(id, api_key) {
+  var exp = new Date();     //set new date object
+  var expires = exp.setTime(exp.getTime() + (1000 * 60 * 60 * 24 * 30));     //set it 30 days ahead 
+  var idCookie = document.cookie = "family_id=" + escape(id) + "; path=/; expires=" + expires +";";
+  var keyCookie = document.cookie = "family_key=" + escape(api_key) + "; path=/; expires=" + expires +";";
 }

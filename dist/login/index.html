@@ -19,34 +19,32 @@
     </header>
   </body>
 </html>
-<section ng-controller="loginCtrl" class="main">
+<section class="main">
   <div class="container">
     <div class="col-xs-12 col-sm-10 col-md-8 col-lg-6 col-sm-offset-1 col-md-offset-2 col-lg-offset-3">
       <div class="title">
         <h3 class="title__header">Login</h3><small class="title__tagline">Bem vindo ao Family24h</small>
       </div>
-      <form name="login_form" ng-submit="onSubmit()" novalidate="novalidate">
+      <form name="login_form" novalidate="novalidate">
         <div class="form__field">
           <label for="email">Email</label><small class="email_return"></small>
-          <input type="email" name="email" id="email" ng-model="formModel.email" required class="form__input">
+          <input type="email" name="email" id="email" required class="form__input">
         </div>
         <div class="form__field">
           <label for="password">Senha</label><small class="password_return"></small>
-          <input type="password" name="password" id="password" ng-model="formModel.password" required class="form__input">
+          <input type="password" name="password" id="password" required class="form__input">
         </div>
         <div class="form__field">
           <input type="checkbox" name="remember" id="remember">
           <label for="remember">Mantenha-me conectado</label><a href="#">Esqueci minha senha</a>
         </div>
         <div class="form__field">
-          <button type="submit" class="form__button btn btn-lg btn-block">Entrar</button>
+          <button type="button" onclick="getCredentials()" class="form__button btn btn-lg btn-block">Entrar</button>
         </div>
       </form>
     </div>
   </div>
 </section>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js"></script>
-<script src="/scripts/controller.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script>
   window.jQuery || document.write('<script src="/scripts/vendor/jquery-1.11.3.min.js")<\/script>')
@@ -62,3 +60,4 @@
   r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
   ga('create','UA-XXXXX-X','auto');ga('send','pageview');
 </script>
+<script src="/scripts/login/login.js"></script>

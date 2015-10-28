@@ -1,0 +1,33 @@
+include ../../layout/header_interna.jade
+
+section.main(role="password_change")
+  .container
+    .col-xs-12.col-sm-10.col-md-8.col-lg-6.col-sm-offset-1.col-md-offset-2.col-lg-offset-3
+      .title
+        h3.title__header Login
+        small.title__tagline Bem vindo ao Family24h
+
+      form(name="pass_change_form")
+        .form__field.email
+          label(for="email") Email
+          input.form__input(type="email" name="email" id="email")
+
+        .form__field.codigo
+          label(for="codigo") Código
+          input.form__input(type="text" name="codigo" id="codigo")
+
+        .form__field.senha
+          label(for="password") Nova senha
+          input.form__input(type="password" name="password" id="password")
+
+        .form__field.confirma
+          label(for="password_confirmP") Confirmar senha
+          small(class="password_return")
+          input.form__input(type="password" name="password_confirm" id="password_confirm")
+
+        .form__field.envia
+          input.form__button(type="submit" class="btn btn-lg btn-block" onclick="passwordChange()" value="Prosseguir")
+
+include ../../scripts.jade
+
+script(src="/scripts/password/change/pass_change.min.js")
