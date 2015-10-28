@@ -259,7 +259,6 @@ section {
   }
 }
 
-/* entire container, keeps perspective */
 .list {
   perspective: 1000;
 }
@@ -568,6 +567,24 @@ footer {
     }
   }
 }
+
+/*----------------------------------------------------------------------------*\
+    $DOWNLOAD
+\*----------------------------------------------------------------------------*/
+.download {
+  margin-left: 25% !important;
+  
+  .release {
+    width: 50%;
+    float: left;
+    margin-bottom: 15px;
+
+    img {
+      float: left !important;
+      margin: 0;
+    }
+  }
+} 
 
 //=include login/login.scss
 

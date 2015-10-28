@@ -10273,7 +10273,6 @@ section
     color: #006599;
 }
 
-/* entire container, keeps perspective */
 .list
 {
     -webkit-perspective: 1000;
@@ -10632,6 +10631,26 @@ footer .legal p
     text-align: center; 
 
     color: #fff;
+}
+
+/*----------------------------------------------------------------------------*    $DOWNLOAD
+\*----------------------------------------------------------------------------*/
+.download
+{
+    margin-left: 25% !important;
+}
+.download .release
+{
+    float: left;
+
+    width: 50%;
+    margin-bottom: 15px;
+}
+.download .release img
+{
+    float: left !important;
+
+    margin: 0;
 }
 
 /*----------------------------------------------------------------------------*    $LOGIN
