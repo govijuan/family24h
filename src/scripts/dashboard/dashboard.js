@@ -1,4 +1,4 @@
-(function validateCookie() {
+function validateCookie() {
   "use strict";
 
   // API's config 
@@ -14,9 +14,9 @@
     crossDomain: true,
     data: "&api_key=" + api_key
   });
-})();
+}
 
-function getCookie (name) {
+function getCookie(name) {
   var dc = document.cookie;
   var cname = name + "=";
 
@@ -31,3 +31,11 @@ function getCookie (name) {
     }
   return null;
 }
+
+(function() {
+  if (document.cookie.contains("family_id") && document.cookie.contains("family_key")) {
+    validateCookie();
+  } else{
+    window.location = "/login"; 
+  };
+})();
