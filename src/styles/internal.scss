@@ -159,6 +159,7 @@ $dark_gray: #666;
     text-transform: uppercase;
     font-weight: bold;
     color: $black;
+    margin: 0;
   }
 
   &:hover {
@@ -297,6 +298,7 @@ $dark_gray: #666;
   .ring,
   .pattern,
   .wipe {
-    height: 146px;
+    // height: 146px;
+    padding: 20px 0;
   }
 }

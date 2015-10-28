@@ -158,6 +158,15 @@ gulp.task('ui-tests', function () {
 });
 
 /*******************************************************************************
+* APK related tasks
+*******************************************************************************/
+gulp.task('apk', function() {
+  return gulp.src('./src/download/*.apk')
+    .pipe(plugins.plumber())
+    .pipe(gulp.dest('./dist/download'))
+});
+
+/*******************************************************************************
 * Main tasks
 *******************************************************************************/
 gulp.task('build', function(done) {
@@ -168,6 +177,7 @@ gulp.task('build', function(done) {
     'jade',
     'sass',
     'scripts',
+    'apk',
     done);
 });
 

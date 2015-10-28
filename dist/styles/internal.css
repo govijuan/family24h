@@ -10163,6 +10163,8 @@ button.close
 {
     font-weight: bold;
 
+    margin: 0; 
+
     text-transform: uppercase;
 
     color: #2e2e2e;
@@ -10315,6 +10317,6 @@ button.close
     .pattern,
     .wipe
     {
-        height: 146px;
+        padding: 20px 0;
     }
 }
