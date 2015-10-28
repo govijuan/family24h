@@ -10131,11 +10131,60 @@ h3 small
     margin-bottom: 0;
 
     border: none;
+    border-bottom: 4px solid #1a1a1a; 
     background-color: #2e2e2e;
+}
+.header_dark > .container
+{
+    height: 56px;
+}
+.header_dark .header__logo
+{
+    position: absolute;
+    z-index: 10;
+    bottom: 7px;
+    left: 0;
+
+    width: 171px;
+    margin: 0;
+}
+.header_dark .header__tagline
+{
+    font-size: 12px;
+    font-weight: bold;
+
+    float: left;
+
+    margin-top: 25px; 
+    margin-left: 191px;
+
+    letter-spacing: 5px;
+
+    color: #ccc;
 }
 .header_dark .container
 {
     position: relative;
+}
+.header_dark .system
+{
+    position: relative;
+
+    width: 100%;
+
+    border-bottom: 1px solid #424343;
+}
+.header_dark .system .login
+{
+    font-family: Ubuntu;
+    font-size: 12px;
+    font-weight: bold;
+
+    float: right;
+
+    padding: 10px 0; 
+
+    color: #3dc7f4;
 }
 
 .menu
@@ -10144,7 +10193,7 @@ h3 small
 
     position: absolute;
     right: 0;
-    bottom: 0;
+    bottom: -4px;
 }
 .menu li
 {
@@ -10427,6 +10476,14 @@ section
 {
     font-size: 36px;
 }
+.contact form
+{
+    width: 100%; 
+    padding: 0;
+
+    border: none;
+    background-color: transparent;
+}
 .contact .field
 {
     margin-bottom: 15px; 
@@ -10436,6 +10493,12 @@ section
 {
     float: left;
     clear: both;
+
+    color: #fff;
+}
+.contact label span
+{
+    color: #069;
 }
 .contact input,
 .contact textarea
@@ -10471,9 +10534,10 @@ footer
 {
     float: left;
 
-    width: 100%; 
+    width: 100%;
     padding: 40px 0;
 
+    color: #fff; 
     background-color: #2e2e2e;
 }
 footer .logo img
@@ -10547,6 +10611,8 @@ footer .socials-links
 footer .socials-links p,
 footer .socials-links .networks
 {
+    font-weight: bold; 
+
     text-align: center;
 }
 footer .socials-links img

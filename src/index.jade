@@ -19,6 +19,10 @@ html(class="no-js" lang="pt-BR" ng-app)
   body
 
     header.header.header_dark
+      .system
+        .container
+          a.login(href="/login") LOGIN
+
       .container
         a(href="/")
           img.header__logo(src="images/logo-negativo.svg")
@@ -32,7 +36,7 @@ html(class="no-js" lang="pt-BR" ng-app)
               a(href="#features") Vantagens
             li
               a(href="#versions") Versões
-            li
+            //- li
               a(href="#help") Ajuda
             li
               a(href="download") Downloads
@@ -75,7 +79,7 @@ html(class="no-js" lang="pt-BR" ng-app)
 
             a(class="btn btn-default baixar" href="download.html" role="button") Não perca, baixe agora!
 
-    include home_help.jade
+    //- include home_help.jade
 
 
     section.contact#contact
@@ -91,7 +95,7 @@ html(class="no-js" lang="pt-BR" ng-app)
             span.fone &nbsp;3386-8181
 
         .message.col-xs-6.col-sm-6.col-md-6.col-lg-6
-          p Ou, por email
+          // p Ou, por email
           form
             .field.col-xs-12.col-sm-12.col-md-6.col-lg-6
               label(for="name") Nome 
@@ -104,7 +108,7 @@ html(class="no-js" lang="pt-BR" ng-app)
               input(type="text" name="email" id="email")
 
             .field.col-xs-12.col-sm-12.col-md-12.col-lg-12
-              label(for="") Mensagem (máximo 300 caracteres)
+              label(for="") Mensagem (máximo 300 caracteres) 
                 span *
               textarea
 
@@ -170,9 +174,9 @@ html(class="no-js" lang="pt-BR" ng-app)
 
         .legal
           p 
-            Copyright &copy; 2015 - Family 24h - An 
+            | Copyright &copy; 2015 - Family 24h - An 
             a(href="http://www.eokoe.com") Eokoe 
-             Project
+            | Project
 
     include scripts.jade
 
