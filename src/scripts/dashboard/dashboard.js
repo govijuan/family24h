@@ -7,34 +7,16 @@ var user_id = getCookie("family_id");
 var api_key = getCookie("family_key");
 
 
-// /*----------------------------------------------------------------------------*\
-//     $FadeIn Effect
-// \*----------------------------------------------------------------------------*/
-// function fadeIn(el) {
-//   "use strict";
-
-//   var opacity = 0;
-
-//   el.style.opacity = 0;
-//   el.style.filter = "";
-//   el.style.display = "block";
-
-//   var last = +new Date();
-
-//   var tick = function() {
-//     opacity += (new Date() - last) / 400;
-//     el.style.opacity = opacity;
-//     el.style.filter = "alpha(opacity=" + (100 * opacity)|0 + ")";
-
-//     last = +new Date();
-
-//     if (opacity < 1) {
-//       (window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16);
-//     }
-//   };
-
-//   tick();
-// }
+/*----------------------------------------------------------------------------*\
+    $Verify if the user has a previous cookie w/ valid api_key
+\*----------------------------------------------------------------------------*/
+(function() {
+  if (document.cookie.contains("family_id") && document.cookie.contains("family_key")) {
+    validateCookie();
+  } else {
+    window.location = "/login";
+  }
+})();
 
 /*----------------------------------------------------------------------------*\
     $Ajax to parse user's info 
@@ -350,9 +332,7 @@ function resizeSidebar() {
   var section = document.getElementsByClassName("content");
   var map = document.getElementById("mapdiv");
   sideBar[0].style.height = windowHeight - topBar[0].offsetHeight + "px";
-  // section[0].style.width = windowWidth - sideBar[0].offsetWidth - 1 + "px";
   section[0].style.height = windowHeight - topBar[0].offsetHeight + "px";
-  // map.style.width = windowWidth - sideBar[0].offsetWidth + "px";
   map.style.height = windowHeight - topBar[0].offsetHeight + "px";
 }
 
@@ -372,7 +352,7 @@ function validateCookie() {
     data: "&api_key=" + api_key,
     statusCode: {
       200: function(data) { 
-        // window.location = "/dashboard";
+        $(".dashboard").show();
       },
       403: function(data) { 
         window.location = "/login";
@@ -414,11 +394,3 @@ $("#flash .close").click(function() {
 
 // window.addEventListener('orientationchange', resizeSidebar, false);
 // window.addEventListener('resize', resizeSidebar, false);
-
-(function() {
-  if (document.cookie.contains("family_id") && document.cookie.contains("family_key")) {
-    validateCookie();
-  } else{
-    window.location = "/login"; 
-  }
-})();

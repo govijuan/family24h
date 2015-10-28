@@ -10107,6 +10107,11 @@ button.close
     height: 64px;
 }
 
+.dashboard
+{
+    display: none;
+}
+
 .content
 {
     position: relative;

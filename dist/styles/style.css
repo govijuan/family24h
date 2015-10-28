@@ -10637,7 +10637,20 @@ footer .legal p
 \*----------------------------------------------------------------------------*/
 .download
 {
-    margin-left: 25% !important;
+    font-family: 'Ubuntu', sans-serif; 
+
+    float: left;
+    overflow: hidden;
+
+    box-sizing: border-box;
+    width: -webkit-calc(50% - 10px);
+    width:         calc(50% - 10px);
+    padding: 30px;
+
+    color: #666;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f7f7f7;
 }
 .download .release
 {
@@ -10646,15 +10659,23 @@ footer .legal p
     width: 50%;
     margin-bottom: 15px;
 }
-.download .release img
+.download h4
 {
-    float: left !important;
-
-    margin: 0;
+    font-size: 24px; 
+    font-weight: bold;
+}
+.download p
+{
+    font-size: 18px;
 }
 
 /*----------------------------------------------------------------------------*    $LOGIN
 \*----------------------------------------------------------------------------*/
+.login
+{
+    display: none;
+}
+
 .title,
 .form__field
 {
@@ -10787,45 +10808,6 @@ form input[type='checkbox'] + label
 .title__header_left
 {
     margin-left: 0;
-}
-
-.download
-{
-    font-family: 'Ubuntu', sans-serif; 
-
-    float: left;
-    overflow: hidden;
-
-    box-sizing: border-box;
-    width: -webkit-calc(50% - 10px);
-    width:         calc(50% - 10px);
-    padding: 30px;
-
-    color: #666;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f7f7f7;
-}
-.download img
-{
-    margin: 45px 0;
-}
-.download img:last-child
-{
-    float: right;
-}
-.download:last-child
-{
-    margin-left: 20px;
-}
-.download h4
-{
-    font-size: 24px; 
-    font-weight: bold;
-}
-.download p
-{
-    font-size: 18px;
 }
 
 /*----------------------------------------------------------------------------*    $EXTRA_SMALL

@@ -18,7 +18,7 @@ var api_key = getCookie("family_key");
     data: "?&api_key=" + api_key,
     statusCode: {
       200: function(data) { 
-        window.location = "/";
+        window.location = "/login";
       },
       400: function(data) { 
         window.location = "/dashboard";

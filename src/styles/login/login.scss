@@ -1,6 +1,10 @@
 /*----------------------------------------------------------------------------*\
     $LOGIN
 \*----------------------------------------------------------------------------*/
+.login {
+  display: none;
+}
+
 .title,
 .form__field {
   position: relative;
@@ -108,40 +112,6 @@ form {
 
 .title__header_left {
   margin-left: 0px;
-}
-
-.download {
-  border: 1px solid $medium_gray;
-  border-radius: 5px;
-  background-color: $lighter_gray;
-  overflow: hidden;
-  width: calc(50% - 10px);
-  box-sizing: border-box;
-  float: left;
-  padding: 30px;
-  color: $dark_gray;
-  font-family: 'Ubuntu', sans-serif;
-
-  img {
-    margin: 45px 0;
-
-    &:last-child {
-      float: right;
-    }
-  }
-
-  &:last-child {
-    margin-left: 20px;
-  }
-
-  h4 {
-    font-weight: bold;
-    font-size: 24px;
-  }
-
-  p {
-    font-size: 18px;
-  }
 }
 
 /*----------------------------------------------------------------------------*\
