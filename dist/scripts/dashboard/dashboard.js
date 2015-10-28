@@ -2,9 +2,39 @@
     $Global Variables
 \*----------------------------------------------------------------------------*/
 var api_url = "http://familyhomol.eokoe.com";
-var flash = document.getElementById("flash");
+var flash = $("#flash");
 var user_id = getCookie("family_id"); 
 var api_key = getCookie("family_key");
+
+
+// /*----------------------------------------------------------------------------*\
+//     $FadeIn Effect
+// \*----------------------------------------------------------------------------*/
+// function fadeIn(el) {
+//   "use strict";
+
+//   var opacity = 0;
+
+//   el.style.opacity = 0;
+//   el.style.filter = "";
+//   el.style.display = "block";
+
+//   var last = +new Date();
+
+//   var tick = function() {
+//     opacity += (new Date() - last) / 400;
+//     el.style.opacity = opacity;
+//     el.style.filter = "alpha(opacity=" + (100 * opacity)|0 + ")";
+
+//     last = +new Date();
+
+//     if (opacity < 1) {
+//       (window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16);
+//     }
+//   };
+
+//   tick();
+// }
 
 /*----------------------------------------------------------------------------*\
     $Ajax to parse user's info 
@@ -32,13 +62,13 @@ $(document).ready(function() {
           nameField[i].innerHTML = data.name;
           emailField[i].innerHTML = data.email;
           profilePicture[i].innerHTML = data.profile_picture_url;
-        };
+        }
         
-      } // Ok
-      ,400: function(msg) { 
+      }, // Ok
+      400: function(msg) { 
         console.log(msg);
-      } // Bad Request
-      ,404: function(msg) { 
+      }, // Bad Request
+      404: function(msg) { 
         console.log(msg); 
       } // Not Found
     }
@@ -192,7 +222,7 @@ function notification(type) {
   $(".confirm-modal").fadeOut("slow");
 
   flash.className += " alert-success";
-  fadeIn(flash);
+  flash.fadeIn("slow");
 }
 
 /*----------------------------------------------------------------------------*\
@@ -227,7 +257,7 @@ function geo_location() {
     watchId = navigator.geolocation.getCurrentPosition(showPosition, showError, optn);
   } else {
     flash.innerHTML += "<p>Geolocation is <strong>not</strong> supported in your browser.</p>";
-    fadeIn(flash);
+    flash.fadeIn("slow");
   }
 }
 
@@ -269,7 +299,7 @@ function showPosition(position) {
           flash.innerHTML += "<p>No results found.</p>";
       }
     } else {
-        flash.inerHTLM += "<p>Geocoder failed due to: " + status + "</p>";
+        flash.innerHTML += "<p>Geocoder failed due to: " + status + "</p>";
     }
   });
 
@@ -291,19 +321,19 @@ function showError(error) {
   switch(error.code) {
     case error.code == 1 || error.PERMISSION_DENIED:
       flash.innerHTML += "<p>User denied the request for Geolocation.</p>";
-      fadeIn(flash);
+      flash.fadeIn("slow");
     break;
     case error.code == 2 || error.POSITION_UNAVAILABLE:
       flash.innerHTML += "<p>Location information is unavailable.</p>";
-      fadeIn(flash);
+      flash.fadeIn("slow");
     break;
     case error.code == 3 || error.TIMEOUT:
       flash.innerHTML += "<p>The request to get user location timed out.</p>";
-      fadeIn(flash);
+      flash.fadeIn("slow");
     break;
     case error.code === 0 || error.UNKNOWN_ERROR:
       flash.innerHTML += "<p>An unknown error occurred.</p>";
-      fadeIn(flash);
+      flash.fadeIn("slow");
     break;
   }
 }
@@ -367,6 +397,10 @@ $(".user-config").click(function() {
 });
 
 $(".confirm-modal .close").click(function() {
+  $(this).parent().fadeOut("slow");
+});
+
+$(".#flash .close").click(function() {
   $(this).parent().fadeOut("slow");
 });
 

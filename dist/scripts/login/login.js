@@ -1,3 +1,6 @@
+var api_url = "http://familyhomol.eokoe.com";
+var user_id = getCookie("family_id"); 
+var api_key = getCookie("family_key");
 /*----------------------------------------------------------------------------*\
     $Validation 
 \*----------------------------------------------------------------------------*/
@@ -8,8 +11,6 @@ function validate(element) {
   var pass_error = document.querySelector(".password_return");
 
   if (element.value === null || element.value === "") {
-
-    // console.log(element.value);
 
     if (element.name == "email") {
 
@@ -71,16 +72,57 @@ function login(user,pass) {
       200: function(data_server) { 
         var api_key = data_server.api_key;
         var id = data_server.id;
-
         setCookie(id, api_key);
         window.location = "/dashboard"; 
-
       },
       400: function(data_server) { 
-        // console.log('teste');
       }
     }
   });
+}
+
+/*----------------------------------------------------------------------------*\
+    $Cookie handling 
+\*----------------------------------------------------------------------------*/
+function validateCookie() {
+  "use strict";
+
+  // API's config 
+  var endpoint = "/users";
+
+  $.ajax({
+    url: api_url + endpoint + "/" + user_id,
+    type: "GET",
+    crossDomain: true,
+    data: "&api_key=" + api_key,
+    statusCode: {
+      200: function(data) { 
+        window.location = "/dashboard";
+      },
+      400: function(data) { 
+        $(".container").show();
+      },
+      403: function(data) { 
+        $(".container").show();
+      }   
+    }
+  }); 
+}
+
+function getCookie(name) {
+  var dc = document.cookie;
+  var cname = name + "=";
+
+  if (dc.length > 0) {
+    begin = dc.indexOf(cname);
+    if (begin != -1) {
+      begin += cname.length;
+      end = dc.indexOf(";", begin);
+      if (end == -1) end = dc.length;
+        return unescape(dc.substring(begin, end));
+      }
+    }
+  return null;
 }
 
 function setCookie(id, api_key) {
@@ -89,3 +131,15 @@ function setCookie(id, api_key) {
   var idCookie = document.cookie = "family_id=" + escape(id) + "; path=/; expires=" + expires +";";
   var keyCookie = document.cookie = "family_key=" + escape(api_key) + "; path=/; expires=" + expires +";";
 }
+
+/*----------------------------------------------------------------------------*\
+    $Calls 
+\*----------------------------------------------------------------------------*/
+(function() {
+  if (document.cookie.contains("family_id") && document.cookie.contains("family_key")) {
+    $(".container").hide();
+    validateCookie();
+  } else{
+    window.location = "/login"; 
+  }
+})();
