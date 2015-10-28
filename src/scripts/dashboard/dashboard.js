@@ -369,7 +369,15 @@ function validateCookie() {
     url: api_url + endpoint + "/" + user_id,
     type: "GET",
     crossDomain: true,
-    data: "&api_key=" + api_key
+    data: "&api_key=" + api_key,
+    statusCode: {
+      200: function(data) { 
+        // window.location = "/dashboard";
+      },
+      403: function(data) { 
+        window.location = "/login";
+      }   
+    }
   });
 }
 
@@ -400,7 +408,7 @@ $(".confirm-modal .close").click(function() {
   $(this).parent().fadeOut("slow");
 });
 
-$(".#flash .close").click(function() {
+$("#flash .close").click(function() {
   $(this).parent().fadeOut("slow");
 });
 

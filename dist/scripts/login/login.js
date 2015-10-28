@@ -137,7 +137,7 @@ function setCookie(id, api_key) {
 \*----------------------------------------------------------------------------*/
 (function() {
   if (document.cookie.contains("family_id") && document.cookie.contains("family_key")) {
-    $(".container").hide();
+    // $(".container").hide();
     validateCookie();
   } else{
     window.location = "/login"; 
