@@ -10,13 +10,13 @@ var api_key = getCookie("family_key");
 /*----------------------------------------------------------------------------*\
     $Verify if the user has a previous cookie w/ valid api_key
 \*----------------------------------------------------------------------------*/
-(function() {
-  if (document.cookie.contains("family_id") && document.cookie.contains("family_key")) {
+// (function() {
+//   if (document.cookie.contains("family_id") && document.cookie.contains("family_key")) {
     validateCookie();
-  } else {
-    window.location = "/login";
-  }
-})();
+//   } else {
+//     window.location = "/login";
+//   }
+// })();
 
 /*----------------------------------------------------------------------------*\
     $Ajax to parse user's info 
