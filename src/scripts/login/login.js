@@ -100,10 +100,10 @@ function validateCookie() {
         window.location = "/dashboard";
       },
       400: function(data) { 
-        $(".login").show();
+        $("#login").show();
       },
       403: function(data) { 
-        $(".login").show();
+        $("#login").show();
       }   
     }
   }); 
@@ -136,10 +136,10 @@ function setCookie(id, api_key) {
     $Calls 
 \*----------------------------------------------------------------------------*/
 (function() {
-  $(".login").hide();
+  $("#login").hide();
   if (document.cookie.contains("family_id") && document.cookie.contains("family_key")) {
     validateCookie();
   } else {
-    $(".login").show();
+    $("#login").show();
   }
 })();
