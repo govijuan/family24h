@@ -6,57 +6,6 @@ var flash = $("#flash");
 var user_id = getCookie("family_id"); 
 var api_key = getCookie("family_key");
 
-
-/*----------------------------------------------------------------------------*\
-    $Verify if the user has a previous cookie w/ valid api_key
-\*----------------------------------------------------------------------------*/
-// (function() {
-//   if (document.cookie.contains("family_id") && document.cookie.contains("family_key")) {
-    validateCookie();
-//   } else {
-//     window.location = "/login";
-//   }
-// })();
-
-/*----------------------------------------------------------------------------*\
-    $Ajax to parse user's info 
-\*----------------------------------------------------------------------------*/
-$(document).ready(function() {
-
-  // API's config 
-  var endpoint = "/users";
-
-  $.ajax({
-    url: api_url + endpoint + "/" + user_id + "?&api_key=" + api_key,
-    type: 'GET',
-    crossDomain: true,
-    statusCode: {
-      200: function(data) { 
-        console.log(data);
-
-        var telephoneField = document.querySelectorAll('.telephone');
-        var nameField = document.querySelectorAll('.name');
-        var emailField = document.querySelectorAll('.email');
-        var profilePicture = document.querySelectorAll('.profile_picture_url');
-
-        for (var i = 0; i <= telephoneField.length - 1; i++) {
-          telephoneField[i].innerHTML = data.telephone;
-          nameField[i].innerHTML = data.name;
-          emailField[i].innerHTML = data.email;
-          profilePicture[i].innerHTML = data.profile_picture_url;
-        }
-        
-      }, // Ok
-      400: function(msg) { 
-        console.log(msg);
-      }, // Bad Request
-      404: function(msg) { 
-        console.log(msg); 
-      } // Not Found
-    }
-  });
-});
-
 /*----------------------------------------------------------------------------*\
     $Modal 
 \*----------------------------------------------------------------------------*/
@@ -85,16 +34,9 @@ function displayModal(mode) {
   if(mode === "ring"){
     title[0].innerHTML = "Ring your phone";
     avatar[0].src = "/images/ic_speaker_phone_black_48px.svg";
-    description[0].innerHTML = "You can lock your phone and combine with others actions";
+    description[0].innerHTML = "You can ring your phone and combine with others actions";
     button[0].innerHTML = "Ring";
     button[0].setAttribute("onclick","notification('ring');");
-  }
-  
-  if(mode === "pattern"){
-    title[0].innerHTML = "Change the lock pattern of your phone";
-    avatar[0].src = "/images/ic_dialpad_black_48px.svg";
-    description[0].innerHTML = "You can lock your phone and combine with others actions";
-    button[0].innerHTML = "Change";
   }
   
   if(mode === "wipe"){
@@ -326,13 +268,11 @@ function resizeSidebar() {
   "use strict";
 
   var windowHeight = window.innerHeight;
-  var windowWidth = window.innerWidth;
   var sideBar = document.getElementsByClassName("button__bar");
   var topBar = document.getElementsByClassName("top");
-  var section = document.getElementsByClassName("content");
   var map = document.getElementById("mapdiv");
+
   sideBar[0].style.height = windowHeight - topBar[0].offsetHeight + "px";
-  section[0].style.height = windowHeight - topBar[0].offsetHeight + "px";
   map.style.height = windowHeight - topBar[0].offsetHeight + "px";
 }
 
@@ -377,6 +317,46 @@ function getCookie(name) {
   return null;
 }
 
+
+/*----------------------------------------------------------------------------*\
+    $Ajax to parse user's info 
+\*----------------------------------------------------------------------------*/
+$(document).ready(function() {
+
+  // API's config 
+  var endpoint = "/users";
+
+  $.ajax({
+    url: api_url + endpoint + "/" + user_id + "?&api_key=" + api_key,
+    type: 'GET',
+    crossDomain: true,
+    statusCode: {
+      200: function(data) { 
+        console.log(data);
+
+        var telephoneField = document.querySelectorAll('.telephone');
+        var nameField = document.querySelectorAll('.name');
+        var emailField = document.querySelectorAll('.email');
+        var profilePicture = document.querySelectorAll('.profile_picture_url');
+
+        for (var i = 0; i <= telephoneField.length - 1; i++) {
+          telephoneField[i].innerHTML = data.telephone;
+          nameField[i].innerHTML = data.name;
+          emailField[i].innerHTML = data.email;
+          profilePicture[i].innerHTML = data.profile_picture_url;
+        }
+        
+      }, // Ok
+      400: function(msg) { 
+        console.log(msg);
+      }, // Bad Request
+      404: function(msg) { 
+        console.log(msg); 
+      } // Not Found
+    }
+  });
+});
+
 /*----------------------------------------------------------------------------*\
     $Calls 
 \*----------------------------------------------------------------------------*/
@@ -392,5 +372,20 @@ $("#flash .close").click(function() {
   $(this).parent().fadeOut("slow");
 });
 
+validateCookie();
+
+
+
+if(document.readyState == "complete") {
+    resizeSidebar();
+} else {
+    if (window.addEventListener) {  
+        window.addEventListener('load', resizeSidebar, false);
+    } else {
+        window.attachEvent('onload', resizeSidebar);
+    }
+}
+
+
 // window.addEventListener('orientationchange', resizeSidebar, false);
-// window.addEventListener('resize', resizeSidebar, false);
+window.addEventListener('resize', resizeSidebar, false);
