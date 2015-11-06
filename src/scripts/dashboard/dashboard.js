@@ -67,10 +67,6 @@ function confirmModal(mode) {
     button[0].setAttribute("onclick","notification('lock');");
   }
   
-  if(mode === "pattern"){
-    button[0].innerHTML = "Change";
-  }
-  
   if(mode === "wipe"){
     button[0].innerHTML = "Wipe";
     button[0].setAttribute("onclick","notification('wipe');");
@@ -90,7 +86,7 @@ function notification(type) {
   // API's config 
   var endpoint = "/notification-messages";
   var password_input = document.getElementsByName("confirm[password]");
-  // var password = "&password=" + password_input[0].value;
+  var password = "&password=" + password_input[0].value;
 
   var code = "&code=";
   var event_id = "&event_id=";
@@ -317,7 +313,6 @@ function getCookie(name) {
   return null;
 }
 
-
 /*----------------------------------------------------------------------------*\
     $Ajax to parse user's info 
 \*----------------------------------------------------------------------------*/
@@ -376,6 +371,9 @@ validateCookie();
 
 
 
+/*----------------------------------------------------------------------------*\
+    Waits page complete load to trigger the resizeSidebar function 
+\*----------------------------------------------------------------------------*/
 if(document.readyState == "complete") {
     resizeSidebar();
 } else {
