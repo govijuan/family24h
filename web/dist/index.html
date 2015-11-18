@@ -8,12 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="apple-touch-icon" href="apple-touch-icon.png"><!-- Place favicon.ico in the root directory -->
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-
-
-    <script src="/scripts/vendor/modernizr-2.8.3.min.js"></script>
+    <link rel="stylesheet" href="styles/style.css">
+    <script src="scripts/vendor/modernizr-2.8.3.min.js"></script>
   </head>
   <body>
-    <link rel="stylesheet" href="/styles/style.css">
     <header class="header header_dark">
       <div class="system">
         <div class="container"><a href="/login" class="login">LOGIN</a></div>
@@ -46,29 +44,29 @@
           <div class="list__item">
             <div class="item__front"><img src="images/icon_warn.png" class="icon">
               <p>
-
-                Alerta de <br>Pânico
+                 
+                Alerta de <br>Panico
               </p><img src="/images/icon_more.png" class="more">
             </div>
             <div class="item__back">
-              <p>Em uma situação de emergência é possivel enviar fotos da câmera frontal e traseira e uma gravação de áudio de 10s para todos os membros do grupo.</p><img src="/images/icon_minus.png" class="minus">
+              <p>Em uma situação de emergencia é possivel enviar fotos câmera ferontal e traseira e gravação de audio de 10s para todos os membros do grupo.</p><img src="/images/icon_minus.png" class="minus">
             </div>
           </div>
           <div class="list__item">
             <div class="item__front"><img src="/images/icon_id.png" class="icon">
               <p>
-
+                 
                 Detalhamento<br>do dispositivo
               </p><img src="images/icon_more.png" class="more">
             </div>
             <div class="item__back">
-              <p>É possivel verificar o nível de bateria, sinal e velocidade de cada um dos membros de seu grupo individualmente, bem como o endereço atual.</p><img src="/images/icon_minus.png" class="minus">
+              <p>É possivel veriica nivel de bateira, sinal e beloiade, de cada um dos membros individualmente, vbem como o endereço atual</p><img src="/images/icon_minus.png" class="minus">
             </div>
           </div>
           <div class="list__item">
             <div class="item__front"><img src="/images/icon_fence.png" class="icon">
               <p>
-
+                 
                 Alarme de<br>perímetro
               </p><img src="/images/icon_more.png" class="more">
             </div>
@@ -79,7 +77,7 @@
           <div class="list__item">
             <div class="item__front"><img src="/images/icon_velocidade.png" class="icon">
               <p>
-
+                 
                 Alarme<br>de velocidade
               </p><img src="/images/icon_more.png" class="more">
             </div>
@@ -90,7 +88,7 @@
           <div class="list__item">
             <div class="item__front"><img src="/images/icon_geolocation.png" class="icon">
               <p>
-
+                 
                 Histórico de<br>posições
               </p><img src="/images/icon_more.png" class="more">
             </div>
@@ -101,18 +99,18 @@
           <div class="list__item">
             <div class="item__front"><img src="/images/icon_geolocation.png" class="icon">
               <p>
-
+                 
                 Acesso através<br>da Web
               </p><img src="/images/icon_more.png" class="more">
             </div>
             <div class="item__back">
-              <p>Além de acessar via Mobile, você também pode acessar a plataforma através de seu navegador preferido, em seu computador ou tablet. </p><img src="/images/icon_minus.png" class="minus">
+              <p>Além de acessar via Mobile, você também pode acessá-lo pelo seu navegador preferido. </p><img src="/images/icon_minus.png" class="minus">
             </div>
           </div>
         </div>
       </div>
     </section>
-
+    
     <section id="contact" class="contact">
       <div class="container">
         <div class="row"><a name="contact"></a>
@@ -147,7 +145,7 @@
         <div class="logo"><a href="/"><img src="images/logo-negativo.svg"></a></div>
         <div class="links">
           <ul>
-            <li>
+            <li> 
               <p>Sobre</p>
             </li>
             <li> <a href="#intro">Conheça</a></li>
@@ -156,14 +154,14 @@
             <li> <a href="privacidade.html">Políticas e Privacidade</a></li>
           </ul>
           <ul>
-            <li>
+            <li> 
               <p>Versões</p>
             </li>
             <li> <a href="#versions">Gratuito</a></li>
             <li> <a href="#versions">Premium</a></li>
           </ul>
           <ul>
-            <li>
+            <li> 
               <p>Ajuda</p>
             </li>
             <li> <a href="#help">Suporte</a></li>
@@ -176,7 +174,7 @@
         </div>
         <div class="legal">
           <p>
-
+             
             Copyright &copy; 2015 - Family 24h - An <a href="http://www.eokoe.com">Eokoe </a>Project
           </p>
         </div>
@@ -185,7 +183,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script>
       window.jQuery || document.write('<script src="/scripts/vendor/jquery-1.11.3.min.js")<\/script>')
-
+      
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=true"></script>
     <script src="/scripts/lib.js"></script>
@@ -200,9 +198,9 @@
     <script>
       // Smooth Scrolling
       $('a[href^="#"]').on('click', function(event) {
-
+      
           var target = $( $(this).attr('href') );
-
+      
           if( target.length ) {
               event.preventDefault();
               $('html, body').animate({
@@ -210,14 +208,14 @@
               }, 1000);
           }
       });
-
+      
       // Features's Flip on click
       $(".list__item .item__front").click(function() {
         $(this).hide();
         $(this).parent().addClass("flip");
         $(this).next().show();
       });
-
+      
       $(".list__item .item__back").click(function() {
         $(this).hide();
         $(this).parent().removeClass("flip");
