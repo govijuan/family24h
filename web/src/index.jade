@@ -14,8 +14,6 @@ html(lang="pt-BR")
 
     link(rel="stylesheet" href="styles/style.css")
 
-    script(src="scripts/vendor/modernizr-2.8.3.min.js")
-
   body
 
     header.header.header_dark
@@ -51,13 +49,13 @@ html(lang="pt-BR")
           a(class="btn btn-default baixar" href="/download" role="button") Baixe agora, é gratuito!
 
           //- a(class="btn btn-default video" href="#" role="button") Assista ao vídeo
-    
+
     include home_features.jade
 
     //-section.versions#versions
       .container
         .row
-          h3 
+          h3
             span Versões
             small Ainda mais proteção para sua familia
 
@@ -90,25 +88,25 @@ html(lang="pt-BR")
 
         .tel.col-xs-6.col-sm-6.col-md-6.col-lg-6
           p Entre em contato por telefone
-          p 
-            span.pre +55 11  
+          p
+            span.pre +55 11
             span.fone &nbsp;3386-8181
 
         .message.col-xs-6.col-sm-6.col-md-6.col-lg-6
           // p Ou, por email
           form
             .field.col-xs-12.col-sm-12.col-md-6.col-lg-6
-              label(for="name") Nome 
+              label(for="name") Nome
                 span *
               input(type="text" name="name" id="name")
 
             .field.col-xs-12.col-sm-12.col-md-6.col-lg-6
-              label(for="email") Email 
+              label(for="email") Email
                 span *
               input(type="text" name="email" id="email")
 
             .field.col-xs-12.col-sm-12.col-md-12.col-lg-12
-              label(for="") Mensagem (máximo 300 caracteres) 
+              label(for="") Mensagem (máximo 300 caracteres)
                 span *
               textarea
 
@@ -123,31 +121,31 @@ html(lang="pt-BR")
         .links
 
           ul
-            li 
+            li
               p Sobre
-            li 
+            li
               a(href="#intro") Conheça
-            li 
+            li
               a(href="#features") Vantagens
-            li 
+            li
               a(href="termo.html") Termos de Uso
-            li 
+            li
               a(href="privacidade.html") Políticas e Privacidade
 
           ul
-            li 
+            li
               p Versões
-            li 
+            li
               a(href="#versions") Gratuito
-            li 
+            li
               a(href="#versions") Premium
 
           ul
-            li 
+            li
               p Ajuda
-            li 
+            li
               a(href="#help") Suporte
-            li 
+            li
               a(href="#contact") Contato
 
         //- .appstore
@@ -173,9 +171,9 @@ html(lang="pt-BR")
               img(src="images/icon_footer_gplus.png")
 
         .legal
-          p 
-            | Copyright &copy; 2015 - Family 24h - An 
-            a(href="http://www.eokoe.com") Eokoe 
+          p
+            | Copyright &copy; 2015 - Family 24h - An
+            a(href="http://www.eokoe.com") Eokoe
             | Project
 
     include scripts.jade

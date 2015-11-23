@@ -55,8 +55,8 @@ gulp.task('clean', function() {
 * Jade related tasks
 *******************************************************************************/
 gulp.task('jade', function() {
-  return gulp.src([src.jade, 
-      '!src/**/header.jade', 
+  return gulp.src([src.jade,
+      '!src/**/header.jade',
       '!src/**/footer.jade',
       '!src/**/home_help.jade',
       '!src/**/home_features.jade',
@@ -82,10 +82,10 @@ gulp.task('sass', function() {
     .pipe(plugins.sass())
     // .pipe(plugins.uncss({html: ['dist/index.html']}))
     .pipe(plugins.autoprefixer([
-      'last 2 version',  
+      'last 2 version',
       'android >= 4',
       'ie >= 9',
-      'opera >= 12', 
+      'opera >= 12',
       'ios >= 6']))
     .pipe(plugins.csscomb())
     // .pipe(plugins.sourcemaps.write('./'))
@@ -114,8 +114,8 @@ gulp.task('images', function() {
     .pipe(plugins.plumber())
     .pipe(plugins.changed(dist.images))
     .pipe(plugins.imagemin(
-      {optimizationLevel: 3, 
-        progressive: true, 
+      {optimizationLevel: 3,
+        progressive: true,
         interlaced: true }))
     .pipe(gulp.dest(dist.images))
     .pipe(browserSync.stream())

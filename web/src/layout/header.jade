@@ -1,42 +1,39 @@
 doctype html
 html(lang="pt-BR")
-  head
-    meta(charset="utf-8")
-    meta(http-equiv="x-ua-compatible" content="ie=edge")
-    title Family 24h
-    meta(name="description" content="")
-    meta(name="viewport" content="width=device-width, initial-scale=1")
+    head
+        meta(charset="utf-8")
+        meta(http-equiv="x-ua-compatible" content="ie=edge")
+        title Family 24h
+        meta(name="description" content="")
+        meta(name="viewport" content="width=device-width, initial-scale=1")
 
-    link(rel="apple-touch-icon" href="apple-touch-icon.png")
+        link(rel="apple-touch-icon" href="apple-touch-icon.png")
 
-    <!-- Place favicon.ico in the root directory -->
-    link(rel="shortcut icon" href="favicon.ico" type="image/x-icon")
+        <!-- Place favicon.ico in the root directory -->
+        link(rel="shortcut icon" href="favicon.ico" type="image/x-icon")
 
-    link(rel="stylesheet" href="/styles/internal.min.css")
+        link(rel="stylesheet" href="/styles/internal.min.css")
 
-    script(src="/scripts/vendor/modernizr-2.8.3.min.js")
+        script(src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js")
 
-  body.dashboard
-    .top
-      .logo
-        a(href="/")
-          img(src="/images/logo-negativo.svg")
-      .user-config.glyphicon.glyphicon-cog
-      p.profile_picture_url
-      .gender
-
-      .config-box
-        .top-tip
-
-        .row
-
-          div
-            .avatar
-
-          div
-            p.name Name
-            p.email Email
-            p.telephone Telephone
-
-        .row
-          a(href="/logout") logout
+    body.dashboard
+    div.preloader
+    != "<div class=\"dashboard-content\">"
+        .top
+          .logo
+            a(href="/")
+              img(src="/images/logo-negativo.svg")
+          .user-config.glyphicon.glyphicon-cog
+          p.profile_picture_url
+          .gender
+          .config-box
+            .top-tip
+            .row
+              div
+                .avatar
+              div
+                p.name Name
+                p.email Email
+                p.telephone Telephone
+            .row
+              a(href="/logout") logout

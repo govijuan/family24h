@@ -9,30 +9,30 @@
     <link rel="apple-touch-icon" href="apple-touch-icon.png"><!-- Place favicon.ico in the root directory -->
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="/styles/internal.min.css">
-    <script src="/scripts/vendor/modernizr-2.8.3.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
   </head>
-  <body class="dashboard">
-    <div class="top">
-      <div class="logo"><a href="/"><img src="/images/logo-negativo.svg"></a></div>
-      <div class="user-config glyphicon glyphicon-cog"></div>
-      <p class="profile_picture_url"></p>
-      <div class="gender"></div>
-      <div class="config-box">
-        <div class="top-tip"></div>
-        <div class="row">
-          <div>
-            <div class="avatar"></div>
-          </div>
-          <div>
-            <p class="name">Name</p>
-            <p class="email">Email</p>
-            <p class="telephone">Telephone</p>
-          </div>
+  <body class="dashboard"></body>
+  <div class="preloader"></div><div class="dashboard-content">
+  <div class="top">
+    <div class="logo"><a href="/"><img src="/images/logo-negativo.svg"></a></div>
+    <div class="user-config glyphicon glyphicon-cog"></div>
+    <p class="profile_picture_url"></p>
+    <div class="gender"></div>
+    <div class="config-box">
+      <div class="top-tip"></div>
+      <div class="row">
+        <div>
+          <div class="avatar"></div>
         </div>
-        <div class="row"><a href="/logout">logout</a></div>
+        <div>
+          <p class="name">Name</p>
+          <p class="email">Email</p>
+          <p class="telephone">Telephone</p>
+        </div>
       </div>
+      <div class="row"><a href="/logout">logout</a></div>
     </div>
-  </body>
+  </div>
 </html>
 <div role="main" class="dashboard">
   <section class="content">
@@ -61,11 +61,6 @@
   </section>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script>
-  window.jQuery || document.write('<script src="/scripts/vendor/jquery-1.11.3.min.js")<\/script>')
-  
-</script>
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=true"></script>
 <script src="/scripts/lib.js"></script>
 <script>
   (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
@@ -77,6 +72,7 @@
 </script>
 <script src="/scripts/dashboard/dashboard.js"></script>
 <script>
-  //- geo_location();  
+  //- geo_location();
   //- resizeSidebar();
-</script>
+  
+</script></div></body></html>

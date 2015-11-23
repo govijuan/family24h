@@ -1,5 +1,5 @@
 doctype html
-html(lang="pt-BR")
+!= "<html lang=\"pt-BR\""
   head
     meta(charset="utf-8")
     meta(http-equiv="x-ua-compatible" content="ie=edge")
@@ -14,9 +14,9 @@ html(lang="pt-BR")
 
     link(rel="stylesheet" href="/styles/style.css")
 
-    script(src="/scripts/vendor/modernizr-2.8.3.min.js")
+    script(src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js")
 
-  body
+  != "<body>"
 
     header.header
       .container

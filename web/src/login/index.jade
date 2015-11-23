@@ -7,7 +7,7 @@ section.main#login
         h3.title__header Login
         small.title__tagline Bem vindo ao Family24h
 
-      form(name="login_form" novalidate="novalidate")
+      form(name="login_form" class="login_form hide" novalidate="novalidate")
         .form__field
           label(for="email") Email
           small(class="email_return")
@@ -25,7 +25,7 @@ section.main#login
           a(href="#") Esqueci minha senha
 
         .form__field
-          button.form__button(type="button" class="btn btn-lg btn-block" onclick="getCredentials()") Entrar
+          button.form__button(type="submit" class="btn btn-lg btn-block" ) Entrar
 
 include ../scripts.jade
 

@@ -6,7 +6,7 @@ include ../layout/header.jade
     #flash.alert.alert-dismissible(role="alert")
       button(type="button" class="close" data-dismiss="alert" aria-label="Close")
         span(aria-hidden="true") &times;
-    
+
     .button__bar
       .buttons
         a.lock(href="#" onclick="displayModal('lock');")
@@ -27,7 +27,7 @@ include ../layout/header.jade
       button(type="button" class="close" data-dismiss="alert" aria-label="Close")
         span(aria-hidden="true") &times;
       h3
-      
+
       .row
         div
           .avatar
@@ -43,5 +43,7 @@ include ../scripts.jade
 script(src="/scripts/dashboard/dashboard.js")
 
 script.
-  //- geo_location();  
+  //- geo_location();
   //- resizeSidebar();
+
+include ../layout/footer.jade

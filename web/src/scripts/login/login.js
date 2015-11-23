@@ -1,138 +1,114 @@
-var api_url = "http://familyhomol.eokoe.com";
-var user_id = getCookie("family_id"); 
-var api_key = getCookie("family_key");
+
 /*----------------------------------------------------------------------------*\
-    $Validation 
+    $Validation
 \*----------------------------------------------------------------------------*/
 function validate(element) {
-  "use strict";
+    "use strict";
 
-  var email_error = document.querySelector(".email_return");
-  var pass_error = document.querySelector(".password_return");
+    var email_error = document.querySelector(".email_return");
+    var pass_error = document.querySelector(".password_return");
 
-  if (element.value === null || element.value === "") {
+var ok = 1;
+    if (element.value === null || element.value === "") {
 
-    if (element.name == "email") {
+        if (element.name == "email") {
 
-      if (email_error.innerHTML === "") {
-        email_error.innerHTML += "Campo requerido";
-      }
+            if (email_error.innerHTML === "") {
+                email_error.innerHTML += "Campo requerido";
+                ok =0;
+            }
 
-      if (element.parentNode.classList != "error") {
-        document.login_form.email.parentNode.className += " error";
-      }
+            if (element.parentNode.classList != "error") {
+                document.login_form.email.parentNode.className += " error";
+            }
+        }
+
+        if (element.name == "password") {
+
+            if (pass_error.innerHTML === "") {
+                pass_error.innerHTML += "Campo requerido";
+                ok =0;
+            }
+
+            document.login_form.password.parentNode.className += " error";
+        }
+
+    } else {
+
+        if (document.login_form.email.parentNode.classList.contains("error")) {
+            email_error.innerHTML = "";
+            document.login_form.email.parentNode.className = "form__field";
+        }
+
+        if (document.login_form.password.parentNode.classList.contains("error")) {
+            pass_error.innerHTML = "";
+            document.login_form.password.parentNode.className = "form__field";
+        }
     }
 
-    if (element.name == "password") {
-
-      if (pass_error.innerHTML === "") {
-        pass_error.innerHTML += "Campo requerido";
-      }
-
-      document.login_form.password.parentNode.className += " error";
-    }
-
-  } else {
-
-    if (document.login_form.email.parentNode.classList.contains("error")) {
-        email_error.innerHTML = "";
-        document.login_form.email.parentNode.className = "form__field";
-    }
-
-    if (document.login_form.password.parentNode.classList.contains("error")) {
-      pass_error.innerHTML = "";
-      document.login_form.password.parentNode.className = "form__field";
-    }
-  }
+    return ok;
 }
+
 
 /*----------------------------------------------------------------------------*\
-    $Ajax Login  
+    $Ajax Login
 \*----------------------------------------------------------------------------*/
-function getCredentials() {
-  "use strict";
+function getCredentials(e) {
+    "use strict";
 
-  var username = document.login_form.email.value;
-  var password = document.login_form.password.value;
-  login(username,password);
-}
+    e.stopPropagation();
 
-function login(user,pass) {
-  "use strict";
-
-  // API's config 
-  var endpoint = "/login";
-
-  $.ajax({
-    url: api_url + endpoint,
-    type: "POST",
-    crossDomain: true,
-    data: "&email=" + user + "&password=" + pass + "&is_mobile=0",
-    statusCode: {
-      200: function(data_server) { 
-        var api_key = data_server.api_key;
-        var id = data_server.id;
-        setCookie(id, api_key);
-        window.location = "/dashboard"; 
-      },
-      400: function(data_server) { 
-      }
+    if (validate(document.login_form.email) + validate(document.login_form.password) == 2){
+        var username = document.login_form.email.value;
+        var password = document.login_form.password.value;
+        login(username, password);
     }
-  });
+    return false;
 }
 
-/*----------------------------------------------------------------------------*\
-    $Cookie handling 
-\*----------------------------------------------------------------------------*/
-function validateCookie() {
-  "use strict";
+function login(user, pass) {
+    "use strict";
 
-  // API's config 
-  var endpoint = "/users";
+    // API's config
+    var endpoint = "/login";
 
-  $.ajax({
-    url: api_url + endpoint + "/" + user_id,
-    type: "GET",
-    crossDomain: true,
-    data: "&api_key=" + api_key,
-    statusCode: {
-      200: function(data) { 
+    $.ajax({
+        url: api_url + endpoint,
+        type: "POST",
+        crossDomain: true,
+        data: "&email=" + user + "&password=" + pass + "&is_mobile=0",
+        statusCode: {
+            200: function(data_server) {
+                var api_key = data_server.api_key;
+                var id = data_server.id;
+                setCookie(id, api_key);
+                window.location = "/dashboard";
+            },
+            400: function(data_server) {
+                alert("Erro ao fazer login");
+            }
+        }
+    });
+}
+
+
+
+$('form.login_form').on('submit', getCredentials);
+
+
+validateCookie(
+    function() {
         window.location = "/dashboard";
-      },
-      400: function(data) { 
-        $("#login").show();
-      },
-      403: function(data) { 
-        $("#login").show();
-      }   
+    },
+    function() {
+        var elm = $("form.login_form");
+
+        if (elm[0]) {
+            elm.removeClass('hide');
+        } else {
+            window.location = "/login";
+        }
+
     }
-  }); 
-}
 
-function getCookie(name) {
-  var dc = document.cookie;
-  var cname = name + "=";
-
-  if (dc.length > 0) {
-    begin = dc.indexOf(cname);
-    if (begin != -1) {
-      begin += cname.length;
-      end = dc.indexOf(";", begin);
-      if (end == -1) end = dc.length;
-        return unescape(dc.substring(begin, end));
-      }
-    }
-  return null;
-}
-
-function setCookie(id, api_key) {
-  var exp = new Date();     //set new date object
-  var expires = exp.setTime(exp.getTime() + (1000 * 60 * 60 * 24 * 30));     //set it 30 days ahead 
-  var idCookie = document.cookie = "family_id=" + escape(id) + "; path=/; expires=" + expires +";";
-  var keyCookie = document.cookie = "family_key=" + escape(api_key) + "; path=/; expires=" + expires +";";
-}
-
-/*----------------------------------------------------------------------------*\
-    $Calls 
-\*----------------------------------------------------------------------------*/
-validateCookie();
+);

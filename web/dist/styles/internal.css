@@ -10123,7 +10123,7 @@ button.close
     height: 64px;
 }
 
-.dashboard
+.dashboard-content
 {
     display: none;
 }
@@ -10242,6 +10242,21 @@ button.close
 {
     float: right;
     clear: both;
+}
+
+.preloader
+{
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    left: 0;
+
+    overflow: visible;
+
+    width: 100%;
+    height: 100%;
+
+    background: #333 url('/images/loading.gif') no-repeat center center;
 }
 
 /*----------------------------------------------------------------------------*    $BILLING
