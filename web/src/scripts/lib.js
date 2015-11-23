@@ -2,7 +2,7 @@
     $Global Variables
 \*----------------------------------------------------------------------------*/
 var api_url = "http://familyhomol.eokoe.com";
-var flash = document.getElementById("flash");
+var flash = $("#flash");
 
 var user_id = getCookie("family_id");
 var api_key = getCookie("family_key");
@@ -27,7 +27,6 @@ function validateCookie(onsuccess, onerror) {
             data: "&api_key=" + api_key,
             statusCode: {
                 200: function(data) {
-                    console.log(data);
                     user_data = data;
 
                     if (onsuccess) {

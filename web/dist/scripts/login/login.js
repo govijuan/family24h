@@ -79,9 +79,7 @@ function login(user, pass) {
         data: "&email=" + user + "&password=" + pass + "&is_mobile=0",
         statusCode: {
             200: function(data_server) {
-                var api_key = data_server.api_key;
-                var id = data_server.id;
-                setCookie(id, api_key);
+                setCookie(data_server.id, data_server.api_key);
                 window.location = "/dashboard";
             },
             400: function(data_server) {
