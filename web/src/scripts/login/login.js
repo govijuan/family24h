@@ -1,6 +1,6 @@
 
 /*----------------------------------------------------------------------------*\
-    $Validation
+    $Validation (que codigo wtf)
 \*----------------------------------------------------------------------------*/
 function validate(element) {
     "use strict";
@@ -8,7 +8,7 @@ function validate(element) {
     var email_error = document.querySelector(".email_return");
     var pass_error = document.querySelector(".password_return");
 
-var ok = 1;
+    var ok = 1;
     if (element.value === null || element.value === "") {
 
         if (element.name == "email") {
