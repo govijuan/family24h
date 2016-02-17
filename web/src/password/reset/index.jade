@@ -5,9 +5,10 @@ section.main
     .col-xs-12.col-sm-10.col-md-8.col-lg-6.col-sm-offset-1.col-md-offset-2.col-lg-offset-3
       .title
         h3.title__header Login
-        small.title__tagline Bem vindo ao Family24h
+        small.title__tagline Recuperar a senha
 
       form(name="pass_reset_form")
+        p.text-center Por favor informe seu email para recuperar a senha
         .form__field.email
           label(for="email") Email
           small(class="email_return")
@@ -19,8 +20,11 @@ section.main
         .form__field.fail
           p Ocorreu um problema ao enviar sua requisição. <br/ > Tente novamente em alguns minutos.
 
-        .form__field.envia
-          input.form__button(type="button" class="btn btn-lg btn-block" onclick="passwordRecovery()" value="Enviar")
+        .row
+          .col-xs-6
+            input.form__button(type="button" class="btn btn-block" onclick="passwordRecovery()" value="Enviar")
+          .col-xs-6
+             a.form__button(href="/login" class="btn btn-block btn-info") Voltar
 
 include ../../scripts.jade
 

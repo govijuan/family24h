@@ -56,6 +56,10 @@ $dark_gray: #666;
 /*----------------------------------------------------------------------------*\
     $SHARED
 \*----------------------------------------------------------------------------*/
+div, a, h1, h2, h3, span, li, p{
+  font-family: 'Ubuntu', sans-serif;
+}
+
 .top {
   background-color: $black;
   width: 100%;
@@ -80,6 +84,14 @@ $dark_gray: #666;
   margin-right: 15px;
   float: right;
   color: #fff;
+}
+.user-config:hover {
+  cursor: hand;
+  cursor: pointer;
+}
+
+.profile_picture_url{
+  display: none;
 }
 
 .config-box {
@@ -138,7 +150,19 @@ $dark_gray: #666;
   top: 10px;
   right: 10px;
   z-index: 100;
-  width: 90%;
+  width: 80%;
+
+  .message{
+      display: inline;
+  }
+}
+
+#flash-modal {
+  display: none;
+  margin: 0 auto;
+  .message{
+      display: inline;
+  }
 }
 
 .button__bar {
@@ -218,6 +242,13 @@ $dark_gray: #666;
    background: #333 url('/images/loading.gif') no-repeat center center;
 }
 
+#myModal .modal-body input[type=text],
+#myModal .modal-body input[type=password]{
+  border-radius: 4px;
+  border-color: #e0e0e0;
+  padding: 2px 5px;
+  margin-bottom: 5px;
+}
 /*----------------------------------------------------------------------------*\
     $BILLING
 \*----------------------------------------------------------------------------*/
@@ -266,10 +297,15 @@ $dark_gray: #666;
 
   .button__bar {
     position: absolute;
-    bottom: 0;
+    top: 0;
     left: 0;
     width: 100%;
     z-index: 10;
+  }
+  #flash {
+    top: 85px;
+    right: 10px;
+    width: 90%;
   }
 
   #mapdiv {
@@ -285,8 +321,9 @@ $dark_gray: #666;
   .pattern,
   .wipe {
     float: left;
-    height: 75px;
-    width: 25%;
+    height: 85px;
+    width: 33%;
+    font-size: 0.8em;
 
     img {
       margin: 10px auto;
