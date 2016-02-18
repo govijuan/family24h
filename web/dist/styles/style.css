@@ -10041,6 +10041,11 @@ button.close
 \*----------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------*    $SHARED
 \*----------------------------------------------------------------------------*/
+body.home
+{
+    padding-top: 90px;
+}
+
 *
 {
     box-sizing: border-box;
@@ -10049,7 +10054,7 @@ button.close
 h3
 {
     font-family: 'Ubuntu', sans-serif;
-    font-size: 48px;
+    font-size: 3.45em;
     font-weight: bold;
     line-height: 54px;
 
@@ -10063,12 +10068,13 @@ h3 span
 }
 h3 small
 {
-    font-size: 30px;
-    line-height: 54px;
+    font-size: .6em;
+    line-height: 2em;
 
     float: left;
 
-    margin-left: 35px; 
+    max-width: 75%; 
+    margin-left: 35px;
     padding-left: 35px;
 
     color: #666;
@@ -10078,8 +10084,11 @@ h3 small
 .intro a,
 .versions a
 {
+    font-weight: bolder;
+
     margin-top: 10px;
     margin-right: 10px;
+    padding: 12px 15px; 
 
     text-transform: uppercase;
 
@@ -10104,6 +10113,22 @@ h3 small
     box-shadow: 0 3px #0098ca;
 }
 
+.intro a
+{
+    font-size: .7em;
+}
+
+.terms-content
+{
+    padding: 40px 50px;
+
+    border: 1px solid #e0e0e0;
+}
+.terms-content h4
+{
+    margin-top: 25px;
+}
+
 /*----------------------------------------------------------------------------*    $HEADER
 \*----------------------------------------------------------------------------*/
 .header
@@ -10120,11 +10145,8 @@ h3 small
 
 .header__logo
 {
-    float: left;
-
     height: 70px;
     margin-top: 25px;
-    margin-bottom: 10px;
 }
 
 .header__tagline
@@ -10138,6 +10160,19 @@ h3 small
     margin-left: 20px;
 
     letter-spacing: 5px; 
+
+    color: #ccc;
+}
+
+.headermobile__tagline
+{
+    font-size: .7em;
+    font-weight: bold;
+
+    padding: 10px 0;
+
+    text-align: center;
+    letter-spacing: .2em;
 
     color: #ccc;
 }
@@ -10156,37 +10191,51 @@ h3 small
 }
 .header_dark .header__logo
 {
-    position: absolute;
-    z-index: 10;
-    bottom: 7px;
-    left: 0;
-
     width: 171px;
-    margin: 0;
+    margin-top: -15px;
 }
 .header_dark .header__tagline
 {
     font-size: 12px;
     font-weight: bold;
 
-    float: left;
+    margin-top: 25px;
 
-    margin-top: 25px; 
-    margin-left: 191px;
-
+    text-align: center; 
     letter-spacing: 5px;
 
     color: #ccc;
 }
+.header_dark .navbar
+{
+    margin-bottom: 0;
+}
 .header_dark .container
 {
     position: relative;
+}
+.header_dark .navbar-toggle
+{
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    float: none; 
+
+    color: #fff;
+    border-color: #fff;
+}
+.header_dark .navbar-toggle span
+{
+    background-color: #fff;
 }
 .header_dark .system
 {
     position: relative;
 
     width: 100%;
+
+    text-align: right; 
 
     border-bottom: 1px solid #424343;
 }
@@ -10196,20 +10245,23 @@ h3 small
     font-size: 12px;
     font-weight: bold;
 
-    float: right;
-
-    padding: 10px 0; 
+    padding: 10px 15px; 
 
     color: #3dc7f4;
 }
 
+.login-menu
+{
+    display: block;
+
+    margin: 5px;
+}
+
 .menu
 {
-    font-weight: bold; 
+    font-weight: bold;
 
-    position: absolute;
-    right: 0;
-    bottom: -4px;
+    margin-bottom: -5px;
 }
 .menu li
 {
@@ -10224,19 +10276,42 @@ h3 small
 {
     float: left;
 
-    padding-bottom: 19px; 
-
     color: #fff;
+    border-top: 4px solid #2e2e2e;
+    border-bottom: 4px solid #1a1a1a;
 }
 .menu a.active,
 .menu a:hover
 {
-    padding-bottom: 15px; 
-
-    text-decoration: none;
+    text-decoration: none; 
 
     color: #fff;
     border-bottom: 4px solid #32ccfe;
+}
+
+@-moz-document url-prefix()
+{
+    .menu
+    {
+        position: relative;
+        bottom: -5px;
+
+        margin-bottom: 0;
+    }
+}
+
+.nav > li > a:hover,
+.nav > li > a:focus
+{
+    background-color: transparent;
+}
+
+.nav > li > a
+{
+    font-size: 1.1em;
+
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 section
@@ -10258,7 +10333,7 @@ section
 }
 .intro .text
 {
-    font-size: 20px;
+    font-size: 1.4em;
 
     margin-top: 185px;
 
@@ -10270,7 +10345,7 @@ section
 }
 .intro h4
 {
-    font-size: 52px;
+    font-size: 2.5em;
     font-weight: bold;
 
     color: #32ccfe;
@@ -10280,9 +10355,9 @@ section
 \*----------------------------------------------------------------------------*/
 .features
 {
-    height: 1016px; 
+    min-height: 800px; 
 
-    background: #fff url('../images/site_features.jpg') top right scroll no-repeat;
+    background: #f3f3f3 url('../images/site_features.jpg') bottom right scroll no-repeat;
 }
 .features h3
 {
@@ -10297,19 +10372,17 @@ section
 
 .list__item
 {
-    float: left;
-
-    width: 30%;
-    height: 204px;
+    height: 200px;
     margin: 10px;
     padding: 15px;
 
-    cursor: pointer; 
+    cursor: pointer;
     -webkit-transition: .6s;
          -o-transition: .6s;
             transition: .6s;
 
     opacity: .8;
+    border: 1px solid #efefef; 
     border-radius: 10px;
     background-color: #fff;
 
@@ -10337,7 +10410,7 @@ section
 .item__back
 {
     font-family: 'Ubuntu', sans-serif;
-    font-size: 20px;
+    font-size: 1.45em;
     font-weight: bold;
 
     position: relative;
@@ -10361,53 +10434,60 @@ section
 }
 .item__front .icon
 {
+    margin-top: 15px; 
     margin-bottom: 10px;
 }
 
 .item__back
 {
-    font-size: 18px;
+    font-size: 1.35em;
     font-weight: normal;
     line-height: 22px;
 
+    display: table;
+
+    table-layout: fixed; 
+
     -webkit-transform: rotateY(180deg);
-            transform: rotateY(180deg); 
+            transform: rotateY(180deg);
 
     color: #fff;
+}
+.item__back p
+{
+    display: table-cell;
+
+    text-align: center; 
+    vertical-align: middle;
 }
 
 /*----------------------------------------------------------------------------*    $VERSIONS
 \*----------------------------------------------------------------------------*/
 .versions
 {
+    padding-bottom: 220px; 
+
     background: #fff url('../images/site_versions.jpg') bottom center scroll no-repeat;
 }
 .versions h3
 {
     color: #32ccfe;
 }
-.versions .slide
-{
-    height: 541px;
-    margin: 70px 0 170px;
-}
 .versions .slide img
 {
     overflow: hidden;
 }
-.versions .slide .text
+.versions .slide p
 {
     font-family: 'Ubuntu', sans-serif;
-    font-size: 20px;
+    font-size: 1.8em;
 
-    position: absolute; 
-    top: 105px;
-    right: 70px;
+    margin: 35px 0;
 }
 .versions .slide ul
 {
     font-family: 'Ubuntu', sans-serif;
-    font-size: 22px;
+    font-size: .8em;
     font-weight: bold;
 
     padding-left: 20px;
@@ -10419,12 +10499,34 @@ section
     margin-top: 35px;
     padding: 12px 15px;
 }
+.versions .carousel-control.left,
+.versions .carousel-control.right
+{
+    background-image: none;
+}
+.versions .carousel-indicators
+{
+    bottom: -50px;
+}
+.versions .carousel-indicators li
+{
+    border-color: #006599;
+    background-color: transparent;
+}
+.versions .carousel-indicators .active
+{
+    background-color: #006599;
+}
+.versions .carousel-control
+{
+    color: #006599;
+}
 
 /*----------------------------------------------------------------------------*    $HELP
 \*----------------------------------------------------------------------------*/
 .help
 {
-    height: 700px; 
+    min-height: 700px; 
 
     background: #fff url('../images/site_help.png') top center scroll repeat-x;
 }
@@ -10434,7 +10536,7 @@ section
 }
 .help h3 small
 {
-    font-size: 24px;
+    font-size: .6em;
 }
 .help span.glyphicon
 {
@@ -10459,6 +10561,60 @@ section
     border: 1px solid #ccc;
     border-radius: 5px;
 }
+.help .multi-column
+{
+    -webkit-column-count: 3;
+       -moz-column-count: 3;
+            column-count: 3;
+}
+.help .faq-list
+{
+    font-family: 'Ubuntu', sans-serif;
+
+    clear: both;
+}
+.help .faq-list h3
+{
+    font-size: 2em;
+
+    float: none; 
+
+    margin: 5px 0;
+
+    color: #32ccfe;
+}
+.help .faq-list ul
+{
+    list-style-type: none;
+}
+.help .faq-list .question
+{
+    font-weight: bold;
+}
+.help .faq-list .answer
+{
+    display: none; 
+
+    padding-left: 5px;
+}
+.help .faq-list .question:hover
+{
+    cursor: hand;
+    cursor: pointer;
+
+    color: #006599;
+}
+.help .faq-list .question.active
+{
+    color: #006599;
+}
+.help .faq-list .no-results
+{
+    font-size: 1.1em;
+    font-style: italic;
+
+    padding: 0 20px;
+}
 
 /*----------------------------------------------------------------------------*    $CONTACT
 \*----------------------------------------------------------------------------*/
@@ -10468,10 +10624,13 @@ section
     font-size: 16px; 
     font-weight: bold;
 
-    height: 1034px;
+    padding-bottom: 80px;
 
     color: #fff;
-    background: #fff url('../images/site_contact.jpg') top center scroll repeat-x;
+    background-color: #fff;
+    background-image: url('../images/site_contact.jpg');
+    background-repeat: repeat-x;
+    background-position: top center;
 }
 .contact .container
 {
@@ -10521,8 +10680,9 @@ section
     clear: both;
 
     width: 100%;
-    padding: 7px; 
+    padding: 7px;
 
+    color: #000; 
     border: none;
     border-radius: 3px;
 }
@@ -10546,6 +10706,8 @@ section
 \*----------------------------------------------------------------------------*/
 footer
 {
+    font-family: 'Ubuntu', sans-serif;
+
     float: left;
 
     width: 100%;
@@ -10558,21 +10720,12 @@ footer .logo img
 {
     height: 70px;
 }
-footer .logo,
-footer .links
-{
-    float: left;
-}
-footer .links
-{
-    margin-left: 50px;
-}
 footer .links ul
 {
     float: left;
 
-    margin-left: 80px; 
-    padding-left: 0;
+    margin: 0; 
+    padding: 0;
 }
 footer .links ul:first-child
 {
@@ -10580,7 +10733,6 @@ footer .links ul:first-child
 }
 footer .links li
 {
-    font-family: 'MavenPro', sans-serif;
     font-weight: bold;
 
     margin: 10px 0;
@@ -10589,7 +10741,7 @@ footer .links li
 }
 footer .links li p
 {
-    font-size: 18px;
+    font-size: 1.2em;
 
     margin-bottom: 20px; 
 
@@ -10597,8 +10749,6 @@ footer .links li p
 }
 footer .links li a
 {
-    font-size: 12px;
-
     margin-bottom: 15px; 
 
     color: #fff;
@@ -10611,14 +10761,6 @@ footer .links,
 footer .appstore
 {
     margin-top: 40px;
-}
-footer .appstore
-{
-    float: right;
-}
-footer .appstore img:first-child
-{
-    margin-right: 15px;
 }
 footer .socials-links
 {
@@ -10642,6 +10784,10 @@ footer .legal
 
     width: 100%;
 }
+footer .legal
+{
+    margin-top: 20px;
+}
 footer .legal p
 {
     text-align: center; 
@@ -10655,12 +10801,7 @@ footer .legal p
 {
     font-family: 'Ubuntu', sans-serif; 
 
-    float: left;
-    overflow: hidden;
-
     box-sizing: border-box;
-    width: -webkit-calc(50% - 10px);
-    width:         calc(50% - 10px);
     padding: 30px;
 
     color: #666;
@@ -10670,15 +10811,18 @@ footer .legal p
 }
 .download .release
 {
-    float: left;
-
-    width: 50%;
     margin-bottom: 15px;
+}
+.download .release img
+{
+    max-width: 100%;
 }
 .download h4
 {
-    font-size: 24px; 
+    font-size: 24px;
     font-weight: bold;
+
+    margin-bottom: 20px;
 }
 .download p
 {
@@ -10906,32 +11050,227 @@ form[name='pass_change_form'] .codigo
 \*----------------------------------------------------------------------------*/
 @media screen and (max-width: 767px)
 {
-    h3 small
+    body.home
     {
-        font-size: 24px;
-        line-height: 30px;
+        padding-top: 96px;
+    }
+    .header__tagline
+    {
+        text-align: center;
+        letter-spacing: .2em;
+    }
+    #login .title
+    {
+        text-align: center;
+    }
+    #login .title small
+    {
+        font-size: 1.2em;
 
-        clear: both;
+        display: block; 
+        float: none;
 
-        margin: 10px 0;
-        margin-bottom: 30px; 
-        padding: 0;
+        tet-align: center;
+    }
+    #login .title h3
+    {
+        display: block; 
+        float: none;
 
-        border: none;
+        tet-align: center;
+    }
+    .intro
+    {
+        height: auto; 
+
+        background: #fff url('../images/site_intro_small.png') top center no-repeat;
+        background-size: 100% auto;
     }
     .intro .text
     {
-        font-size: 18px;
+        font-size: 1.1em;
+
+        margin-top: 260px;
+
+        text-align: center;
     }
     .intro h4
     {
-        font-size: 36px;
+        font-size: 2em;
+    }
+    .intro .baixar
+    {
+        margin-bottom: 40px;
+    }
+    .login-menu
+    {
+        display: inline;
+
+        margin: 5px;
+    }
+    h3
+    {
+        font-size: 2em;
+
+        display: block; 
+        float: none;
+    }
+    h3 small
+    {
+        line-height: 1em;
+
+        display: block;
+        float: none;
+        clear: both;
+
+        max-width: 100%; 
+        margin: 10px 0;
+        margin-bottom: 30px;
+        padding: 0;
+
+        text-align: center;
+
+        border: none;
+    }
+    h3 span
+    {
+        float: none;
+
+        text-align: center;
+    }
+    .nav > li
+    {
+        width: 100%; 
+        margin: 0;
+    }
+    .nav > li > a
+    {
+        font-size: .8em;
+
+        width: 100%;
+        padding-top: 5px;
+        padding-bottom: 5px;
+
+        text-transform: uppercase;
+    }
+    .navbar-nav
+    {
+        margin: 0;
+    }
+    .navbar-collapse
+    {
+        padding-right: 0; 
+        padding-left: 0;
+    }
+    .features
+    {
+        min-height: 1100px;
+    }
+    .features h3
+    {
+        margin: 20px auto;
+
+        text-align: center;
+    }
+    .features h3 small
+    {
+        display: none;
     }
     .features .item
     {
         width: 100%; 
 
         background-color: red;
+    }
+    .features .list .col-xs-6
+    {
+        padding-right: 2px; 
+        padding-left: 2px;
+    }
+    .features .list .col-xs-6 .list__item
+    {
+        height: 150px; 
+        padding: 5px;
+    }
+    .versions
+    {
+        background-image: none;
+    }
+    .versions h3
+    {
+        margin: 10px;
+
+        text-align: center;
+    }
+    .versions h3 span
+    {
+        text-align: center;
+    }
+    .versions h3 small
+    {
+        text-align: center;
+    }
+    .versions .carousel-inner
+    {
+        border: 1px solid #e0e0e0;
+        border-radius: 10px;
+    }
+    .versions .carousel-inner .item.premium
+    {
+        background: url('/images/bg_slide_premium.png') no-repeat;
+        background-position: 5% 5%; 
+        background-size: 150% auto;
+    }
+    .versions .carousel-inner .item.free
+    {
+        background: url('/images/bg_slide.png') no-repeat;
+        background-position: 5% 5%; 
+        background-size: 150% auto;
+    }
+    .versions .carousel-inner .item
+    {
+        font-size: .8em;
+
+        text-align: center;
+    }
+    .versions .carousel-inner .item img
+    {
+        width: 50%;
+        margin: 100px auto;
+        margin-left: 10px;
+    }
+    .versions .carousel-inner .item .btn
+    {
+        margin: 0 auto 20px 0;
+    }
+    .versions .carousel-inner .item ul
+    {
+        list-style-type: none;
+    }
+    .versions .carousel-inner .item ul p
+    {
+        margin: 10px 0;
+    }
+    .versions .carousel-inner > .item
+    {
+        font-size: .8em; 
+
+        padding: 0 40px;
+    }
+    .item__front,
+    .item__back
+    {
+        font-size: 1em;
+    }
+    .item__front .icon
+    {
+        margin-top: 10px; 
+        margin-bottom: 5px;
+    }
+    .item__back
+    {
+        font-size: .8em;
+        line-height: 1em;
     }
     footer .logo,
     footer .appstore
@@ -10943,9 +11282,52 @@ form[name='pass_change_form'] .codigo
     footer .logo img,
     footer .appstore img
     {
+        display: inline; 
         clear: both;
 
         margin-bottom: 10px;
+    }
+    footer .links
+    {
+        text-align: center;
+    }
+    footer .links ul
+    {
+        float: none;
+    }
+    .help h3
+    {
+        text-align: center;
+    }
+    .help .multi-column
+    {
+        -webkit-column-count: 1;
+           -moz-column-count: 1;
+                column-count: 1;
+    }
+    .contact h3
+    {
+        text-align: center;
+    }
+}
+
+@media screen and (min-width: 459px) and (max-width: 559px)
+{
+    .intro .text
+    {
+        margin-top: 350px;
+    }
+}
+
+@media screen and (min-width: 560px) and (max-width: 766px)
+{
+    .intro .text
+    {
+        margin-top: 480px;
+    }
+    .slide .text
+    {
+        padding-top: 80px;
     }
 }
 
@@ -10955,16 +11337,29 @@ form[name='pass_change_form'] .codigo
 {
     h3 small
     {
-        font-size: 24px;
-        line-height: 30px;
-
         clear: both;
 
         margin: 10px 0;
-        margin-bottom: 30px; 
-        padding: 0;
+        padding: 0; 
 
         border: none;
+    }
+    .menu li
+    {
+        margin: 0;
+    }
+    .nav > li > a
+    {
+        font-size: .9em;
+
+        padding-right: 5px; 
+        padding-left: 5px;
+    }
+    .header_dark .header__tagline
+    {
+        font-size: 11px;
+
+        letter-spacing: 3px;
     }
     .intro .text
     {
@@ -10977,6 +11372,11 @@ form[name='pass_change_form'] .codigo
     .features .item
     {
         background-color: green;
+    }
+    .versions .carousel-inner
+    {
+        width: 80%;
+        margin: 0 auto;
     }
     footer .appstore
     {
@@ -10997,9 +11397,23 @@ form[name='pass_change_form'] .codigo
     {
         font-size: 48px;
     }
+    .menu li
+    {
+        margin: 0;
+    }
+    .nav > li > a
+    {
+        padding-right: 10px; 
+        padding-left: 10px;
+    }
     .features .item
     {
         background-color: yellow;
+    }
+    .versions .carousel-inner
+    {
+        width: 80%;
+        margin: 0 auto;
     }
     footer .appstore img
     {
@@ -11012,3 +11426,10 @@ form[name='pass_change_form'] .codigo
 
 /*----------------------------------------------------------------------------*    $LARGE
 \*----------------------------------------------------------------------------*/
+@media screen and (min-width: 1200px)
+{
+    .header_dark .system .login
+    {
+        padding: 10px 30px;
+    }
+}

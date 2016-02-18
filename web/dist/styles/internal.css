@@ -10041,6 +10041,18 @@ button.close
 \*----------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------*    $SHARED
 \*----------------------------------------------------------------------------*/
+div,
+a,
+h1,
+h2,
+h3,
+span,
+li,
+p
+{
+    font-family: 'Ubuntu', sans-serif;
+}
+
 .top
 {
     float: left; 
@@ -10075,6 +10087,17 @@ button.close
     cursor: context-menu;
 
     color: #fff;
+}
+
+.user-config:hover
+{
+    cursor: hand;
+    cursor: pointer;
+}
+
+.profile_picture_url
+{
+    display: none;
 }
 
 .config-box
@@ -10148,7 +10171,22 @@ button.close
 
     display: none;
 
-    width: 90%;
+    width: 80%;
+}
+#flash .message
+{
+    display: inline;
+}
+
+#flash-modal
+{
+    display: none;
+
+    margin: 0 auto;
+}
+#flash-modal .message
+{
+    display: inline;
 }
 
 .button__bar
@@ -10259,6 +10297,16 @@ button.close
     background: #333 url('/images/loading.gif') no-repeat center center;
 }
 
+#myModal .modal-body input[type=text],
+#myModal .modal-body input[type=password]
+{
+    margin-bottom: 5px; 
+    padding: 2px 5px;
+
+    border-color: #e0e0e0;
+    border-radius: 4px;
+}
+
 /*----------------------------------------------------------------------------*    $BILLING
 \*----------------------------------------------------------------------------*/
 .perfil
@@ -10307,10 +10355,17 @@ button.close
     {
         position: absolute;
         z-index: 10; 
-        bottom: 0;
+        top: 0;
         left: 0;
 
         width: 100%;
+    }
+    #flash
+    {
+        top: 85px;
+        right: 10px;
+
+        width: 90%;
     }
     #mapdiv
     {
@@ -10327,10 +10382,12 @@ button.close
     .pattern,
     .wipe
     {
+        font-size: .8em; 
+
         float: left;
 
-        width: 25%; 
-        height: 75px;
+        width: 33%;
+        height: 85px;
     }
     .lock img,
     .ring img,

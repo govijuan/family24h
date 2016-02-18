@@ -36,32 +36,55 @@
 </html>
 <div role="main" class="dashboard">
   <section class="content">
-    <div id="flash" role="alert" class="alert alert-dismissible">
-      <button type="button" data-dismiss="alert" aria-label="Close" class="close"><span aria-hidden="true">&times;</span></button>
+    <div id="flash" role="alert" class="alert">
+      <div class="message"></div>
+      <button type="button" aria-label="Close" class="close"><span aria-hidden="true">&times;</span></button>
     </div>
     <div class="button__bar">
       <div class="buttons"><a href="#" onclick="displayModal('lock');" class="lock"><img src="/images/ic_phonelink_lock_black_48px.svg">
-          <p>Lock</p></a><a href="#" onclick="displayModal('ring');" class="ring"><img src="/images/ic_speaker_phone_black_48px.svg">
+          <p>Mark as stolen</p></a><a href="#" onclick="displayModal('ring');" class="ring"><img src="/images/ic_speaker_phone_black_48px.svg">
           <p>Ring</p></a><a href="#" onclick="displayModal('wipe');" class="wipe"><img src="/images/ic_phonelink_erase_black_48px.svg">
           <p>Wipe</p></a></div>
     </div>
     <div id="mapdiv"></div>
-    <div role="modal" class="confirm-modal">
-      <button type="button" data-dismiss="alert" aria-label="Close" class="close"><span aria-hidden="true">&times;</span></button>
-      <h3></h3>
-      <div class="row">
-        <div>
-          <div class="avatar"><img src=""></div>
+    <div id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" class="modal fade">
+      <div role="document" class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button data-dismiss="modal" aria-label="Close" class="close">
+              <div aria-hidden="true" class="span">&times;</div>
+            </button>
+            <h4 id="myModalLabel" class="modal-title">Modal title</h4>
+          </div>
+          <div class="modal-body">
+            <div id="flash-modal" role="alert" class="alert">
+              <div class="message"></div>
+              <button type="button" aria-label="Close" class="close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="row">
+              <div class="col-sm-3 col-xs-12 text-center">
+                <div class="avatar"><img src=""></div>
+              </div>
+              <div class="col-sm-9 col-xs-12">
+                <p>This will ring your phone for 15 seconds</p>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-primary">Ring</button>
+          </div>
         </div>
-        <div>
-          <p>This will ring your phone for 15 seconds</p>
-        </div>
-      </div><a href="#" role="button" class="btn btn-lg btn-success btn-ring">Ring ma' bell</a>
+      </div>
     </div>
   </section>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="/scripts/jquery.tr.dictionary.js"></script>
+<script src="/scripts/jquery.tr.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 <script src="/scripts/lib.js"></script>
+<script src="/scripts/faq.js"></script>
 <script>
   (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
   function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
