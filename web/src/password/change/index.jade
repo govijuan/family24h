@@ -5,7 +5,7 @@ section.main(role="password_change")
     .col-xs-12.col-sm-10.col-md-8.col-lg-6.col-sm-offset-1.col-md-offset-2.col-lg-offset-3
       .title
         h3.title__header Login
-        small.title__tagline Bem vindo ao Family24h
+        small.title__tagline Alterar senha
 
       form(name="pass_change_form")
         .form__field.email
@@ -25,8 +25,11 @@ section.main(role="password_change")
           small(class="password_return")
           input.form__input(type="password" name="password_confirm" id="password_confirm")
 
-        .form__field.envia
-          input.form__button(type="submit" class="btn btn-lg btn-block" onclick="passwordChange()" value="Prosseguir")
+        .row
+          .col-xs-6
+            input.form__button(type="button" class="btn btn-block" onclick="passwordChange()" value="Prosseguir")
+          .col-xs-6
+             a.form__button(href="/login" class="btn btn-block btn-info") Voltar
 
 include ../../scripts.jade
 

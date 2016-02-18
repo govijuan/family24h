@@ -14,12 +14,15 @@ doctype html
 
     link(rel="stylesheet" href="/styles/style.css")
 
-    script(src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js")
+  script(src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js")
 
   != "<body>"
 
     header.header
       .container
-        a(href="/")
-            img.header__logo(src="/images/logo-positivo.svg")
-        p.header__tagline SUA FAMILIA EM BOAS MÃOS
+        .row
+          .col-xs-12.col-sm-2
+            a(href="/")
+              img.header__logo(src="/images/logo-positivo.svg")
+          .col-xs-12.col-sm-10.text-left
+            p.header__tagline SUA FAMILIA EM BOAS MÃOS

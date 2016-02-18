@@ -14,35 +14,48 @@ html(lang="pt-BR")
 
     link(rel="stylesheet" href="styles/style.css")
 
-  body
+  body.home
 
-    header.header.header_dark
+    header.header.header_dark.navbar-fixed-top
       .system
         .container
-          a.login(href="/login") LOGIN
+          .headermobile__tagline.hidden-sm.hidden-md.hidden-lg  SUA FAMÍLIA EM BOAS MÃOS
+          .login-menu.hidden-xs
+            a.login(href="/login") LOGIN
 
-      .container
-        a(href="/")
-          img.header__logo(src="images/logo-negativo.svg")
-          p.header__tagline SUA FAMÍLIA EM BOAS MÃOS
-
-        nav.menu
-          ul
-            li
-              a(href="#intro") Conheça
-            li
-              a(href="#features") Vantagens
-            //-li
-              a(href="#versions") Versões
-            //-li
-              a(href="#help") Ajuda
-            li
-              a(href="download") Downloads
+      nav(class="navbar navbar-custom" role="navigation")
+        .container
+          .row
+            .col-sm-2.col-xs-12
+              a(href="/")
+                img.header__logo(src="images/logo-negativo.svg")
+            .col-sm-5.col-xs-12.hidden-xs
+              p.header__tagline SUA FAMÍLIA EM BOAS MÃOS
+            .col-sm-5.col-xs-12
+              nav.menu.navbar-collapse.collapse
+                ul.nav.navbar-nav
+                  li
+                    a(href="#intro") Conheça
+                  li
+                    a(href="#features") Vantagens
+                  li
+                    a(href="#versions") Versões
+                  //-li
+                    a(href="#help") Ajuda
+                  li
+                    a(href="download") Downloads
+                  li.hidden-sm.hidden-md.hidden-lg
+                    a(href="login") Login
+          button(class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse")
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
 
     section.intro#intro
       .container
 
-        .text.col-xs-5.col-sm-5.col-md-5.col-lg-5
+        .text.col-xs-12.col-sm-5
           h4 Sua família mais protegida!
           p <strong>Family24h</strong> é um aplicativo mobile focado na segurança de sua família, no qual você tem acesso, online, a localização dos aparelhos cadastrados, através de um mapa interativo.
 
@@ -52,32 +65,68 @@ html(lang="pt-BR")
 
     include home_features.jade
 
-    //-section.versions#versions
+    section.versions#versions
       .container
         .row
           h3
             span Versões
             small Ainda mais proteção para sua familia
 
-        .slide.col-xs-12.col-sm-12.col-md-12.col-lg-12
-          img(src="images/versions_premium.png")
+        .slide.carousel(id="myCarousel" data-ride="carousel" data-interval="10000")
+          ol.carousel-indicators
+            li.active(data-target="#myCarousel" data-slide-to="0")
+            li(data-target="#myCarousel" data-slide-to="1")
 
-          .text.col-xs-6.col-sm-6.col-md-6.col-lg-6
-            p <strong>Family24h</strong> é um aplicativo mobile que permite o monitoramento familiar, no qual você tem acesso, on line, a localização dos aparelhos cadastrados, através de um mapa interativo.
+          .carousel-inner(role="list-box")
+            .item.premium.active
+              .row
+                .col-sm-4.col-md-5.hidden-xs
+                  img(src="images/premium_image.png").img-responsive
 
-            ul
-              li
-                p Direct emergency responders to your location
-              li
-                p Give you personalized crisis care
-              li
-                p Direct you to the nearest gas station
-              li
-                p Access your emergency profile
+                .col-xs-12.col-sm-8.col-md-7
+                  img(src="images/premium_logo.png").img-responsive
+                  p.text <strong>Family24h</strong> é um aplicativo mobile que permite o monitoramento familiar, no qual você tem acesso, on line, a localização dos aparelhos cadastrados, através de um mapa interativo.
 
-            a(class="btn btn-default baixar" href="download.html" role="button") Não perca, baixe agora!
+                  ul
+                    li
+                      p Direct emergency responders to your location
+                    li
+                      p Give you personalized crisis care
+                    li
+                      p Direct you to the nearest gas station
+                    li
+                      p Access your emergency profile
 
-    //- include home_help.jade
+                  a(class="btn btn-default baixar" href="download.html" role="button") Não perca, baixe agora!
+            .item.free
+              .row
+                .col-sm-4.col-md-5.hidden-xs
+                  img(src="images/free_image.png").img-responsive
+
+                .col-xs-12.col-sm-8.col-md-7
+                  img(src="images/free_logo.png").img-responsive
+                  p.text <strong>Family24h</strong> é um aplicativo mobile que permite o monitoramento familiar, no qual você tem acesso, on line, a localização dos aparelhos cadastrados, através de um mapa interativo.
+
+                  ul
+                    li
+                      p Direct emergency responders to your location
+                    li
+                      p Give you personalized crisis care
+                    li
+                      p Direct you to the nearest gas station
+                    li
+                      p Access your emergency profile
+
+                  a(class="btn btn-default baixar" href="download.html" role="button") Não perca, baixe agora!
+
+          .left.carousel-control(href="#myCarousel" role="button" data-slide="prev")
+            span.glyphicon.glyphicon-chevron-left(aria-hidden="true")
+            span.sr-only Previous
+          .right.carousel-control(href="#myCarousel" role="button" data-slide="next")
+            span.glyphicon.glyphicon-chevron-right(aria-hidden="true")
+            span.sr-only Next
+
+    //include home_help.jade
 
 
     section.contact#contact
@@ -86,15 +135,16 @@ html(lang="pt-BR")
           a(name="contact")
           h3 Contato
 
-        .tel.col-xs-6.col-sm-6.col-md-6.col-lg-6
-          p Entre em contato por telefone
-          p
+        .tel.col-sm-12.col-md-6.col-lg-6
+          p.hidden-xs Entre em contato por telefone
+          p.hidden-xs
             span.pre +55 11
             span.fone &nbsp;3386-8181
 
-        .message.col-xs-6.col-sm-6.col-md-6.col-lg-6
+        .message.col-sm-12.col-md-6.col-lg-6
           // p Ou, por email
-          form
+          form#contactForm
+            .alert.message
             .field.col-xs-12.col-sm-12.col-md-6.col-lg-6
               label(for="name") Nome
                 span *
@@ -108,51 +158,55 @@ html(lang="pt-BR")
             .field.col-xs-12.col-sm-12.col-md-12.col-lg-12
               label(for="") Mensagem (máximo 300 caracteres)
                 span *
-              textarea
+              textarea(name="message" id="message")
 
             button(type="button" class="btn btn-lg") Enviar Mensagem
 
     footer
       .container
-        .logo
-          a(href="/")
-            img(src="images/logo-negativo.svg")
+        .row
+          .logo.col-xs-12.col-sm-2
+            a(href="/")
+              img(src="images/logo-negativo.svg").img-responsive
 
-        .links
+          .links.col-xs-12.col-sm-6
+            .row
+              .col-xs-12.col-sm-4
+                ul
+                  li
+                    p Sobre
+                  li
+                    a(href="#intro") Conheça
+                  li
+                    a(href="#features") Vantagens
+                  li
+                    a(href="termos.html") Termos de Uso
+                  li
+                    a(href="privacidade.html") Políticas e Privacidade
+              .col-xs-12.col-sm-4
+                ul
+                  li
+                    p Versões
+                  li
+                    a(href="#versions") Gratuito
+                  li
+                    a(href="#versions") Premium
+              .col-xs-12.col-sm-4
+                ul
+                  li
+                    p Ajuda
+                  li
+                    a(href="#help") Suporte
+                  li
+                    a(href="#contact") Contato
 
-          ul
-            li
-              p Sobre
-            li
-              a(href="#intro") Conheça
-            li
-              a(href="#features") Vantagens
-            li
-              a(href="termo.html") Termos de Uso
-            li
-              a(href="privacidade.html") Políticas e Privacidade
+          .appstore.col-xs-12.col-sm-2
+            a(href="https://play.google.com/store/apps/details?id=br.com.family_24h" target="_blank")
+              img(src="images/google_play.png" title="Baixar o app no Google Play")
+          .appstore.col-xs-12.col-sm-2
+            img(src="images/app_store_soon.png" title="Em Breve")
 
-          ul
-            li
-              p Versões
-            li
-              a(href="#versions") Gratuito
-            li
-              a(href="#versions") Premium
-
-          ul
-            li
-              p Ajuda
-            li
-              a(href="#help") Suporte
-            li
-              a(href="#contact") Contato
-
-        //- .appstore
-          img(src="images/google_play.png")
-          img(src="images/app_store.png")
-
-        .socials-links
+        //-.socials-links
           p Siga-nos
           .networks
             a(href="#")
@@ -172,9 +226,9 @@ html(lang="pt-BR")
 
         .legal
           p
-            | Copyright &copy; 2015 - Family 24h - An
+            | Copyright &copy; 2015 - Family 24h - An&nbsp;
             a(href="http://www.eokoe.com") Eokoe
-            | Project
+            |&nbsp;Project
 
     include scripts.jade
 
@@ -182,13 +236,16 @@ html(lang="pt-BR")
       // Smooth Scrolling
       $('a[href^="#"]').on('click', function(event) {
 
+          var obj = $(this);
           var target = $( $(this).attr('href') );
 
           if( target.length ) {
               event.preventDefault();
               $('html, body').animate({
-                  scrollTop: target.offset().top
+                  scrollTop: target.offset().top - 90
               }, 1000);
+              $(".menu ul li a").removeClass("active");
+              obj.addClass("active");
           }
       });
 
@@ -204,3 +261,10 @@ html(lang="pt-BR")
         $(this).parent().removeClass("flip");
         $(this).prev().show();
       });
+      loadFAQ();
+
+      $('#contactForm button').on('click', function(event) {
+          sendContact();
+      });
+      
+      
