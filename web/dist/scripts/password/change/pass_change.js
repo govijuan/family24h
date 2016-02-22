@@ -20,16 +20,41 @@ function passwordChange() {
                 "&password_confirm=" + password_confirm +
                 "&secret_key=" + secret_key;
 
+  
+  if (secret_key == "" || email == ""){
+    $(".alert").html("Requisição inválida. Por verifique se o link fornecido está correto.");
+    $(".alert").removeClass("alert-success");
+    $(".alert").addClass("alert-danger");
+    return false;
+  }else if (password == ""){
+    $(".alert").html("Por favor informe a nova senha.");
+    $(".alert").removeClass("alert-success");
+    $(".alert").addClass("alert-danger");
+    return false;
+  }else if (password != password_confirm){
+    $(".alert").html("Confirmação de senha inválida.");
+    $(".alert").removeClass("alert-success");
+    $(".alert").addClass("alert-danger");
+    return false;
+  }
+  
   $.ajax({
     url: api_url + endpoint,
     type: "POST",
     crossDomain: true,
     data: request,
-    statusCode: {
-      200: function(data_server) {
-      },
-      400: function(data_server) { 
-      }
+    complete: function(e, xhr, settings){
+        if(e.status === 200){
+          $(".alert").html("Sua senha foi alterada com sucesso");
+          $(".alert").removeClass("alert-danger");
+          $(".alert").addClass("alert-success");
+          $("form")[0].reset();
+        }
+    },
+    error: function(xhr, status, error){
+        $(".alert").html("Erro ao alterar senha (" + xhr.status + ")");
+        $(".alert").removeClass("alert-success");
+        $(".alert").addClass("alert-danger");
     }
   });
 }

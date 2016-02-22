@@ -7,18 +7,14 @@ section.main
         h3.title__header Login
         small.title__tagline Recuperar a senha
 
+      .alert
+
       form(name="pass_reset_form")
         p.text-center Por favor informe seu email para recuperar a senha
         .form__field.email
           label(for="email") Email
           small(class="email_return")
           input.form__input(type="email" name="email" id="email")
-
-        .form__field.success
-          p Email enviado com sucesso. <br />Cheque a sua pasta de SPAM.
-
-        .form__field.fail
-          p Ocorreu um problema ao enviar sua requisição. <br/ > Tente novamente em alguns minutos.
 
         .row
           .col-xs-6
