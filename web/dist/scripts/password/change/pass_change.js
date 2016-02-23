@@ -49,6 +49,9 @@ function passwordChange() {
           $(".alert").removeClass("alert-danger");
           $(".alert").addClass("alert-success");
           $("form")[0].reset();
+          $(".form__field").hide();
+          $(".row-btn .btn1").hide();
+          $(".row-btn .btn2").removeClass("col-sm-6").addClass("col-sm-12");
         }
     },
     error: function(xhr, status, error){

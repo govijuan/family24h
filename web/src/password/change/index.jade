@@ -27,10 +27,10 @@ section.main(role="password_change")
           small(class="password_return")
           input.form__input(type="password" name="password_confirm" id="password_confirm")
 
-        .row
-          .col-xs-6
+        .row.row-btn
+          .col-xs-6.btn1
             input.form__button(type="button" class="btn btn-block" onclick="passwordChange()" value="Prosseguir")
-          .col-xs-6
+          .col-xs-6.btn2
              a.form__button(href="/login" class="btn btn-block btn-info") Voltar
 
 include ../../scripts.jade
