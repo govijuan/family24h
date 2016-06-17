@@ -22,6 +22,7 @@
 /*
     Project: Family 24h
     Developer: Gutem <gutem@eokoe.com>
+    Midified by: govijuan <juan@eokoe.com>
     Project Manager: Gian <gian.vizzotto@eokoe.com>
 */
 /*----------------------------------------------------------------------------*    $IMPORTS
@@ -36,7 +37,7 @@
    Base styles: opinionated defaults
    ========================================================================== */
 @import url(http://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.2/css/lightness/jquery-ui-1.10.2.custom.min.css);
-@import url(http://fonts.googleapis.com/css?family=Ubuntu);
+@import url(http://fonts.googleapis.com/css?family=Ubuntu:300,400);
 @import url(http://fonts.googleapis.com/css?family=Maven+Pro);
 html
 {
@@ -10203,9 +10204,43 @@ p
     float: left; 
 
     width: 100%;
-    height: 70px;
+    height: 78px;
 
-    background-color: #2e2e2e;
+    background-color: #fff;
+}
+.top:before
+{
+    top: -8px;
+
+    display: block;
+
+    width: 100%;
+    height: 8px;
+
+    content: '';
+
+    background-image: -webkit-linear-gradient(right, #5ef6fa, #4ec0fe);
+    background-image:      -o-linear-gradient(right, #5ef6fa, #4ec0fe);
+    background-image:         linear-gradient(to left, #5ef6fa, #4ec0fe);
+}
+.top .int-page-title
+{
+    position: relative;
+
+    display: block;
+    float: left; 
+
+    width: 200px;
+    padding: 0 15px;
+
+    color: #868686;
+}
+.top .int-page-title h2
+{
+    font-size: 18px;
+    font-weight: 300;
+
+    margin-top: 40px;
 }
 
 .logo
@@ -10239,7 +10274,7 @@ p
 
     cursor: context-menu;
 
-    color: #fff;
+    color: #e2e2e2;
 }
 .user-config .counter,
 .user-messages .counter

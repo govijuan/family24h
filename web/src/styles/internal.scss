@@ -26,6 +26,7 @@
 /*
     Project: Family 24h
     Developer: Gutem <gutem@eokoe.com>
+    Midified by: govijuan <juan@eokoe.com>
     Project Manager: Gian <gian.vizzotto@eokoe.com>
 */
 
@@ -36,13 +37,14 @@
 @import "_bootstrap";
 @import "jscrollpane";
 @import url(http://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.2/css/lightness/jquery-ui-1.10.2.custom.min.css);
-@import url(http://fonts.googleapis.com/css?family=Ubuntu);
+@import url(http://fonts.googleapis.com/css?family=Ubuntu:300,400);
 @import url(http://fonts.googleapis.com/css?family=Maven+Pro);
 
 /*----------------------------------------------------------------------------*\
     $VARIABLES
 \*----------------------------------------------------------------------------*/
 $black: #2e2e2e;
+$white: #ffffff;
 
 $dark_blue: #006599;
 $dark_blue_shade: #03405f;
@@ -63,10 +65,31 @@ div, a, h1, h2, h3, span, li, p{
 }
 
 .top {
-  background-color: $black;
+  background-color: $white;
   width: 100%;
-  height: 70px;
+  height: 78px;
   float: left;
+  &:before {
+    top: -8px;
+    height: 8px;
+    content: "";
+    display: block;
+    width: 100%;
+    background-image: linear-gradient(to left, #5ef6fa, #4ec0fe);
+  }
+  .int-page-title{
+    color: #868686;
+    padding: 0 15px;
+    width: 200px;
+    display: block;
+    position: relative;
+    float: left;
+    h2{
+      font-weight: 300;
+      font-size: 18px;
+      margin-top: 40px;
+    }
+  }
 }
 
 .logo {
@@ -90,7 +113,7 @@ div, a, h1, h2, h3, span, li, p{
   line-height: 60px;
   margin-right: 15px;
   display: inline-block;
-  color: #fff;
+  color: $light_gray;
   .counter{
     position: absolute;
     color: #000;
