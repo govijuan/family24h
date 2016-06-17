@@ -21,19 +21,33 @@ html(lang="pt-BR")
     != "<div class=\"dashboard-content\">"
         .top
           .logo
-            a(href="/")
+            a(href="/dashboard")
               img(src="/images/logo-negativo.svg")
-          .user-config.glyphicon.glyphicon-cog
+          .user-buttons
+            .user-messages.glyphicon.glyphicon-comment
+              .counter
+            .user-config.glyphicon.glyphicon-cog
           p.profile_picture_url
           .gender
           .config-box
             .top-tip
-            .row
-              div
-                .avatar
-              div
-                p.name Name
-                p.email Email
-                p.telephone Telephone
-            .row
-              a(href="/logout") logout
+            ul.buttons
+              li
+                a.lock(href="#" onclick="displayModal('lock');")
+                  img(src="/images/ic_phonelink_lock_black_48px.svg")
+                  p Mark as stolen
+              li
+                a.ring(href="#" onclick="displayModal('ring');")
+                  img(src="/images/ic_speaker_phone_black_48px.svg")
+                  p Ring
+              li
+                a.wipe(href="#" onclick="displayModal('wipe');")
+                  img(src="/images/ic_phonelink_erase_black_48px.svg")
+                  p Wipe
+              li
+                a.logout(href="/logout")
+                  img(src="/images/ic_logout_black_48px.svg")
+                  p Logout
+          .message-box
+            .top-tip
+            .message-list
