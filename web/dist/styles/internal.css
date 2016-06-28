@@ -22,6 +22,7 @@
 /*
     Project: Family 24h
     Developer: Gutem <gutem@eokoe.com>
+    Midified by: govijuan <juan@eokoe.com>
     Project Manager: Gian <gian.vizzotto@eokoe.com>
 */
 /*----------------------------------------------------------------------------*    $IMPORTS
@@ -35,7 +36,8 @@
 /* ==========================================================================
    Base styles: opinionated defaults
    ========================================================================== */
-@import url(http://fonts.googleapis.com/css?family=Ubuntu);
+@import url(http://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.2/css/lightness/jquery-ui-1.10.2.custom.min.css);
+@import url(http://fonts.googleapis.com/css?family=Ubuntu:300,400);
 @import url(http://fonts.googleapis.com/css?family=Maven+Pro);
 html
 {
@@ -215,6 +217,16 @@ textarea
    These examples override the primary ('mobile first') styles.
    Modify as content requires.
    ========================================================================== */
+@media only screen and (min-width: 35em)
+{
+    /* Style adjustments for viewports that meet the condition */
+}
+
+@media print, (-webkit-min-device-pixel-ratio: 1.25), (-o-min-device-pixel-ratio: 5/4), (min-resolution: 1.25dppx), (min-resolution: 120dpi)
+{
+    /* Style adjustments for high resolution devices */
+}
+
 /* ==========================================================================
    Print styles.
    Inlined to avoid the additional HTTP request:
@@ -10037,6 +10049,140 @@ button.close
     }
 }
 
+/*
+ * CSS Styles that are needed by jScrollPane for it to operate correctly.
+ *
+ * Include this stylesheet in your site or copy and paste the styles below into your stylesheet - jScrollPane
+ * may not operate correctly without them.
+ */
+.jspContainer
+{
+    position: relative; 
+
+    overflow: hidden;
+}
+
+.jspPane
+{
+    position: absolute;
+}
+
+.jspVerticalBar
+{
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    width: 16px;
+    height: 100%;
+
+    background: transparent;
+}
+
+.jspHorizontalBar
+{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    width: 100%;
+    height: 16px;
+
+    background: red;
+}
+
+.jspCap
+{
+    display: none;
+}
+
+.jspHorizontalBar .jspCap
+{
+    float: left;
+}
+
+.jspTrack
+{
+    position: relative; 
+
+    background: transparent;
+}
+
+.jspDrag
+{
+    position: relative;
+    top: 0;
+    left: 0;
+
+    margin: auto 5px;
+
+    cursor: pointer; 
+
+    border-radius: 5px;
+    background: #95e5ff;
+}
+
+.jspHorizontalBar .jspTrack,
+.jspHorizontalBar .jspDrag
+{
+    float: left;
+
+    height: 100%;
+}
+
+.jspArrow
+{
+    display: block;
+
+    margin: 0; 
+    padding: 0;
+
+    cursor: pointer;
+    text-indent: -20000px;
+
+    background: #50506d;
+}
+
+.jspArrow.jspDisabled
+{
+    cursor: default;
+
+    background: #80808d;
+}
+
+.jspVerticalBar .jspArrow
+{
+    height: 16px;
+}
+
+.jspHorizontalBar .jspArrow
+{
+    float: left;
+
+    width: 16px;
+    height: 100%;
+}
+
+.jspVerticalBar .jspArrow:focus
+{
+    outline: none;
+}
+
+.jspCorner
+{
+    float: left;
+
+    height: 100%; 
+
+    background: #eeeef4;
+}
+
+/* Yuk! CSS Hack for IE6 3 pixel bug :( */
+* html .jspCorner
+{
+    margin: 0 -3px 0 0;
+}
+
 /*----------------------------------------------------------------------------*    $VARIABLES
 \*----------------------------------------------------------------------------*/
 /*----------------------------------------------------------------------------*    $SHARED
@@ -10058,9 +10204,43 @@ p
     float: left; 
 
     width: 100%;
-    height: 70px;
+    height: 78px;
 
-    background-color: #2e2e2e;
+    background-color: #fff;
+}
+.top:before
+{
+    top: -8px;
+
+    display: block;
+
+    width: 100%;
+    height: 8px;
+
+    content: '';
+
+    background-image: -webkit-linear-gradient(right, #5ef6fa, #4ec0fe);
+    background-image:      -o-linear-gradient(right, #5ef6fa, #4ec0fe);
+    background-image:         linear-gradient(to left, #5ef6fa, #4ec0fe);
+}
+.top .int-page-title
+{
+    position: relative;
+
+    display: block;
+    float: left; 
+
+    width: 200px;
+    padding: 0 15px;
+
+    color: #868686;
+}
+.top .int-page-title h2
+{
+    font-size: 18px;
+    font-weight: 300;
+
+    margin-top: 40px;
 }
 
 .logo
@@ -10075,21 +10255,45 @@ p
     margin-top: 10px;
 }
 
-.user-config
+.user-buttons
 {
-    font-size: 32px;
-    line-height: 70px;
-
     float: right;
+}
+
+.user-config,
+.user-messages
+{
+    font-size: 28px;
+    line-height: 60px;
+
+    position: relative;
+
+    display: inline-block;
 
     margin-right: 15px;
 
     cursor: context-menu;
 
-    color: #fff;
+    color: #e2e2e2;
+}
+.user-config .counter,
+.user-messages .counter
+{
+    font-size: .5em;
+
+    position: absolute;
+    top: -3px;
+    left: 10%;
+
+    width: 80%;
+
+    text-align: center; 
+
+    color: #000;
 }
 
-.user-config:hover
+.user-config:hover,
+.user-messages:hover
 {
     cursor: hand;
     cursor: pointer;
@@ -10132,6 +10336,91 @@ p
     background-color: #fff;
 }
 
+.message-box
+{
+    position: absolute;
+    z-index: 1001;
+    top: 70px;
+    right: 40px;
+
+    display: none;
+
+    padding: 5px;
+
+    border: 1px solid #efefef; 
+    border-radius: 5px;
+    background-color: #fff;
+}
+.message-box .top-tip
+{
+    position: absolute;
+    top: -5px;
+    right: 35px;
+
+    width: 10px; 
+    height: 10px;
+
+    -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+         -o-transform: rotate(45deg);
+            transform: rotate(45deg);
+
+    background-color: #fff;
+}
+.message-box .message-list
+{
+    font-size: .9em; 
+
+    overflow-y: auto;
+
+    min-width: 300px;
+    max-width: 80%;
+    max-height: 400px;
+}
+.message-box .message-list .item
+{
+    padding: 5px;
+
+    border-bottom: 1px solid #e0e0e0;
+}
+.message-box .message-list .item p
+{
+    margin-bottom: 2px;
+}
+.message-box .message-list .item .time
+{
+    color: #999;
+}
+.message-box .message-list .unread
+{
+    background-color: #feffd7;
+}
+.message-box .message-list .unread:hover
+{
+    cursor: hand;
+    cursor: pointer;
+}
+.message-box .message-list .empty
+{
+    font-style: italic; 
+
+    padding: 5px;
+
+    text-align: center;
+
+    color: #999;
+}
+.message-box .message-loading
+{
+    font-size: .9em;
+
+    padding: 4px; 
+
+    text-align: center;
+
+    color: #999;
+}
+
 .confirm-modal div,
 .config-box div
 {
@@ -10171,25 +10460,27 @@ p
 
     display: none;
 
-    width: 80%;
+    width: 78%;
 }
 #flash .message
 {
     display: inline;
 }
 
-#flash-modal
+#flash-modal,
+.flash-modal
 {
     display: none;
 
     margin: 0 auto;
 }
-#flash-modal .message
+#flash-modal .message,
+.flash-modal .message
 {
     display: inline;
 }
 
-.button__bar
+.left__bar
 {
     position: relative; 
 
@@ -10199,25 +10490,385 @@ p
 
     background-color: #32ccfe;
 }
+.left__bar .group-toggle
+{
+    position: absolute;
+    top: 20px;
+    left: 20px;
 
-.lock,
-.ring,
-.pattern,
-.wipe
+    color: #fff;
+}
+.left__bar .group-toggle:hover
+{
+    cursor: hand;
+    cursor: pointer;
+}
+.left__bar .group-select
+{
+    padding: 5px 20px;
+
+    text-align: center;
+}
+.left__bar .group-select select
+{
+    font-size: 1.2em; 
+
+    padding: 10px 20px;
+
+    border-radius: 4px;
+}
+.left__bar .group-info
 {
     position: relative;
 
+    padding: 0 20px 10px 20px;
+
+    text-align: center;
+}
+.left__bar .group-info .info
+{
+    color: #fff;
+}
+.left__bar .group-info .info .item
+{
+    padding: 5px 10px;
+
+    text-align: left;
+
+    border-bottom: 1px solid #82e0ff;
+}
+.left__bar .group-info .info .created-by
+{
+    text-align: center;
+}
+.left__bar .group-info .info a
+{
+    color: #fff;
+}
+.left__bar .group-info .info a:hover
+{
+    text-decoration: none; 
+
+    color: #337ab7;
+}
+.left__bar .list-members-top,
+.left__bar .list-fences-top,
+.left__bar .list-fences-bottom
+{
+    padding: 20px;
+
+    color: #fff; 
+    border-bottom: 1px solid #82e0ff;
+}
+.left__bar .list-members-top a,
+.left__bar .list-fences-top a,
+.left__bar .list-fences-bottom a
+{
+    color: #fff;
+}
+.left__bar .list-members-top a:hover,
+.left__bar .list-fences-top a:hover,
+.left__bar .list-fences-bottom a:hover
+{
+    text-decoration: none; 
+
+    color: #337ab7;
+}
+.left__bar .list-members-top,
+.left__bar .list-fences-top
+{
+    text-align: center;
+}
+.left__bar .list-members,
+.left__bar .list-fences
+{
+    overflow-y: auto; 
+
+    height: 90%;
+}
+.left__bar .list-members ul,
+.left__bar .list-fences ul
+{
+    margin: 0;
+    padding: 0; 
+
+    list-style-type: none;
+}
+.left__bar .list-members ul li,
+.left__bar .list-fences ul li
+{
+    position: relative;
+
+    padding: 5px 10px;
+
+    text-align: left;
+
+    color: #fff;
+    border-bottom: 1px solid #82e0ff;
+}
+.left__bar .list-members ul li.active,
+.left__bar .list-fences ul li.active
+{
+    color: #00ffea;
+}
+.left__bar .list-members ul a,
+.left__bar .list-fences ul a
+{
+    position: absolute;
+    right: 2px;
+
+    color: #fff;
+}
+.left__bar .list-members ul a:hover,
+.left__bar .list-fences ul a:hover
+{
+    text-decoration: none; 
+
+    color: #337ab7;
+}
+.left__bar .list-fences li:hover
+{
+    cursor: hand;
+    cursor: pointer; 
+
+    color: #00ffea;
+}
+
+.bottom__bar
+{
+    position: relative;
+
+    clear: both; 
+
+    width: 100%;
+
+    background-color: #fff;
+}
+.bottom__bar .icon-bottom-bar
+{
+    padding: 5px;
+}
+.bottom__bar .icon-bottom-bar img
+{
+    width: 30px;
+    height: 30px;
+}
+.bottom__bar .icon-bottom-bar img:hover
+{
+    cursor: hand;
+    cursor: pointer;
+}
+.bottom__bar .contents
+{
+    overflow-y: auto; 
+
+    height: 110px;
+
+    text-align: center;
+}
+.bottom__bar .contents.closed
+{
+    height: 0;
+}
+.bottom__bar .opened
+{
+    height: 300px;
+}
+.bottom__bar .user-list
+{
+    display: inline-block;
+
+    margin: 0 auto;
+    margin: 0; 
+    padding: 0;
+
+    list-style-type: none;
+
+    text-align: left;
+}
+.bottom__bar .user-list li
+{
+    padding: 10px 20px;
+
+    border-bottom: 1px solid #e0e0e0;
+}
+.bottom__bar .user-list li p
+{
+    margin: 0;
+}
+.bottom__bar .user-list li .timestamp
+{
+    color: #999;
+}
+.bottom__bar .user-list li .user-avatar
+{
     float: left;
 
+    width: 80px;
+    height: 80px;
+    margin-right: 10px;
+
+    border-radius: 50px;
+    background-repeat: no-repeat; 
+    background-size: cover;
+}
+.bottom__bar .user-list li .force-position
+{
+    font-size: .85em;
+
+    margin-left: 5px;
+}
+.bottom__bar .user-list li .user-info
+{
+    clear: right; 
+
+    min-height: 80px;
+}
+.bottom__bar .user-list li:hover
+{
+    cursor: hand;
+    cursor: pointer;
+}
+.bottom__bar .user-list li:last-child
+{
+    border-bottom: none;
+}
+.bottom__bar .user-history
+{
+    display: inline-block;
+
+    margin: 0 auto;
+
+    text-align: left;
+}
+.bottom__bar .user-history .info p
+{
+    margin: 0;
+}
+.bottom__bar .user-history .info p.address
+{
+    font-size: .9em;
+}
+.bottom__bar .user-history .info .user-avatar
+{
+    float: left;
+
+    width: 80px;
+    height: 80px;
+    margin-right: 10px;
+
+    border-radius: 50px;
+    background-repeat: no-repeat; 
+    background-size: cover;
+}
+.bottom__bar .user-history .info .user-info
+{
+    clear: right; 
+
+    min-height: 80px;
+}
+.bottom__bar .user-history ul
+{
+    margin: 0;
+    padding: 0;
+
+    list-style-type: none;
+
+    text-align: center;
+}
+.bottom__bar .user-history .tabs
+{
+    margin-top: 4px;
+}
+.bottom__bar .user-history .tabs li
+{
+    display: inline-block;
+
+    padding: 5px 10px;
+
+    text-align: center;
+
+    border-bottom: 1px solid #fff;
+}
+.bottom__bar .user-history .tabs li.item.active
+{
+    border-bottom: 1px solid #32ccfe;
+}
+.bottom__bar .user-history .tabs li.item:hover
+{
+    cursor: hand;
+    cursor: pointer; 
+
+    border-bottom: 1px solid #32ccfe;
+    background-color: #e0e0e0;
+}
+.bottom__bar .user-history .tabs li.arrow:hover
+{
+    cursor: hand;
+    cursor: pointer; 
+
+    color: #32ccfe;
+}
+.bottom__bar .user-history .tabs li.arrow.disabled
+{
+    color: #e0e0e0;
+}
+.bottom__bar .user-history .tabs li.arrow.disabled:hover
+{
+    cursor: default;
+}
+.bottom__bar .user-history .history
+{
+    padding: 10px;
+
+    background-color: #f5f5f5;
+}
+
+.marker-info .user-avatar
+{
+    float: left;
+
+    width: 80px;
+    height: 80px;
+    margin-right: 10px;
+
+    border-radius: 50px;
+    background-repeat: no-repeat; 
+    background-size: cover;
+}
+
+.marker-info .user-info
+{
+    clear: right; 
+
+    min-height: 80px;
+}
+
+.buttons
+{
+    padding: 0;
+
+    list-style-type: none;
+
+    magin: 0;
+}
+.buttons li
+{
     width: 100%;
 
     text-align: center; 
 
-    border-bottom: 1px solid #0098ca;
+    border-bottom: 1px solid #ccc;
 }
+.buttons li:hover
+{
+    background-color: #e0e0e0;
+}
+
 .lock p,
 .ring p,
 .pattern p,
+.logout p,
 .wipe p
 {
     font-weight: bold;
@@ -10228,15 +10879,63 @@ p
 
     color: #2e2e2e;
 }
-.lock:hover,
-.ring:hover,
-.pattern:hover,
-.wipe:hover
+
+.map
 {
-    background-color: #0098ca;
+    position: relative;
+}
+.map #mapdiv
+{
+    width: 100%;
+    height: 100%;
+}
+.map #overmap
+{
+    position: absolute;
+    z-index: 99; 
+    right: 50px;
+    bottom: 25px;
+}
+.map #overmap .icons
+{
+    font-size: 1.8em;
+}
+.map #overmap .icons ul
+{
+    margin: 0; 
+    padding: 0;
+
+    list-style-type: none;
+}
+.map #overmap .icons ul li
+{
+    display: none;
+
+    width: 50px;
+    height: 50px;
+    margin-top: 10px;
+
+    border-radius: 5em; 
+    background-color: #fff;
+}
+.map #overmap .icons ul li a
+{
+    display: block; 
+
+    padding: 10px 13px;
+
+    color: #32ccfe;
+}
+.map #overmap .icons ul li:hover
+{
+    background-color: #32ccfe;
+}
+.map #overmap .icons ul li:hover a
+{
+    color: #fff;
 }
 
-#mapdiv
+.map
 {
     z-index: 10;
 
@@ -10244,6 +10943,18 @@ p
 
     width: 90%;
     height: 100%;
+}
+
+.labels
+{
+    font-size: 12px;
+
+    width: 30px;
+
+    text-align: center;
+    white-space: nowrap; 
+
+    color: white;
 }
 
 .confirm-modal
@@ -10307,6 +11018,56 @@ p
     border-radius: 4px;
 }
 
+#myModalInvites .invites .item
+{
+    display: none;
+}
+#myModalInvites .invites .item .invite-count
+{
+    text-align: center;
+}
+#myModalInvites .invites .item .caption-name,
+#myModalInvites .invites .item .caption-member,
+#myModalInvites .invites .item .caption-date
+{
+    color: #999;
+}
+#myModalInvites .invites .item .name
+{
+    font-size: 1.2em; 
+    font-weight: bold;
+}
+
+#myModalInvites .invites .item.active
+{
+    display: block;
+}
+
+.calendar .ui-datepicker
+{
+    width: 80%;
+    margin: 0 auto;
+}
+
+.time-label,
+.time-slider
+{
+    width: 80%;
+    margin: 10px auto;
+}
+
+.time-label
+{
+    font-size: 1.2em;
+}
+
+#contextMenu
+{
+    position: absolute;
+
+    display: none;
+}
+
 /*----------------------------------------------------------------------------*    $BILLING
 \*----------------------------------------------------------------------------*/
 .perfil
@@ -10351,7 +11112,7 @@ p
 \*----------------------------------------------------------------------------*/
 @media screen and (max-width: 991px)
 {
-    .button__bar
+    .left__bar
     {
         position: absolute;
         z-index: 10; 
@@ -10367,7 +11128,7 @@ p
 
         width: 90%;
     }
-    #mapdiv
+    .map
     {
         position: relative;
         z-index: 1; 
@@ -10380,27 +11141,50 @@ p
     .lock,
     .ring,
     .pattern,
+    .logout,
     .wipe
     {
         font-size: .8em; 
 
-        float: left;
-
-        width: 33%;
         height: 85px;
     }
     .lock img,
     .ring img,
     .pattern img,
+    .logout img,
     .wipe img
     {
         width: 32px; 
         margin: 10px auto;
     }
+    .buttons li
+    {
+        float: left;
+
+        width: 25%;
+
+        border-bottom: none;
+    }
 }
 
 /*----------------------------------------------------------------------------*    $MEDIUM
 \*----------------------------------------------------------------------------*/
+@media screen and (min-width: 992px) and (max-width: 1199px)
+{
+    .left__bar
+    {
+        width: 25%;
+    }
+    .left__bar .left-contents.collapse
+    {
+        display: block;
+    }
+    .map
+    {
+        width: 75%;
+    }
+}
+
 /*----------------------------------------------------------------------------*    $LARGE
 \*----------------------------------------------------------------------------*/
 @media screen and (min-width: 1200px)
@@ -10411,5 +11195,17 @@ p
     .wipe
     {
         padding: 20px 0;
+    }
+    .left__bar
+    {
+        width: 20%;
+    }
+    .left__bar .left-contents.collapse
+    {
+        display: block;
+    }
+    .map
+    {
+        width: 80%;
     }
 }

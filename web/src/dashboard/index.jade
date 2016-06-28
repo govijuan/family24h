@@ -7,22 +7,42 @@ include ../layout/header.jade
       .message
       button(type="button" class="close" aria-label="Close")
         span(aria-hidden="true") &times;
-
-    .button__bar
-      .buttons
-        a.lock(href="#" onclick="displayModal('lock');")
-          img(src="/images/ic_phonelink_lock_black_48px.svg")
-          p Mark as stolen
-
-        a.ring(href="#" onclick="displayModal('ring');")
-          img(src="/images/ic_speaker_phone_black_48px.svg")
-          p Ring
-
-        a.wipe(href="#" onclick="displayModal('wipe');")
-          img(src="/images/ic_phonelink_erase_black_48px.svg")
-          p Wipe
-
-    #mapdiv
+    .left__bar
+      .fixed-top
+        .group-toggle.hidden-md.hidden-lg(data-toggle="collapse" data-target="#leftContents" aria-expanded="false" aria-controls="leftContents")
+          span.glyphicon.glyphicon-menu-hamburger(aria-hidden="true")
+        .contents
+      #leftContents.left-contents.collapse
+    .map
+      #mapdiv
+      #overmap
+        .icons
+          ul
+            li.force-position
+              a(title="Force position" alt="Force position")
+                span.glyphicon.glyphicon-screenshot(aria-hidden="true")
+            li.virtual-fences
+              a(title="Virtual fences" alt="Virtual fences")
+                span.glyphicon.glyphicon-record(aria-hidden="true")
+            li.delete
+              a(title="Delete" alt="Delete")
+                span.glyphicon.glyphicon-remove(aria-hidden="true")
+            li.save
+              a(title="Save" alt="Save")
+                span.glyphicon.glyphicon-ok(aria-hidden="true")
+            li.edit
+              a(title="Edit" alt="Edit")
+                span.glyphicon.glyphicon-pencil(aria-hidden="true")
+            li.calendar
+              a(title="Select date interval" alt="Select date interval")
+                span.glyphicon.glyphicon-calendar(aria-hidden="true")
+    .bottom__bar
+      .icon-bottom-bar.text-center
+        img(src="/images/icon-bottom-bar.svg")
+      .contents
+      
+    #contextMenu.dropdown.clearfix
+      ul.dropdown-menu(role="menu" aria-labelledby="dropdownMenu")
 
     .modal.fade(id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel")
       .modal-dialog(role="document")
@@ -45,8 +65,75 @@ include ../layout/header.jade
           .modal-footer
             button.btn.btn-primary Ring
 
+
+    .modal.fade(id="myModalInvites" tabindex="-1" role="dialog" aria-labelledby="myModalInvitesLabel")
+      .modal-dialog(role="document")
+        .modal-content
+          .modal-header
+            button.close(data-dismiss="modal" aria-label="Close")
+              .span(aria-hidden="true") &times;
+            h4.modal-title(id="myModalInvitesLabel") Invites
+          .modal-body
+            .flash-modal.alert(role="alert")
+              .message
+              button(type="button" class="close" aria-label="Close")
+                span(aria-hidden="true") &times;
+            .invites
+              .item.active
+                .invite-count
+                .row
+                  .col-xs-12
+                    .group-thumb
+                      .image
+                    .group-info
+                      .caption-name Group Name
+                      .name
+                      .caption-date
+                      .date
+                .row
+                  .col-xs-12
+                    .caption-member Invited by
+                    .member-thumb
+                      .image
+                    .member-info
+                      .name
+                .row
+                  .col-xs-6.text-right
+                    button.btn.btn-success.accept-invite Accept
+                  .col-xs-6.text-left
+                    button.btn.btn-danger.deny-invite Deny
+            .no-invites
+          .modal-footer
+            button.btn.btn-primary Next
+
+    .modal.fade(id="myModalCalendar" tabindex="-1" role="dialog" aria-labelledby="myModalCalendarLabel")
+      .modal-dialog(role="document")
+        .modal-content
+          .modal-header
+            button.close(data-dismiss="modal" aria-label="Close")
+              .span(aria-hidden="true") &times;
+            h4.modal-title(id="myModalCalendarLabel") Selecione uma data
+          .modal-body
+            #flash-modal.alert(role="alert")
+              .message
+              button(type="button" class="close" aria-label="Close")
+                span(aria-hidden="true") &times;
+            .row
+              .calendar(id="datepicker")
+              .time-label
+                .row
+                  .col-xs-6
+                    span.hour-ini 01:00
+                  .col-xs-6.text-right
+                    span.hour-end 23:59
+              .time-slider(id="time-slider")
+                
+          .modal-footer
+            button.btn.btn-primary#save Salvar
+
 include ../scripts.jade
 
+script(src="/scripts/jquery.ba-hashchange.js")
 script(src="/scripts/dashboard/dashboard.js")
 
 script.

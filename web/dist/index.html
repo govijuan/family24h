@@ -59,7 +59,7 @@
             <div class="list__item">
               <div class="item__front"><img src="images/icon_warn.png" class="icon">
                 <p>
-
+                   
                   Alerta de <br>Panico
                 </p><img src="/images/icon_more.png" class="more">
               </div>
@@ -72,7 +72,7 @@
             <div class="list__item">
               <div class="item__front"><img src="/images/icon_id.png" class="icon">
                 <p>
-
+                   
                   Detalhamento<br>do dispositivo
                 </p><img src="images/icon_more.png" class="more">
               </div>
@@ -85,7 +85,7 @@
             <div class="list__item">
               <div class="item__front"><img src="/images/icon_fence.png" class="icon">
                 <p>
-
+                   
                   Alarme de<br>perímetro
                 </p><img src="/images/icon_more.png" class="more">
               </div>
@@ -98,7 +98,7 @@
             <div class="list__item">
               <div class="item__front"><img src="/images/icon_velocidade.png" class="icon">
                 <p>
-
+                   
                   Alarme<br>de velocidade
                 </p><img src="/images/icon_more.png" class="more">
               </div>
@@ -111,7 +111,7 @@
             <div class="list__item">
               <div class="item__front"><img src="/images/icon_geolocation.png" class="icon">
                 <p>
-
+                   
                   Histórico de<br>posições
                 </p><img src="/images/icon_more.png" class="more">
               </div>
@@ -124,7 +124,7 @@
             <div class="list__item">
               <div class="item__front"><img src="/images/icon_geolocation.png" class="icon">
                 <p>
-
+                   
                   Acesso através<br>da Web
                 </p><img src="/images/icon_more.png" class="more">
               </div>
@@ -192,7 +192,7 @@
       </div>
     </section>
     <!--include home_help.jade-->
-
+    
     <section id="contact" class="contact">
       <div class="container">
         <div class="row"><a name="contact"></a>
@@ -237,6 +237,8 @@
                   <li><a href="#intro">Conheça</a></li>
                   <li><a href="#features">Vantagens</a></li>
                   <li><a href="termos.html">Termos de Uso</a></li>
+                  <!--lia(href="privacidade.html") Políticas e Privacidade
+                  -->
                 </ul>
               </div>
               <div class="col-xs-12 col-sm-4">
@@ -268,10 +270,19 @@
       </div>
     </footer>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
     <script src="/scripts/jquery.tr.dictionary.js"></script>
+    <script src="/scripts/jquery.jscrollpane.js"></script>
+    <script src="/scripts/jquery.mousewheel.js"></script>
+    <script src="/scripts/dateFormat.js"></script>
+    <script src="/scripts/jquery.dateFormat.js"></script>
     <script src="/scripts/jquery.tr.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script>
+    <script src="/scripts/jquery.ui.ouch-punch.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false&amp;libraries=drawing"></script>
+    <script src="/scripts/markerwithlabel.js"></script>
+    <script src="/scripts/markerclusterer.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="/scripts/bootstrap-toolkit.js"></script>
     <script src="/scripts/lib.js"></script>
     <script src="/scripts/faq.js"></script>
     <script>
@@ -285,10 +296,10 @@
     <script>
       // Smooth Scrolling
       $('a[href^="#"]').on('click', function(event) {
-
+      
           var obj = $(this);
           var target = $( $(this).attr('href') );
-
+      
           if( target.length ) {
               event.preventDefault();
               $('html, body').animate({
@@ -298,21 +309,21 @@
               obj.addClass("active");
           }
       });
-
+      
       // Features's Flip on click
       $(".list__item .item__front").click(function() {
         $(this).hide();
         $(this).parent().addClass("flip");
         $(this).next().show();
       });
-
+      
       $(".list__item .item__back").click(function() {
         $(this).hide();
         $(this).parent().removeClass("flip");
         $(this).prev().show();
       });
       loadFAQ();
-
+      
       $('#contactForm button').on('click', function(event) {
           sendContact();
       });

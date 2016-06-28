@@ -7,31 +7,45 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="apple-touch-icon" href="apple-touch-icon.png"><!-- Place favicon.ico in the root directory -->
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="/styles/internal.min.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
   </head>
   <body class="dashboard"></body>
   <div class="preloader"></div><div class="dashboard-content">
   <div class="top">
-    <div class="logo"><a href="/"><img src="/images/logo-negativo.svg"></a></div>
-    <div class="user-config glyphicon glyphicon-cog"></div>
-    <p class="profile_picture_url"></p>
-    <div class="gender"></div>
-    <div class="config-box">
-      <div class="top-tip"></div>
-      <div class="row">
-        <div>
-          <div class="avatar"></div>
-        </div>
-        <div>
-          <p class="name">Name</p>
-          <p class="email">Email</p>
-          <p class="telephone">Telephone</p>
-        </div>
+    <div class="top-left-wrap">
+      <div class="logo"><a href="/dashboard"><img src="/images/logo-positivo.svg"></a></div>
+      <div class="int-page-title">
+        <h2>Painel de Controle</h2>
       </div>
-      <div class="row"><a href="/logout">logout</a></div>
+      <div class="user-buttons">
+        <div class="user-messages glyphicon glyphicon-comment">
+          <div class="counter"></div>
+        </div>
+        <div class="user-config glyphicon glyphicon-cog"></div>
+      </div>
+      <p class="profile_picture_url"></p>
+      <div class="gender"></div>
+      <div class="config-box">
+        <div class="top-tip"></div>
+        <ul class="buttons">
+          <li><a href="#" onclick="displayModal('lock');" class="lock"><img src="/images/ic_phonelink_lock_black_48px.svg">
+              <p>Mark as stolen</p></a></li>
+          <li><a href="#" onclick="displayModal('ring');" class="ring"><img src="/images/ic_speaker_phone_black_48px.svg">
+              <p>Ring</p></a></li>
+          <li><a href="#" onclick="displayModal('wipe');" class="wipe"><img src="/images/ic_phonelink_erase_black_48px.svg">
+              <p>Wipe</p></a></li>
+          <li><a href="/logout" class="logout"><img src="/images/ic_logout_black_48px.svg">
+              <p>Logout</p></a></li>
+        </ul>
+      </div>
+      <div class="message-box">
+        <div class="top-tip"></div>
+        <div class="message-list"></div>
+      </div>
     </div>
+    <div class="top-right-wrap"></div>
   </div>
 </html>
 <div role="main" class="dashboard">
@@ -40,13 +54,35 @@
       <div class="message"></div>
       <button type="button" aria-label="Close" class="close"><span aria-hidden="true">&times;</span></button>
     </div>
-    <div class="button__bar">
-      <div class="buttons"><a href="#" onclick="displayModal('lock');" class="lock"><img src="/images/ic_phonelink_lock_black_48px.svg">
-          <p>Mark as stolen</p></a><a href="#" onclick="displayModal('ring');" class="ring"><img src="/images/ic_speaker_phone_black_48px.svg">
-          <p>Ring</p></a><a href="#" onclick="displayModal('wipe');" class="wipe"><img src="/images/ic_phonelink_erase_black_48px.svg">
-          <p>Wipe</p></a></div>
+    <div class="left__bar">
+      <div class="fixed-top">
+        <div data-toggle="collapse" data-target="#leftContents" aria-expanded="false" aria-controls="leftContents" class="group-toggle hidden-md hidden-lg"><span aria-hidden="true" class="glyphicon glyphicon-menu-hamburger"></span></div>
+        <div class="contents"></div>
+      </div>
+      <div id="leftContents" class="left-contents collapse"></div>
     </div>
-    <div id="mapdiv"></div>
+    <div class="map">
+      <div id="mapdiv"></div>
+      <div id="overmap">
+        <div class="icons">
+          <ul>
+            <li class="force-position"><a title="Force position" alt="Force position"><span aria-hidden="true" class="glyphicon glyphicon-screenshot"></span></a></li>
+            <li class="virtual-fences"><a title="Virtual fences" alt="Virtual fences"><span aria-hidden="true" class="glyphicon glyphicon-record"></span></a></li>
+            <li class="delete"><a title="Delete" alt="Delete"><span aria-hidden="true" class="glyphicon glyphicon-remove"></span></a></li>
+            <li class="save"><a title="Save" alt="Save"><span aria-hidden="true" class="glyphicon glyphicon-ok"></span></a></li>
+            <li class="edit"><a title="Edit" alt="Edit"><span aria-hidden="true" class="glyphicon glyphicon-pencil"></span></a></li>
+            <li class="calendar"><a title="Select date interval" alt="Select date interval"><span aria-hidden="true" class="glyphicon glyphicon-calendar"></span></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="bottom__bar">
+      <div class="icon-bottom-bar text-center"><img src="/images/icon-bottom-bar.svg"></div>
+      <div class="contents"></div>
+    </div>
+    <div id="contextMenu" class="dropdown clearfix">
+      <ul role="menu" aria-labelledby="dropdownMenu" class="dropdown-menu"></ul>
+    </div>
     <div id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" class="modal fade">
       <div role="document" class="modal-dialog">
         <div class="modal-content">
@@ -76,13 +112,112 @@
         </div>
       </div>
     </div>
+    <div id="myModalInvites" tabindex="-1" role="dialog" aria-labelledby="myModalInvitesLabel" class="modal fade">
+      <div role="document" class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button data-dismiss="modal" aria-label="Close" class="close">
+              <div aria-hidden="true" class="span">&times;</div>
+            </button>
+            <h4 id="myModalInvitesLabel" class="modal-title">Invites</h4>
+          </div>
+          <div class="modal-body">
+            <div role="alert" class="flash-modal alert">
+              <div class="message"></div>
+              <button type="button" aria-label="Close" class="close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="invites">
+              <div class="item active">
+                <div class="invite-count"></div>
+                <div class="row">
+                  <div class="col-xs-12">
+                    <div class="group-thumb">
+                      <div class="image"></div>
+                    </div>
+                    <div class="group-info">
+                      <div class="caption-name">Group Name</div>
+                      <div class="name"></div>
+                      <div class="caption-date"></div>
+                      <div class="date"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-xs-12">
+                    <div class="caption-member">Invited by</div>
+                    <div class="member-thumb">
+                      <div class="image"></div>
+                    </div>
+                    <div class="member-info">
+                      <div class="name"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-xs-6 text-right">
+                    <button class="btn btn-success accept-invite">Accept</button>
+                  </div>
+                  <div class="col-xs-6 text-left">
+                    <button class="btn btn-danger deny-invite">Deny</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="no-invites"></div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-primary">Next</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="myModalCalendar" tabindex="-1" role="dialog" aria-labelledby="myModalCalendarLabel" class="modal fade">
+      <div role="document" class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button data-dismiss="modal" aria-label="Close" class="close">
+              <div aria-hidden="true" class="span">&times;</div>
+            </button>
+            <h4 id="myModalCalendarLabel" class="modal-title">Selecione uma data</h4>
+          </div>
+          <div class="modal-body">
+            <div id="flash-modal" role="alert" class="alert">
+              <div class="message"></div>
+              <button type="button" aria-label="Close" class="close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="row">
+              <div id="datepicker" class="calendar"></div>
+              <div class="time-label">
+                <div class="row">
+                  <div class="col-xs-6"><span class="hour-ini">01:00</span></div>
+                  <div class="col-xs-6 text-right"><span class="hour-end">23:59</span></div>
+                </div>
+              </div>
+              <div id="time-slider" class="time-slider"></div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button id="save" class="btn btn-primary">Salvar</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
 <script src="/scripts/jquery.tr.dictionary.js"></script>
+<script src="/scripts/jquery.jscrollpane.js"></script>
+<script src="/scripts/jquery.mousewheel.js"></script>
+<script src="/scripts/dateFormat.js"></script>
+<script src="/scripts/jquery.dateFormat.js"></script>
 <script src="/scripts/jquery.tr.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script>
+<script src="/scripts/jquery.ui.ouch-punch.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false&amp;libraries=drawing"></script>
+<script src="/scripts/markerwithlabel.js"></script>
+<script src="/scripts/markerclusterer.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+<script src="/scripts/bootstrap-toolkit.js"></script>
 <script src="/scripts/lib.js"></script>
 <script src="/scripts/faq.js"></script>
 <script>
@@ -93,6 +228,7 @@
   r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
   ga('create','UA-XXXXX-X','auto');ga('send','pageview');
 </script>
+<script src="/scripts/jquery.ba-hashchange.js"></script>
 <script src="/scripts/dashboard/dashboard.js"></script>
 <script>
   //- geo_location();
