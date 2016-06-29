@@ -20,7 +20,7 @@ html(lang="pt-BR")
     div.preloader
     != "<div class=\"dashboard-content\">"
         .top
-          .top-left-wrap
+          .top-left-wrap.col-md-6.col-lg-8
             .logo
               a(href="/dashboard")
                 img(src="/images/logo-positivo.svg")
@@ -54,4 +54,5 @@ html(lang="pt-BR")
             .message-box
               .top-tip
               .message-list
-          .top-right-wrap
+          .top-right-users-wrap.col-md-3.col-lg-2
+          .top-right-groups-wrap.col-md-3.col-lg-2
