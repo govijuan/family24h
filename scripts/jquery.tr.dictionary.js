@@ -81,6 +81,8 @@ var myDictionary = {
       'Manage invitations': 'Gerenciar convites',
       'No invites found': 'Você não possui convites pendentes',
       'Group Name': 'Nome do grupo',
+      'Group': 'Grupo',
+      'invited you': 'lhe convidou',
       'Sent at': 'Enviado em',
       'Invited by': 'Enviado por',
       'Error loading invites': 'Erro ao carregar convites',

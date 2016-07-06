@@ -333,7 +333,9 @@ function resetMessage(target){
     target.removeClass("alert-success alert-info alert-warning alert-danger");
     target.hide();
 }
-
+function setAcceptInviteMessage(msg, target){
+	target.append("<div class='invite-accept-msg'>" + msg + "</div>");
+}
 /*----------------------------------------------------------------------------*\
     $Geolocation
 \*----------------------------------------------------------------------------*/
@@ -501,7 +503,7 @@ function initialize(callback,callback2){
         $(".top-right-groups-wrap").empty();//novo
         $(".left__bar .fixed-top .contents").append("<div class='group-select'><select id='group-list'></select></div>");//anterior
         $(".top-right-groups-wrap").append("<div class='group-in-header'></div>");//novo
-        $(".left__bar .left-contents").empty();
+        $(".left__bar .left-contents").empty();//anterior
         $(".left__bar .left-contents").append("<div class='group-info'></div>");
         $(".left__bar .fixed-bottom").remove();
         $(".left__bar .group-info").after("<div class='fixed-bottom'></div>");
@@ -511,7 +513,8 @@ function initialize(callback,callback2){
             $(".left__bar .group-info").append("<div class='info' id=''></div>");
             $(".left__bar .group-info .info").append("<div class='created-by item'><small>" + tr("Created by") + "</small><br />" + item.created_by.name + "</div>");
             $(".left__bar .group-info .info").append("<div class='members item'><a href='#' id='loadMembersMenu'>" + tr("Group members") + "</a></div>");
-            $(".left__bar .group-info .info").append("<div class='members item'><a href='#' id='loadInvites'>" + tr("Manage invitations") + "</a></div>");
+            $(".left__bar .group-info .info").append("<div class='members item'><a href='#' id='loadInvites'>" + tr("Manage invitations") + "</a></div>");//antiga
+            $(".invites-box .invites-list .convites-title").html(tr("Invites"));
             group_id = item.id;
             var endpoint = "/groups/"+group_id+"/members";
             $.ajax({
@@ -567,6 +570,7 @@ function initialize(callback,callback2){
            e.preventDefault();
            loadInvites();
         });
+        carregaConvites();
       }
     },
     error: function(data){
@@ -575,14 +579,61 @@ function initialize(callback,callback2){
   });
 }
 
-function loadInvites(){
+function carregaConvites(){
+	$(".invites-list-ul li").remove();
+	$(".invites-list-ul .invite-text-content span").each(function(){
+		$(this).html(tr($(this).html()));
+	});
+	var endpoint = "/users/group-suggestions";
+  $("#myModalInvites .modal-header h4.modal-title").text(tr("Invites"));
+  $.ajax({
+    type: 'GET',
+    dataType: 'json',
+    crossDomain: true,
+    url: api_url + endpoint +'?api_key=$$key'.render({
+        key: api_key
+    }),
+    success: function(data,status,jqXHR){
+      lista_convites = data.suggestions;
+      $(".user-invites .counter").html(lista_convites.length);
+       if (lista_convites.length > 0){
+	       $(lista_convites).each(function(index,item){
+						$(".invites-list-ul").append("<li code='" + item.code + "'><div class='invite-icon'><i class='glyphicon glyphicon-group-icon'></i></div><div class='invite-text-content'>" + tr("Group") + " " + item.group.name + " " + tr("invited you") + "<br><span class='reject-invite'>" + tr("Deny") + "</span><span class='accept-invite'>" + tr("Accept") + "</span></div></li>" );
+	       });
+	       $(".invites-list-ul li .invite-text-content .accept-invite").on("click",function(e){
+		          var inviteCode = $(this).closest("li").attr("code");
+		          $(this).closest("li").addClass(".accept-invite-msg-target");
+		          aceitaConvite(true, inviteCode);
+				  });
+				  $(".invites-list-ul li .invite-text-content .reject-invite").on("click",function(e){
+		          var inviteCode = $(this).closest("li").attr("code");
+		          aceitaConvite(false, inviteCode);
+				  });
+       }else{
+	       $(".invites-list-ul li").hide();
+	       $(".sem-convites").html(tr("No invites found"));
+	       $(".sem-convites").show();
+       }
+      
+      
+  	},
+  	error: function(data){
+	  	$(".invites-box .invites-list-ul li").hide();
+	  	$(".sem-convites").html(tr("Error loading invites"));
+	  	$(".sem-convites").show();
+  	}
+	});
 
-  $("#myModalInvites .invites .item").not(":first").remove();
+  
+}
+
+function loadInvites(){
+	$("#myModalInvites .invites .item").not(":first").remove();//antiga
   $("#myModalInvites .invites .item").addClass("active");
   $("#myModalInvites .invites .item button").each(function(index,item){
     $(this).html(tr($(this).html()));
-  });
-  var endpoint = "/users/group-suggestions";
+  });//antiga
+	var endpoint = "/users/group-suggestions";
   $("#myModalInvites .modal-header h4.modal-title").text(tr("Invites"));
   $.ajax({
     type: 'GET',
@@ -628,16 +679,20 @@ function loadInvites(){
       }*/
       if (invites_list.length > 0){
         $(invites_list).each(function(index,item){
-          if (index > 0){
+          if (index > 0){ 
             var div_item = $($("#myModalInvites .invites .item")[0]).clone();
             $(div_item).removeClass("active");
             $("#myModalInvites .invites").append(div_item);
           }
-          var div_item = $("#myModalInvites .invites .item:last-child");
-          $(div_item).attr("code",item.code);
-          $(div_item).find(".invite-count").html(tr("Invite") + " " + (index+1) + tr(" of ") + invites_list.length );
+          var div_item = $("#myModalInvites .invites .item:last-child");//antiga
+          
+          $(div_item).attr("code",item.code);//anitiga
+          
+          $(div_item).find(".invite-count").html(tr("Invite") + " " + (index+1) + tr(" of ") + invites_list.length );// antiga definindo a contagem de convites
+          //$(".user-invites .counter").html(invites_list.length);// nova
+          
           $(div_item).find(".group-info .caption-name").html(tr("Group Name"));
-          $(div_item).find(".group-info .name").html(item.group.name);
+          $(div_item).find(".group-info .name").html(item.group.name);// antiga colocando nome do grupo do convite no lugar
           $(div_item).find(".group-info .caption-date").html(tr("Sent at"));
           $(div_item).find(".group-info .date").html(convertDate(item.invited_at));
           $(div_item).find(".caption-member").html(tr("Invited by"));
@@ -728,6 +783,40 @@ function acceptInvite(accept){
     }
   });
 
+}
+
+
+//Nova função para aceitar o convite a um Grupo
+function aceitaConvite(accept, inviteCode){
+	if(accept){
+		var method = "POST";
+	}else{
+		var method = "DELETE";
+	}
+	var endpoint = "/groups/invites/accept/";
+	$.ajax({
+    type: method,
+    dataType: 'json',
+    crossDomain: true,
+    url: api_url + endpoint +'?api_key=$$key&code=$$code'.render({
+        key: api_key,
+        code: inviteCode
+        }),
+    success: function(data,status,jqXHR){
+      if (accept){
+        msg = tr("Invite accepted");
+      }else{
+        msg = tr("Invite denied");
+      }
+      setMessage(msg,$(".accept-invite-msg-target").find(".invite-accept-msg"));
+    },
+    error: function(data){
+      msg = tr("Error sending command");
+      setMessage(msg,$(".accept-invite-msg-target").find(".invite-accept-msg"));
+    }
+  });
+  console.log(inviteCode);
+  console.log(method);
 }
 
 function loadGroupMembers(callback){
@@ -1906,7 +1995,7 @@ $(document).ready(function() {
         $('.preloader').fadeOut('fast');
 				$(".profile_picture_url").css({'background':  'url(' + user_data.profile_picture_url + ')', 'background-size' : '120%', 'background-position' : '20% 20%' });
 				$('.usuario-at-wrap').append('<div class="nome-at-usuario">' + user_data.name + '</div><div class="users-groups-arrow glyphicon glyphicon-menu-down"></div>');
-				//console.log(user_data.profile_picture_url);
+				//console.log(user_data);
       },
       __default_cookie_error
     );
@@ -1920,14 +2009,18 @@ $(document).ready(function() {
     }); ****  Anterior *****/
     
     $(".top-right-users-wrap").click(function() {
-        $(".message-box").hide();
+        $(".message-box, .invites-box").hide();
         $(".config-box").toggle();
         $(this).find(".users-groups-arrow").toggleClass("glyphicon-menu-down glyphicon-menu-up");
     });
     
     $(".user-messages").click(function() {
-        $(".config-box").hide();
+        $(".config-box, .invites-box").hide();
         $(".message-box").toggle();
+    });
+    $(".user-invites").click(function(){
+	    $(".message-box, .config-box").hide();
+	    $(".invites-box").toggle();
     });
 
     $("#flash .close,#flash-modal .close,.flash-modal .close").click(function() {

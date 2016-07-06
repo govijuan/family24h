@@ -46,7 +46,7 @@
 $black: #2e2e2e;
 $white: #ffffff;
 
-$dark_blue: #2a50bf;
+$dark_blue: #0066cc;
 $dark_blue_shade: #03405f;
 
 $light_blue: #32ccfe;
@@ -57,6 +57,9 @@ $lighter_gray: #f7f7f7;
 $light_gray: #e2e2e2;
 $medium_gray: #999;
 $dark_gray: #666;
+$light-green: #50e3c2;
+$fucsia: #bb0ea5;
+$caqui: #f5a623;
 
 /*----------------------------------------------------------------------------*\
     $SHARED
@@ -109,24 +112,71 @@ div, a, h1, h2, h3, span, li, p{
 
 .user-buttons {
   float: right;
+  .glyphicon { &:before {  } }
+}
+.user-invites{
+	position: relative;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 30px;
+  margin-right: 15px;
+  display: inline-block;
+  color: $medium_gray;
+  height: 30px;
+  width: 30px;
+  margin: 25px 0;
+  border-radius: 4px;
+  padding: 3px 8.5px;
+  background: #eeedef;
+  margin: 0 20px 0;
+  .counter{
+	  position: absolute;
+		color: #fff;
+		top: -9px;
+		right: -9px;
+		font-size: 0.5em;
+		line-height: 12px;
+		text-align: center;
+		height: 19px;
+		width: 19px;
+		line-height: 11px;
+		padding: 1px 0 0 1px;
+		border-radius: 100%;
+		background: #0066cc;
+		border: 2.5px solid white;
+  }
 }
 .user-config,
 .user-messages {
   position: relative;
   cursor: context-menu;
-  font-size: 28px;
-  line-height: 80px;
+  font-size: 20px;
+  line-height: 30px;
   margin-right: 15px;
   display: inline-block;
-  color: $light_gray;
+  color: $medium_gray;
+  height: 30px;
+  width: 30px;
+  margin: 25px 0;
+  border-radius: 4px;
+  padding: 3px 5px;
+  background: #eeedef;
   .counter{
     position: absolute;
-    color: #000;
-    top: -3px;
-    left: 10%;
+    color: #fff;
+    top: -9px;
+    right: -9px;
     font-size: 0.5em;
-    width: 80%;
+    line-height: 12px;
     text-align: center;
+    height: 19px;
+		width: 19px;
+		line-height: 11px;
+		padding: 1px 0 0 1px;
+		border-radius: 100%;
+		background: $dark_blue;
+    border: 2.5px solid white;
+
   }
 }
 .top-right-users-wrap{
@@ -202,20 +252,22 @@ div, a, h1, h2, h3, span, li, p{
   background-color: #fff;
   padding: 5px;
   position: absolute;
-  right: 40px;
+  right: -240px;
   top: 70px;
   z-index: 1001;
   border-radius: 5px;
   border: 1px solid #efefef;
+  margin: 30px 0 0;
 
   .top-tip {
     background-color: #fff;
-    height: 10px;
+    height: 20px;
     position: absolute;
-    right: 35px;
-    top: -5px;
+    left: 35px;
+    top: -10px;
     transform: rotate(45deg);
-    width: 10px;
+    width: 20px;
+    z-index: -1;
   }
   .message-list{
     max-height: 400px;
@@ -820,6 +872,94 @@ div, a, h1, h2, h3, span, li, p{
       border-bottom: none;
     }
   }
+}
+
+/*----------------------------------------------------------------------------*\
+    $Invites box Style
+\*----------------------------------------------------------------------------*/
+.invites-box{
+	display: none;
+	background-color: #fff;
+	padding: 15px;
+	position: absolute;
+	right: -203px;
+	top: 70px;
+	z-index: 1000;
+	border-radius: 5px;
+	border: 1px solid #efefef;
+	margin: 30px 0 0;
+	box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25);
+	.top-tip {
+    background-color: #fff;
+    height: 20px;
+    position: absolute;
+    left: 35px;
+    top: -10px;
+    transform: rotate(45deg);
+    width: 20px;
+    z-index: -1;
+  }
+	.invites-list{
+		min-width: 300px;
+		max-width: 80%;
+		min-height: 200px;
+		.invites-list-ul{
+			list-style: none;
+			padding: 0;
+			margin: 20px 0 0;
+			li{
+				font-size: 13px;
+				margin: 10px 0;
+				&:nth-child(4n-7){
+					.invite-icon{
+						background: $light_blue;
+					}
+				}
+				&:nth-child(4n-6){
+					.invite-icon{
+						background: $light-green;
+					}
+				}
+				&:nth-child(4n-5){
+					.invite-icon{
+						background: $fucsia;
+					}
+				}
+				&:nth-child(4n-4){
+					.invite-icon{
+						background: $caqui;
+					}
+				}
+				.invite-icon{
+					border-radius: 100%;
+					height: 40px;
+					width: 40px;
+					color: white;
+					line-height: 40px;
+					font-size: 22px;
+					display: inline-block;
+					padding: 0 5px;
+					margin: 0 20px 0 0;
+				}
+				.invite-text-content{
+					display: inline-block;
+					vertical-align: top;
+					height: 40px;
+					.reject-invite, .accept-invite{
+						padding: 0 20px 0 0;
+						text-transform: uppercase;
+						color: $dark_blue;
+						font-size: 11px;
+						font-weight: 600;
+						letter-spacing: 0.5pt;
+						cursor: pointer;
+					}
+				}
+				
+			}
+		}
+	}
+	
 }
 
 
