@@ -19,6 +19,7 @@ var calendarSet = false;
 var drawingManager, fencePolygon;
 var loading_message = false;
 var bs_viewport;
+var currentInvitesLength = 0;
 
 if (!String.prototype.render) {
   String.prototype.render = function(args) {
@@ -333,8 +334,25 @@ function resetMessage(target){
     target.removeClass("alert-success alert-info alert-warning alert-danger");
     target.hide();
 }
-function setAcceptInviteMessage(msg, target){
-	target.append("<div class='invite-accept-msg'>" + msg + "</div>");
+function setAcceptInviteMessage(msg, target, icon){
+	target.children().hide(600);
+	target.append("<div class='invite-icon-clicked' style='display: none'>" + icon + "</div>");
+	target.append("<div class='invite-accept-msg' style='display: none'>" + msg + "</div>");
+	target.find(".invite-accept-msg, .invite-icon-clicked").show(600);
+}
+function setAcceptErrorMessage(msg, target){
+	target.children().hide(500);
+	target.append("<div class='invite-error-msg' style='display: none'>" + msg + "</div>");
+	target.find(".invite-error-msg").show(500);
+	target.find(".invite-error-msg").delay(1000).hide(500);
+	target.find(".invite-error-msg").remove();
+	target.children().show(500);
+	target.removeClass("accept-invite-msg-target");
+}
+function checkIfCouterIsCero(targetCounter){
+	if(currentInvitesLength <= 0){
+		targetCounter.hide();
+	}
 }
 /*----------------------------------------------------------------------------*\
     $Geolocation
@@ -596,35 +614,43 @@ function carregaConvites(){
     success: function(data,status,jqXHR){
       lista_convites = data.suggestions;
       $(".user-invites .counter").html(lista_convites.length);
+      currentInvitesLength = lista_convites.length;
        if (lista_convites.length > 0){
 	       $(lista_convites).each(function(index,item){
 						$(".invites-list-ul").append("<li code='" + item.code + "'><div class='invite-icon'><i class='glyphicon glyphicon-group-icon'></i></div><div class='invite-text-content'>" + tr("Group") + " " + item.group.name + " " + tr("invited you") + "<br><span class='reject-invite'>" + tr("Deny") + "</span><span class='accept-invite'>" + tr("Accept") + "</span></div></li>" );
 	       });
 	       $(".invites-list-ul li .invite-text-content .accept-invite").on("click",function(e){
 		          var inviteCode = $(this).closest("li").attr("code");
-		          $(this).closest("li").addClass(".accept-invite-msg-target");
+		          $(this).closest("li").addClass("accept-invite-msg-target");
 		          aceitaConvite(true, inviteCode);
+		          currentInvitesLength = currentInvitesLength - 1;
+		          console.log(currentInvitesLength);
+		          $(".user-invites .counter").html(currentInvitesLength);
+		          
+		          
 				  });
 				  $(".invites-list-ul li .invite-text-content .reject-invite").on("click",function(e){
 		          var inviteCode = $(this).closest("li").attr("code");
+		          $(this).closest("li").addClass("accept-invite-msg-target");
 		          aceitaConvite(false, inviteCode);
+		          currentInvitesLength = lista_convites.length - 1;
+							$(".user-invites .counter").html(currentInvitesLength);
 				  });
        }else{
 	       $(".invites-list-ul li").hide();
 	       $(".sem-convites").html(tr("No invites found"));
 	       $(".sem-convites").show();
+	       
        }
-      
-      
-  	},
+    },
   	error: function(data){
 	  	$(".invites-box .invites-list-ul li").hide();
 	  	$(".sem-convites").html(tr("Error loading invites"));
 	  	$(".sem-convites").show();
+	  	checkIfCouterIsCero($(".user-invites .counter"));
   	}
+  	
 	});
-
-  
 }
 
 function loadInvites(){
@@ -786,7 +812,7 @@ function acceptInvite(accept){
 }
 
 
-//Nova função para aceitar o convite a um Grupo
+//Nova função para aceitarou não o convite a um Grupo
 function aceitaConvite(accept, inviteCode){
 	if(accept){
 		var method = "POST";
@@ -805,18 +831,23 @@ function aceitaConvite(accept, inviteCode){
     success: function(data,status,jqXHR){
       if (accept){
         msg = tr("Invite accepted");
+        icon = "<i class='glyphicon glyphicon-ok-circle'></i>"
       }else{
         msg = tr("Invite denied");
+        icon = "<i class='glyphicon glyphicon-ban-circle'></i>"
       }
-      setMessage(msg,$(".accept-invite-msg-target").find(".invite-accept-msg"));
+      setAcceptInviteMessage(msg,$(".accept-invite-msg-target"), icon);
+      checkIfCouterIsCero($(".user-invites .counter"));
     },
     error: function(data){
       msg = tr("Error sending command");
-      setMessage(msg,$(".accept-invite-msg-target").find(".invite-accept-msg"));
+      setAcceptErrorMessage(msg,$(".accept-invite-msg-target"));
     }
+  }).done( function(){
+	  $(".accept-invite-msg-target").delay(2500).hide(400, function(){
+		  $(this).remove();
+	  });
   });
-  console.log(inviteCode);
-  console.log(method);
 }
 
 function loadGroupMembers(callback){

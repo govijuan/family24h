@@ -2511,14 +2511,16 @@ div, a, h1, h2, h3, span, li, p { font-family: 'Ubuntu', sans-serif; }
 \*----------------------------------------------------------------------------*/
 .invites-box { display: none; background-color: #fff; padding: 15px; position: absolute; right: -203px; top: 70px; z-index: 1000; border-radius: 5px; border: 1px solid #efefef; margin: 30px 0 0; box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25); }
 .invites-box .top-tip { background-color: #fff; height: 20px; position: absolute; left: 35px; top: -10px; transform: rotate(45deg); width: 20px; z-index: -1; }
-.invites-box .invites-list { min-width: 300px; max-width: 80%; min-height: 200px; }
+.invites-box .invites-list { min-width: 300px; max-width: 80%; min-height: 50px; overflow-y: scroll; max-height: 400px; }
 .invites-box .invites-list .invites-list-ul { list-style: none; padding: 0; margin: 20px 0 0; }
-.invites-box .invites-list .invites-list-ul li { font-size: 13px; margin: 10px 0; }
+.invites-box .invites-list .invites-list-ul li { font-size: 13px; margin: 10px 0; height: 40px; }
 .invites-box .invites-list .invites-list-ul li:nth-child(4n-7) .invite-icon { background: #32ccfe; }
 .invites-box .invites-list .invites-list-ul li:nth-child(4n-6) .invite-icon { background: #50e3c2; }
 .invites-box .invites-list .invites-list-ul li:nth-child(4n-5) .invite-icon { background: #bb0ea5; }
 .invites-box .invites-list .invites-list-ul li:nth-child(4n-4) .invite-icon { background: #f5a623; }
-.invites-box .invites-list .invites-list-ul li .invite-icon { border-radius: 100%; height: 40px; width: 40px; color: white; line-height: 40px; font-size: 22px; display: inline-block; padding: 0 5px; margin: 0 20px 0 0; }
+.invites-box .invites-list .invites-list-ul li .invite-icon, .invites-box .invites-list .invites-list-ul li .invite-icon-clicked { border-radius: 100%; height: 40px; width: 40px; color: white; line-height: 40px; font-size: 22px; display: inline-block; padding: 0 0 0 6px; margin: 0 20px 0 0; }
+.invites-box .invites-list .invites-list-ul li .invite-icon-clicked { padding: 2px 0 0 9.4px !important; float: left; background: #50e3c2; }
+.invites-box .invites-list .invites-list-ul li .invite-accept-msg { color: #50e3c2; height: 40px; display: inline-block; float: left; vertical-align: middle; line-height: 40px; }
 .invites-box .invites-list .invites-list-ul li .invite-text-content { display: inline-block; vertical-align: top; height: 40px; }
 .invites-box .invites-list .invites-list-ul li .invite-text-content .reject-invite, .invites-box .invites-list .invites-list-ul li .invite-text-content .accept-invite { padding: 0 20px 0 0; text-transform: uppercase; color: #0066cc; font-size: 11px; font-weight: 600; letter-spacing: 0.5pt; cursor: pointer; }
 
