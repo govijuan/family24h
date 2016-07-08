@@ -349,9 +349,11 @@ function setAcceptErrorMessage(msg, target){
 	target.children().show(500);
 	target.removeClass("accept-invite-msg-target");
 }
-function checkIfCouterIsCero(targetCounter){
+function checkIfCouterIsCero(targetCounter, currentInvitesLength){
 	if(currentInvitesLength <= 0){
 		targetCounter.hide();
+		$(".sem-convites").html(tr("No invites found"));
+	       $(".sem-convites").show();
 	}
 }
 /*----------------------------------------------------------------------------*\
@@ -525,6 +527,7 @@ function initialize(callback,callback2){
         $(".left__bar .left-contents").append("<div class='group-info'></div>");
         $(".left__bar .fixed-bottom").remove();
         $(".left__bar .group-info").after("<div class='fixed-bottom'></div>");
+        $(".groups-content-header").append("<div class='groups-in-info-header-wrap'></div><div class='curr-group-info-in-h'></div>");
         $.each(group_list, function(index,item){
           if (index == 0 && $.getUrlVar("g") == undefined || $.getUrlVar("g") == item.id){
             if ($(".left__bar .group-info .info").length > 0) $(".left__bar .group-info .info").remove();
@@ -533,6 +536,14 @@ function initialize(callback,callback2){
             $(".left__bar .group-info .info").append("<div class='members item'><a href='#' id='loadMembersMenu'>" + tr("Group members") + "</a></div>");
             $(".left__bar .group-info .info").append("<div class='members item'><a href='#' id='loadInvites'>" + tr("Manage invitations") + "</a></div>");//antiga
             $(".invites-box .invites-list .convites-title").html(tr("Invites"));
+            console.log(item);
+            // colocar a imagem de fundo no header do container de informações do grupo
+            if( item.data.group_picture_url != undefined){
+	            $(".groups-content-header").attr("style", "background-image: url(" + item.data.group_picture_url + ")");
+	          }else{
+	            $(".groups-content-header").attr("style", "background-image: url(/images/bg-grupos.jpg)");
+	            console.log("Foto do grupo é igual a undefined");
+            }
             group_id = item.id;
             var endpoint = "/groups/"+group_id+"/members";
             $.ajax({
@@ -560,14 +571,19 @@ function initialize(callback,callback2){
 
               }
             });
+            
           }
+          $(".groups-in-info-header-wrap").append("<div class='group-icon-in-info-h glyphicon glyphicon-group-icon' group-id='" + item.id + "'></div>");
           var selected = "";//anterior
           var selecterLi = ""//novo
           var grupoAtual = ""
           if ($.getUrlVar("g") == item.id){
             selected = " selected";//anterior
-            grupoAtual = "<span class='grupo-atual-txt'>Grupo Atual</span><br>"
-            $(".group-in-header").append(grupoAtual + "<span class='nome-grupo-atual' item-id='" + item.id + "'>" + item.data.name + "</span");//novo
+            grupoAtual = "<div class='grupo-atual-txt'>" + tr("Grupo Atual") + "</div>"
+            $(".group-in-header").append(grupoAtual + "<div class='nome-grupo-atual' item-id='" + item.id + "'>" + item.data.name + "</div>");//novo
+            $(".top-right-groups-wrap").append("<div class ='users-groups-arrow glyphicon glyphicon-menu-down'></div>");
+            
+						
           }
           $("#group-list").append("<option value='" + item.id + "' " + selected + ">"+item.data.name);//anterior
           
@@ -623,7 +639,6 @@ function carregaConvites(){
 		          var inviteCode = $(this).closest("li").attr("code");
 		          $(this).closest("li").addClass("accept-invite-msg-target");
 		          aceitaConvite(true, inviteCode);
-		          currentInvitesLength = currentInvitesLength - 1;
 		          console.log(currentInvitesLength);
 		          $(".user-invites .counter").html(currentInvitesLength);
 		          
@@ -633,21 +648,20 @@ function carregaConvites(){
 		          var inviteCode = $(this).closest("li").attr("code");
 		          $(this).closest("li").addClass("accept-invite-msg-target");
 		          aceitaConvite(false, inviteCode);
-		          currentInvitesLength = lista_convites.length - 1;
 							$(".user-invites .counter").html(currentInvitesLength);
 				  });
        }else{
 	       $(".invites-list-ul li").hide();
 	       $(".sem-convites").html(tr("No invites found"));
 	       $(".sem-convites").show();
-	       
+	       checkIfCouterIsCero($(".user-invites .counter"), lista_convites.length);
        }
     },
   	error: function(data){
 	  	$(".invites-box .invites-list-ul li").hide();
 	  	$(".sem-convites").html(tr("Error loading invites"));
 	  	$(".sem-convites").show();
-	  	checkIfCouterIsCero($(".user-invites .counter"));
+	  	
   	}
   	
 	});
@@ -802,6 +816,7 @@ function acceptInvite(accept){
       }
       setMessage(msg,"success",$("#myModalInvites .flash-modal"));
       $("#myModalInvites .invites .item.active button").prop("disabled",true);
+      
     },
     error: function(data){
       msg = tr("Error sending command");
@@ -837,7 +852,8 @@ function aceitaConvite(accept, inviteCode){
         icon = "<i class='glyphicon glyphicon-ban-circle'></i>"
       }
       setAcceptInviteMessage(msg,$(".accept-invite-msg-target"), icon);
-      checkIfCouterIsCero($(".user-invites .counter"));
+      currentInvitesLength = currentInvitesLength - 1;
+      checkIfCouterIsCero($(".user-invites .counter"), currentInvitesLength);  
     },
     error: function(data){
       msg = tr("Error sending command");
@@ -2034,25 +2050,29 @@ $(document).ready(function() {
     /*----------------------------------------------------------------------------*\
         $Calls
     \*----------------------------------------------------------------------------*/
-    /*$(".user-config, .top-right-users-wrap").click(function() {
-        $(".message-box").hide();
-        $(".config-box").toggle();
-    }); ****  Anterior *****/
     
+    //** Novo Começo
     $(".top-right-users-wrap").click(function() {
-        $(".message-box, .invites-box").hide();
+        $(".message-box, .invites-box, .groups-content-container").hide();
         $(".config-box").toggle();
         $(this).find(".users-groups-arrow").toggleClass("glyphicon-menu-down glyphicon-menu-up");
     });
     
+    $(".top-right-groups-wrap").click(function(){
+	    	$(".message-box, .invites-box, .config-box").hide();
+	    	$(".groups-content-container").toggle();
+	    	$(this).find(".users-groups-arrow").toggleClass("glyphicon-menu-down glyphicon-menu-up");
+    });
+    
     $(".user-messages").click(function() {
-        $(".config-box, .invites-box").hide();
+        $(".config-box, .invites-box, .groups-content-container").hide();
         $(".message-box").toggle();
     });
+    
     $(".user-invites").click(function(){
-	    $(".message-box, .config-box").hide();
+	    $(".message-box, .config-box, .groups-content-container").hide();
 	    $(".invites-box").toggle();
-    });
+    });// ** Novo Fim
 
     $("#flash .close,#flash-modal .close,.flash-modal .close").click(function() {
         $(this).parent().fadeOut("slow");

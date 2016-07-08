@@ -83,6 +83,7 @@ var myDictionary = {
       'Group Name': 'Nome do grupo',
       'Group': 'Grupo',
       'invited you': 'lhe convidou',
+      'Current Group': 'Grupo Atual',
       'Sent at': 'Enviado em',
       'Invited by': 'Enviado por',
       'Error loading invites': 'Erro ao carregar convites',

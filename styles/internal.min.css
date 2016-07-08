@@ -2330,11 +2330,12 @@ button.close { padding: 0; cursor: pointer; background: transparent; border: 0; 
 \*----------------------------------------------------------------------------*/
 div, a, h1, h2, h3, span, li, p { font-family: 'Ubuntu', sans-serif; }
 
-.top { background-color: #ffffff; width: 100%; height: 88px; float: left; }
+.top { background-color: #ffffff; width: 100%; height: 88px; float: left; z-index: 101; position: relative; }
 .top:before { top: -8px; height: 8px; content: ""; display: block; width: 100%; background-image: linear-gradient(to left, #5ef6fa, #32ccfe); }
 .top .int-page-title { color: #999; padding: 0 15px; width: 200px; display: block; position: relative; float: left; }
 .top .int-page-title h2 { font-weight: 300; font-size: 18px; margin-top: 40px; }
 .top .top-left-wrap, .top .top-right-users-wrap, .top .top-right-groups-wrap { border-right: 1px solid #e2e2e2; color: #999; }
+.top .top-right-groups-wrap { cursor: pointer; }
 
 .logo { margin-left: 50px; float: left; }
 .logo img { height: 50px; margin-top: 10px; }
@@ -2523,6 +2524,28 @@ div, a, h1, h2, h3, span, li, p { font-family: 'Ubuntu', sans-serif; }
 .invites-box .invites-list .invites-list-ul li .invite-accept-msg { color: #50e3c2; height: 40px; display: inline-block; float: left; vertical-align: middle; line-height: 40px; }
 .invites-box .invites-list .invites-list-ul li .invite-text-content { display: inline-block; vertical-align: top; height: 40px; }
 .invites-box .invites-list .invites-list-ul li .invite-text-content .reject-invite, .invites-box .invites-list .invites-list-ul li .invite-text-content .accept-invite { padding: 0 20px 0 0; text-transform: uppercase; color: #0066cc; font-size: 11px; font-weight: 600; letter-spacing: 0.5pt; cursor: pointer; }
+
+/*----------------------------------------------------------------------------*\ Top Menu Group link and Groups boxes
+\*----------------------------------------------------------------------------*/
+.group-in-header { margin-top: calc( ( 80px - 45.7167px) / 2); width: calc( 100% - 14px ); float: left; }
+.group-in-header .grupo-atual-txt { font-size: 11px; }
+.group-in-header .nome-grupo-atual { font-size: 18px; line-height: 20px; }
+
+.groups-content-container { display: none; position: absolute; width: 300px; right: 0; height: 100%; background: white; z-index: 100; box-shadow: -5px -3px 7px rgba(0, 0, 0, 0.1); }
+
+.groups-content-header { background-color: #0066cc; height: 160px; width: 300px; color: white; }
+
+.groups-in-info-header-wrap { text-align: right; }
+
+.group-icon-in-info-h { border-radius: 100%; height: 40px; width: 40px; color: white; line-height: 40px; font-size: 22px; display: inline-block; }
+
+.group-icon-in-info-h:nth-child(4n-7) { background: #32ccfe; }
+
+.group-icon-in-info-h:nth-child(4n-6) { background: #50e3c2; }
+
+.group-icon-in-info-h:nth-child(4n-5) { background: #bb0ea5; }
+
+.group-icon-in-info-h:nth-child(4n-4) { background: #f5a623; }
 
 /*----------------------------------------------------------------------------*\ $MEDIUM
 \*----------------------------------------------------------------------------*/
