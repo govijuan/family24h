@@ -1000,7 +1000,7 @@ div, a, h1, h2, h3, span, li, p{
 .groups-content-container{
 	display: none;
 	position: absolute;
-	width: 300px;
+	width: 330px;
 	right: 0;
 	height: 100%;
 	background: white;
@@ -1010,23 +1010,81 @@ div, a, h1, h2, h3, span, li, p{
 .groups-content-header{
 	background-color: $dark_blue;
 	height: 160px;
-	width: 300px;
+	width: 330px;
 	color: white;
+	padding: 15px 15px 10px 15px;
+	position: relative;
+}
+.curr-group-info-in-h{
+	color: white;
+	position: absolute;
+	bottom: 0;
+	.curr-group-in-h-txt{
+		font-size: 22px;
+		font-weight: 600;
+	}
 }
 .groups-in-info-header-wrap{text-align: right;}
 .group-icon-in-info-h{
 	border-radius: 100%;
-	height: 40px;
-	width: 40px;
+	height: 30px;
+	width: 30px;
 	color: white;
-	line-height: 40px;
-	font-size: 22px;
+	line-height: 30px;
+	font-size: 18px;
 	display: inline-block;
+	padding: 2px 4px 0 0;
+	margin: 0 3px;
+	cursor: pointer;
+}
+.see-more-groups-in-h{
+	border-radius: 100%;
+	height: 30px;
+	width: 30px;
+	color: white;
+	line-height: 30px;
+	display: inline-block;
+	margin: 0 0 0 3px;
+	cursor: pointer;
+	background: $dark_gray;
+	padding: 0 6px 0 0;
 }
 .group-icon-in-info-h{ &:nth-child(4n-7){ background: $light_blue; } }
 .group-icon-in-info-h{ &:nth-child(4n-6){ background: $light-green; } }
 .group-icon-in-info-h{ &:nth-child(4n-5){ background: $fucsia; } }
 .group-icon-in-info-h{ &:nth-child(4n-4){ background: $caqui; } }
+.group-content{
+	padding: 15px;
+	.group-members-ul{
+		padding: 0;
+		list-style: none;
+		.user-avatar{
+			height: 40px;
+			width: 40px;
+			background-size: 100%;
+			border-radius: 100%;
+			display: block;
+			float: left;
+		}
+		.user-info{
+			width: calc(100% - 40px);
+			display: block;
+			float: left;
+			padding: 0 0 0 15px;
+			.name{
+				color: $medium_gray;
+				margin: 0;
+			}
+			.address{color: #B6B6B6; font-size: 12px; margin: 0;}
+			.timestamp{
+				color: $light_blue;
+				font-size: 12px;
+				margin: 0;
+			}
+		}
+	}
+}
+
 /*----------------------------------------------------------------------------*\
     $MEDIUM
 \*----------------------------------------------------------------------------*/

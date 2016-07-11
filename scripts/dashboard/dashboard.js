@@ -527,7 +527,8 @@ function initialize(callback,callback2){
         $(".left__bar .left-contents").append("<div class='group-info'></div>");
         $(".left__bar .fixed-bottom").remove();
         $(".left__bar .group-info").after("<div class='fixed-bottom'></div>");
-        $(".groups-content-header").append("<div class='groups-in-info-header-wrap'></div><div class='curr-group-info-in-h'></div>");
+        $(".groups-content-header").append("<div class='groups-in-info-header-wrap'></div><div class='curr-group-info-in-h'></div>");//novo
+        
         $.each(group_list, function(index,item){
           if (index == 0 && $.getUrlVar("g") == undefined || $.getUrlVar("g") == item.id){
             if ($(".left__bar .group-info .info").length > 0) $(".left__bar .group-info .info").remove();
@@ -536,13 +537,12 @@ function initialize(callback,callback2){
             $(".left__bar .group-info .info").append("<div class='members item'><a href='#' id='loadMembersMenu'>" + tr("Group members") + "</a></div>");
             $(".left__bar .group-info .info").append("<div class='members item'><a href='#' id='loadInvites'>" + tr("Manage invitations") + "</a></div>");//antiga
             $(".invites-box .invites-list .convites-title").html(tr("Invites"));
-            console.log(item);
+            //console.log(item);
             // colocar a imagem de fundo no header do container de informações do grupo
             if( item.data.group_picture_url != undefined){
-	            $(".groups-content-header").attr("style", "background-image: url(" + item.data.group_picture_url + ")");
+	            $(".groups-content-header").attr("style", "background-image: url(" + item.data.group_picture_url + "); background-size: 90% auto; background-position: 40% 30%;");
 	          }else{
-	            $(".groups-content-header").attr("style", "background-image: url(/images/bg-grupos.jpg)");
-	            console.log("Foto do grupo é igual a undefined");
+	            $(".groups-content-header").attr("style", "background-image: url(/images/bg-grupos.jpg)");	            
             }
             group_id = item.id;
             var endpoint = "/groups/"+group_id+"/members";
@@ -574,20 +574,25 @@ function initialize(callback,callback2){
             
           }
           $(".groups-in-info-header-wrap").append("<div class='group-icon-in-info-h glyphicon glyphicon-group-icon' group-id='" + item.id + "'></div>");
+          
+          //$(".curr-group-info-in-h").append("<div class='curr-group-length-txt'>" +  + "</div>");
           var selected = "";//anterior
           var selecterLi = ""//novo
           var grupoAtual = ""
           if ($.getUrlVar("g") == item.id){
             selected = " selected";//anterior
             grupoAtual = "<div class='grupo-atual-txt'>" + tr("Grupo Atual") + "</div>"
-            $(".group-in-header").append(grupoAtual + "<div class='nome-grupo-atual' item-id='" + item.id + "'>" + item.data.name + "</div>");//novo
+            $(".group-in-header").append(grupoAtual + "<div class='nome-grupo-atual' item-id='" + item.id + "'>" + item.data.name + "</div>");
             $(".top-right-groups-wrap").append("<div class ='users-groups-arrow glyphicon glyphicon-menu-down'></div>");
-            
-						
+            $(".curr-group-info-in-h").prepend("<div class='curr-group-in-h-txt'>" + item.data.name + "</div>");//novo
           }
           $("#group-list").append("<option value='" + item.id + "' " + selected + ">"+item.data.name);//anterior
           
         });
+        if(group_list.length > 3){ // se tem mais do que tres grupos fazer com que apareçam tres e o símbolo para carregar a lista completa de grupos embaixo no espaço de conteúdos dos grupos
+		        	$(".groups-in-info-header-wrap .group-icon-in-info-h:nth-child(n + 4)").css("display", "none");
+		        	$(".groups-in-info-header-wrap").append("<div class='see-more-groups-in-h'>•••</div>");
+        		}        		
         $("#group-list").change(function(){
           group_id = $('#group-list').find(":selected").val();
           location.hash = "#!/group?g=" + $('#group-list').find(":selected").val();
@@ -1423,7 +1428,9 @@ function loadGroupMarkers(){
   members_alias = [];
   $(".bottom__bar .contents").remove();
   $(".bottom__bar").append("<div class='contents'></div>");
-  $(".bottom__bar .contents").append("<ul class='user-list'></ul>");
+  $(".bottom__bar .contents").append("<ul class='user-list'></ul>");//antiga
+  $(".group-content .group-members-ul").remove();
+  $(".group-content").append("<ul class='group-members-ul'></ul>");//nova
   $.each(member_list,function(i,member){
     if (!member.alias){
       member.alias = generateAlias(member.name);
@@ -1480,12 +1487,13 @@ function loadGroupMarkers(){
     }
     userInfo += "<div class='user-info'>";
     userInfo += "<p class='name'><strong>" + member.name + "</strong>";
-    userInfo += " <a hhref='#' class='force-position' user-id='" + member.user_id + "' title='" + tr("Force position") + "' alt='" + tr("Force position") + "'><span class='glyphicon glyphicon-repeat' aria-hidden='true'></span></a></p>";
+    userInfo += " <a  class='force-position' user-id='" + member.user_id + "' title='" + tr("Force position") + "' alt='" + tr("Force position") + "'><span class='glyphicon glyphicon-repeat' aria-hidden='true'></span></a></p>";
     userInfo += "<p class='address'>" + member.location.human_address + "</p>";
     userInfo += "<p class='timestamp'>" + convertDate(member.valid_time) + "</p>";
     userInfo += "</div>";
 
-    $(".bottom__bar .contents .user-list").append("<li m-index='" + i + "'>" + userInfo + "</li>");
+    $(".bottom__bar .contents .user-list").append("<li m-index='" + i + "'>" + userInfo + "</li>");//antiga
+    $(".group-members-ul").append("<li>" + userInfo + "</li>")// nova
   });
   $(".user-list li a.force-position").on("click", function(e){
     e.preventDefault();
