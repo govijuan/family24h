@@ -1433,6 +1433,7 @@ function loadGroupMarkers(){
   $(".bottom__bar .contents").append("<ul class='user-list'></ul>");//antiga
   $(".group-content .group-members-ul").remove();
   $(".group-content").append("<ul class='group-members-ul'></ul>");//nova
+  $(".curr-group-info-in-h .curr-group-length-txt").remove();
   $(".curr-group-info-in-h").append("<div class='curr-group-length-txt'>" + member_list.length + " " + tr("members") + "</div>");//novo
   $.each(member_list,function(i,member){
     if (!member.alias){

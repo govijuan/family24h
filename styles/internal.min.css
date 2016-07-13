@@ -2535,8 +2535,9 @@ div, a, h1, h2, h3, span, li, p { font-family: 'Ubuntu', sans-serif; }
 
 .groups-content-header { background-color: #0066cc; height: 160px; width: 330px; color: white; padding: 15px 15px 10px 15px; position: relative; }
 
-.curr-group-info-in-h { color: white; position: absolute; bottom: 0; }
+.curr-group-info-in-h { color: white; position: absolute; bottom: 10px; }
 .curr-group-info-in-h .curr-group-in-h-txt { font-size: 22px; font-weight: 600; }
+.curr-group-info-in-h .curr-group-length-txt { font-size: 12px; }
 
 .groups-in-info-header-wrap { text-align: right; }
 
