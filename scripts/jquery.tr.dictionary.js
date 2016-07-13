@@ -60,6 +60,7 @@ var myDictionary = {
       'Virtual fences': 'Cercas Virtuais',
       'Select date interval': 'Selecionar data',
       'Group members': 'Membros do Grupo',
+      'members': 'membros',
       'Created by': 'Criado por',
       'View position history': 'Ver histórico de posições',
       'Loading': 'Carregando',
