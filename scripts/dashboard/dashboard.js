@@ -537,6 +537,8 @@ function initialize(callback,callback2){
             $(".left__bar .group-info .info").append("<div class='members item'><a href='#' id='loadMembersMenu'>" + tr("Group members") + "</a></div>");
             $(".left__bar .group-info .info").append("<div class='members item'><a href='#' id='loadInvites'>" + tr("Manage invitations") + "</a></div>");//antiga
             $(".invites-box .invites-list .convites-title").html(tr("Invites"));
+            grupoAtual = "<div class='grupo-atual-txt'>" + tr("Grupo Atual") + "</div>"
+            $(".group-in-header").append(grupoAtual + "<div class='nome-grupo-atual' item-id='" + item.id + "'>" + item.data.name + "</div>");
             //console.log(item);
             // colocar a imagem de fundo no header do container de informações do grupo
             if( item.data.group_picture_url != undefined){
@@ -581,8 +583,7 @@ function initialize(callback,callback2){
           var grupoAtual = ""
           if ($.getUrlVar("g") == item.id){
             selected = " selected";//anterior
-            grupoAtual = "<div class='grupo-atual-txt'>" + tr("Grupo Atual") + "</div>"
-            $(".group-in-header").append(grupoAtual + "<div class='nome-grupo-atual' item-id='" + item.id + "'>" + item.data.name + "</div>");
+            
             $(".top-right-groups-wrap").append("<div class ='users-groups-arrow glyphicon glyphicon-menu-down'></div>");
             $(".curr-group-info-in-h").prepend("<div class='curr-group-in-h-txt'>" + item.data.name + "</div>");//novo
           }
