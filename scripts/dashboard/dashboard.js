@@ -20,6 +20,8 @@ var drawingManager, fencePolygon;
 var loading_message = false;
 var bs_viewport;
 var currentInvitesLength = 0;
+var currGroupName = '';
+var currGroupHeaderBG_URL = '';
 
 if (!String.prototype.render) {
   String.prototype.render = function(args) {
@@ -529,6 +531,7 @@ function initialize(callback,callback2){
         $(".left__bar .group-info").after("<div class='fixed-bottom'></div>");
         $(".groups-content-header").append("<div class='groups-in-info-header-wrap'></div><div class='curr-group-info-in-h'></div>");//novo
         $(".group-in-header .nome-grupo-atual").remove();
+        $(".group-content").append("<ul class='group-list-in-g-content'></ul>");
         
         $.each(group_list, function(index,item){
           if (index == 0 && $.getUrlVar("g") == undefined || $.getUrlVar("g") == item.id){
@@ -541,7 +544,6 @@ function initialize(callback,callback2){
             grupoAtual = "<div class='grupo-atual-txt'>" + tr("Grupo Atual") + "</div>";
             $(".group-in-header").append(grupoAtual + "<div class='nome-grupo-atual' item-id='" + item.id + "'>" + item.data.name + "</div>");//novo
             $(".curr-group-info-in-h").prepend("<div class='curr-group-in-h-txt'>" + item.data.name + "</div>");
-            //$(".curr-group-info-in-h").append("<div class='curr-group-length-txt'>" + item.data.name + "</div>");//novo
             if( item.data.group_picture_url != undefined){
 	            $(".groups-content-header").attr("style", "background-image: url(" + item.data.group_picture_url + "); background-size: 90% auto; background-position: 40% 30%;");
 	          }else{
@@ -576,8 +578,8 @@ function initialize(callback,callback2){
             });
             
           }
-          $(".groups-in-info-header-wrap").append("<div class='group-icon-in-info-h glyphicon glyphicon-group-icon' group-id='" + item.id + "'></div>");
-          
+          $(".groups-in-info-header-wrap").append("<div class='group-icon-in-info-h group-click glyphicon glyphicon-group-icon' group-id='" + item.id + "' title='" + item.data.name + "'></div>");
+          $(".group-list-in-g-content").append("<li class='group-click' group-id='" + item.id + "'><div class='group-icon glyphicon glyphicon-group-icon'></div><div class='group-name-txt'>" + item.data.name + "</div>");
          
           var selected = "";//anterior
           var selecterLi = ""//novo
@@ -597,6 +599,12 @@ function initialize(callback,callback2){
         $("#group-list").change(function(){
           group_id = $('#group-list').find(":selected").val();
           location.hash = "#!/group?g=" + $('#group-list').find(":selected").val();
+        });
+        $(".group-click").bind("click", function(e){
+	        var clickedGroupId = $(this).attr("group-id");
+	        group_id = clickedGroupId;
+	        location.hash = "#!/group?g=" + clickedGroupId;
+	        //console.log(currGroupId);
         });
 
         $("#loadMembersMenu").unbind();
@@ -893,6 +901,30 @@ function loadGroupMembers(callback){
   });
 }
 
+function updateCurrGroupInfo(group_id){
+	getGroupNameFromId(group_id);
+	$(".nome-grupo-atual").text(currGroupName);
+	$(".curr-group-in-h-txt").text(currGroupName);
+	if ( currGroupHeaderBG_URL !== null){
+		$(".groups-content-header").css({"background-image": "url(" + currGroupHeaderBG_URL + ")",
+																			"background-size": "90% auto",
+																			"background-position": "40% 30%"
+																		});
+	}else{
+		$(".groups-content-header").attr("style", "background-image: url(/images/bg-grupos.jpg)");
+	}
+	
+}
+
+
+function getGroupNameFromId(id){
+	$.each(group_list, function (index, item) {
+		if (id == item.id) {
+			currGroupName = item.data.name;
+			currGroupHeaderBG_URL = item.data.group_picture_url;
+		}
+	});
+}
 function loadMembersMenu(){
   $(".left__bar .group-info").hide();
   $(".left__bar .group-select").hide();
@@ -2035,7 +2067,6 @@ $(document).ready(function() {
     $("html").click(function(e){
         $("#contextMenu").hide();
     });
-
     validateCookie(function() {
         var telephoneField = document.querySelectorAll('.telephone');
         var nameField = document.querySelectorAll('.name');
@@ -2085,6 +2116,15 @@ $(document).ready(function() {
 	    $(".message-box, .config-box, .groups-content-container").hide();
 	    $(".invites-box").toggle();
     });// ** Novo Fim
+    
+   /* $(".see-more-groups-in-h").click(function(){
+	    $(".group-list-in-g-content").toggle();
+	    console.log("Clicked for opening goups list");
+    });*/
+    $(".see-more-groups-in-h").click(function(e){
+	    $(".group-list-in-g-content").toggle();
+	    console.log("Clicked for opening goups list");
+    });
 
     $("#flash .close,#flash-modal .close,.flash-modal .close").click(function() {
         $(this).parent().fadeOut("slow");
@@ -2167,7 +2207,10 @@ $(window).hashchange( function(){
   }else if ($.getUrlSub() == "group"){
     deleteAllMarkers();
     if (group_id){
+			currGroupName = '';
+			currGroupHeaderBG_URL = '';
       loadGroupMembers();
+      updateCurrGroupInfo(group_id)
     }else{
       initialize(loadGroupMembers,null);
     }
