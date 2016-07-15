@@ -2411,7 +2411,7 @@ div, a, h1, h2, h3, span, li, p { font-family: 'Ubuntu', sans-serif; }
 .left__bar .list-members ul a:hover, .left__bar .list-fences ul a:hover { color: #337ab7; text-decoration: none; }
 .left__bar .list-fences li:hover { color: #00ffea; cursor: hand; cursor: pointer; }
 
-.bottom__bar { background-color: #fff; width: 100%; position: relative; clear: both; }
+.bottom__bar { background-color: #fff; width: 100%; position: relative; clear: both; /*display: none;*/ }
 .bottom__bar .icon-bottom-bar { padding: 5px; }
 .bottom__bar .icon-bottom-bar img { width: 30px; height: 30px; }
 .bottom__bar .icon-bottom-bar img:hover { cursor: hand; cursor: pointer; }
@@ -2527,9 +2527,11 @@ div, a, h1, h2, h3, span, li, p { font-family: 'Ubuntu', sans-serif; }
 
 /*----------------------------------------------------------------------------*\ Top Menu Group link and Groups boxes
 \*----------------------------------------------------------------------------*/
-.group-in-header { margin-top: calc( ( 80px - 45.7167px) / 2); width: calc( 100% - 14px ); float: left; }
+.group-in-header { margin-top: calc( ( 80px - 45.7167px) / 2); width: calc( 100% - 54px ); float: left; padding: 0 10px 0 15px; }
 .group-in-header .grupo-atual-txt { font-size: 11px; }
 .group-in-header .nome-grupo-atual { font-size: 18px; line-height: 20px; }
+
+.group-i-in-h { color: #32ccfe; font-size: 40px; width: 40px; float: left; line-height: 80px; padding: 5px 0; }
 
 .groups-content-container { display: none; position: absolute; width: 330px; right: 0; height: 100%; background: white; z-index: 100; box-shadow: -5px -3px 7px rgba(0, 0, 0, 0.1); }
 
@@ -2582,6 +2584,10 @@ div, a, h1, h2, h3, span, li, p { font-family: 'Ubuntu', sans-serif; }
 .group-icons-wrap { width: calc(100% - 40px); float: left; }
 
 .close-groups-list { margin: 0 6px 0 0; }
+
+.usr-info-in-map-wrap { min-height: 400px; width: 310px; background: white; position: absolute; top: 20px; left: 20px; z-index: 300; border-radius: 5px; opacity: 0; transition: opacity 0.5s; }
+
+.visible-urs-info { opacity: 1 !important; }
 
 /*----------------------------------------------------------------------------*\ $MEDIUM
 \*----------------------------------------------------------------------------*/

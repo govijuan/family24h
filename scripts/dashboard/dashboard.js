@@ -460,6 +460,7 @@ function resizeSidebar() {
     }else{
       $(sideBar).css("height","auto");
       $(map).css("height", windowHeight - (topBar[0].offsetHeight + bottomBar[0].offsetHeight) + "px");
+      //$(map).css("height", (windowHeight - topBar[0].offsetHeight) + "px");
     }
 
 }
@@ -524,7 +525,9 @@ function initialize(callback,callback2){
         $(".left__bar .fixed-top .contents").empty();//anterior
         $(".top-right-groups-wrap").empty();//novo
         $(".left__bar .fixed-top .contents").append("<div class='group-select'><select id='group-list'></select></div>");//anterior
+        $(".top-right-groups-wrap").append("<div class='group-i-in-h glyphicon glyphicon-group-icon'></div>");
         $(".top-right-groups-wrap").append("<div class='group-in-header'></div>");//novo
+        $(".top-right-groups-wrap").append("<div class ='users-groups-arrow glyphicon glyphicon-menu-down'></div>");
         $(".left__bar .left-contents").empty();//anterior
         $(".left__bar .left-contents").append("<div class='group-info'></div>");
         $(".left__bar .fixed-bottom").remove();
@@ -586,7 +589,7 @@ function initialize(callback,callback2){
           var grupoAtual = ""
           if ($.getUrlVar("g") == item.id){
             selected = " selected";//anterior
-            $(".top-right-groups-wrap").append("<div class ='users-groups-arrow glyphicon glyphicon-menu-down'></div>");
+            
             //novo
           }
           $("#group-list").append("<option value='" + item.id + "' " + selected + ">"+item.data.name);//anterior
@@ -1515,7 +1518,12 @@ function loadGroupMarkers(){
       }
       popupIW = new google.maps.InfoWindow(popOpts);
       popupIW.open(googleMap, googleMarker);
+      $(".usr-info-in-map-wrap").empty();
+      $(".usr-info-in-map-wrap").append("<div class'nome-usr'>" + member.name + "</div>");
+      $(".usr-info-in-map-wrap").toggleClass("visible-urs-info");
     });
+    
+    
     var userInfo = "";
     if (member.profile_picture_url && member.profile_picture_url != ""){
       userInfo += "<div class='user-avatar' style='background-image: url(" + member.profile_picture_url + ");'></div>";
