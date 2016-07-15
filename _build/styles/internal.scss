@@ -1045,6 +1045,7 @@ div, a, h1, h2, h3, span, li, p{
 	border-radius: 100%;
 	height: 30px;
 	width: 30px;
+	float: left;
 	color: white;
 	line-height: 30px;
 	display: inline-block;
@@ -1087,11 +1088,16 @@ div, a, h1, h2, h3, span, li, p{
 			}
 		}
 	}
+	
+}
+.groups-listing-container{
+	display: none;
+	z-index: 10;
+	position: absolute;
+	margin-top: -40px;
+	width: 100%;
 	.group-list-in-g-content{
-		display: none;
-		padding: 15px;
-		z-index: 10;
-		position: absolute;
+		padding: 25px 20px 20px;
 		list-style: none;
 		background: white;
 		width: 100%;
@@ -1110,9 +1116,11 @@ div, a, h1, h2, h3, span, li, p{
 			float: left;
 			line-height: 40px;
 			padding: 0 0 0 15px;
+			color: $medium_gray;
 		}
 	}
 }
+
 .group-list-in-g-content li{ &:nth-child(4n-7){ .group-icon{background: $light_blue;} } }
 .group-list-in-g-content li { &:nth-child(4n-6){ .group-icon{background: $light-green;} } }
 .group-list-in-g-content li { &:nth-child(4n-5){ .group-icon{background: $fucsia;} } }
@@ -1125,7 +1133,9 @@ div, a, h1, h2, h3, span, li, p{
 	width: 100%;
 	cursor: pointer;
 }
-
+.group-list-in-g-content.visible{display: block!important}
+.group-icons-wrap{width: calc(100% - 40px); float: left;}
+.close-groups-list{margin: 0 6px 0 0;}
 /*----------------------------------------------------------------------------*\
     $MEDIUM
 \*----------------------------------------------------------------------------*/

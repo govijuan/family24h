@@ -529,9 +529,9 @@ function initialize(callback,callback2){
         $(".left__bar .left-contents").append("<div class='group-info'></div>");
         $(".left__bar .fixed-bottom").remove();
         $(".left__bar .group-info").after("<div class='fixed-bottom'></div>");
-        $(".groups-content-header").append("<div class='groups-in-info-header-wrap'></div><div class='curr-group-info-in-h'></div>");//novo
+        //$(".groups-content-header").append("");//novo
         $(".group-in-header .nome-grupo-atual").remove();
-        $(".group-content").append("<ul class='group-list-in-g-content'></ul>");
+        $(".groups-listing-container").append("<ul class='group-list-in-g-content'></ul>");
         
         $.each(group_list, function(index,item){
           if (index == 0 && $.getUrlVar("g") == undefined || $.getUrlVar("g") == item.id){
@@ -578,7 +578,7 @@ function initialize(callback,callback2){
             });
             
           }
-          $(".groups-in-info-header-wrap").append("<div class='group-icon-in-info-h group-click glyphicon glyphicon-group-icon' group-id='" + item.id + "' title='" + item.data.name + "'></div>");
+          $(".group-icons-wrap").append("<div class='group-icon-in-info-h group-click glyphicon glyphicon-group-icon' group-id='" + item.id + "' title='" + item.data.name + "'></div>");
           $(".group-list-in-g-content").append("<li class='group-click' group-id='" + item.id + "'><div class='group-icon glyphicon glyphicon-group-icon'></div><div class='group-name-txt'>" + item.data.name + "</div>");
          
           var selected = "";//anterior
@@ -594,7 +594,7 @@ function initialize(callback,callback2){
         });
         if(group_list.length > 3){ // se tem mais do que tres grupos fazer com que apareçam tres e o símbolo para carregar a lista completa de grupos embaixo no espaço de conteúdos dos grupos
 		        	$(".groups-in-info-header-wrap .group-icon-in-info-h:nth-child(n + 4)").css("display", "none");
-		        	$(".groups-in-info-header-wrap").append("<div class='see-more-groups-in-h'>•••</div>");
+		        	//$(".groups-in-info-header-wrap").append("<div class='see-more-groups-in-h'>•••</div>");
         		}        		
         $("#group-list").change(function(){
           group_id = $('#group-list').find(":selected").val();
@@ -606,7 +606,6 @@ function initialize(callback,callback2){
 	        location.hash = "#!/group?g=" + clickedGroupId;
 	        //console.log(currGroupId);
         });
-
         $("#loadMembersMenu").unbind();
         $("#loadMembersMenu").bind("click", function(e){
            e.preventDefault();
@@ -2063,7 +2062,7 @@ function checkIfMobile(){
     $Ajax to parse user's info
 \*----------------------------------------------------------------------------*/
 $(document).ready(function() {
-
+	
     $("html").click(function(e){
         $("#contextMenu").hide();
     });
@@ -2117,14 +2116,10 @@ $(document).ready(function() {
 	    $(".invites-box").toggle();
     });// ** Novo Fim
     
-   /* $(".see-more-groups-in-h").click(function(){
-	    $(".group-list-in-g-content").toggle();
-	    console.log("Clicked for opening goups list");
-    });*/
-    $(".see-more-groups-in-h").click(function(e){
-	    $(".group-list-in-g-content").toggle();
-	    console.log("Clicked for opening goups list");
+    $(".see-more-groups-in-h, .close-groups-list").click(function(){
+	    $(".groups-listing-container").toggle();
     });
+    
 
     $("#flash .close,#flash-modal .close,.flash-modal .close").click(function() {
         $(this).parent().fadeOut("slow");

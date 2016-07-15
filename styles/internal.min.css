@@ -2543,7 +2543,7 @@ div, a, h1, h2, h3, span, li, p { font-family: 'Ubuntu', sans-serif; }
 
 .group-icon-in-info-h { border-radius: 100%; height: 30px; width: 30px; color: white; line-height: 30px; font-size: 18px; display: inline-block; padding: 2px 4px 0 0; margin: 0 3px; cursor: pointer; }
 
-.see-more-groups-in-h { border-radius: 100%; height: 30px; width: 30px; color: white; line-height: 30px; display: inline-block; margin: 0 0 0 3px; cursor: pointer; background: #666; padding: 0 6px 0 0; }
+.see-more-groups-in-h { border-radius: 100%; height: 30px; width: 30px; float: left; color: white; line-height: 30px; display: inline-block; margin: 0 0 0 3px; cursor: pointer; background: #666; padding: 0 6px 0 0; }
 
 .group-icon-in-info-h:nth-child(4n-7) { background: #32ccfe; }
 
@@ -2559,9 +2559,11 @@ div, a, h1, h2, h3, span, li, p { font-family: 'Ubuntu', sans-serif; }
 .group-content .group-members-ul .user-info .name { color: #999; margin: 0; }
 .group-content .group-members-ul .user-info .address { color: #B6B6B6; font-size: 12px; margin: 0; }
 .group-content .group-members-ul .user-info .timestamp { color: #32ccfe; font-size: 12px; margin: 0; }
-.group-content .group-list-in-g-content { display: none; padding: 15px; z-index: 10; position: absolute; list-style: none; background: white; width: 100%; }
-.group-content .group-list-in-g-content .group-icon { border-radius: 100%; color: white; font-size: 25px; height: 40px; width: 40px; float: left; clear: both; padding: 10px 0 0 4px; }
-.group-content .group-list-in-g-content .group-name-txt { height: 40px; float: left; line-height: 40px; padding: 0 0 0 15px; }
+
+.groups-listing-container { display: none; z-index: 10; position: absolute; margin-top: -40px; width: 100%; }
+.groups-listing-container .group-list-in-g-content { padding: 25px 20px 20px; list-style: none; background: white; width: 100%; }
+.groups-listing-container .group-list-in-g-content .group-icon { border-radius: 100%; color: white; font-size: 25px; height: 40px; width: 40px; float: left; clear: both; padding: 10px 0 0 4px; }
+.groups-listing-container .group-list-in-g-content .group-name-txt { height: 40px; float: left; line-height: 40px; padding: 0 0 0 15px; color: #999; }
 
 .group-list-in-g-content li:nth-child(4n-7) .group-icon { background: #32ccfe; }
 
@@ -2574,6 +2576,12 @@ div, a, h1, h2, h3, span, li, p { font-family: 'Ubuntu', sans-serif; }
 .group-list-in-g-content li:after { clear: both; }
 
 .group-list-in-g-content li { margin: 0 0 8px; display: block; height: 40px; width: 100%; cursor: pointer; }
+
+.group-list-in-g-content.visible { display: block !important; }
+
+.group-icons-wrap { width: calc(100% - 40px); float: left; }
+
+.close-groups-list { margin: 0 6px 0 0; }
 
 /*----------------------------------------------------------------------------*\ $MEDIUM
 \*----------------------------------------------------------------------------*/
