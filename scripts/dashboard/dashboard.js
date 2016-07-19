@@ -1518,12 +1518,16 @@ function loadGroupMarkers(){
       }
       popupIW = new google.maps.InfoWindow(popOpts);
       popupIW.open(googleMap, googleMarker);
-      $(".usr-info-in-map-wrap").empty();
-      $(".usr-info-in-map-wrap").append("<div class'nome-usr'>" + member.name + "</div>");
-      $(".usr-info-in-map-wrap").toggleClass("visible-urs-info");
+      
+      $(".usr-info-in-map-content").empty();
+      $(".usr-info-in-map-content").append("<div class='mrkr-info-member-img' style=' background-image: url(" + member.profile_picture_url + ")'></div>");
+      $(".usr-info-in-map-content").append('<div class="nome-usr">' + member.name + '</div>');
+      $(".usr-info-in-map-wrap").addClass("visible-urs-info");
     });
     
-    
+    $(".close-member-marker-label-info").click(function(){
+	    $(".usr-info-in-map-wrap").removeClass("visible-urs-info");
+    });
     var userInfo = "";
     if (member.profile_picture_url && member.profile_picture_url != ""){
       userInfo += "<div class='user-avatar' style='background-image: url(" + member.profile_picture_url + ");'></div>";

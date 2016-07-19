@@ -1165,6 +1165,23 @@ div, a, h1, h2, h3, span, li, p{
 .visible-urs-info{
 	opacity: 1!important;
 }
+.usr-info-in-map-content{text-align: center; padding: 15px}
+.close-member-marker-label-info{
+	margin: 0 6px 0 0;
+}
+.mrkr-info-member-img{
+	height: 120px;
+	width: 120px;
+	border-radius: 100%;
+	background-size: 100%;
+	display: inline-block;
+}
+.nome-usr{
+	color: $medium_gray;
+	font-size: 22px;
+	font-weight: 300;
+}
+.mrkr-info-member-img{ &:after{ height: 45px; width: 45px; background: $dark_blue; position: absolute;z-index: 103; border-radius: 100%; font-family: 'Glyphicons Halflings'; content: "\e013"; color: white; line-height: 45px; top: 100px; margin: 0 0 0 30px; border: 5px solid white; font-size: 20px } }
 /*----------------------------------------------------------------------------*\
     $MEDIUM
 \*----------------------------------------------------------------------------*/
