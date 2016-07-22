@@ -1525,7 +1525,8 @@ function loadGroupMarkers(){
       $(".usr-info-in-map-content").append('<div class="nome-usr">' + member.name + '</div>');
       $(".usr-info-in-map-content").append("<div class'posicao-usr'><div class='pos-title'><i class='glyphicon glyphicon-map-marker'></i> " + tr("Current Position") + "</div><div class='pos-info'>" + member.location.human_address + " <hr/></div></div>" );
 
-      $(".usr-info-in-map-content").append("<div class='hora-data-usr'>" + convertDateToHuman(member.valid_time, tr("en-EN")) + "</div>" );
+      $(".usr-info-in-map-content").append("<div class='hora-data-usr'><i class='timestamp-cal-icon glyphicon glyphicon-calendar'></i> " + convertDateToHuman(member.valid_time, tr("en-EN")) + "h</div>" );
+      $(".usr-info-in-map-content").append("<div class='hist-posicoes-wrap'><a class='hist-posicoes-link' href='#!/member?u=" + member.user_id + "&g=" + group_id + "'><i class='hist-pos-icon glyphicon glyphicon-th'></i>" + tr("Positions History") + "</a></div><div class='hist-pos-intrucao'>" + tr("Click here to see former position") + "</div>");
       $(".usr-info-in-map-wrap").addClass("visible-urs-info");
     });
     
@@ -2037,7 +2038,7 @@ function convertDateToHuman(tagText, language){
 																															 year: 'numeric'
 																										});
 	localGivenDate = localGivenDate.upperfirst();
-	localGivenDate = localGivenDate + " &nbsp;&nbsp;<i class='glyphicon glyphicon-time'></i> " + time;
+	localGivenDate = localGivenDate + " &nbsp;&nbsp;<i class='timestamp-time-icon glyphicon glyphicon-time'></i> " + time;
 	
 	return localGivenDate.upperfirst();
 }//nova

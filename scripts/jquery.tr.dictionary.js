@@ -63,6 +63,8 @@ var myDictionary = {
       'Group members': 'Membros do Grupo',
       'members': 'membros',
       'Created by': 'Criado por',
+      'Positions History': 'Hostórico de Posições',
+      'Click here to see former position': 'Clique e confira as posições anteriores',
       'View position history': 'Ver histórico de posições',
       'Loading': 'Carregando',
       'You have': 'Você possui',
