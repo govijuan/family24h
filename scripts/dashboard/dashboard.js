@@ -22,6 +22,7 @@ var bs_viewport;
 var currentInvitesLength = 0;
 var currGroupName = '';
 var currGroupHeaderBG_URL = '';
+String.prototype.upperfirst = function(){return this.charAt(0).toUpperCase() + this.slice(1);}
 
 if (!String.prototype.render) {
   String.prototype.render = function(args) {
@@ -1524,7 +1525,7 @@ function loadGroupMarkers(){
       $(".usr-info-in-map-content").append('<div class="nome-usr">' + member.name + '</div>');
       $(".usr-info-in-map-content").append("<div class'posicao-usr'><div class='pos-title'><i class='glyphicon glyphicon-map-marker'></i> " + tr("Current Position") + "</div><div class='pos-info'>" + member.location.human_address + " <hr/></div></div>" );
 
-      $(".usr-info-in-map-content").append("<div class='hora-data-usr'>" + convertDate(member.valid_time, ) + "</div>" );
+      $(".usr-info-in-map-content").append("<div class='hora-data-usr'>" + convertDateToHuman(member.valid_time, tr("en-EN")) + "</div>" );
       $(".usr-info-in-map-wrap").addClass("visible-urs-info");
     });
     
@@ -2005,7 +2006,7 @@ function mountTabs(mindex){
   }
 
 }
-function convertDate(tagText,format,){
+function convertDate(tagText,format){
   // get time offset from browser
   var currentDate = new Date();
   var offset = -(currentDate.getTimezoneOffset() / 60);
@@ -2013,7 +2014,7 @@ function convertDate(tagText,format,){
 
   // get provided date
   var givenDate = new Date(tagText);
-  givenDate = givenDate.toLocaleDateString("pt-BR");
+
   // apply offset
   var hours = givenDate.getHours();
   hours += offset;
@@ -2022,7 +2023,24 @@ function convertDate(tagText,format,){
   // format the date
   var localDateString = $.format.date(givenDate, format);
   return localDateString;
-}
+}//antiga
+
+function convertDateToHuman(tagText, language){
+	var givenDate = new Date(tagText);
+	var hours = givenDate.getHours();
+	var minutes = givenDate.getMinutes();
+	var time = hours + ":" + minutes;
+	var localGivenDate = givenDate.toLocaleDateString(language, {
+																															 weekday: 'short', 
+																															 day: 'numeric',
+																															 month: 'long',
+																															 year: 'numeric'
+																										});
+	localGivenDate = localGivenDate.upperfirst();
+	localGivenDate = localGivenDate + " &nbsp;&nbsp;<i class='glyphicon glyphicon-time'></i> " + time;
+	
+	return localGivenDate.upperfirst();
+}//nova
 
 function deleteAllMarkers(){
   $.each(markers, function(index,item){
@@ -2031,6 +2049,8 @@ function deleteAllMarkers(){
   markers = [];
   if (markerClusterer) markerClusterer.clearMarkers();
 }
+
+
 
 function pinSymbol(color) {
     return {

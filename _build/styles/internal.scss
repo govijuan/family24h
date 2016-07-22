@@ -1184,8 +1184,20 @@ div, a, h1, h2, h3, span, li, p{
 	margin: 0 0 20px;
 }
 .pos-title{color: $light_blue; text-align: left; text-transform: uppercase; margin: 0 0 8px; font-size: 12px;}
-.pos-info{color: $medium_gray; padding: 0 13px; text-align: left; font-weight: 300; line-height: 16px; }
+.pos-info{
+	color: $medium_gray; 
+	padding: 0 13px; 
+	text-align: left; 
+	font-weight: 300; 
+	line-height: 16px;
+	font-size: 13px;
+	hr{
+		margin: 10px 0 5px!important;
+	}
+}
+
 .mrkr-info-member-img{ &:after{ height: 45px; width: 45px; background: $dark_blue; position: absolute;z-index: 103; border-radius: 100%; font-family: 'Glyphicons Halflings'; content: "\e013"; color: white; line-height: 45px; top: 125px; margin: 0 0 0 30px; border: 5px solid white; font-size: 20px } }
+.hora-data-usr{color: $dark_gray; text-align: left; padding: 0 13px; font-size: 13px;}
 
 /*----------------------------------------------------------------------------*\
     $MEDIUM

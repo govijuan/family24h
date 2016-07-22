@@ -98,6 +98,7 @@ var myDictionary = {
       'Next': 'Próximo',
       'Error sending action': 'Erro ao enviar ação',
       'Invite accepted': 'Convite aceito',
-      'Invite denied': 'Convite recusado'
+      'Invite denied': 'Convite recusado',
+      'en-EN': 'pt-BR'
 	}
 };
