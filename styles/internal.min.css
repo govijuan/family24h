@@ -2585,19 +2585,23 @@ div, a, h1, h2, h3, span, li, p { font-family: 'Ubuntu', sans-serif; }
 
 .close-groups-list { margin: 0 6px 0 0; }
 
-.usr-info-in-map-wrap { min-height: 400px; width: 310px; background: white; position: absolute; top: 20px; left: 20px; z-index: 300; border-radius: 5px; opacity: 0; transition: opacity 0.5s; }
+.usr-info-in-map-wrap { min-height: 400px; width: 310px; background: white; position: absolute; top: 20px; left: 20px; z-index: 300; border-radius: 5px; opacity: 0; transition: opacity 0.5s; box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25); }
 
 .visible-urs-info { opacity: 1 !important; }
 
-.usr-info-in-map-content { text-align: center; padding: 15px; }
+.usr-info-in-map-content { text-align: center; padding: 50px 15px 0; }
 
 .close-member-marker-label-info { margin: 0 6px 0 0; }
 
 .mrkr-info-member-img { height: 120px; width: 120px; border-radius: 100%; background-size: 100%; display: inline-block; }
 
-.nome-usr { color: #999; font-size: 22px; font-weight: 300; }
+.nome-usr { color: #999; font-size: 22px; font-weight: 300; margin: 0 0 20px; }
 
-.mrkr-info-member-img:after { height: 45px; width: 45px; background: #0066cc; position: absolute; z-index: 103; border-radius: 100%; font-family: 'Glyphicons Halflings'; content: "\e013"; color: white; line-height: 45px; top: 100px; margin: 0 0 0 30px; border: 5px solid white; font-size: 20px; }
+.pos-title { color: #32ccfe; text-align: left; text-transform: uppercase; margin: 0 0 8px; font-size: 12px; }
+
+.pos-info { color: #999; padding: 0 13px; text-align: left; font-weight: 300; line-height: 16px; }
+
+.mrkr-info-member-img:after { height: 45px; width: 45px; background: #0066cc; position: absolute; z-index: 103; border-radius: 100%; font-family: 'Glyphicons Halflings'; content: "\e013"; color: white; line-height: 45px; top: 125px; margin: 0 0 0 30px; border: 5px solid white; font-size: 20px; }
 
 /*----------------------------------------------------------------------------*\ $MEDIUM
 \*----------------------------------------------------------------------------*/

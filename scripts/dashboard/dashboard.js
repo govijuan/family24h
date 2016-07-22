@@ -1522,6 +1522,9 @@ function loadGroupMarkers(){
       $(".usr-info-in-map-content").empty();
       $(".usr-info-in-map-content").append("<div class='mrkr-info-member-img' style=' background-image: url(" + member.profile_picture_url + ")'></div>");
       $(".usr-info-in-map-content").append('<div class="nome-usr">' + member.name + '</div>');
+      $(".usr-info-in-map-content").append("<div class'posicao-usr'><div class='pos-title'><i class='glyphicon glyphicon-map-marker'></i> " + tr("Current Position") + "</div><div class='pos-info'>" + member.location.human_address + " <hr/></div></div>" );
+
+      $(".usr-info-in-map-content").append("<div class='hora-data-usr'>" + convertDate(member.valid_time, ) + "</div>" );
       $(".usr-info-in-map-wrap").addClass("visible-urs-info");
     });
     
@@ -2002,7 +2005,7 @@ function mountTabs(mindex){
   }
 
 }
-function convertDate(tagText,format){
+function convertDate(tagText,format,){
   // get time offset from browser
   var currentDate = new Date();
   var offset = -(currentDate.getTimezoneOffset() / 60);
@@ -2010,7 +2013,7 @@ function convertDate(tagText,format){
 
   // get provided date
   var givenDate = new Date(tagText);
-
+  givenDate = givenDate.toLocaleDateString("pt-BR");
   // apply offset
   var hours = givenDate.getHours();
   hours += offset;

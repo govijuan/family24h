@@ -54,6 +54,7 @@ var myDictionary = {
       'Request successful sent': 'Requisição enviada com sucesso',
       'Error sending request': 'Erro ao enviar requisição',
       'Force position': 'Forçar posição',
+      'Current Position': 'Posição Atual',
       'Delete': 'Apagar',
       'Edit': 'Editar',
       'Save': 'Salvar',
