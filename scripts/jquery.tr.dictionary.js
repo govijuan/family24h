@@ -55,6 +55,8 @@ var myDictionary = {
       'Error sending request': 'Erro ao enviar requisição',
       'Force position': 'Forçar posição',
       'Current Position': 'Posição Atual',
+      'Position': 'Posição',
+      'Alter': 'Alterar',
       'Delete': 'Apagar',
       'Edit': 'Editar',
       'Save': 'Salvar',

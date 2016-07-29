@@ -1211,6 +1211,88 @@ div, a, h1, h2, h3, span, li, p{
 .hist-pos-intrucao{ color: $dark_blue; font-size: 10px; text-transform: uppercase; text-align: left; padding: 0 13px;}
 
 /*----------------------------------------------------------------------------*\
+    Member's Positions History Styles
+\*----------------------------------------------------------------------------*/
+.member-history{ 
+	ul.tabs{
+		list-style: none;
+		padding: 0;
+		li{
+			padding: 2.5px 5px;
+			text-align: center;
+			border-bottom: 1px solid #fff;
+			display: inline-block;
+		}
+		li.item{
+			
+			
+			font-size: 13px;
+			color: #666;
+			&:hover{
+				cursor: pointer;
+				border-bottom: 1px solid $light_blue;
+				background-color: $light_gray;
+				color: $light_blue;
+			}
+		}
+		li.item.active{
+				border-bottom: 1px solid $light_blue;
+				color: $light_blue;
+		}
+		li.arrow{ cursor: pointer;
+							& :hover { color: $light_blue}
+							.glyphicon{
+								&:after, &:before{
+									font-size: 13px
+								}
+							}
+						}
+		li.arrow.disabled{
+			color: #e0e0e0;
+		}
+	}
+	ul.history-info{
+		list-style: none;
+		padding: 0;
+		margin: 0 -15px -10px;
+		background: #eaebec;
+		.batery-info, .network-info{
+			padding: 10px 15px; 
+			text-align: left;
+			color: $dark_gray;
+			.glyphicon{
+				margin: 0 20px 0 0;
+				color: #9c9c9c;
+				width: 20px;
+				text-align: center;
+			}
+			
+		}
+		.network-info-nmbr, .batery-info-nmbr{ 
+			text-align: right;
+			width: calc(40% - 10px);
+			display: inline-block;
+			font-size: 13px;
+		}
+		.batery-info-txt, .network-info-txt{
+			width: calc(60% - 30px);
+			display: inline-block;
+			font-size: 13px;
+		}
+	}
+}
+.alterar-data-hist{
+	display: block; 
+	color: $dark_blue; 
+	text-decoration: none; 
+	text-align: left;
+	text-align: left;
+	padding: 0px 24px;
+	font-size: 11px;
+}
+
+
+/*----------------------------------------------------------------------------*\
     $MEDIUM
 \*----------------------------------------------------------------------------*/
 @media screen and (min-width: 992px) and (max-width: 1199px) {

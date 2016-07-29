@@ -2620,6 +2620,25 @@ div, a, h1, h2, h3, span, li, p { font-family: 'Ubuntu', sans-serif; }
 
 .hist-pos-intrucao { color: #0066cc; font-size: 10px; text-transform: uppercase; text-align: left; padding: 0 13px; }
 
+/*----------------------------------------------------------------------------*\ Member's Positions History Styles
+\*----------------------------------------------------------------------------*/
+.member-history ul.tabs { list-style: none; padding: 0; }
+.member-history ul.tabs li { padding: 2.5px 5px; text-align: center; border-bottom: 1px solid #fff; display: inline-block; }
+.member-history ul.tabs li.item { font-size: 13px; color: #666; }
+.member-history ul.tabs li.item:hover { cursor: pointer; border-bottom: 1px solid #32ccfe; background-color: #e2e2e2; color: #32ccfe; }
+.member-history ul.tabs li.item.active { border-bottom: 1px solid #32ccfe; color: #32ccfe; }
+.member-history ul.tabs li.arrow { cursor: pointer; }
+.member-history ul.tabs li.arrow :hover { color: #32ccfe; }
+.member-history ul.tabs li.arrow .glyphicon:after, .member-history ul.tabs li.arrow .glyphicon:before { font-size: 13px; }
+.member-history ul.tabs li.arrow.disabled { color: #e0e0e0; }
+.member-history ul.history-info { list-style: none; padding: 0; margin: 0 -15px -10px; background: #eaebec; }
+.member-history ul.history-info .batery-info, .member-history ul.history-info .network-info { padding: 10px 15px; text-align: left; color: #666; }
+.member-history ul.history-info .batery-info .glyphicon, .member-history ul.history-info .network-info .glyphicon { margin: 0 20px 0 0; color: #9c9c9c; width: 20px; text-align: center; }
+.member-history ul.history-info .network-info-nmbr, .member-history ul.history-info .batery-info-nmbr { text-align: right; width: calc(40% - 10px); display: inline-block; font-size: 13px; }
+.member-history ul.history-info .batery-info-txt, .member-history ul.history-info .network-info-txt { width: calc(60% - 30px); display: inline-block; font-size: 13px; }
+
+.alterar-data-hist { display: block; color: #0066cc; text-decoration: none; text-align: left; text-align: left; padding: 0px 24px; font-size: 11px; }
+
 /*----------------------------------------------------------------------------*\ $MEDIUM
 \*----------------------------------------------------------------------------*/
 @media screen and (min-width: 992px) and (max-width: 1199px) { .left__bar { width: 25%; }

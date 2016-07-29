@@ -1523,7 +1523,7 @@ function loadGroupMarkers(){
       $(".usr-info-in-map-content").empty();
       $(".usr-info-in-map-content").append("<div class='mrkr-info-member-img' style=' background-image: url(" + member.profile_picture_url + ")'></div>");
       $(".usr-info-in-map-content").append('<div class="nome-usr">' + member.name + '</div>');
-      $(".usr-info-in-map-content").append("<div class'posicao-usr'><div class='pos-title'><i class='glyphicon glyphicon-map-marker'></i> " + tr("Current Position") + "</div><div class='pos-info'>" + member.location.human_address + " <hr/></div></div>" );
+      $(".usr-info-in-map-content").append("<div class='posicao-usr'><div class='pos-title'><i class='glyphicon glyphicon-map-marker'></i> " + tr("Current Position") + "</div><div class='pos-info'>" + member.location.human_address + " <hr/></div></div>" );
 
       $(".usr-info-in-map-content").append("<div class='hora-data-usr'><i class='timestamp-cal-icon glyphicon glyphicon-calendar'></i> " + convertDateToHuman(member.valid_time, tr("en-EN")) + "h</div>" );
       $(".usr-info-in-map-content").append("<div class='hist-posicoes-wrap'><a class='hist-posicoes-link' href='#!/member?u=" + member.user_id + "&g=" + group_id + "'><i class='hist-pos-icon glyphicon glyphicon-th'></i>" + tr("Positions History") + "</a></div><div class='hist-pos-intrucao'>" + tr("Click here to see former position") + "</div>");
@@ -1653,11 +1653,17 @@ function loadMemberMarkers(){
   $(".bottom__bar .contents").remove();
   $(".bottom__bar").append("<div class='contents'></div>");
   $(".bottom__bar .contents").append("<div class='user-history'><div class='info'></div><ul class='tabs'></ul><ul class='history'></ul></div>");
-
+  
+	$(".usr-info-in-map-wrap").empty();
+	$(".usr-info-in-map-wrap").append("<span class='close close-member-marker-label-info'>x</span><div class='usr-info-in-map-content'></div>");
+	$(".usr-info-in-map-content").append("<div class='member-history'><ul class='tabs'></ul></div>");
+			$(".member-history").append("<ul class='history-info'></ul>");
   member_history.sort(sort_by_date);
   if (member_history.length > 5){
-    $(".bottom__bar .contents .user-history ul.tabs").append("<li m-index='prev' class='arrow disabled'><span class='glyphicon glyphicon-menu-left' aria-hidden='true'></span></li>");
-  }
+    $(".bottom__bar .contents .user-history ul.tabs").append("<li m-index='prev' class='arrow disabled'><span class='glyphicon glyphicon-menu-left' aria-hidden='true'></span></li>");//antiga
+    $(".member-history ul.tabs").append("<li m-index='prev' class='arrow disabled'><span class='glyphicon glyphicon-menu-left' aria-hidden='true'></span></li>");//nova
+   }
+  
   $.each(member_history,function(i,track){
     var position = {lat: track.location.latitude, lng: track.location.longitude};
     var markerOpt = {
@@ -1703,49 +1709,73 @@ function loadMemberMarkers(){
       $(".user-history .tabs li[m-index=" + _index + "]").addClass("active");
       $(".user-history .history li.item").addClass("hidden");
       $(".user-history .history li[m-index=" + _index + "]").removeClass("hidden");
+      $
 
-      var infoUser = "";
+      var infoUser = "";//antiga
+      var infoUserCardTop = "";//nova
+      
+      //$(".usr-info-in-map-content .member-history").remove();
+			
       if (track.user_picture && track.user_picture != ""){
-        infoUser += "<div class='user-avatar' style='background-image: url(" + track.user_picture + ");'></div>";
+        infoUser += "<div class='user-avatar' style='background-image: url(" + track.user_picture + ");'></div>";//antiga
+        infoUserCardTop += "<div class='mrkr-info-member-img' style='background-image: url(" + track.user_picture + ")'></div>";//nova
       }
       infoUser += "<div class='user-info'>";
       infoUser += "<p class='name'>" + track.user_name + "</p>";
       infoUser += "<p class='address'>" + track.location.human_address + "</p>";
       infoUser += "<p class='timestamp'>" + convertDate(track.valid_time,"dd/MM/yyyy") + "</p>";
       infoUser += "</div>";
-      $(".user-history .info").html(infoUser);
+      $(".user-history .info").html(infoUser);// carrega info por primeira vez
+      infoUserCardTop += "<div class='nome-usr'>" + track.user_name + "</div>";
+      infoUserCardTop += "<div class='posicao-usr'><div class='pos-title'><i class='glyphicon glyphicon-map-marker'></i>" + tr("Position") + "</div><div class='pos-info'>" + track.location.human_address + " <hr/></div></div>";
+      infoUserCardTop += "<div class='hora-data-usr'><i class='timestamp-cal-icon glyphicon glyphicon-calendar'></i>" + convertDateToHuman(track.valid_time, tr("en-EN")) + "h</div><a class='alterar-data-hist'>" + tr("Alter") + "</a>";
+      infoUserCardTop += "<div class='hist-posicoes-wrap'><a class='hist-posicoes-link' href='#!/member?u=" + track.user_id + "&g=" + group_id + "'><i class='hist-pos-icon glyphicon glyphicon-th'></i>" + tr("Positions History") + "</a></div>";
+      $(".usr-info-in-map-content").prepend(infoUserCardTop);
+    
       mountTabs();
     });
 
     var date_tmp = convertDate(track.valid_time).split(" ");
     if (i > 0){
-      $(".bottom__bar .contents .user-history ul.tabs").append("<li m-index='" + i + "' class='item'>" + date_tmp[1] + "</li>");
+      $(".bottom__bar .contents .user-history ul.tabs ").append("<li m-index='" + i + "' class='item'>" + date_tmp[1] + "</li>");//antiga
+      $(".member-history ul.tabs").append("<li m-index='" + i + "' class='item'>" + date_tmp[1] + "</li>");//nova
     }else{
       $(".bottom__bar .contents .user-history ul.tabs").append("<li m-index='" + i + "' class='item active'>" + date_tmp[1] + "</li>");
+      $(".member-history ul.tabs").append("<li m-index='" + i + "' class='item active'>" + date_tmp[1] + "</li>");
     }
 
-    var itemInfo = "";
+    var itemInfo = "";//antiga
+    var timeStampInfo = "";//nova
     if (track.other && track.other.battery){
-      itemInfo += "<p class='battery'>Bateria: " + track.other.battery.level + "%</p>";
+      itemInfo += "<p class='battery'>Bateria: " + track.other.battery.level + "%</p>";//antiga
+      timeStampInfo += "<div class='batery-info'><i class='glyphicon glyphicon-battery-state'></i><span class='batery-info-txt'>Nivel de bateria</span><span class='batery-info-nmbr'>" + track.other.battery.level + "%</span></div>";//nova
     }
     if (track.network && track.network.network){
       if (track.network.network == "Wi-Fi"){
-        itemInfo += "<p class='network'>Rede: " + track.network.network + "&nbsp;(" + track.network.link_speed +  ")</p>";
+        itemInfo += "<p class='network'>Rede: " + track.network.network + "&nbsp;(" + track.network.link_speed +  ")</p>";//antiga
+        timeStampInfo += "<div class='network-info'><i class='glyphicon glyphicon-wifi'></i><span class='network-info-txt'>" + track.network.network + "</span><span class='network-info-nmbr'>" + track.network.link_speed + "</span></div>";//nova
       }else if (track.network.network == "3G" || track.network.network == "4G"){
-        itemInfo += "<p class='network'>Rede: " + track.network.network + "&nbsp;(" + track.network.signal +  ")</p>";
+        itemInfo += "<p class='network'>Rede: " + track.network.network + "&nbsp;(" + track.network.signal +  ")</p>";//antiga
+        timeStampInfo += "<div class='network-info'><i class='glyphicon glyphicon-signal-quality'></i><span class='network-info-txt'>Wi-fi</span><span class='network-info-type'>" + track.network.network + "</span><span class='network-info-nmbr'>" + track.network.link_speed + "</span></div>";//nova
       }else{
-        itemInfo += "<p class='network'>Rede: offline</p>";
+        itemInfo += "<p class='network'>Rede: offline</p>";//antiga
+        timeStampInfo += "<div class='network-info'><i class=''></i><span class='network-info-txt'>Rede offline</span></div>";//nova
       }
     }
+    
+    
     if (i > 0){
-      $(".bottom__bar .contents .user-history ul.history").append("<li class='item hidden' m-index='" + i + "'>" + itemInfo + "</li>");
+      $(".bottom__bar .contents .user-history ul.history").append("<li class='item hidden' m-index='" + i + "'>" + itemInfo + "</li>");//antiga
+      $(".member-history .history-info").append("<li class='item hidden' m-index='" + i + "'>" + timeStampInfo + "</li>");//nova
     }else{
-      $(".bottom__bar .contents .user-history ul.history").append("<li class='item' m-index='" + i + "'>" + itemInfo + "</li>");
+      $(".bottom__bar .contents .user-history ul.history").append("<li class='item' m-index='" + i + "'>" + itemInfo + "</li>");//antiga
+      $(".member-history .history-info").append("<li class='item' m-index='" + i + "'>" + timeStampInfo + "</li>");//nova
     }
 
   });
   if (member_history.length > 5){
     $(".bottom__bar .contents .user-history ul.tabs").append("<li m-index='next' class='arrow'><span class='glyphicon glyphicon-menu-right' aria-hidden='true'></span></li>");
+    $(".member-history ul.tabs").append("<li m-index='next' class='arrow'><span class='glyphicon glyphicon-menu-right' aria-hidden='true'></span></li>");
   }
 
   if (member_history.length <= 0){
@@ -1757,8 +1787,10 @@ function loadMemberMarkers(){
   var tabs_page_size = 5;
   if (member_history.length > tabs_page_size){
     $(".user-history .tabs li.item").hide();
+    $(".member-history .tabs li.item").hide();
     for (i = 0; i < tabs_page_size; i++){
       $(".user-history .tabs li[m-index=" + i + "]").fadeIn();
+      $(".member-history .tabs li[m-index=" + i + "]").fadeIn();
     }
   }
 
@@ -1845,6 +1877,41 @@ function loadMemberMarkers(){
       $(".user-history .tabs li[m-index='next']").removeClass("disabled");
     }
   });
+  
+  $(".member-history.tabs li").unbind();//nova
+  $(".member-history.tabs li").bind(function(e){
+	  if ($(this).hasClass("arrow")){
+      if ($(this).hasClass("disabled")){
+        return true;
+      }
+      var li_selected = parseInt($(".member-history .tabs li.active").attr("m-index"));
+      if ($(this).attr("m-index") == "prev"){
+        li_selected--;
+      }else if($(this).attr("m-index") == "next"){
+        li_selected++;
+      }
+      if (li_selected >= 0 && li_selected < member_history.length){
+        $(".member-history .tabs li[m-index="+li_selected+"]").trigger("click");
+      }
+      if (li_selected == 0){
+        $(".member-history .tabs li[m-index='prev']").addClass("disabled");
+        $(".member-history .tabs li[m-index='next']").removeClass("disabled");
+      }else if(li_selected == (member_history.length-1)){
+        $(".member-history .tabs li[m-index='next']").addClass("disabled");
+        $(".member-history .tabs li[m-index='prev']").removeClass("disabled");
+      }else{
+        $(".member-history .tabs li[m-index='prev']").removeClass("disabled");
+        $(".member-history .tabs li[m-index='next']").removeClass("disabled");
+      }
+      return true;
+    }
+    var mindex = $(this).attr("m-index");
+    mountTabs($(this).attr("m-index"));
+    $(".member-history .tabs li.item").removeClass("active");
+    $(this).addClass("active");
+    $(".member-history .history li.item").addClass("hidden");
+    $(".user-history .history li[m-index=" + $(this).attr("m-index") + "]").removeClass("hidden")
+  });//nova
 
   google.maps.event.trigger(markers[0], 'click');
 
@@ -1863,6 +1930,9 @@ function loadMemberMarkers(){
   $("#overmap .icons li.virtual-fences").fadeIn();
 
   resizeSidebar();
+  $(".close-member-marker-label-info").click(function(){
+	    $(".usr-info-in-map-wrap").removeClass("visible-urs-info");
+  });
 }
 
 
