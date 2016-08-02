@@ -103,6 +103,13 @@ var myDictionary = {
       'Error sending action': 'Erro ao enviar ação',
       'Invite accepted': 'Convite aceito',
       'Invite denied': 'Convite recusado',
-      'en-EN': 'pt-BR'
+      'en-EN': 'pt-BR',
+      'Unavailable': 'Indisponível',
+      'Optimum': 'Ótimo',
+      'Good' : 'Bom',
+      'Normal': 'Regular',
+      'Bad': 'Ruim',
+      'Terrible': 'Péssimo',
+      'No signal': 'Sem sinal'
 	}
 };

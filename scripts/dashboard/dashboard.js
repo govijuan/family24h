@@ -1733,6 +1733,7 @@ function loadMemberMarkers(){
       $(".usr-info-in-map-content").prepend(infoUserCardTop);
     
       mountTabs();
+      mountTabs2();
     });
 
     var date_tmp = convertDate(track.valid_time).split(" ");
@@ -1740,8 +1741,8 @@ function loadMemberMarkers(){
       $(".bottom__bar .contents .user-history ul.tabs ").append("<li m-index='" + i + "' class='item'>" + date_tmp[1] + "</li>");//antiga
       $(".member-history ul.tabs").append("<li m-index='" + i + "' class='item'>" + date_tmp[1] + "</li>");//nova
     }else{
-      $(".bottom__bar .contents .user-history ul.tabs").append("<li m-index='" + i + "' class='item active'>" + date_tmp[1] + "</li>");
-      $(".member-history ul.tabs").append("<li m-index='" + i + "' class='item active'>" + date_tmp[1] + "</li>");
+      $(".bottom__bar .contents .user-history ul.tabs").append("<li m-index='" + i + "' class='item active'>" + date_tmp[1] + "</li>");//antiga
+      $(".member-history ul.tabs").append("<li m-index='" + i + "' class='item active'>" + date_tmp[1] + "</li>");//nova
     }
 
     var itemInfo = "";//antiga
@@ -1752,16 +1753,36 @@ function loadMemberMarkers(){
     }
     if (track.network && track.network.network){
       if (track.network.network == "Wi-Fi"){
-        itemInfo += "<p class='network'>Rede: " + track.network.network + "&nbsp;(" + track.network.link_speed +  ")</p>";//antiga
+        itemInfo += "<div class='network'>Rede: " + track.network.network + "&nbsp;(" + track.network.link_speed +  ")</div>";//antiga
         timeStampInfo += "<div class='network-info'><i class='glyphicon glyphicon-wifi'></i><span class='network-info-txt'>" + track.network.network + "</span><span class='network-info-nmbr'>" + track.network.link_speed + "</span></div>";//nova
       }else if (track.network.network == "3G" || track.network.network == "4G"){
-        itemInfo += "<p class='network'>Rede: " + track.network.network + "&nbsp;(" + track.network.signal +  ")</p>";//antiga
-        timeStampInfo += "<div class='network-info'><i class='glyphicon glyphicon-signal-quality'></i><span class='network-info-txt'>Wi-fi</span><span class='network-info-type'>" + track.network.network + "</span><span class='network-info-nmbr'>" + track.network.link_speed + "</span></div>";//nova
+        itemInfo += "<div class='network'>Rede: " + track.network.network + "&nbsp;(" + track.network.signal +  ")</div>";//antiga
+        var signalStrengthText = "";
+        var signalStrengthInteger = parseInt(track.network.signal);
+        if(signalStrengthInteger == -51){
+	        signalStrengthText = tr("Unavailable");
+        }else if(signalStrengthInteger >= -91 && signalStrengthInteger < -51){
+	        signalStrengthText = tr("Optimum") + " ( " + track.network.signal + " )";
+        }else if(signalStrengthInteger >= -101 && signalStrengthInteger < -91){
+	        signalStrengthText = tr("Good") + " ( " + track.network.signal + " )";
+        }else if(signalStrengthInteger >= -103 && signalStrengthInteger < -101){
+	        signalStrengthText = tr("Normal") + " ( " + track.network.signal + " )";
+        }else if(signalStrengthInteger >= -107 && signalStrengthInteger < -103){
+	        signalStrengthText = tr("Bad") + " ( " + track.network.signal + "  )";
+        }else if(signalStrengthInteger >= -113 && signalStrengthInteger < -107){
+	        signalStrengthText = tr("Terrible") + " ( " + track.network.signal + " )";
+        }else if(signalStrengthInteger >= -115 && signalStrengthInteger < -113){
+	        signalStrengthText = tr("No signal");
+        }else{
+	        signalStrengthText = tr("No signal");
+        }
+        timeStampInfo += "<div class='mobile-network-info'><i class='glyphicon glyphicon-signal-quality'></i><span class='network-info-type'>" + track.network.network + "</span><span class='m-network-info-nmbr'>" + signalStrengthText + "</span></div>";//nova
       }else{
-        itemInfo += "<p class='network'>Rede: offline</p>";//antiga
+        itemInfo += "<div class='network'>Rede: offline</p>";//antiga
         timeStampInfo += "<div class='network-info'><i class=''></i><span class='network-info-txt'>Rede offline</span></div>";//nova
       }
     }
+    console.log(track.network);
     
     
     if (i > 0){
@@ -1822,8 +1843,7 @@ function loadMemberMarkers(){
       }
       return true;
     }
-
-    var mindex = $(this).attr("m-index");
+		var mindex = $(this).attr("m-index");
     mountTabs($(this).attr("m-index"));
     $(".user-history .tabs li.item").removeClass("active");
     $(this).addClass("active");
@@ -1878,7 +1898,65 @@ function loadMemberMarkers(){
     }
   });
   
-  $(".member-history.tabs li").unbind();//nova
+  $(".member-history .tabs li").unbind();
+	$(".member-history .tabs li").bind("click", function(e){
+			if ($(this).hasClass("arrow")){
+				if ($(this).hasClass("disabled")){
+        	return true;
+      	}
+      	var li_selected = parseInt($(".member-history .tabs li.active").attr("m-index"));
+      	if ($(this).attr("m-index") == "prev"){
+        	li_selected--;
+      	}else if($(this).attr("m-index") == "next"){
+        	li_selected++;
+      	}
+      	if (li_selected >= 0 && li_selected < member_history.length){
+        	$(".member-history .tabs li[m-index="+li_selected+"]").trigger("click");
+      	}
+      	if (li_selected == 0){
+	      	$(".member-history .tabs li[m-index='prev']").addClass("disabled");
+					$(".member-history .tabs li[m-index='next']").removeClass("disabled");
+      	}else if(li_selected == (member_history.length-1)){
+	      	$("member-history .tabs li[m-index='next']").addClass("disabled");
+					$("member-history .tabs li[m-index='prev']").removeClass("disabled");
+      	}else{
+	      	$("member-history .tabs li[m-index='prev']").removeClass("disabled");
+					$("member-history .tabs li[m-index='next']").removeClass("disabled");
+      	}
+      	return true;
+			}
+			var mindex = $(this).attr("m-index");
+			mountTabs2($(this).attr("m-index"));
+			$(".member-history .tabs li.item").removeClass("active");
+			$(this).addClass("active");
+			$(".member-history .history-info li.item").addClass("hidden");
+			$(".member-history .history-info li[m-index=" + $(this).attr("m-index") + "]").removeClass("hidden");
+			var track = member_history[mindex];
+			var position = {lat: track.location.latitude, lng: track.location.longitude};
+			var timeStampInfoOnClick = "";
+			if (track.other && track.other.battery){
+				timeStampInfoOnClick += "<div class='batery-info'><i class='glyphicon glyphicon-battery-state'></i><span class='batery-info-txt'>Nivel de bateria</span><span class='batery-info-nmbr'>" + track.other.battery.level + "%</span></div>";
+			}
+			if (track.network && track.network.network){
+				if (track.network.network == "Wi-Fi"){
+					timeStampInfoOnClick += "<div class='network-info'><i class='glyphicon glyphicon-wifi'></i><span class='network-info-txt'>" + track.network.network + "</span><span class='network-info-nmbr'>" + track.network.link_speed + "</span></div>";
+				}else if (track.network.network == "3G" || track.network.network == "4G"){
+					timeStampInfoOnClick += "<div class='cellphone-network-info'><i class='glyphicon glyphicon-signal-quality'></i><span class='network-info-txt'>Wi-fi</span><span class='network-info-type'>" + track.network.network + "</span><span class='network-info-nmbr'>" + track.network.link_speed + "</span></div>";
+				}else{
+					timeStampInfoOnClick += "<div class='network-info'><i class=''></i><span class='network-info-txt'>Rede offline</span></div>";
+				}
+			}
+			
+			if (track.user_picture && track.user_picture != ""){
+				$(".mrkr-info-member-img").css("background-image", "url(" + track.user_picture + ")");
+			}
+			$(".usr-info-in-map-content .nome-usr").empty().text(track.user_name );
+			$(".usr-info-in-map-content .posicao-usr").empty().html("<div class='pos-title'><i class='glyphicon glyphicon-map-marker'></i>" + tr("Position") + "</div><div class='pos-info'>" + track.location.human_address + " <hr/></div>");
+			$(".usr-info-in-map-content .hora-data-usr").empty().html("<i class='timestamp-cal-icon glyphicon glyphicon-calendar'></i>" + convertDateToHuman(track.valid_time, tr("en-EN")) + "h");
+			 console.log(track.valid_time);
+	});
+  
+  /*$(".member-history.tabs li").unbind();//nova
   $(".member-history.tabs li").bind(function(e){
 	  if ($(this).hasClass("arrow")){
       if ($(this).hasClass("disabled")){
@@ -1909,9 +1987,9 @@ function loadMemberMarkers(){
     mountTabs($(this).attr("m-index"));
     $(".member-history .tabs li.item").removeClass("active");
     $(this).addClass("active");
-    $(".member-history .history li.item").addClass("hidden");
-    $(".user-history .history li[m-index=" + $(this).attr("m-index") + "]").removeClass("hidden")
-  });//nova
+		var track = member_history[mindex];
+    
+  });//nova*/
 
   google.maps.event.trigger(markers[0], 'click');
 
@@ -2076,6 +2154,50 @@ function mountTabs(mindex){
     }
   }
 
+}
+
+function mountTabs2(mindex){
+	if(mindex){
+		var visible_tabs = $(".member-history .tabs li.item:visible");
+		$(visible_tabs).each(function(index,item){
+			if($(item).attr("m-index") == mindex){
+				if(index > 2){
+					if(parseInt($(visible_tabs[0]).attr("m-index")) > 0){
+						var mindex_show = parseInt($(visible_tabs[0]).attr("m-index")) - 1;
+            var mindex_hide = parseInt($(visible_tabs[4]).attr("m-index"));
+            $(".member-history .tabs li[m-index=" + mindex_hide + "]").fadeOut("fast",function(){
+              $(".member-history .tabs li[m-index=" + mindex_show + "]").fadeIn("fast");
+            });
+					}
+				}else if (index > 2){
+					if (parseInt($(visible_tabs[4]).attr("m-index")) < ($(".member-history .tabs li.item").length-1)){
+						var mindex_show = parseInt($(visible_tabs[4]).attr("m-index")) + 1;
+            var mindex_hide = parseInt($(visible_tabs[0]).attr("m-index"));
+            $(".member-history .tabs li[m-index=" + mindex_hide + "]").fadeOut("fast",function(){
+              $(".member-history .tabs li[m-index=" + mindex_show + "]").fadeIn("fast");
+            });
+					}
+				}
+			}
+		});
+	}else{
+		mindex = parseInt($(".member-history .tabs li.active").attr("m-index"));
+		$(".member-history .tabs li.item").hide();
+		var m_ini = mindex - 2;
+    var m_end = mindex + 2;
+    if (mindex <= 1){
+      m_ini = 0;
+      m_end = 4;
+    }else if (mindex >= ($(".member-history .tabs li.item").length-2)){
+      m_ini = $(".member-history .tabs li.item").length-5;
+      m_end = $(".member-history .tabs li.item").length-1;
+    }
+    delayi = 1;
+    for (i = m_ini; i <= m_end; i++){
+      $(".member-history .tabs li[m-index=" + i + "]").fadeIn(400*delayi);
+      delayi++;
+    }
+	}
 }
 function convertDate(tagText,format){
   // get time offset from browser

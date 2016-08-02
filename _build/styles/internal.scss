@@ -1256,7 +1256,7 @@ div, a, h1, h2, h3, span, li, p{
 		padding: 0;
 		margin: 0 -15px -10px;
 		background: #eaebec;
-		.batery-info, .network-info{
+		.batery-info, .network-info, .mobile-network-info{
 			padding: 10px 15px; 
 			text-align: left;
 			color: $dark_gray;
@@ -1276,6 +1276,17 @@ div, a, h1, h2, h3, span, li, p{
 		}
 		.batery-info-txt, .network-info-txt{
 			width: calc(60% - 30px);
+			display: inline-block;
+			font-size: 13px;
+		}
+		.network-info-type{
+			width: calc((100% - 40px) / 5);
+			font-size: 13px;
+			display: inline-block;
+		}
+		.m-network-info-nmbr{
+			text-align: right;
+			width: calc(((100% - 40px) / 5) * 4);
 			display: inline-block;
 			font-size: 13px;
 		}
