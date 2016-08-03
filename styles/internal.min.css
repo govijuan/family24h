@@ -2411,7 +2411,7 @@ div, a, h1, h2, h3, span, li, p { font-family: 'Ubuntu', sans-serif; }
 .left__bar .list-members ul a:hover, .left__bar .list-fences ul a:hover { color: #337ab7; text-decoration: none; }
 .left__bar .list-fences li:hover { color: #00ffea; cursor: hand; cursor: pointer; }
 
-.bottom__bar { background-color: #fff; width: 100%; position: relative; clear: both; /*display: none;*/ }
+.bottom__bar { background-color: #fff; width: 100%; position: relative; clear: both; display: none; }
 .bottom__bar .icon-bottom-bar { padding: 5px; }
 .bottom__bar .icon-bottom-bar img { width: 30px; height: 30px; }
 .bottom__bar .icon-bottom-bar img:hover { cursor: hand; cursor: pointer; }
@@ -2585,7 +2585,7 @@ div, a, h1, h2, h3, span, li, p { font-family: 'Ubuntu', sans-serif; }
 
 .close-groups-list { margin: 0 6px 0 0; }
 
-.usr-info-in-map-wrap { min-height: 400px; width: 310px; background: white; position: absolute; top: 20px; left: 20px; z-index: 300; border-radius: 5px; opacity: 0; transition: opacity 0.5s; box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25); z-index: -1; }
+.usr-info-in-map-wrap { min-height: 400px; width: 310px; background: white; position: absolute; top: 20px; left: 20px; z-index: 300; border-radius: 5px; opacity: 0; transition: opacity 0.5s; box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25); z-index: -1; height: calc(100% - 40px); overflow: hidden; }
 
 .visible-urs-info { opacity: 1 !important; z-index: 101 !important; }
 
@@ -2632,6 +2632,7 @@ div, a, h1, h2, h3, span, li, p { font-family: 'Ubuntu', sans-serif; }
 .member-history ul.tabs li.arrow .glyphicon:after, .member-history ul.tabs li.arrow .glyphicon:before { font-size: 13px; }
 .member-history ul.tabs li.arrow.disabled { color: #e0e0e0; }
 .member-history ul.history-info { list-style: none; padding: 0; margin: 0 -15px -10px; background: #eaebec; }
+.member-history ul.history-info .item { height: 500px; }
 .member-history ul.history-info .batery-info, .member-history ul.history-info .network-info, .member-history ul.history-info .mobile-network-info { padding: 10px 15px; text-align: left; color: #666; }
 .member-history ul.history-info .batery-info .glyphicon, .member-history ul.history-info .network-info .glyphicon, .member-history ul.history-info .mobile-network-info .glyphicon { margin: 0 20px 0 0; color: #9c9c9c; width: 20px; text-align: center; }
 .member-history ul.history-info .network-info-nmbr, .member-history ul.history-info .batery-info-nmbr { text-align: right; width: calc(40% - 10px); display: inline-block; font-size: 13px; }
@@ -2644,13 +2645,13 @@ div, a, h1, h2, h3, span, li, p { font-family: 'Ubuntu', sans-serif; }
 /*----------------------------------------------------------------------------*\ $MEDIUM
 \*----------------------------------------------------------------------------*/
 @media screen and (min-width: 992px) and (max-width: 1199px) { .left__bar { width: 25%; }
-  .left__bar .left-contents.collapse { display: block; }
-  .map { width: 75%; } }
+  .left__bar .left-contents.collapse { display: none; }
+  .map { width: 100%; } }
 /*----------------------------------------------------------------------------*\ $LARGE
 \*----------------------------------------------------------------------------*/
 @media screen and (min-width: 1200px) { .lock, .ring, .pattern, .wipe { padding: 20px 0; }
   .left__bar { width: 20%; }
-  .left__bar .left-contents.collapse { display: block; }
-  .map { width: 80%; } }
+  .left__bar .left-contents.collapse { display: none; }
+  .map { width: 100%; } }
 
 /*# sourceMappingURL=internal.min.css.map */

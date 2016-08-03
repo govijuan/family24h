@@ -460,8 +460,8 @@ function resizeSidebar() {
       },"fast");
     }else{
       $(sideBar).css("height","auto");
-      $(map).css("height", windowHeight - (topBar[0].offsetHeight + bottomBar[0].offsetHeight) + "px");
-      //$(map).css("height", (windowHeight - topBar[0].offsetHeight) + "px");
+      //$(map).css("height", windowHeight - (topBar[0].offsetHeight + bottomBar[0].offsetHeight) + "px");
+      $(map).css("height", (windowHeight - topBar[0].offsetHeight) + "px");
     }
 
 }
@@ -1722,7 +1722,12 @@ function loadMemberMarkers(){
 			
       if (track.user_picture && track.user_picture != ""){
         infoUser += "<div class='user-avatar' style='background-image: url(" + track.user_picture + ");'></div>";//antiga
-        infoUserCardTop += "<div class='mrkr-info-member-img' style='background-image: url(" + track.user_picture + ")'></div>";//nova
+        if (($(".mrkr-info-member-img").length) > 0){
+	        $(".mrkr-info-member-img").css("background-image", "url(" + track.user_picture + ")");
+        }else{
+	        infoUserCardTop += "<div class='mrkr-info-member-img' style='background-image: url(" + track.user_picture + ")'></div>";//nova
+        }
+        
       }
       infoUser += "<div class='user-info'>";
       infoUser += "<p class='name'>" + track.user_name + "</p>";
@@ -1730,11 +1735,19 @@ function loadMemberMarkers(){
       infoUser += "<p class='timestamp'>" + convertDate(track.valid_time,"dd/MM/yyyy") + "</p>";
       infoUser += "</div>";
       $(".user-history .info").html(infoUser);// carrega info por primeira vez
-      infoUserCardTop += "<div class='nome-usr'>" + track.user_name + "</div>";
-      infoUserCardTop += "<div class='posicao-usr'><div class='pos-title'><i class='glyphicon glyphicon-map-marker'></i>" + tr("Position") + "</div><div class='pos-info'>" + track.location.human_address + " <hr/></div></div>";
-      infoUserCardTop += "<div class='hora-data-usr'><i class='timestamp-cal-icon glyphicon glyphicon-calendar'></i>" + convertDateToHuman(track.valid_time, tr("en-EN")) + "h</div><a class='alterar-data-hist'>" + tr("Alter") + "</a>";
-      infoUserCardTop += "<div class='hist-posicoes-wrap'><a class='hist-posicoes-link' href='#!/member?u=" + track.user_id + "&g=" + group_id + "'><i class='hist-pos-icon glyphicon glyphicon-th'></i>" + tr("Positions History") + "</a></div>";
+      
+      if (($(".usr-info-in-map-content .nome-usr").length) > 0 && ($(".usr-info-in-map-content .posicao-usr").length) > 0 && ($(".usr-info-in-map-content .hora-data-usr").length) > 0){
+	      $(".usr-info-in-map-content .nome-usr").empty().text(track.user_name );
+				$(".usr-info-in-map-content .posicao-usr").empty().html("<div class='pos-title'><i class='glyphicon glyphicon-map-marker'></i>" + tr("Position") + "</div><div class='pos-info'>" + track.location.human_address + " <hr/></div>");
+				$(".usr-info-in-map-content .hora-data-usr").empty().html("<i class='timestamp-cal-icon glyphicon glyphicon-calendar'></i>" + convertDateToHuman(track.valid_time, tr("en-EN")) + "h");
+      }else{
+	      infoUserCardTop += "<div class='nome-usr'>" + track.user_name + "</div>";
+				infoUserCardTop += "<div class='posicao-usr'><div class='pos-title'><i class='glyphicon glyphicon-map-marker'></i>" + tr("Position") + "</div><div class='pos-info'>" + track.location.human_address + " <hr/></div></div>";
+				infoUserCardTop += "<div class='hora-data-usr'><i class='timestamp-cal-icon glyphicon glyphicon-calendar'></i>" + convertDateToHuman(track.valid_time, tr("en-EN")) + "h</div><a class='alterar-data-hist'>" + tr("Alter") + "</a>";
+				infoUserCardTop += "<div class='hist-posicoes-wrap'><a class='hist-posicoes-link' href='#!/member?u=" + track.user_id + "&g=" + group_id + "'><i class='hist-pos-icon glyphicon glyphicon-th'></i>" + tr("Positions History") + "</a></div>";
       $(".usr-info-in-map-content").prepend(infoUserCardTop);
+      }
+      
     
       mountTabs();
       mountTabs2();
@@ -1960,12 +1973,12 @@ function loadMemberMarkers(){
 			var popOpts = {
         content: "Esta",
         position: position
-    };
-    if (popupIW){
-      popupIW.close();
-    }
-    popupIW = new google.maps.InfoWindow(popOpts);
-    popupIW.open(googleMap, markers[mindex]);
+	    };
+	    if (popupIW){
+	      popupIW.close();
+	    }
+	    popupIW = new google.maps.InfoWindow(popOpts);
+	    popupIW.open(googleMap, markers[mindex]);
 
     if (mindex == 0){
       $(".member-history .tabs li[m-index='prev']").addClass("disabled");
