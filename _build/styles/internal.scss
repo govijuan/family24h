@@ -1256,16 +1256,18 @@ div, a, h1, h2, h3, span, li, p{
 	}
 	ul.history-info{
 		list-style: none;
-		padding: 0;
+		padding: 5px 0;
 		margin: 0 -15px -10px;
 		background: #eaebec;
 		.item{
 			height: 500px;
 		}
 		.batery-info, .network-info, .mobile-network-info{
-			padding: 10px 15px; 
+			margin: 0 15px; 
 			text-align: left;
 			color: $dark_gray;
+			height: 50px;
+			line-height: 50px;
 			.glyphicon{
 				margin: 0 20px 0 0;
 				color: #9c9c9c;
@@ -1273,6 +1275,9 @@ div, a, h1, h2, h3, span, li, p{
 				text-align: center;
 			}
 			
+		}
+		.batery-info{
+			border-bottom: 1px solid #d7d7d7;
 		}
 		.network-info-nmbr, .batery-info-nmbr{ 
 			text-align: right;
