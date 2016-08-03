@@ -2388,7 +2388,7 @@ div, a, h1, h2, h3, span, li, p { font-family: 'Ubuntu', sans-serif; }
 #flash-modal, .flash-modal { display: none; margin: 0 auto; }
 #flash-modal .message, .flash-modal .message { display: inline; }
 
-.left__bar { background-color: #32ccfe; width: 10%; float: left; position: relative; }
+.left__bar { background-color: #32ccfe; width: 10%; float: left; position: relative; display: none; }
 .left__bar .group-toggle { position: absolute; top: 20px; left: 20px; color: #fff; }
 .left__bar .group-toggle:hover { cursor: hand; cursor: pointer; }
 .left__bar .group-select { padding: 5px 20px; text-align: center; }

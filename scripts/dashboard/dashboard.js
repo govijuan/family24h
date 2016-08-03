@@ -1663,7 +1663,7 @@ function loadMemberMarkers(){
     $(".bottom__bar .contents .user-history ul.tabs").append("<li m-index='prev' class='arrow disabled'><span class='glyphicon glyphicon-menu-left' aria-hidden='true'></span></li>");//antiga
     $(".member-history ul.tabs").append("<li m-index='prev' class='arrow disabled'><span class='glyphicon glyphicon-menu-left' aria-hidden='true'></span></li>");//nova
    }
-  
+  console.log(member_history);
   $.each(member_history,function(i,track){
     var position = {lat: track.location.latitude, lng: track.location.longitude};
     var markerOpt = {
@@ -1709,7 +1709,11 @@ function loadMemberMarkers(){
       $(".user-history .tabs li[m-index=" + _index + "]").addClass("active");
       $(".user-history .history li.item").addClass("hidden");
       $(".user-history .history li[m-index=" + _index + "]").removeClass("hidden");
-      $
+      
+      $(".member-history .tabs li.item").removeClass("active");
+      $(".member-history .tabs li[m-index=" + _index + "]").addClass("active");
+      $(".member-history .history-info li.item").addClass("hidden");
+      $(".member-history .history-info li[m-index=" + _index + "]").removeClass("hidden");
 
       var infoUser = "";//antiga
       var infoUserCardTop = "";//nova
@@ -1782,7 +1786,6 @@ function loadMemberMarkers(){
         timeStampInfo += "<div class='network-info'><i class=''></i><span class='network-info-txt'>Rede offline</span></div>";//nova
       }
     }
-    console.log(track.network);
     
     
     if (i > 0){
@@ -1855,7 +1858,7 @@ function loadMemberMarkers(){
     var infoContent = "<div><p>" + track.location.human_address + "</p>";
     infoContent += "<p>" + convertDate(track.valid_time) + "</p></div>";
     if (track.other && track.other.battery){
-      infoContent += "<p class='battery'>Bateria: " + track.other.battery.level + "%</p>";
+      	infoContent += "<p class='battery'>Bateria: " + track.other.battery.level + "%</p>";
     }
     if (track.network && track.network.network){
       if (track.network.network == "Wi-Fi"){
@@ -1905,6 +1908,7 @@ function loadMemberMarkers(){
         	return true;
       	}
       	var li_selected = parseInt($(".member-history .tabs li.active").attr("m-index"));
+      	
       	if ($(this).attr("m-index") == "prev"){
         	li_selected--;
       	}else if($(this).attr("m-index") == "next"){
@@ -1953,43 +1957,27 @@ function loadMemberMarkers(){
 			$(".usr-info-in-map-content .nome-usr").empty().text(track.user_name );
 			$(".usr-info-in-map-content .posicao-usr").empty().html("<div class='pos-title'><i class='glyphicon glyphicon-map-marker'></i>" + tr("Position") + "</div><div class='pos-info'>" + track.location.human_address + " <hr/></div>");
 			$(".usr-info-in-map-content .hora-data-usr").empty().html("<i class='timestamp-cal-icon glyphicon glyphicon-calendar'></i>" + convertDateToHuman(track.valid_time, tr("en-EN")) + "h");
-			 console.log(track.valid_time);
-	});
-  
-  /*$(".member-history.tabs li").unbind();//nova
-  $(".member-history.tabs li").bind(function(e){
-	  if ($(this).hasClass("arrow")){
-      if ($(this).hasClass("disabled")){
-        return true;
-      }
-      var li_selected = parseInt($(".member-history .tabs li.active").attr("m-index"));
-      if ($(this).attr("m-index") == "prev"){
-        li_selected--;
-      }else if($(this).attr("m-index") == "next"){
-        li_selected++;
-      }
-      if (li_selected >= 0 && li_selected < member_history.length){
-        $(".member-history .tabs li[m-index="+li_selected+"]").trigger("click");
-      }
-      if (li_selected == 0){
-        $(".member-history .tabs li[m-index='prev']").addClass("disabled");
-        $(".member-history .tabs li[m-index='next']").removeClass("disabled");
-      }else if(li_selected == (member_history.length-1)){
-        $(".member-history .tabs li[m-index='next']").addClass("disabled");
-        $(".member-history .tabs li[m-index='prev']").removeClass("disabled");
-      }else{
-        $(".member-history .tabs li[m-index='prev']").removeClass("disabled");
-        $(".member-history .tabs li[m-index='next']").removeClass("disabled");
-      }
-      return true;
+			var popOpts = {
+        content: "Esta",
+        position: position
+    };
+    if (popupIW){
+      popupIW.close();
     }
-    var mindex = $(this).attr("m-index");
-    mountTabs($(this).attr("m-index"));
-    $(".member-history .tabs li.item").removeClass("active");
-    $(this).addClass("active");
-		var track = member_history[mindex];
-    
-  });//nova*/
+    popupIW = new google.maps.InfoWindow(popOpts);
+    popupIW.open(googleMap, markers[mindex]);
+
+    if (mindex == 0){
+      $(".member-history .tabs li[m-index='prev']").addClass("disabled");
+      $(".member-history .tabs li[m-index='next']").removeClass("disabled");
+    }else if(mindex == (member_history.length-1)){
+      $(".member-history .tabs li[m-index='next']").addClass("disabled");
+      $(".member-history .tabs li[m-index='prev']").removeClass("disabled");
+    }else{
+      $(".member-history .tabs li[m-index='prev']").removeClass("disabled");
+      $(".member-history .tabs li[m-index='next']").removeClass("disabled");
+    }
+	});
 
   google.maps.event.trigger(markers[0], 'click');
 
@@ -2161,7 +2149,7 @@ function mountTabs2(mindex){
 		var visible_tabs = $(".member-history .tabs li.item:visible");
 		$(visible_tabs).each(function(index,item){
 			if($(item).attr("m-index") == mindex){
-				if(index > 2){
+				if(index < 2){
 					if(parseInt($(visible_tabs[0]).attr("m-index")) > 0){
 						var mindex_show = parseInt($(visible_tabs[0]).attr("m-index")) - 1;
             var mindex_hide = parseInt($(visible_tabs[4]).attr("m-index"));
@@ -2220,7 +2208,9 @@ function convertDate(tagText,format){
 
 function convertDateToHuman(tagText, language){
 	var givenDate = new Date(tagText);
+	var offset = -(givenDate.getTimezoneOffset() / 60);
 	var hours = givenDate.getHours();
+	hours += offset;
 	var minutes = givenDate.getMinutes();
 	var time = hours + ":" + minutes;
 	var localGivenDate = givenDate.toLocaleDateString(language, {
@@ -2231,7 +2221,6 @@ function convertDateToHuman(tagText, language){
 																										});
 	localGivenDate = localGivenDate.upperfirst();
 	localGivenDate = localGivenDate + " &nbsp;&nbsp;<i class='timestamp-time-icon glyphicon glyphicon-time'></i> " + time;
-	
 	return localGivenDate.upperfirst();
 }//nova
 
