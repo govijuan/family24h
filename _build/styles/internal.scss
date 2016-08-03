@@ -1220,8 +1220,9 @@ div, a, h1, h2, h3, span, li, p{
 	ul.tabs{
 		list-style: none;
 		padding: 0;
+		margin-bottom: 0;
 		li{
-			padding: 2.5px 5px;
+			padding: 2.5px 5px 6px;
 			text-align: center;
 			border-bottom: 1px solid #fff;
 			display: inline-block;
