@@ -2622,8 +2622,8 @@ div, a, h1, h2, h3, span, li, p { font-family: 'Ubuntu', sans-serif; }
 
 /*----------------------------------------------------------------------------*\ Member's Positions History Styles
 \*----------------------------------------------------------------------------*/
-.member-history ul.tabs { list-style: none; padding: 0; }
-.member-history ul.tabs li { padding: 2.5px 5px; text-align: center; border-bottom: 1px solid #fff; display: inline-block; }
+.member-history ul.tabs { list-style: none; padding: 0; margin-bottom: 0; }
+.member-history ul.tabs li { padding: 2.5px 5px 6px; text-align: center; border-bottom: 1px solid #fff; display: inline-block; }
 .member-history ul.tabs li.item { font-size: 13px; color: #666; }
 .member-history ul.tabs li.item:hover { cursor: pointer; border-bottom: 1px solid #32ccfe; background-color: #e2e2e2; color: #32ccfe; }
 .member-history ul.tabs li.item.active { border-bottom: 1px solid #32ccfe; color: #32ccfe; }
