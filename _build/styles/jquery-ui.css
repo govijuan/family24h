@@ -234,7 +234,9 @@ button.ui-button::-moz-focus-inner {
 	padding: .2em 0;
 }
 .ui-datepicker .ui-datepicker-prev,
-.ui-datepicker .ui-datepicker-next {
+.ui-datepicker .ui-datepicker-next,
+.ui-datepicker .ui-datepicker-prev-hover,
+.ui-datepicker .ui-datepicker-next-hover {
 	position: absolute;
 	top: 2px;
 	width: 1.8em;
@@ -242,7 +244,7 @@ button.ui-button::-moz-focus-inner {
 }
 .ui-datepicker .ui-datepicker-prev-hover,
 .ui-datepicker .ui-datepicker-next-hover {
-	top: 1px;
+	
 }
 .ui-datepicker .ui-datepicker-prev {
 	left: 2px;
@@ -251,10 +253,10 @@ button.ui-button::-moz-focus-inner {
 	right: 2px;
 }
 .ui-datepicker .ui-datepicker-prev-hover {
-	left: 1px;
+	left: 2px;
 }
 .ui-datepicker .ui-datepicker-next-hover {
-	right: 1px;
+	right: 2px;
 }
 .ui-datepicker .ui-datepicker-prev span,
 .ui-datepicker .ui-datepicker-next span {
@@ -264,6 +266,7 @@ button.ui-button::-moz-focus-inner {
 	margin-left: -8px;
 	top: 50%;
 	margin-top: -8px;
+	width: 12px!important
 }
 .ui-datepicker .ui-datepicker-title {
 	margin: 0 2.3em;
@@ -616,9 +619,12 @@ button.ui-button::-moz-focus-inner {
 .ui-slider .ui-slider-handle {
 	position: absolute;
 	z-index: 2;
-	width: 1.2em;
-	height: 1.2em;
+	width: .8em;
+	height: .8em;
 	cursor: default;
+	background: #32ccfe!important;
+	border: none!important;
+	box-shadow: 0 0 0 12px rgba(50,204,254, 0.5);
 }
 .ui-slider .ui-slider-range {
 	position: absolute;
@@ -627,6 +633,11 @@ button.ui-button::-moz-focus-inner {
 	display: block;
 	border: 0;
 	background-position: 0 0;
+	background: #32ccfe;
+}
+.ui-slider .ui-slider-handle:focus, .ui-slider .ui-slider-handle:active{
+	outline: none;
+	background: #32ccfe;
 }
 
 /* For IE8 - See #6727 */
@@ -636,11 +647,12 @@ button.ui-button::-moz-focus-inner {
 }
 
 .ui-slider-horizontal {
-	height: .8em;
+	height: .3em;
 }
 .ui-slider-horizontal .ui-slider-handle {
-	top: -.3em;
+	top: -.25em;
 	margin-left: -.6em;
+	border-radius: 100%;
 }
 .ui-slider-horizontal .ui-slider-range {
 	top: 0;
@@ -798,7 +810,6 @@ body .ui-tooltip {
 	font-size: 1em;
 }
 .ui-widget-content {
-	border: 1px solid #aaaaaa;
 	background: #ffffff url(images/ui-bg_flat_75_ffffff_40x100.png) 50% 50% repeat-x;
 	color: #222222;
 }
@@ -806,8 +817,6 @@ body .ui-tooltip {
 	color: #222222;
 }
 .ui-widget-header {
-	border: 1px solid #aaaaaa;
-	background: #cccccc url(images/ui-bg_highlight-soft_75_cccccc_1x100.png) 50% 50% repeat-x;
 	color: #222222;
 	font-weight: bold;
 }
@@ -831,7 +840,7 @@ body .ui-tooltip {
 	color: #555555;
 	text-decoration: none;
 }
-.ui-state-hover,
+/*.ui-state-hover,
 .ui-widget-content .ui-state-hover,
 .ui-widget-header .ui-state-hover,
 .ui-state-focus,
@@ -841,7 +850,7 @@ body .ui-tooltip {
 	background: #dadada url(images/ui-bg_glass_75_dadada_1x400.png) 50% 50% repeat-x;
 	font-weight: normal;
 	color: #212121;
-}
+}*/
 .ui-state-hover a,
 .ui-state-hover a:hover,
 .ui-state-hover a:link,
@@ -928,10 +937,10 @@ body .ui-tooltip {
 }
 .ui-icon,
 .ui-widget-content .ui-icon {
-	background-image: url(images/ui-icons_222222_256x240.png);
+	/*background-image: url(images/ui-icons_222222_256x240.png);*/
 }
 .ui-widget-header .ui-icon {
-	background-image: url(images/ui-icons_222222_256x240.png);
+	/*background-image: url(images/ui-icons_888888_256x240.png);*/
 }
 .ui-state-default .ui-icon {
 	background-image: url(images/ui-icons_888888_256x240.png);
@@ -1105,9 +1114,9 @@ body .ui-tooltip {
 .ui-icon-circle-plus { background-position: 0 -192px; }
 .ui-icon-circle-minus { background-position: -16px -192px; }
 .ui-icon-circle-close { background-position: -32px -192px; }
-.ui-icon-circle-triangle-e { background-position: -48px -192px; }
+.ui-icon-circle-triangle-e { font-family: 'Glyphicons Halflings'; color: #0066cc; background-image: url(../../images/setas-calendario.png); background-position: -12px 0px;  background-size: 200%;}
 .ui-icon-circle-triangle-s { background-position: -64px -192px; }
-.ui-icon-circle-triangle-w { background-position: -80px -192px; }
+.ui-icon-circle-triangle-w { font-family: 'Glyphicons Halflings'; color: #0066cc; background-image: url(../../images/setas-calendario.png); background-position: 0 0; background-size: 200%;}
 .ui-icon-circle-triangle-n { background-position: -96px -192px; }
 .ui-icon-circle-arrow-e { background-position: -112px -192px; }
 .ui-icon-circle-arrow-s { background-position: -128px -192px; }
