@@ -2456,8 +2456,8 @@ div, a, h1, h2, h3, span, li, p { font-family: 'Ubuntu', sans-serif; }
 .map #overmap { position: absolute; bottom: 25px; right: 50px; z-index: 99; }
 .map #overmap .icons { font-size: 1.8em; }
 .map #overmap .icons ul { list-style-type: none; padding: 0; margin: 0; }
-.map #overmap .icons ul li { display: none; margin-top: 10px; width: 50px; height: 50px; background-color: #fff; border-radius: 5em; }
-.map #overmap .icons ul li a { color: #32ccfe; padding: 10px 13px; display: block; }
+.map #overmap .icons ul li { display: none; margin-top: 10px; width: 50px; height: 50px; background-color: #0066cc; border-radius: 5em; }
+.map #overmap .icons ul li a { color: white; padding: 10px 13px; display: block; }
 .map #overmap .icons ul li:hover { background-color: #32ccfe; }
 .map #overmap .icons ul li:hover a { color: #fff; }
 
