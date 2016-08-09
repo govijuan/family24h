@@ -2091,15 +2091,15 @@ button.close { padding: 0; cursor: pointer; background: transparent; border: 0; 
 .modal-backdrop.fade { opacity: 0; filter: alpha(opacity=0); }
 .modal-backdrop.in { opacity: 0.5; filter: alpha(opacity=50); }
 
-.modal-header { padding: 15px; border-bottom: 1px solid #e5e5e5; min-height: 16.42857px; }
+.modal-header { padding: 15px; min-height: 16.42857px; }
 
 .modal-header .close { margin-top: -2px; }
 
-.modal-title { margin: 0; line-height: 1.42857; }
+.modal-title { margin: 0; line-height: 1.42857; font-weight: 300; color: #999; padding: 0 10px; }
 
 .modal-body { position: relative; padding: 15px; }
 
-.modal-footer { padding: 15px; text-align: right; border-top: 1px solid #e5e5e5; }
+.modal-footer { padding: 15px; text-align: right; }
 .modal-footer:before, .modal-footer:after { content: " "; display: table; }
 .modal-footer:after { clear: both; }
 .modal-footer .btn + .btn { margin-left: 5px; margin-bottom: 0; }
@@ -2108,10 +2108,10 @@ button.close { padding: 0; cursor: pointer; background: transparent; border: 0; 
 
 .modal-scrollbar-measure { position: absolute; top: -9999px; width: 50px; height: 50px; overflow: scroll; }
 
-@media (min-width: 768px) { .modal-dialog { width: 600px; margin: 30px auto; }
+@media (min-width: 768px) { .modal-dialog { width: 70%; margin: 30px auto; }
   .modal-content { -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); }
-  .modal-sm { width: 300px; } }
-@media (min-width: 992px) { .modal-lg { width: 900px; } }
+  .modal-sm { width: 80%; } }
+@media (min-width: 992px) { .modal-lg { width: 70%; } }
 .tooltip { position: absolute; z-index: 1070; display: block; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-style: normal; font-weight: normal; letter-spacing: normal; line-break: auto; line-height: 1.42857; text-align: left; text-align: start; text-decoration: none; text-shadow: none; text-transform: none; white-space: normal; word-break: normal; word-spacing: normal; word-wrap: normal; font-size: 12px; opacity: 0; filter: alpha(opacity=0); }
 .tooltip.in { opacity: 0.9; filter: alpha(opacity=90); }
 .tooltip.top { margin-top: -3px; padding: 5px 0; }
@@ -2481,13 +2481,22 @@ div, a, h1, h2, h3, span, li, p { font-family: 'Ubuntu', sans-serif; }
 #myModalInvites .invites .item .name { font-weight: bold; font-size: 1.2em; }
 #myModalInvites .invites .item.active { display: block; }
 
-.calendar .ui-datepicker { width: 80%; margin: 0 auto; }
+.calendar .ui-datepicker { width: 100%; margin: 0 auto; }
 
-.time-label, .time-slider { width: 80%; margin: 10px auto; }
+.time-label, .time-slider { width: 80%; margin: 20px auto; }
 
-.time-label { font-size: 1.2em; }
+.time-slider { background: #e2e2e2 none repeat; }
+
+.time-label { font-size: 1.2em; color: #e2e2e2; }
+.time-label .row div { padding-left: 0 !important; padding-right: 0 !important; }
 
 #contextMenu { position: absolute; display: none; }
+
+.datepicker-title, .time-slider-title { text-transform: uppercase; color: #32ccfe; font-size: 11px; font-weight: 600; margin: 10px 0 30px; }
+
+.datepicker-title { padding: 0px 0px 0px 10px; }
+
+.time-slider-title { padding: 0 0 0 20px; }
 
 /*----------------------------------------------------------------------------*\ $BILLING
 \*----------------------------------------------------------------------------*/
@@ -2642,6 +2651,14 @@ div, a, h1, h2, h3, span, li, p { font-family: 'Ubuntu', sans-serif; }
 .member-history ul.history-info .m-network-info-nmbr { text-align: right; width: calc(((100% - 40px) / 5) * 4); display: inline-block; font-size: 13px; }
 
 .alterar-data-hist { display: block; color: #0066cc; text-decoration: none; text-align: left; text-align: left; padding: 0px 24px; font-size: 11px; }
+
+#myModalCalendar .modal-header { padding: 15px 30px 0; }
+
+#myModalCalendar .modal-body { padding: 0 30px 15px; }
+
+#myModalCalendar .modal-dialog .modal-footer .btn { background: none; border: none; color: #0066cc; }
+
+.modal-footer { padding: 15px 30px 30px; }
 
 /*----------------------------------------------------------------------------*\ $MEDIUM
 \*----------------------------------------------------------------------------*/

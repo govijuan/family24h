@@ -773,23 +773,35 @@ div, a, h1, h2, h3, span, li, p{
 
 .calendar{
   .ui-datepicker{
-    width: 80%;
+    width: 100%;
     margin: 0 auto;
   }
 }
 .time-label,
 .time-slider{
   width: 80%;
-  margin: 10px auto;
+  margin: 20px auto;
+  
+}
+
+.time-slider{
+	background: $light_gray none repeat;
 }
 .time-label{
   font-size: 1.2em;
+  color: $light_gray;
+  .row{
+	  div{ padding-left: 0!important; padding-right: 0!important;}
+  }
 }
 
 #contextMenu{
   position: absolute;
   display: none;
 }
+.datepicker-title, .time-slider-title{text-transform: uppercase; color: $light_blue; font-size: 11px; font-weight: 600; margin: 10px 0 30px;}
+.datepicker-title{ padding: 0px 0px 0px 10px; }
+.time-slider-title{padding: 0 0 0 20px;}
 
 /*----------------------------------------------------------------------------*\
     $BILLING
@@ -1313,7 +1325,15 @@ div, a, h1, h2, h3, span, li, p{
 	padding: 0px 24px;
 	font-size: 11px;
 }
+#myModalCalendar .modal-header{
+	padding: 15px 30px 0;
+}
+#myModalCalendar .modal-body{
+	padding: 0 30px 15px;
+}
+#myModalCalendar .modal-dialog .modal-footer .btn{ background: none; border: none; color: $dark_blue;}
 
+.modal-footer{ padding: 15px 30px 30px; }
 
 /*----------------------------------------------------------------------------*\
     $MEDIUM

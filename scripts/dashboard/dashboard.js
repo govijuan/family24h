@@ -1690,8 +1690,10 @@ function loadMemberMarkers(){
         infoContent += "<p class='network'>Rede: " + track.network.network + "&nbsp;(" + track.network.link_speed +  ")</p>";
       }else if (track.network.network == "3G" || track.network.network == "4G"){
         infoContent += "<p class='network'>Rede: " + track.network.network + "&nbsp;(" + track.network.signal +  ")</p>";
-      }else{
+      }else if(track.network.offline == 1) {
         infoContent += "<p class='network'>Rede: offline</p>";
+      }else{
+	      nfoContent += "<p class='network'>Rede: offline</p>";
       }
     }
     googleMarker.addListener("click", function(){
@@ -1795,9 +1797,14 @@ function loadMemberMarkers(){
         }
         timeStampInfo += "<div class='mobile-network-info'><i class='glyphicon glyphicon-signal-quality'></i><span class='network-info-type'>" + track.network.network + "</span><span class='m-network-info-nmbr'>" + signalStrengthText + "</span></div>";//nova
       }else{
-        itemInfo += "<div class='network'>Rede: offline</p>";//antiga
-        timeStampInfo += "<div class='network-info'><i class=''></i><span class='network-info-txt'>Rede offline</span></div>";//nova
+	      eStampInfo += "<div class='network-info'><i class=''></i><span class='network-info-txt'>Rede offline</span></div>";//nova
       }
+    }else if(track.network && track.network.offline){
+	    	if(track.network.offline == 1){
+		    	itemInfo += "<div class='network'>Rede: offline</p>";//antiga
+	        timeStampInfo += "<div class='network-info'><i class=''></i><span class='network-info-txt'>Rede offline</span></div>";//nova
+	    	}
+	        
     }
     
     
@@ -2350,6 +2357,9 @@ $(document).ready(function() {
 	    $(".groups-listing-container").toggle();
     });
     
+    /*$(".cancel-modal").click(function(){
+	    $(".modal").hide();
+    });*/
 
     $("#flash .close,#flash-modal .close,.flash-modal .close").click(function() {
         $(this).parent().fadeOut("slow");

@@ -78,7 +78,7 @@
 // Top section of the modal w/ title and dismiss
 .modal-header {
   padding: $modal-title-padding;
-  border-bottom: 1px solid $modal-header-border-color;
+  //border-bottom: 1px solid $modal-header-border-color;
   min-height: ($modal-title-padding + $modal-title-line-height);
 }
 // Close icon
@@ -90,6 +90,9 @@
 .modal-title {
   margin: 0;
   line-height: $modal-title-line-height;
+  font-weight: 300;
+  color: #999;
+  padding: 0 10px;
 }
 
 // Modal body
@@ -103,7 +106,7 @@
 .modal-footer {
   padding: $modal-inner-padding;
   text-align: right; // right align buttons
-  border-top: 1px solid $modal-footer-border-color;
+  //border-top: 1px solid $modal-footer-border-color;
   @include clearfix; // clear it in case folks use .pull-* classes on buttons
 
   // Properly space out buttons
@@ -135,7 +138,7 @@
   // Automatically set modal's width for larger viewports
   .modal-dialog {
     width: $modal-md;
-    margin: 30px auto;
+    margin: 30px auto;		
   }
   .modal-content {
     @include box-shadow(0 5px 15px rgba(0,0,0,.5));
