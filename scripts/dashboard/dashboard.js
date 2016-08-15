@@ -1474,20 +1474,24 @@ function loadGroupMarkers(){
     if (!member.alias){
       member.alias = generateAlias(member.name);
     }
-    var position = {lat: member.location.latitude, lng: member.location.longitude};
-    var markerOpt = {
+    //var position = {lat: member.location.latitude, lng: member.location.longitude};
+    var position = new google.maps.LatLng(member.location.latitude, member.location.longitude);
+		var markerOpt = {
         map: googleMap,
         position: position,
         title: member.name,
-        labelContent: member.alias,
+        flat: true,
+        /*labelContent: member.alias,
         labelAnchor: new google.maps.Point(15, 38),
         labelClass: "labels",
         labelInBackground: false,
-        icon: pinSymbol('#32ccfe'),
+        icon: pinSymbol('#32ccfe'),*/
+        content: '<div class="marker-main-wrap"><div style="color:#32ccfe; font-size: 50px;"><i class="glyphicon glyphicon-map-marker"></i></div><div class="marker-user-img-container" style=" width:40px; height: 40px;border-radius: 100%; overflow: hidden;"><img src="' + member.profile_picture_url + '" style="width: 40px; height: auto;"/></div></div>',
         animation: google.maps.Animation.DROP,
         user_id: member.user_id
     };
-    var googleMarker = new MarkerWithLabel(markerOpt);
+    /*var googleMarker = new MarkerWithLabel(markerOpt);*/
+    var googleMarker = new RichMarker(markerOpt);
     markers.push(googleMarker);
     var infoContent = "<div class='marker-info'>";
     if (member.profile_picture_url && member.profile_picture_url != ""){

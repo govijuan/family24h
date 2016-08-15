@@ -1194,6 +1194,12 @@ div, a, h1, h2, h3, span, li, p{
 	background-size: 100%;
 	display: inline-block;
 }
+.marker-user-img-container{
+	width:30px;
+	height: 30px;
+	border-radius: 100%;
+	overflow: hidden;
+}
 .nome-usr{
 	color: $medium_gray;
 	font-size: 22px;
