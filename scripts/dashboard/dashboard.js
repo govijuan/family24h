@@ -1486,7 +1486,7 @@ function loadGroupMarkers(){
         labelClass: "labels",
         labelInBackground: false,
         icon: pinSymbol('#32ccfe'),*/
-        content: '<div class="marker-main-wrap"><div style="color:#32ccfe; font-size: 50px;"><i class="glyphicon glyphicon-map-marker"></i></div><div class="marker-user-img-container" style=" width:40px; height: 40px;border-radius: 100%; overflow: hidden;"><img src="' + member.profile_picture_url + '" style="width: 40px; height: auto;"/></div></div>',
+        content: '<div class="marker-main-wrap"><div class="marker-user-img-container" style=" width:40px; height: 40px;border-radius: 100%; overflow: hidden; position: relative; bottom: -49px; z-index: 100;right: -11.5px;"><img src="' + member.profile_picture_url + '" style="width: 40px; height: auto;"/></div><div style="color:#32ccfe; font-size: 60px;"><i class="glyphicon glyphicon-family-map-marker"></i></div></div>',
         animation: google.maps.Animation.DROP,
         user_id: member.user_id
     };
