@@ -725,6 +725,10 @@ td, th { padding: 0; }
 
 .glyphicon-family-map-marker:before { content: "\e269"; }
 
+.glyphicon-force-position:before { content: "\e270"; }
+
+.glyphicon-virtual-fence:before { content: "\e271"; }
+
 * { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
 
 *:before, *:after { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
@@ -2459,7 +2463,11 @@ div, a, h1, h2, h3, span, li, p { font-family: 'Ubuntu', sans-serif; }
 .map #overmap .icons { font-size: 1.8em; }
 .map #overmap .icons ul { list-style-type: none; padding: 0; margin: 0; }
 .map #overmap .icons ul li { display: none; margin-top: 10px; width: 50px; height: 50px; background-color: #0066cc; border-radius: 5em; }
-.map #overmap .icons ul li a { color: white; padding: 10px 13px; display: block; }
+.map #overmap .icons ul li a { color: white; padding: 7px 13px; display: block; }
+.map #overmap .icons ul li.force-position { background-color: white !important; }
+.map #overmap .icons ul li.force-position a { color: #999 !important; }
+.map #overmap .icons ul li.force-position:hover { background-color: #999 !important; }
+.map #overmap .icons ul li.force-position:hover a { color: white !important; }
 .map #overmap .icons ul li:hover { background-color: #32ccfe; }
 .map #overmap .icons ul li:hover a { color: #fff; }
 

@@ -1487,7 +1487,7 @@ function loadGroupMarkers(){
         labelInBackground: false,
         icon: pinSymbol('#32ccfe'),*/
         /*content: '<div class="marker-main-wrap"><div class="marker-user-img-container" style=" width:40px; height: 40px;border-radius: 100%; overflow: hidden; position: absolute; bottom: -49px; z-index: 100;right: -11.5px;"><img src="' + member.profile_picture_url + '" style="width: 40px; height: auto;"/></div><div style="color:#32ccfe; font-size: 60px;"><i class="glyphicon glyphicon-family-map-marker"></i></div></div>',*/
-        content: '<div class="marker-main-wrap" style="height:76px;width:66px;background-image:url(\'/images/family-marker.png\');background-size:cover; padding: 4px 0px 0px 13px;"><div class="marker-user-img-container" style=" width:40px; height: 40px;border-radius: 100%; overflow: hidden;"><img src="' + member.profile_picture_url + '" style="width: 40px; height: auto;"/></div></div>',
+        content: '<div class="marker-main-wrap" style="height:76px;width:66px;background-image:url(\'/images/family-marker.png\');background-size:cover; padding: 4px 0px 0px 13px;top: 19px;position: relative;"><div class="marker-user-img-container" style=" width:40px; height: 40px;border-radius: 100%; overflow: hidden;"><img src="' + member.profile_picture_url + '" style="width: 40px; height: auto;"/></div></div>',
         animation: google.maps.Animation.DROP,
         user_id: member.user_id
     };

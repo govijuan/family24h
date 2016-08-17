@@ -669,9 +669,22 @@ div, a, h1, h2, h3, span, li, p{
           border-radius: 5em;
           a{
             color: white;
-            padding: 10px 13px;
+            padding: 7px 13px;
             display: block;
           }
+        }
+        li.force-position{
+	        background-color: white!important;
+	        a{
+		        color: $medium_gray!important;
+	        }
+	        
+        }
+        li.force-position:hover{
+	        background-color: $medium_gray!important;
+	        a{
+		        color: white!important;
+	        }
         }
         li:hover{
           background-color: #32ccfe;
