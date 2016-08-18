@@ -1486,7 +1486,6 @@ function loadGroupMarkers(){
         labelClass: "labels",
         labelInBackground: false,
         icon: pinSymbol('#32ccfe'),*/
-        /*content: '<div class="marker-main-wrap"><div class="marker-user-img-container" style=" width:40px; height: 40px;border-radius: 100%; overflow: hidden; position: absolute; bottom: -49px; z-index: 100;right: -11.5px;"><img src="' + member.profile_picture_url + '" style="width: 40px; height: auto;"/></div><div style="color:#32ccfe; font-size: 60px;"><i class="glyphicon glyphicon-family-map-marker"></i></div></div>',*/
         content: '<div class="marker-main-wrap" style="height:76px;width:66px;background-image:url(\'/images/family-marker.png\');background-size:cover; padding: 4px 0px 0px 13px;top: 19px;position: relative;"><div class="marker-user-img-container" style=" width:40px; height: 40px;border-radius: 100%; overflow: hidden;"><img src="' + member.profile_picture_url + '" style="width: 40px; height: auto;"/></div></div>',
         animation: google.maps.Animation.DROP,
         user_id: member.user_id
@@ -1653,6 +1652,7 @@ function sort_by_date(a, b) {
   return new Date(a.valid_time).getTime() - new Date(b.valid_time).getTime();
 }
 
+
 function loadMemberMarkers(){
   members_alias = [];
   $(".bottom__bar .contents").remove();
@@ -1670,20 +1670,59 @@ function loadMemberMarkers(){
    }
   console.log(member_history);
   $.each(member_history,function(i,track){
-    var position = {lat: track.location.latitude, lng: track.location.longitude};
+    var position = new google.maps.LatLng(track.location.latitude, track.location.longitude);
+    var markerContent = '';
+    if (i < 9){
+	        var markerPointColor = '';
+	        switch (i){
+		        case 0:
+		        markerPointColor = '#ffffff';
+		        break;
+		        case 1:
+		        markerPointColor = '#e3eef9';
+		        break;
+		        case 2:
+		        markerPointColor = '#c6ddf4';
+		        break;
+		        case 3:
+		        markerPointColor = '#aaccee';
+		        break;
+		        case 4:
+		        markerPointColor = '#8ebbe8';
+		        break;
+		        case 5:
+		        markerPointColor = '#71aae3';
+		        break;
+		        case 6:
+		        markerPointColor ='#5599dd';
+		        break;
+		        case 7:
+		        markerPointColor = '#3988d7';
+		        break;
+		        case 8:
+		        markerPointColor = '#1c77d2';
+		        break;
+	        }
+	        markerContent = '<div class="past-hist-pos-marker" style="background-color:' + markerPointColor + '; height: 12px; width:12px;overflow:hidden;border:1px solid #999;border-radius:100%">&nbsp;</div>';
+    }
+    else if(i = 9){
+	        markerContent = '<div class="marker-main-wrap" style="height:76px;width:66px;background-image:url(\'/images/family-marker.png\');background-size:cover; padding: 4px 0px 0px 13px;top: 19px;position: relative;"><div class="marker-user-img-container" style=" width:40px; height: 40px;border-radius: 100%; overflow: hidden;"><img src="' + track.user_picture + '" style="width: 40px; height: auto;"/></div></div>';
+    }
     var markerOpt = {
         map: googleMap,
         position: position,
         title: convertDate(track.valid_time),
-        labelContent: (i+1),
+        /*labelContent: (i+1),
         labelAnchor: new google.maps.Point(15, 38),
         labelClass: "labels",
         labelInBackground: false,
-        icon: pinSymbol('#32ccfe'),
+        icon: pinSymbol('#32ccfe'),*/
+        flat: true,
+        content: markerContent, 
         animation: google.maps.Animation.DROP,
         _index: i
     };
-    var googleMarker = new MarkerWithLabel(markerOpt);
+    var googleMarker = new RichMarker(markerOpt);
     markers.push(googleMarker);
     var infoContent = "<div><p>" + track.location.human_address + "</p>";
     infoContent += "<p>" + convertDate(track.valid_time) + "</p></div>";
@@ -2005,9 +2044,9 @@ function loadMemberMarkers(){
 	});
 
   google.maps.event.trigger(markers[0], 'click');
-
-  if (markerClusterer) markerClusterer.clearMarkers();
-  markerClusterer = new MarkerClusterer(googleMap, markers);
+	
+  /*if (markerClusterer) markerClusterer.clearMarkers();
+  markerClusterer = new MarkerClusterer(googleMap, markers);*/
 
   var bounds = new google.maps.LatLngBounds();
   for (var i = 0; i < markers.length; i++) {
