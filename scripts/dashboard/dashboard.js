@@ -1652,6 +1652,29 @@ function sort_by_date(a, b) {
   return new Date(a.valid_time).getTime() - new Date(b.valid_time).getTime();
 }
 
+/*************************************************************************
+ *  Position History points color processing
+ *************************************************************************/
+
+function generateHistoryMarkerColorRGB(color1, color2, factor) {
+  if (arguments.length < 3) { factor = 0.5; }
+  var result = color1.slice();//converte a cor em array
+  for (var i=0;i<3;i++) {
+    result[i] = Math.round(result[i] + factor*(color2[i]-color1[i]));
+  }
+  return result;//retorna um array com valores rgb
+};
+
+function hexaD_2_RGB(hexaD){
+	var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hexaD);
+    return result ? [
+        parseInt(result[1], 16),
+        parseInt(result[2], 16),
+        parseInt(result[3], 16)
+    ] : null;
+}
+
+/*************************************************************************/
 
 function loadMemberMarkers(){
   members_alias = [];
@@ -1668,41 +1691,18 @@ function loadMemberMarkers(){
     $(".bottom__bar .contents .user-history ul.tabs").append("<li m-index='prev' class='arrow disabled'><span class='glyphicon glyphicon-menu-left' aria-hidden='true'></span></li>");//antiga
     $(".member-history ul.tabs").append("<li m-index='prev' class='arrow disabled'><span class='glyphicon glyphicon-menu-left' aria-hidden='true'></span></li>");//nova
    }
-  console.log(member_history);
+  var factorStep = 1 / (member_history.length - 1);
   $.each(member_history,function(i,track){
     var position = new google.maps.LatLng(track.location.latitude, track.location.longitude);
     var markerContent = '';
     if (i < 9){
 	        var markerPointColor = '';
-	        switch (i){
-		        case 0:
-		        markerPointColor = '#ffffff';
-		        break;
-		        case 1:
-		        markerPointColor = '#e3eef9';
-		        break;
-		        case 2:
-		        markerPointColor = '#c6ddf4';
-		        break;
-		        case 3:
-		        markerPointColor = '#aaccee';
-		        break;
-		        case 4:
-		        markerPointColor = '#8ebbe8';
-		        break;
-		        case 5:
-		        markerPointColor = '#71aae3';
-		        break;
-		        case 6:
-		        markerPointColor ='#5599dd';
-		        break;
-		        case 7:
-		        markerPointColor = '#3988d7';
-		        break;
-		        case 8:
-		        markerPointColor = '#1c77d2';
-		        break;
-	        }
+	        /*startColor = [255, 255, 255];
+	        endColor = [0, 102, 204];*/
+	        starColorRGB = hexaD_2_RGB('#ffffff');
+	        endColorRGB = hexaD_2_RGB('#0066cc');
+	        var pointColorArr = generateHistoryMarkerColorRGB(starColorRGB, endColorRGB, factorStep * i);
+          markerPointColor = 'rgb(' + pointColorArr[0] + ',' + pointColorArr[1] + ',' + pointColorArr[2] + ')';
 	        markerContent = '<div class="past-hist-pos-marker" style="background-color:' + markerPointColor + '; height: 12px; width:12px;overflow:hidden;border:1px solid #999;border-radius:100%">&nbsp;</div>';
     }
     else if(i = 9){
