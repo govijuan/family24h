@@ -1461,6 +1461,16 @@ function generateAlias(name){
   return alias;
 }
 
+function clickShowUserMarkeInfo(element, index){
+	google.maps.event.trigger(markers[$(this).attr("m-index")], 'click');
+    $(".user-list li").removeClass("active");
+    $(this).addClass("active");
+    $("user-list li").addClass("hidden");
+    $("user-list li[m-index=" + $(this).attr("m-index") + "]").removeClass("hidden");
+    var latLng = markers[$(this).attr("m-index")].getPosition();
+    googleMap.setCenter(latLng);
+}
+
 function loadGroupMarkers(){
   members_alias = [];
   $(".bottom__bar .contents").remove();
@@ -1539,7 +1549,7 @@ function loadGroupMarkers(){
     });
     var userInfo = "";
     if (member.profile_picture_url && member.profile_picture_url != ""){
-      userInfo += "<div class='user-avatar' style='background-image: url(" + member.profile_picture_url + ");'></div>";
+      userInfo += "<div class='user-avatar' m-index='" + i + "' style='background-image: url(" + member.profile_picture_url + ");'></div>";
     }
     userInfo += "<div class='user-info'>";
     userInfo += "<p class='name'><strong>" + member.name + "</strong>";
@@ -1555,9 +1565,14 @@ function loadGroupMarkers(){
     e.preventDefault();
     forcePosition($(this).attr("user-id"));
   });
-
-  $(".user-list li").unbind();
-  $(".user-list li").bind("click", function(e){
+  $(".user-avatar").attr('page', 'home-group');
+  var clickShowMemberInfoElement = '.user-list li';
+  if(($('.user-avatar').attr('page')) == 'home-group'){
+	  clickShowMemberInfoElement += ', .user-avatar';
+  }
+  
+  $(clickShowMemberInfoElement).unbind();
+  $(clickShowMemberInfoElement).bind("click", function(e){
     google.maps.event.trigger(markers[$(this).attr("m-index")], 'click');
     $(".user-list li").removeClass("active");
     $(this).addClass("active");
@@ -1571,7 +1586,7 @@ function loadGroupMarkers(){
     googleMap.fitBounds(bounds);
 */
   });
-
+	
   if (markerClusterer) markerClusterer.clearMarkers();
   markerClusterer = new MarkerClusterer(googleMap, markers);
 
@@ -1653,7 +1668,7 @@ function sort_by_date(a, b) {
 }
 
 /*************************************************************************
- *  Position History points color processing
+ *  Position History points color processing (do JS color interpolation )
  *************************************************************************/
 
 function generateHistoryMarkerColorRGB(color1, color2, factor) {
@@ -1676,11 +1691,14 @@ function hexaD_2_RGB(hexaD){
 
 /*************************************************************************/
 
+
+
 function loadMemberMarkers(){
   members_alias = [];
   $(".bottom__bar .contents").remove();
   $(".bottom__bar").append("<div class='contents'></div>");
   $(".bottom__bar .contents").append("<div class='user-history'><div class='info'></div><ul class='tabs'></ul><ul class='history'></ul></div>");
+  
   
 	$(".usr-info-in-map-wrap").empty();
 	$(".usr-info-in-map-wrap").append("<span class='close close-member-marker-label-info'>x</span><div class='usr-info-in-map-content'></div>");
@@ -2058,7 +2076,12 @@ function loadMemberMarkers(){
   $("#overmap .icons li.calendar").fadeIn();
   $("#overmap .icons li.force-position").fadeIn();
   $("#overmap .icons li.virtual-fences").fadeIn();
-
+  $(".user-avatar").attr('page', 'position-history');
+  $(".user-avatar").unbind();
+  $(".user-avatar").bind('click', function(e){
+	  location.hash = "#!/group?g=" + $.getUrlVar("g");
+	  //window.setTimeout(google.maps.event.trigger(markers[$(this).attr("m-index")], 'click'), 3000);
+  });
   resizeSidebar();
   $(".close-member-marker-label-info").click(function(){
 	    $(".usr-info-in-map-wrap").removeClass("visible-urs-info");
