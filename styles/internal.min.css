@@ -2578,12 +2578,21 @@ div, a, h1, h2, h3, span, li, p { font-family: 'Ubuntu', sans-serif; }
 
 .group-icon-in-info-h:nth-child(4n-4) { background: #f5a623; }
 
-.group-content .group-members-ul { padding: 0; list-style: none; padding: 15px; }
-.group-content .group-members-ul .user-avatar { height: 40px; width: 40px; background-size: 100%; border-radius: 100%; display: block; float: left; }
-.group-content .group-members-ul .user-info { width: calc(100% - 40px); display: block; float: left; padding: 0 0 0 15px; }
+.group-content .group-members-ul { list-style: none; padding: 7.5px 0; }
+.group-content .group-members-ul li { margin: 10px 0px; padding: 7.5px 15px; }
+.group-content .group-members-ul li:hover { background-color: #f7f7f7; }
+.group-content .group-members-ul .user-avatar { height: 40px; width: 40px; background-size: 100%; border-radius: 100%; display: block; float: left; margin: 18.75px 0px; }
+.group-content .group-members-ul .user-info { width: calc(100% - 100px); display: block; float: left; padding: 0 7.5px 0 15px; }
 .group-content .group-members-ul .user-info .name { color: #999; margin: 0; }
-.group-content .group-members-ul .user-info .address { color: #B6B6B6; font-size: 12px; margin: 0; }
+.group-content .group-members-ul .user-info .address { color: #B6B6B6; font-size: 12px; margin: 0; line-height: 13px; }
 .group-content .group-members-ul .user-info .timestamp { color: #32ccfe; font-size: 12px; margin: 0; }
+.group-content .group-members-ul .fence-edit-link-container, .group-content .group-members-ul .force-position-container { width: 30px; display: block; float: left; line-height: 100%; vertical-align: middle; position: relative; text-align: center; }
+.group-content .group-members-ul .fence-edit-link-container .glyphicon, .group-content .group-members-ul .force-position-container .glyphicon { display: inline-block; }
+.group-content .group-members-ul .fence-edit-link-container { font-size: 22px; }
+.group-content .group-members-ul .fence-edit-link-container .glyphicon { margin: 27.75px 0; color: #0066cc; }
+.group-content .group-members-ul .force-position-container .glyphicon { margin: 31.75px 0; }
+.group-content .group-members-ul .force-position-container a { color: #0066cc; }
+.group-content .group-members-ul .force-position-container a:hover { color: #32ccfe; }
 
 .groups-listing-container { display: none; z-index: 10; position: absolute; margin-top: -40px; width: 100%; }
 .groups-listing-container .group-list-in-g-content { padding: 25px 20px 20px; list-style: none; background: white; width: 100%; }

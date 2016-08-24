@@ -1095,9 +1095,15 @@ div, a, h1, h2, h3, span, li, p{
 .group-icon-in-info-h{ &:nth-child(4n-4){ background: $caqui; } }
 .group-content{
 	.group-members-ul{
-		padding: 0;
 		list-style: none;
-		padding: 15px;
+		padding: 7.5px 0;
+		li{
+			margin: 10px 0px;
+			padding: 7.5px 15px;
+			&:hover {
+				background-color: $lighter_gray;
+			}	
+		}
 		.user-avatar{
 			height: 40px;
 			width: 40px;
@@ -1105,21 +1111,53 @@ div, a, h1, h2, h3, span, li, p{
 			border-radius: 100%;
 			display: block;
 			float: left;
+			margin: 18.75px 0px;
 		}
 		.user-info{
-			width: calc(100% - 40px);
+			width: calc(100% - 100px);
 			display: block;
 			float: left;
-			padding: 0 0 0 15px;
+			padding: 0 7.5px 0 15px;
 			.name{
 				color: $medium_gray;
 				margin: 0;
 			}
-			.address{color: #B6B6B6; font-size: 12px; margin: 0;}
+			.address{color: #B6B6B6; font-size: 12px; margin: 0; line-height: 13px;}
 			.timestamp{
 				color: $light_blue;
 				font-size: 12px;
 				margin: 0;
+			}
+		}
+		.fence-edit-link-container, .force-position-container{
+			width: 30px;
+			display: block;
+			float: left;
+			line-height: 100%;
+			vertical-align: middle;
+			position: relative;
+			text-align: center;
+			.glyphicon{
+				display: inline-block;
+				
+			}
+		}
+		.fence-edit-link-container{
+			font-size: 22px;
+			.glyphicon{
+				margin: 27.75px 0;
+				color: $dark_blue;
+			}
+		}
+		.force-position-container{
+			.glyphicon{
+				margin: 31.75px 0;
+			}
+			a{
+				color: $dark_blue;
+			}
+			a:hover{
+				color: $light_blue;
 			}
 		}
 	}

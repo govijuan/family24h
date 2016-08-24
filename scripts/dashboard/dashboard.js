@@ -1507,7 +1507,7 @@ function loadGroupMarkers(){
     if (member.profile_picture_url && member.profile_picture_url != ""){
       infoContent += "<div class='user-avatar'  style='background-image: url(" + member.profile_picture_url + ");'></div>";
     }
-    infoContent += "<div class='user-info'><p><a href='#!/member?u=" + member.user_id + "&g=" + group_id + "'>" + member.name + "</a></p>";
+	    infoContent += "<div class='user-info'><p><a href='#!/member?u=" + member.user_id + "&g=" + group_id + "'>" + member.name + "</a></p>";
     infoContent += "<p>" + member.location.human_address + "</p>";
     infoContent += "<p>" + convertDate(member.valid_time) + "</p>";
     if (member.other && member.other.battery){
@@ -1552,11 +1552,12 @@ function loadGroupMarkers(){
       userInfo += "<div class='user-avatar' m-index='" + i + "' style='background-image: url(" + member.profile_picture_url + ");'></div>";
     }
     userInfo += "<div class='user-info'>";
-    userInfo += "<p class='name'><strong>" + member.name + "</strong>";
-    userInfo += " <a  class='force-position' user-id='" + member.user_id + "' title='" + tr("Force position") + "' alt='" + tr("Force position") + "'><span class='glyphicon glyphicon-repeat' aria-hidden='true'></span></a></p>";
+    userInfo += "<p class='name'><strong>" + member.name + "</strong></p>";
     userInfo += "<p class='address'>" + member.location.human_address + "</p>";
     userInfo += "<p class='timestamp'>" + convertDate(member.valid_time) + "</p>";
     userInfo += "</div>";
+    userInfo += "<div class='fence-edit-link-container'><i class='glyphicon glyphicon-virtual-fence'></i></div>";
+    userInfo += "<div class='force-position-container'><a  class='force-position' user-id='" + member.user_id + "' title='" + tr("Force position") + "' alt='" + tr("Force position") + "'><span class='glyphicon glyphicon-repeat' aria-hidden='true'></span></a></div><div class='clearfix'></div>";
 
     $(".bottom__bar .contents .user-list").append("<li m-index='" + i + "'>" + userInfo + "</li>");//antiga
     $(".group-members-ul").append("<li>" + userInfo + "</li>")// nova
