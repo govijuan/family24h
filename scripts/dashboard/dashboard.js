@@ -2079,8 +2079,10 @@ function loadMemberMarkers(){
   $(".user-avatar").attr('page', 'position-history');
   $(".user-avatar").unbind();
   $(".user-avatar").bind('click', function(e){
+	  e.preventDefault();
 	  location.hash = "#!/group?g=" + $.getUrlVar("g");
 	  //window.setTimeout(google.maps.event.trigger(markers[$(this).attr("m-index")], 'click'), 3000);
+	  $(".usr-info-in-map-wrap").removeClass("visible-urs-info");
   });
   resizeSidebar();
   $(".close-member-marker-label-info").click(function(){
