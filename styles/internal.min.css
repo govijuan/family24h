@@ -729,6 +729,10 @@ td, th { padding: 0; }
 
 .glyphicon-virtual-fence:before { content: "\e271"; }
 
+.glyphicon-antena:before { content: "\e272"; }
+
+.glyphicon-gps:before { content: "\e273"; }
+
 * { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
 
 *:before, *:after { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
@@ -2654,9 +2658,9 @@ div, a, h1, h2, h3, span, li, p { font-family: 'Ubuntu', sans-serif; }
 .member-history ul.tabs li.arrow.disabled { color: #e0e0e0; }
 .member-history ul.history-info { list-style: none; padding: 5px 0; margin: 0 -15px -10px; background: #eaebec; }
 .member-history ul.history-info .item { height: 500px; }
-.member-history ul.history-info .batery-info, .member-history ul.history-info .network-info, .member-history ul.history-info .mobile-network-info { margin: 0 15px; text-align: left; color: #666; height: 50px; line-height: 50px; }
-.member-history ul.history-info .batery-info .glyphicon, .member-history ul.history-info .network-info .glyphicon, .member-history ul.history-info .mobile-network-info .glyphicon { margin: 0 20px 0 0; color: #9c9c9c; width: 20px; text-align: center; }
-.member-history ul.history-info .batery-info { border-bottom: 1px solid #d7d7d7; }
+.member-history ul.history-info .batery-info, .member-history ul.history-info .network-info, .member-history ul.history-info .mobile-network-info, .member-history ul.history-info .position-source { margin: 0 15px; text-align: left; color: #666; height: 50px; line-height: 50px; }
+.member-history ul.history-info .batery-info .glyphicon, .member-history ul.history-info .network-info .glyphicon, .member-history ul.history-info .mobile-network-info .glyphicon, .member-history ul.history-info .position-source .glyphicon { margin: 0 20px 0 0; color: #9c9c9c; width: 20px; text-align: center; }
+.member-history ul.history-info .batery-info, .member-history ul.history-info .mobile-network-info, .member-history ul.history-info .network-info { border-bottom: 1px solid #d7d7d7; }
 .member-history ul.history-info .network-info-nmbr, .member-history ul.history-info .batery-info-nmbr { text-align: right; width: calc(40% - 10px); display: inline-block; font-size: 13px; }
 .member-history ul.history-info .batery-info-txt, .member-history ul.history-info .network-info-txt { width: calc(60% - 30px); display: inline-block; font-size: 13px; }
 .member-history ul.history-info .network-info-type { width: calc((100% - 40px) / 5); font-size: 13px; display: inline-block; }

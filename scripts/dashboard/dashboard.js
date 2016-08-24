@@ -1701,10 +1701,11 @@ function loadMemberMarkers(){
   
   
 	$(".usr-info-in-map-wrap").empty();
-	$(".usr-info-in-map-wrap").append("<span class='close close-member-marker-label-info'>x</span><div class='usr-info-in-map-content'></div>");
+	$(".usr-info-in-map-wrap").append("<div class='usr-info-in-map-content'></div>");
 	$(".usr-info-in-map-content").append("<div class='member-history'><ul class='tabs'></ul></div>");
 			$(".member-history").append("<ul class='history-info'></ul>");
   member_history.sort(sort_by_date);
+  console.log(member_history);
   if (member_history.length > 5){
     $(".bottom__bar .contents .user-history ul.tabs").append("<li m-index='prev' class='arrow disabled'><span class='glyphicon glyphicon-menu-left' aria-hidden='true'></span></li>");//antiga
     $(".member-history ul.tabs").append("<li m-index='prev' class='arrow disabled'><span class='glyphicon glyphicon-menu-left' aria-hidden='true'></span></li>");//nova
@@ -1721,7 +1722,7 @@ function loadMemberMarkers(){
 	        endColorRGB = hexaD_2_RGB('#0066cc');
 	        var pointColorArr = generateHistoryMarkerColorRGB(starColorRGB, endColorRGB, factorStep * i);
           markerPointColor = 'rgb(' + pointColorArr[0] + ',' + pointColorArr[1] + ',' + pointColorArr[2] + ')';
-	        markerContent = '<div class="past-hist-pos-marker" style="background-color:' + markerPointColor + '; height: 12px; width:12px;overflow:hidden;border:1px solid #999;border-radius:100%">&nbsp;</div>';
+	        markerContent = '<div class="past-hist-pos-marker" style="background-color:' + markerPointColor + '; height: 15px; width:15px;overflow:hidden;border:1px solid #747374;border-radius:100%">&nbsp;</div>';
     }
     else if(i = 9){
 	        markerContent = '<div class="marker-main-wrap" style="height:76px;width:66px;background-image:url(\'/images/family-marker.png\');background-size:cover; padding: 4px 0px 0px 13px;top: 19px;position: relative;"><div class="marker-user-img-container" style=" width:40px; height: 40px;border-radius: 100%; overflow: hidden;"><img src="' + track.user_picture + '" style="width: 40px; height: auto;"/></div></div>';
@@ -1758,6 +1759,7 @@ function loadMemberMarkers(){
 	      nfoContent += "<p class='network'>Rede: offline</p>";
       }
     }
+    
     googleMarker.addListener("click", function(){
       var popOpts = {
           content: infoContent,
@@ -1778,7 +1780,8 @@ function loadMemberMarkers(){
       $(".member-history .tabs li[m-index=" + _index + "]").addClass("active");
       $(".member-history .history-info li.item").addClass("hidden");
       $(".member-history .history-info li[m-index=" + _index + "]").removeClass("hidden");
-
+      $(".usr-info-in-map-wrap").addClass("visible-urs-info");
+			
       var infoUser = "";//antiga
       var infoUserCardTop = "";//nova
       
@@ -1867,6 +1870,15 @@ function loadMemberMarkers(){
 	        timeStampInfo += "<div class='network-info'><i class=''></i><span class='network-info-txt'>Rede offline</span></div>";//nova
 	    	}
 	        
+    }
+    if(track.location.source){
+	    if(track.location.source == 'GPS'){
+		    timeStampInfo += "<div class='position-source'><i class='glyphicon glyphicon-gps'></i>Localização por GPS</div>";
+	    }else if(track.location.source == 'gps-replace-by-wifi' || track.location.source == 'cache-wifi'){
+		    timeStampInfo += "<div class='position-source'><i class='glyphicon glyphicon-wifi'></i>Localização por Wi-Fi</div>"
+	    }else{
+		    timeStampInfo += "<div class='position-source'><i class='glyphicon glyphicon-antena'></i>Localização por Antena Celular</div>"
+	    }
     }
     
     
@@ -2085,9 +2097,6 @@ function loadMemberMarkers(){
 	  $(".usr-info-in-map-wrap").removeClass("visible-urs-info");
   });
   resizeSidebar();
-  $(".close-member-marker-label-info").click(function(){
-	    $(".usr-info-in-map-wrap").removeClass("visible-urs-info");
-  });
 }
 
 

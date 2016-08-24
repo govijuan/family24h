@@ -1294,7 +1294,7 @@ div, a, h1, h2, h3, span, li, p{
 		.item{
 			height: 500px;
 		}
-		.batery-info, .network-info, .mobile-network-info{
+		.batery-info, .network-info, .mobile-network-info, .position-source {
 			margin: 0 15px; 
 			text-align: left;
 			color: $dark_gray;
@@ -1308,7 +1308,7 @@ div, a, h1, h2, h3, span, li, p{
 			}
 			
 		}
-		.batery-info{
+		.batery-info, .mobile-network-info, .network-info, {
 			border-bottom: 1px solid #d7d7d7;
 		}
 		.network-info-nmbr, .batery-info-nmbr{ 
