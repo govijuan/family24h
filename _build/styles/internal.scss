@@ -1137,6 +1137,7 @@ div, a, h1, h2, h3, span, li, p{
 			vertical-align: middle;
 			position: relative;
 			text-align: center;
+			a{display: block;cursor: pointer;}
 			.glyphicon{
 				display: inline-block;
 				

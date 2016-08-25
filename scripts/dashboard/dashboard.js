@@ -1562,7 +1562,7 @@ function loadGroupMarkers(){
     $(".bottom__bar .contents .user-list").append("<li m-index='" + i + "'>" + userInfo + "</li>");//antiga
     $(".group-members-ul").append("<li>" + userInfo + "</li>")// nova
   });
-  $(".user-list li a.force-position").on("click", function(e){
+  $(".user-list li a.force-position, .group-members-ul li .force-position-container a.force-position").on("click", function(e){
     e.preventDefault();
     forcePosition($(this).attr("user-id"));
   });
