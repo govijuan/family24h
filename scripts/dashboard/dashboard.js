@@ -992,6 +992,33 @@ function closeMembersMenu(){
   $(".left__bar .group-select").show();
 }
 
+function loadFencesListInModalSelect(member_id){
+	var endpoint = "/virtual-fences?group_id="+group_id+"&member_id="+member_id;
+	$.ajax({
+    type: 'GET',
+    dataType: 'json',
+    crossDomain: true,
+    url: api_url + endpoint +'&api_key=$$key'.render({
+        key: api_key
+    }),
+    success: function(data,status,jqXHR){
+      if(jqXHR.status == 200){
+	      $(".fence-select-list").empty();
+        fences_list = data.virtual_fences;
+				console.log('Está em 200');
+        $(fences_list).each(function(index,item){
+          $("select.fence-select-list").append("<option value='" + item.id + "'>" + item.name + "</option>");
+        });
+      }else{
+	      console.log('O endpoint '+ endpoint +' não carrega uma lista de cercas corretamente');
+      }
+    },
+    error: function(data){
+      setMessage(tr("Error loading virtual fences"),"danger",$("#flash-modal"));
+    }
+  });  
+  $("select.fence-select-list").append("<option>Teste</option>");
+}
 function loadFencesMenu(){
   $(".left__bar .group-info").hide();
   $(".left__bar .group-select").hide();
@@ -1480,6 +1507,7 @@ function loadGroupMarkers(){
   $(".group-content").append("<ul class='group-members-ul'></ul>");//nova
   $(".curr-group-info-in-h .curr-group-length-txt").remove();
   $(".curr-group-info-in-h").append("<div class='curr-group-length-txt'>" + member_list.length + " " + tr("members") + "</div>");//novo
+  //console.log(member_list);
   $.each(member_list,function(i,member){
     if (!member.alias){
       member.alias = generateAlias(member.name);
@@ -1556,7 +1584,7 @@ function loadGroupMarkers(){
     userInfo += "<p class='address'>" + member.location.human_address + "</p>";
     userInfo += "<p class='timestamp'>" + convertDate(member.valid_time) + "</p>";
     userInfo += "</div>";
-    userInfo += "<div class='fence-edit-link-container'><i class='glyphicon glyphicon-virtual-fence'></i></div>";
+    userInfo += "<div class='fence-edit-link-container' member_id='" + member.user_id + "'><i class='glyphicon glyphicon-virtual-fence'></i></div>";
     userInfo += "<div class='force-position-container'><a  class='force-position' user-id='" + member.user_id + "' title='" + tr("Force position") + "' alt='" + tr("Force position") + "'><span class='glyphicon glyphicon-repeat' aria-hidden='true'></span></a></div><div class='clearfix'></div>";
 
     $(".bottom__bar .contents .user-list").append("<li m-index='" + i + "'>" + userInfo + "</li>");//antiga
@@ -1586,6 +1614,12 @@ function loadGroupMarkers(){
     bounds.extend(markers[$(this).attr("m-index")].getPosition());
     googleMap.fitBounds(bounds);
 */
+  });
+  $('.fence-edit-link-container').unbind();
+  $('.fence-edit-link-container').bind('click', function(e){
+	  var currMemberID = $(this).attr('member_id');
+	  loadFencesListInModalSelect(currMemberID);
+	  $("#myModalFenceEditing").modal();
   });
 	
   if (markerClusterer) markerClusterer.clearMarkers();
@@ -2466,6 +2500,9 @@ $(document).ready(function() {
     $(".icon-bottom-bar img").click(function(e){
       $(".bottom__bar .contents").toggleClass("opened");
       resizeSidebar();
+    });
+    $("#myModalFenceEditing button#draw-fence").click(function(){
+	    $("#myModalFenceEditing").modal("hide");
     });
 
     /*----------------------------------------------------------------------------*\
