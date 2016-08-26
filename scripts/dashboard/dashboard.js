@@ -1003,7 +1003,7 @@ function loadFencesListInModalSelect(member_id){
     }),
     success: function(data,status,jqXHR){
       if(jqXHR.status == 200){
-	      $(".fence-select-list").empty();
+	      
         fences_list = data.virtual_fences;
 				console.log('Está em 200');
         $(fences_list).each(function(index,item){
@@ -1618,6 +1618,7 @@ function loadGroupMarkers(){
   $('.fence-edit-link-container').unbind();
   $('.fence-edit-link-container').bind('click', function(e){
 	  var currMemberID = $(this).attr('member_id');
+	  currMemberID = parseInt(currMemberID);
 	  loadFencesListInModalSelect(currMemberID);
 	  $("#myModalFenceEditing").modal();
   });
