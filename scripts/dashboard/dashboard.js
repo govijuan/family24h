@@ -992,7 +992,8 @@ function closeMembersMenu(){
   $(".left__bar .group-select").show();
 }
 
-function loadFencesListInModalSelect(member_id){
+function loadFencesListInModalSelect(member_id){	
+	$("select.fence-select-list").empty();
 	var endpoint = "/virtual-fences?group_id="+group_id+"&member_id="+member_id;
 	$.ajax({
     type: 'GET',
@@ -1016,8 +1017,10 @@ function loadFencesListInModalSelect(member_id){
     error: function(data){
       setMessage(tr("Error loading virtual fences"),"danger",$("#flash-modal"));
     }
-  });  
-  $("select.fence-select-list").append("<option>Teste</option>");
+  }); 
+  $("a.nova-cerca").bind('click', function(e){
+	  $(this).addClass('teste');
+  }); 
 }
 function loadFencesMenu(){
   $(".left__bar .group-info").hide();
@@ -1258,7 +1261,7 @@ function loadFence(){
 
   var polyOptions = {
       fillColor: '#a000aa',
-      strokeWeight: 0,
+      strokeWeight: 1,
       fillOpacity: 0.45,
       editable: true
     };
@@ -1584,7 +1587,7 @@ function loadGroupMarkers(){
     userInfo += "<p class='address'>" + member.location.human_address + "</p>";
     userInfo += "<p class='timestamp'>" + convertDate(member.valid_time) + "</p>";
     userInfo += "</div>";
-    userInfo += "<div class='fence-edit-link-container' member_id='" + member.user_id + "'><i class='glyphicon glyphicon-virtual-fence'></i></div>";
+    userInfo += "<div class='fence-edit-link-container'  user_id='" + member.user_id + "' member_id='" + member.id + "'><i class='glyphicon glyphicon-virtual-fence'></i></div>";
     userInfo += "<div class='force-position-container'><a  class='force-position' user-id='" + member.user_id + "' title='" + tr("Force position") + "' alt='" + tr("Force position") + "'><span class='glyphicon glyphicon-repeat' aria-hidden='true'></span></a></div><div class='clearfix'></div>";
 
     $(".bottom__bar .contents .user-list").append("<li m-index='" + i + "'>" + userInfo + "</li>");//antiga
@@ -1618,8 +1621,15 @@ function loadGroupMarkers(){
   $('.fence-edit-link-container').unbind();
   $('.fence-edit-link-container').bind('click', function(e){
 	  var currMemberID = $(this).attr('member_id');
+	  var currUserID = $(this).attr('user_id');
+	  if ($.getUrlVar("g")){
+		  var currGroupID = $.getUrlVar("g");
+	  }else{
+		  var currGroupID = group_id;
+	  }
 	  currMemberID = parseInt(currMemberID);
 	  loadFencesListInModalSelect(currMemberID);
+	  location.hash = "#!/virtual-fences?g=" + currGroupID + "&u=" + currUserID;
 	  $("#myModalFenceEditing").modal();
   });
 	
@@ -1634,7 +1644,6 @@ function loadGroupMarkers(){
   googleMap.fitBounds(bounds);
 
   resizeSidebar();
-
 }
 
 function loadFencesMarkers(){
@@ -2557,6 +2566,7 @@ $(window).hashchange( function(){
     deleteAllMarkers();
     initialize(loadGroupPositions,loadGroupMarkers);
   }else if ($.getUrlSub() == "group"){
+	  $(".usr-info-in-map-wrap").removeClass("visible-urs-info");
     deleteAllMarkers();
     if (group_id){
 			currGroupName = '';

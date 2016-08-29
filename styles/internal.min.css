@@ -2589,7 +2589,7 @@ div, a, h1, h2, h3, span, li, p { font-family: 'Ubuntu', sans-serif; }
 .group-content .group-members-ul .fence-edit-link-container, .group-content .group-members-ul .force-position-container { width: 30px; display: block; float: left; line-height: 100%; vertical-align: middle; position: relative; text-align: center; }
 .group-content .group-members-ul .fence-edit-link-container a, .group-content .group-members-ul .force-position-container a { display: block; cursor: pointer; }
 .group-content .group-members-ul .fence-edit-link-container .glyphicon, .group-content .group-members-ul .force-position-container .glyphicon { display: inline-block; }
-.group-content .group-members-ul .fence-edit-link-container { font-size: 22px; }
+.group-content .group-members-ul .fence-edit-link-container { font-size: 22px; cursor: pointer; }
 .group-content .group-members-ul .fence-edit-link-container .glyphicon { margin: 27.75px 0; color: #0066cc; }
 .group-content .group-members-ul .force-position-container .glyphicon { margin: 31.75px 0; }
 .group-content .group-members-ul .force-position-container a { color: #0066cc; }
