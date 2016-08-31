@@ -692,6 +692,12 @@ div, a, h1, h2, h3, span, li, p{
             color: #fff;
           }
         }
+        li.delete, li.edit, li.save{
+	        background-color: #7F01EE!important;
+        }
+        li.delete:hover{
+	        
+        }
       }
     }
   }

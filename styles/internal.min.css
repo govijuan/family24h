@@ -2474,6 +2474,7 @@ div, a, h1, h2, h3, span, li, p { font-family: 'Ubuntu', sans-serif; }
 .map #overmap .icons ul li.force-position:hover a { color: white !important; }
 .map #overmap .icons ul li:hover { background-color: #32ccfe; }
 .map #overmap .icons ul li:hover a { color: #fff; }
+.map #overmap .icons ul li.delete, .map #overmap .icons ul li.edit, .map #overmap .icons ul li.save { background-color: #7F01EE !important; }
 
 .map { float: left; z-index: 10; width: 90%; height: 100%; }
 
