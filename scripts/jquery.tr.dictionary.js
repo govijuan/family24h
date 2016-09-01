@@ -82,6 +82,7 @@ var myDictionary = {
       'Please enter a name': 'Por favor informe um nome',
       'Fence successful saved': 'Cerca atualizada com sucesso',
       'Fence deleted successful': 'Cerca apagada com sucesso',
+      'Create New Fence': 'Criar Nova cCerca',
       'New Fence': 'Nova Cerca',
       'Error deleting': 'Erro ao apagar',
       'Manage invitations': 'Gerenciar convites',

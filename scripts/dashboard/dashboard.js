@@ -11,7 +11,7 @@ var markers = [];
 var markerClusterer;
 var popupIW = null;
 var data_location;
-var group_list, member_list, member_history, fences_list, currFence_id;
+var group_list, member_list, member_history, fences_list, currFence_id, savingFenceName, savingFenceType, savingFencePoints;
 var group_id = null, member_id = null;
 var members_alias = [];
 var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -1142,7 +1142,34 @@ function newFence(){
   loadFence();
 }
 
-function saveThisFence(){
+function createNewFence(){
+	$("#myModal .modal-header h4.modal-title").text(tr("Create new fence"));
+	$("#myModal .modal-body .col-sm-3").hide();
+  $("#myModal .modal-body p").empty();
+  $("#myModal .modal-body p").append("<div class='fields create-new-fence-fields'></div>");
+  $("#myModal .modal-body p .fields").append(tr("Enter a name for your fence") + ":<br /><input class='form-control' type='text' id='fence-name'/><br /><br />");
+  $("#myModal .modal-body p .fields").append(tr("Monitoring") + ":<br /><select class='form-control' id='fence-type'></select><br /><br />");
+  $("#myModal .modal-body p .fields #fence-type").append("<option value='both'>" + tr("In and Out") + "</option>");
+  $("#myModal .modal-body p .fields #fence-type").append("<option value='in'>" + tr("In") + "</option>");
+  $("#myModal .modal-body p .fields #fence-type").append("<option value='out'>" + tr("Out") + "</option>");
+  $("#myModal .modal-footer button").html(tr("Save"));
+  $("#myModal .modal-footer button").unbind();
+	$("#myModal .modal-footer button").bind("click", function(){
+		$("#myModal").modal('hide');
+		$.each(member_list,function(i,member){
+	    if (member.user_id == parseInt($.getUrlVar("u"))){
+	      member_id = member.id;
+	    }
+  	});
+		savingFenceName = $("#fence-name").val();
+		savingFenceType = $("#fence-type option:selected").val();
+		loadThisFence();
+		
+	});
+	$("#myModal").modal();
+}
+
+function saveThisFence(currFence_id){
 	$.each(member_list,function(i,member){
     if (member.user_id == parseInt($.getUrlVar("u"))){
       member_id = member.id;
@@ -1163,40 +1190,7 @@ function saveThisFence(){
     setMessage(tr("Please enter a name"),"danger",$("#flash-modal"));
     return false;
   }else{
-    /*if (){
-      if ($(".left__bar .list-fences ul li.active a").attr("ref") != ""){
-        var fence_id = $(".left__bar .list-fences ul li.active a").attr("ref");
-        var method = "PUT";
-      }else{
-        var fence_id = "";
-        var method = "POST";
-      }
-      var endpoint = "/virtual-fences/"+fence_id;
-      $.ajax({
-          url: api_url + endpoint +'?api_key=$$key'.render({
-          key: api_key
-          }),
-          data: "&group_id=" + group_id + "&member_id=" + member_id + "&name=" + fence_name + "&type=" + fence_type + "&points=" + JSON.stringify(points),
-          type: method,
-          crossDomain: true,
-          complete: function(e, xhr, settings){
-              var msg = "";
-              msg += tr("Fence successful saved");
-              setMessage(msg,"success");
-              $("#myModal").modal("hide");
-              deleteShape();
-              $("#overmap .icons li.delete").hide();
-              $("#overmap .icons li.save").hide();
-              $("#overmap .icons li.edit").hide();
-              loadFencesMenu();
-          },
-          error: function(xhr, status, error){
-            setMessage(tr("Error saving") + " (" + xhr.status + ")","danger",$("#flash-modal"));
-          }
-      });
-    }*/
     if(currFence_id){
-	    //console.log('registra currFence_id aqui!!!!');
 	    var fence_id = currFence_id;
 	    var method = "PUT";
     }else{
@@ -1242,11 +1236,16 @@ function saveFence(){
     var coords = fencePolygon.getPath().getAt(i).toUrlValue(13).split(",");
     points.push({"longitude": coords[1],"latitude": coords[0]});
   }
-
-  var fence_name = $("#fence-name").val();
-  var fence_type = $("#fence-type option:selected").val();
-
-  if (fence_name == ""){
+	if(savingFenceName && savingFenceType){
+		var fence_name = $avingFenceName;
+		var fence_type = savingFenceType;
+	}else{
+		var fence_name = $("#fence-name").val();
+		var fence_type = $("#fence-type option:selected").val();
+	}
+		
+  
+	if (fence_name == ""){
     setMessage(tr("Please enter a name"),"danger",$("#flash-modal"));
     return false;
   }else{
@@ -1259,7 +1258,12 @@ function saveFence(){
         var method = "POST";
       }
       var endpoint = "/virtual-fences/"+fence_id;
-      $.ajax({
+      
+    }else if(savingFenceName && savingFenceType){
+	    	var fence_id = "";
+        var method = "POST";
+    }
+    $.ajax({
           url: api_url + endpoint +'?api_key=$$key'.render({
           key: api_key
           }),
@@ -1281,7 +1285,6 @@ function saveFence(){
             setMessage(tr("Error saving") + " (" + xhr.status + ")","danger",$("#flash-modal"));
           }
       });
-    }
   }
 }
 
@@ -1776,7 +1779,7 @@ function loadGroupMarkers(){
     userInfo += "<p class='address'>" + member.location.human_address + "</p>";//nova
     userInfo += "<p class='timestamp'>" + convertDate(member.valid_time) + "</p>";//nova
     userInfo += "</div>";//nova
-    userInfo += "<div class='fence-edit-link-container'  user_id='" + member.user_id + "' member_id='" + member.id + "'><i class='glyphicon glyphicon-virtual-fence'></i></div>";//nova
+    userInfo += "<div class='fence-edit-link-container'  title='Editar ou criar cerca virtual'  user_id='" + member.user_id + "' member_id='" + member.id + "'><i class='glyphicon glyphicon-virtual-fence'></i></div>";//nova
     userInfo += "<div class='force-position-container'><a  class='force-position' user-id='" + member.user_id + "' title='" + tr("Force position") + "' alt='" + tr("Force position") + "'><span class='glyphicon glyphicon-repeat' aria-hidden='true'></span></a></div><div class='clearfix'></div>";//nova
 
     $(".bottom__bar .contents .user-list").append("<li m-index='" + i + "'>" + userInfo + "</li>");//antiga
@@ -2704,13 +2707,15 @@ $(document).ready(function() {
 			currFence_id = $('select.fence-select-list').val();
 	    currFenceForEditing = $('.fence-select-list option:selected').text();
 	    currFenceTypeForEditing = $('.fence-select-list option:selected').attr('fence-type');
-	    //console.log(member_list);
 	    $("#myModalFenceEditing").modal("hide");
 	    $('.groups-content-container').hide();
 	    $('.users-groups-arrow').removeClass('glyphicon-menu-up').addClass('glyphicon-menu-down');
-	    
 	    loadThisFence(currFence_id);
 	    //loadFencesMarkers();
+    });
+    $('a.nova-cerca').click(function(){
+	    $("#myModalFenceEditing").modal("hide");
+	    createNewFence();
     });
 
     /*----------------------------------------------------------------------------*\
